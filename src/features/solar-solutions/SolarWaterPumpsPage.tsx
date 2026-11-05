@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, BookOpen, Droplets, Sprout, Compass, Wrench } from 'lucide-react';
+import { ArrowRight, BookOpen, Droplets, Sprout, Compass, Zap } from 'lucide-react';
 import { Container } from '../../components/ui/Container';
 import { SectionHeading } from '../../components/ui/SectionHeading';
 import { Card } from '../../components/ui/Card';
@@ -39,11 +39,11 @@ export const SolarWaterPumpsPage: React.FC = () => {
       description: 'Automated solar pumping into elevated tanks with level sensors.',
     },
     {
-      icon: <Wrench size={22} />,
-      title: 'Community Water Filtration',
-      imageLabel: '[Project gallery image: solar community water filtration unit]',
-      imageSrc: '/images/existing/07.jpg',
-      description: 'Solar-powered water filtration and storage units for rural sites.',
+      icon: <Zap size={22} />,
+      title: 'Deep Tubewell & Dual-Mode Pumping',
+      imageLabel: '[Image: agricultural deep borewell solar pump setup in Odisha]',
+      imageSrc: '/images/solar/solar-deep-borewell-tubewell.jpg',
+      description: 'High-lift submersible solar pumps with dual-drive controllers that seamlessly switch between solar and electric grid.',
     },
   ];
 
