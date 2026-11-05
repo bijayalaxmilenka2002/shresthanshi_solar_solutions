@@ -78,3 +78,4 @@ This audit evaluates the codebase across **6 core categories**:
 1. **Step 1 (Immediate):** Align `companyConfig.founder.name` with `companyConfig.proprietor` to eliminate any lingering references to previous profile names.
 2. **Step 2 (Immediate):** Implement code splitting in `vite.config.ts` to shrink the main bundle from ~1.1MB to under ~300KB for lightning-fast loading across Odisha.
 3. **Step 3 (Next Phase):** Connect Supabase or a serverless webhook so inquiries from any visitor's phone in India flow into the owner's database and trigger an instant WhatsApp/Email alert to the proprietor.
+
