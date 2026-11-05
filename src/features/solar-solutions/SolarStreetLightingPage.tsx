@@ -12,6 +12,9 @@ import {
   Building,
   MapPin,
   Flame,
+  Award,
+  Droplets,
+  Wind,
 } from 'lucide-react';
 import { Container } from '../../components/ui/Container';
 import { SectionHeading } from '../../components/ui/SectionHeading';
@@ -65,46 +68,64 @@ export const SolarStreetLightingPage: React.FC = () => {
 
   const hardwareSpecs = [
     {
-      icon: <Zap size={22} style={{ color: 'var(--color-forest-green)' }} />,
+      icon: <Zap size={16} />,
       component: 'LED Luminaire',
       rating: '15W / 24W / 30W / 45W / 60W',
       detail: 'Die-cast aluminum luminaire with high-efficacy tier-1 LEDs (>140 lm/W), IP66 waterproof sealing, and wide-beam optical lens.',
       badge: 'IP66 Rated',
+      imageSrc: '/images/solar/spec-led-luminaire.jpg',
+      imageAlt: 'High-power IP66 LED solar street light luminaire',
+      keyParams: ['>140 lm/W Efficacy', 'IP66 Waterproof', 'Die-Cast Aluminum'],
     },
     {
-      icon: <Sun size={22} style={{ color: 'var(--color-forest-green)' }} />,
+      icon: <Sun size={16} />,
       component: 'Photovoltaic Module',
       rating: '50Wp – 150Wp Tier-1 PV',
       detail: 'High-efficiency monocrystalline/poly solar panel with toughened anti-reflective glass and corrosion-proof aluminum frame.',
       badge: '25-Yr Efficiency',
+      imageSrc: '/images/solar/spec-solar-module.jpg',
+      imageAlt: 'Monocrystalline solar street lighting PV module',
+      keyParams: ['21+% Efficiency', 'Anti-Reflective Glass', 'Anodized Frame'],
     },
     {
-      icon: <BatteryCharging size={22} style={{ color: 'var(--color-forest-green)' }} />,
+      icon: <BatteryCharging size={16} />,
       component: 'Battery Storage',
       rating: 'Deep-Cycle LiFePO4 / Tubular',
       detail: 'High-temperature thermal stability designed for Odisha summers, providing 2 to 3 days continuous cloudy-weather autonomy.',
       badge: '3-Day Autonomy',
+      imageSrc: '/images/solar/spec-lifepo4-battery.jpg',
+      imageAlt: 'LiFePO4 solar street light lithium battery pack with BMS',
+      keyParams: ['3,000+ Deep Cycles', 'Smart BMS Protection', '55°C Thermal Stability'],
     },
     {
-      icon: <Clock size={22} style={{ color: 'var(--color-forest-green)' }} />,
+      icon: <Clock size={16} />,
       component: 'Automation & Controller',
       rating: 'Dusk-to-Dawn MPPT/PWM',
       detail: 'Microcontroller optical lux sensor switches on at dusk and off at sunrise with multi-stage dimming and deep-discharge protection.',
       badge: '100% Autonomous',
+      imageSrc: '/images/solar/spec-mppt-controller.jpg',
+      imageAlt: 'Intelligent solar dusk-to-dawn MPPT charge controller',
+      keyParams: ['Automatic Lux Sensing', 'Multi-Stage Dimming', 'Surge Protection'],
     },
     {
-      icon: <Building size={22} style={{ color: 'var(--color-forest-green)' }} />,
+      icon: <Building size={16} />,
       component: 'Pole & Civil Foundation',
       rating: '4m to 7m Hot-Dip Galvanized',
       detail: 'Heavy-duty tubular/octagonal steel pole hot-dip galvanized to IS standards with cast anchor bolts and robust RCC civil pedestal.',
       badge: 'IS Galvanized',
+      imageSrc: '/images/solar/spec-galvanized-pole.jpg',
+      imageAlt: 'Hot-dip galvanized octagonal street light pole base with anchor bolts',
+      keyParams: ['IS 2629 Galvanized', '86µm Zinc Layer', 'RCC Anchor Pedestal'],
     },
     {
-      icon: <ShieldCheck size={22} style={{ color: 'var(--color-forest-green)' }} />,
+      icon: <ShieldCheck size={16} />,
       component: 'Security & Enclosure',
       rating: 'Anti-Theft Elevated Cage',
       detail: 'Lockable high-altitude battery cage positioned high on the pole prevents tampering, theft, and monsoon ground moisture.',
       badge: 'Tamper Resistant',
+      imageSrc: '/images/solar/spec-antitheft-cage.jpg',
+      imageAlt: 'Elevated anti-theft battery cage for solar street lights',
+      keyParams: ['Elevated Pole Mounting', 'Padlock Locking Hasp', 'Monsoon Ventilated'],
     },
   ];
 
@@ -297,118 +318,219 @@ export const SolarStreetLightingPage: React.FC = () => {
             subtitle="Built to withstand harsh outdoor conditions with tier-1 components and verified engineering."
           />
 
-          {/* Standards & Certifications Ribbon */}
+          {/* Engineering Standards & Certifications Ribbon */}
           <div
             style={{
-              display: 'flex',
-              gap: '0.75rem',
-              flexWrap: 'wrap',
-              margin: '1.75rem 0 2.25rem',
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))',
+              gap: '1rem',
+              margin: '2rem 0 2.5rem',
             }}
           >
             {[
-              'MNRE Technical Compliance',
-              'IP66 Waterproof & Dustproof',
-              '150 km/h Wind Load Resistance',
-              'LiFePO4 Deep-Cycle Technology',
-              'IS 2629 Hot-Dip Galvanizing',
-            ].map((tag) => (
+              {
+                icon: <Award size={22} style={{ color: 'var(--color-forest-green)' }} />,
+                title: 'MNRE Benchmark Compliant',
+                desc: 'Government technical standards for autonomous outdoor solar lighting',
+              },
+              {
+                icon: <ShieldCheck size={22} style={{ color: 'var(--color-forest-green)' }} />,
+                title: 'IS 2629 Hot-Dip Galvanizing',
+                desc: '86+ microns uniform zinc layer for 25+ years rust-free pole durability',
+              },
+              {
+                icon: <Droplets size={22} style={{ color: 'var(--color-forest-green)' }} />,
+                title: 'IP66 Waterproof & Dustproof',
+                desc: 'Hermetically sealed optical chamber impervious to monsoon downpours',
+              },
+              {
+                icon: <Wind size={22} style={{ color: 'var(--color-forest-green)' }} />,
+                title: '150 km/h Cyclone Wind Rated',
+                desc: 'Reinforced tubular/octagonal base flange with high-tensile anchor bolts',
+              },
+              {
+                icon: <BatteryCharging size={22} style={{ color: 'var(--color-forest-green)' }} />,
+                title: 'LiFePO4 & Smart BMS',
+                desc: '3,000+ deep cycles, 55°C thermal stability with active cell balancing',
+              },
+            ].map((std) => (
               <div
-                key={tag}
+                key={std.title}
                 style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.45rem',
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  gap: '0.75rem',
                   backgroundColor: 'var(--color-soft-green)',
-                  color: 'var(--color-forest-green)',
-                  padding: '0.35rem 0.85rem',
-                  borderRadius: '999px',
-                  fontSize: '0.8rem',
-                  fontWeight: 700,
-                  border: '1px solid var(--border-medium)',
+                  border: '1.5px solid var(--border-medium)',
+                  borderRadius: '14px',
+                  padding: '1rem',
                 }}
               >
-                <ShieldCheck size={14} />
-                <span>{tag}</span>
+                <div
+                  style={{
+                    width: '38px',
+                    height: '38px',
+                    borderRadius: '10px',
+                    backgroundColor: '#FFFFFF',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexShrink: 0,
+                    boxShadow: '0 2px 6px rgba(23,75,53,0.08)',
+                  }}
+                >
+                  {std.icon}
+                </div>
+                <div>
+                  <div style={{ fontWeight: 800, fontSize: '0.85rem', color: 'var(--color-forest-green)', lineHeight: 1.3 }}>
+                    {std.title}
+                  </div>
+                  <div style={{ fontSize: '0.76rem', color: 'var(--text-body)', marginTop: '0.2rem', lineHeight: 1.45 }}>
+                    {std.desc}
+                  </div>
+                </div>
               </div>
             ))}
           </div>
 
-          {/* 6-Card Hardware Specifications Grid */}
-          <div className="grid-3" style={{ gap: '1.5rem', marginBottom: '2.5rem' }}>
+          {/* 6-Card Hardware Specifications Grid with Authentic Component Visuals */}
+          <div className="grid-3" style={{ gap: '1.75rem', marginBottom: '2.5rem' }}>
             {hardwareSpecs.map((spec) => (
               <Card
                 key={spec.component}
                 variant="white"
-                padding="lg"
+                padding="none"
                 hoverable
                 style={{
                   display: 'flex',
                   flexDirection: 'column',
-                  borderRadius: '16px',
+                  borderRadius: '18px',
                   border: '1.5px solid var(--border-medium)',
                   backgroundColor: 'var(--color-white)',
-                  boxShadow: '0 4px 16px rgba(23, 75, 53, 0.04)',
+                  overflow: 'hidden',
+                  boxShadow: '0 4px 18px rgba(23, 75, 53, 0.05)',
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
+                {/* Hardware Component Image Header */}
+                <div
+                  style={{
+                    position: 'relative',
+                    aspectRatio: '16/10',
+                    width: '100%',
+                    overflow: 'hidden',
+                    backgroundColor: '#F3F6F4',
+                  }}
+                >
+                  <img
+                    src={spec.imageSrc}
+                    alt={spec.imageAlt}
+                    loading="lazy"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      transition: 'transform 350ms ease',
+                    }}
+                  />
                   <div
                     style={{
-                      width: '44px',
-                      height: '44px',
-                      borderRadius: '12px',
-                      backgroundColor: 'var(--color-soft-green)',
-                      display: 'flex',
+                      position: 'absolute',
+                      inset: 0,
+                      background: 'linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(23,75,53,0.35) 100%)',
+                      pointerEvents: 'none',
+                    }}
+                  />
+
+                  {/* Component Category Tag */}
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: '0.85rem',
+                      left: '0.85rem',
+                      display: 'inline-flex',
                       alignItems: 'center',
-                      justifyContent: 'center',
+                      gap: '0.4rem',
+                      backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                      color: 'var(--color-forest-green)',
+                      padding: '0.25rem 0.65rem',
+                      borderRadius: '999px',
+                      fontSize: '0.72rem',
+                      fontWeight: 700,
+                      backdropFilter: 'blur(4px)',
+                      boxShadow: '0 2px 6px rgba(0,0,0,0.15)',
                     }}
                   >
                     {spec.icon}
+                    <span>{spec.component}</span>
                   </div>
+
+                  {/* Rating / Standard Badge */}
                   <span
                     style={{
-                      backgroundColor: 'var(--color-soft-green)',
-                      color: 'var(--color-forest-green)',
-                      fontSize: '0.72rem',
+                      position: 'absolute',
+                      bottom: '0.85rem',
+                      right: '0.85rem',
+                      backgroundColor: 'rgba(23, 75, 53, 0.92)',
+                      color: '#FFFFFF',
+                      fontSize: '0.74rem',
                       fontWeight: 700,
-                      padding: '0.25rem 0.65rem',
+                      padding: '0.25rem 0.75rem',
                       borderRadius: '999px',
-                      border: '1px solid var(--border-subtle)',
+                      backdropFilter: 'blur(4px)',
+                      border: '1px solid rgba(255, 255, 255, 0.25)',
                     }}
                   >
                     {spec.badge}
                   </span>
                 </div>
 
-                <div style={{ fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.04em', color: 'var(--text-muted)', fontWeight: 700, marginBottom: '0.2rem' }}>
-                  {spec.component}
+                {/* Card Body */}
+                <div style={{ padding: '1.25rem 1.35rem 1.35rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
+                  <h3
+                    style={{
+                      fontFamily: 'var(--font-heading)',
+                      fontSize: '1.15rem',
+                      fontWeight: 800,
+                      color: 'var(--color-forest-green)',
+                      marginBottom: '0.5rem',
+                      lineHeight: 1.3,
+                    }}
+                  >
+                    {spec.rating}
+                  </h3>
+
+                  <p
+                    style={{
+                      fontFamily: 'var(--font-body)',
+                      fontSize: '0.86rem',
+                      color: 'var(--text-body)',
+                      lineHeight: 1.6,
+                      margin: '0 0 1rem',
+                      flex: 1,
+                    }}
+                  >
+                    {spec.detail}
+                  </p>
+
+                  {/* Key Parameter Pills */}
+                  <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap', paddingTop: '0.5rem', borderTop: '1px solid var(--border-subtle)' }}>
+                    {spec.keyParams.map((param) => (
+                      <span
+                        key={param}
+                        style={{
+                          fontSize: '0.72rem',
+                          fontWeight: 600,
+                          backgroundColor: 'var(--color-soft-green)',
+                          color: 'var(--color-forest-green)',
+                          padding: '0.2rem 0.55rem',
+                          borderRadius: '6px',
+                        }}
+                      >
+                        ✓ {param}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-
-                <h3
-                  style={{
-                    fontFamily: 'var(--font-heading)',
-                    fontSize: '1.15rem',
-                    fontWeight: 700,
-                    color: 'var(--color-forest-green)',
-                    marginBottom: '0.65rem',
-                    lineHeight: 1.3,
-                  }}
-                >
-                  {spec.rating}
-                </h3>
-
-                <p
-                  style={{
-                    fontFamily: 'var(--font-body)',
-                    fontSize: '0.86rem',
-                    color: 'var(--text-body)',
-                    lineHeight: 1.6,
-                    margin: 0,
-                    flex: 1,
-                  }}
-                >
-                  {spec.detail}
-                </p>
               </Card>
             ))}
           </div>
