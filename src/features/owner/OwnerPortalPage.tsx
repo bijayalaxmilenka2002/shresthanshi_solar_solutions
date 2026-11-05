@@ -275,7 +275,7 @@ export const OwnerPortalPage: React.FC = () => {
           <div
             style={{
               backgroundColor: '#174B35',
-              padding: '2rem 2rem 1.5rem',
+              padding: 'clamp(1.5rem, 5vw, 2rem) clamp(1.25rem, 4vw, 2rem) 1.5rem',
               color: '#FFFFFF',
               textAlign: 'center',
               position: 'relative',
@@ -319,7 +319,7 @@ export const OwnerPortalPage: React.FC = () => {
             <h1
               style={{
                 fontFamily: 'var(--font-heading)',
-                fontSize: '1.35rem',
+                fontSize: 'clamp(1.15rem, 4vw, 1.35rem)',
                 fontWeight: 800,
                 margin: '0 0 0.35rem',
                 color: '#FFFFFF',
@@ -327,13 +327,13 @@ export const OwnerPortalPage: React.FC = () => {
             >
               Shresthanshi Solar Solutions
             </h1>
-            <p style={{ margin: 0, fontSize: '0.8rem', opacity: 0.85, color: '#E8F2E8' }}>
+            <p style={{ margin: 0, fontSize: '0.78rem', opacity: 0.85, color: '#E8F2E8' }}>
               Prop. Shubham Pratap Singh • Administrative Control
             </p>
           </div>
 
           {/* Form Area */}
-          <div style={{ padding: '2rem' }}>
+          <div style={{ padding: 'clamp(1.25rem, 4vw, 2rem)' }}>
             {authError && (
               <div
                 style={{
@@ -563,10 +563,10 @@ export const OwnerPortalPage: React.FC = () => {
               alignItems: 'center',
               justifyContent: 'space-between',
               flexWrap: 'wrap',
-              gap: '1rem',
+              gap: '0.85rem',
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', minWidth: '220px' }}>
               <div
                 style={{
                   width: '36px',
@@ -579,30 +579,32 @@ export const OwnerPortalPage: React.FC = () => {
                   justifyContent: 'center',
                   fontWeight: 800,
                   fontSize: '1.1rem',
+                  flexShrink: 0,
                 }}
               >
                 S
               </div>
               <div>
-                <h1 style={{ fontSize: '1.05rem', fontWeight: 800, margin: 0, color: '#FFFFFF' }}>
+                <h1 style={{ fontSize: '1.02rem', fontWeight: 800, margin: 0, color: '#FFFFFF', lineHeight: 1.25 }}>
                   Shresthanshi Solar Solutions
                 </h1>
-                <div style={{ fontSize: '0.74rem', opacity: 0.85 }}>
-                  Owner Response Portal &amp; Client Site Manager • Prop. Shubham Pratap Singh
+                <div style={{ fontSize: '0.72rem', opacity: 0.85, marginTop: '2px' }}>
+                  Owner Response Portal • Prop. Shubham Pratap Singh
                 </div>
               </div>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
               <span
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '0.35rem',
-                  fontSize: '0.74rem',
+                  fontSize: '0.72rem',
                   backgroundColor: 'rgba(255,255,255,0.15)',
-                  padding: '0.3rem 0.65rem',
+                  padding: '0.28rem 0.65rem',
                   borderRadius: '999px',
+                  whiteSpace: 'nowrap',
                 }}
               >
                 <span
@@ -613,7 +615,7 @@ export const OwnerPortalPage: React.FC = () => {
                     backgroundColor: '#4ADE80',
                   }}
                 />
-                Live Synced with Client Website
+                Live Synced
               </span>
 
               <Link
@@ -623,18 +625,19 @@ export const OwnerPortalPage: React.FC = () => {
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
-                  gap: '0.4rem',
+                  gap: '0.35rem',
                   color: '#FFFFFF',
                   backgroundColor: 'rgba(255,255,255,0.2)',
-                  padding: '0.4rem 0.85rem',
+                  padding: '0.35rem 0.75rem',
                   borderRadius: '6px',
-                  fontSize: '0.8rem',
+                  fontSize: '0.78rem',
                   fontWeight: 600,
                   textDecoration: 'none',
+                  whiteSpace: 'nowrap',
                 }}
               >
                 <span>View Public Site</span>
-                <ExternalLink size={14} />
+                <ExternalLink size={13} />
               </Link>
 
               <button
@@ -643,19 +646,20 @@ export const OwnerPortalPage: React.FC = () => {
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
-                  gap: '0.4rem',
+                  gap: '0.35rem',
                   color: '#FECACA',
                   backgroundColor: 'rgba(239, 68, 68, 0.25)',
                   border: '1px solid rgba(248, 113, 113, 0.4)',
-                  padding: '0.4rem 0.85rem',
+                  padding: '0.35rem 0.75rem',
                   borderRadius: '6px',
-                  fontSize: '0.8rem',
+                  fontSize: '0.78rem',
                   fontWeight: 600,
                   cursor: 'pointer',
+                  whiteSpace: 'nowrap',
                 }}
                 title="Log out of Owner Portal"
               >
-                <LogOut size={14} />
+                <LogOut size={13} />
                 <span>Log Out</span>
               </button>
             </div>
@@ -663,7 +667,7 @@ export const OwnerPortalPage: React.FC = () => {
         </Container>
       </div>
 
-      <div style={{ paddingTop: '2rem', paddingBottom: '3rem' }}>
+      <div style={{ paddingTop: '1.5rem', paddingBottom: '3rem' }}>
         <Container>
         {/* Navigation Tabs */}
         <div
@@ -671,9 +675,10 @@ export const OwnerPortalPage: React.FC = () => {
             display: 'flex',
             gap: '0.5rem',
             borderBottom: '2px solid var(--border-subtle)',
-            marginBottom: '2rem',
+            marginBottom: '1.75rem',
             overflowX: 'auto',
-            paddingBottom: '0.25rem',
+            paddingBottom: '0.35rem',
+            WebkitOverflowScrolling: 'touch',
           }}
         >
           <button
@@ -682,20 +687,22 @@ export const OwnerPortalPage: React.FC = () => {
             style={{
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '0.5rem',
-              padding: '0.75rem 1.25rem',
+              gap: '0.45rem',
+              padding: '0.65rem 1rem',
               borderRadius: '8px 8px 0 0',
               fontFamily: 'var(--font-heading)',
-              fontSize: '0.92rem',
+              fontSize: '0.88rem',
               fontWeight: 700,
               cursor: 'pointer',
               border: 'none',
               backgroundColor: activeTab === 'inbox' ? '#174B35' : 'transparent',
               color: activeTab === 'inbox' ? '#FFFFFF' : 'var(--color-forest-green)',
+              whiteSpace: 'nowrap',
+              flexShrink: 0,
               transition: 'all 150ms ease',
             }}
           >
-            <Inbox size={18} />
+            <Inbox size={17} />
             <span>Client Responses &amp; Leads</span>
             <span
               style={{
@@ -703,7 +710,7 @@ export const OwnerPortalPage: React.FC = () => {
                 color: activeTab === 'inbox' ? '#174B35' : '#FFFFFF',
                 borderRadius: '999px',
                 padding: '0.1rem 0.5rem',
-                fontSize: '0.75rem',
+                fontSize: '0.74rem',
                 fontWeight: 800,
               }}
             >
@@ -717,20 +724,22 @@ export const OwnerPortalPage: React.FC = () => {
             style={{
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '0.5rem',
-              padding: '0.75rem 1.25rem',
+              gap: '0.45rem',
+              padding: '0.65rem 1rem',
               borderRadius: '8px 8px 0 0',
               fontFamily: 'var(--font-heading)',
-              fontSize: '0.92rem',
+              fontSize: '0.88rem',
               fontWeight: 700,
               cursor: 'pointer',
               border: 'none',
               backgroundColor: activeTab === 'sections' ? '#174B35' : 'transparent',
               color: activeTab === 'sections' ? '#FFFFFF' : 'var(--color-forest-green)',
+              whiteSpace: 'nowrap',
+              flexShrink: 0,
               transition: 'all 150ms ease',
             }}
           >
-            <Layout size={18} />
+            <Layout size={17} />
             <span>Dynamic Website Sections</span>
           </button>
 
@@ -740,20 +749,22 @@ export const OwnerPortalPage: React.FC = () => {
             style={{
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '0.5rem',
-              padding: '0.75rem 1.25rem',
+              gap: '0.45rem',
+              padding: '0.65rem 1rem',
               borderRadius: '8px 8px 0 0',
               fontFamily: 'var(--font-heading)',
-              fontSize: '0.92rem',
+              fontSize: '0.88rem',
               fontWeight: 700,
               cursor: 'pointer',
               border: 'none',
               backgroundColor: activeTab === 'announcement' ? '#174B35' : 'transparent',
               color: activeTab === 'announcement' ? '#FFFFFF' : 'var(--color-forest-green)',
+              whiteSpace: 'nowrap',
+              flexShrink: 0,
               transition: 'all 150ms ease',
             }}
           >
-            <Bell size={18} />
+            <Bell size={17} />
             <span>Notice &amp; Subsidy Alert Bar</span>
             {editSettings.announcement.enabled && (
               <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#22C55E' }} />
@@ -766,20 +777,22 @@ export const OwnerPortalPage: React.FC = () => {
             style={{
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '0.5rem',
-              padding: '0.75rem 1.25rem',
+              gap: '0.45rem',
+              padding: '0.65rem 1rem',
               borderRadius: '8px 8px 0 0',
               fontFamily: 'var(--font-heading)',
-              fontSize: '0.92rem',
+              fontSize: '0.88rem',
               fontWeight: 700,
               cursor: 'pointer',
               border: 'none',
               backgroundColor: activeTab === 'contact' ? '#174B35' : 'transparent',
               color: activeTab === 'contact' ? '#FFFFFF' : 'var(--color-forest-green)',
+              whiteSpace: 'nowrap',
+              flexShrink: 0,
               transition: 'all 150ms ease',
             }}
           >
-            <Settings size={18} />
+            <Settings size={17} />
             <span>Business &amp; Contact Info</span>
           </button>
         </div>
@@ -793,94 +806,94 @@ export const OwnerPortalPage: React.FC = () => {
             <div
               style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-                gap: '1rem',
-                marginBottom: '1.5rem',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(135px, 1fr))',
+                gap: '0.75rem',
+                marginBottom: '1.25rem',
               }}
             >
-              <Card variant="white" padding="md" style={{ borderLeft: '4px solid #174B35' }}>
-                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Total Responses</div>
-                <div style={{ fontFamily: 'var(--font-heading)', fontSize: '1.75rem', fontWeight: 800, color: '#174B35' }}>
+              <Card variant="white" padding="sm" style={{ borderLeft: '4px solid #174B35', padding: '0.75rem 1rem' }}>
+                <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)' }}>Total Responses</div>
+                <div style={{ fontFamily: 'var(--font-heading)', fontSize: '1.5rem', fontWeight: 800, color: '#174B35' }}>
                   {totalLeads}
                 </div>
               </Card>
 
-              <Card variant="white" padding="md" style={{ borderLeft: '4px solid #F59E0B' }}>
-                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>New / Unread</div>
-                <div style={{ fontFamily: 'var(--font-heading)', fontSize: '1.75rem', fontWeight: 800, color: '#D97706' }}>
+              <Card variant="white" padding="sm" style={{ borderLeft: '4px solid #F59E0B', padding: '0.75rem 1rem' }}>
+                <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)' }}>New / Unread</div>
+                <div style={{ fontFamily: 'var(--font-heading)', fontSize: '1.5rem', fontWeight: 800, color: '#D97706' }}>
                   {newLeadsCount}
                 </div>
               </Card>
 
-              <Card variant="white" padding="md" style={{ borderLeft: '4px solid #8B5CF6' }}>
-                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Site Visits Planned</div>
-                <div style={{ fontFamily: 'var(--font-heading)', fontSize: '1.75rem', fontWeight: 800, color: '#7C3AED' }}>
+              <Card variant="white" padding="sm" style={{ borderLeft: '4px solid #8B5CF6', padding: '0.75rem 1rem' }}>
+                <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)' }}>Site Visits</div>
+                <div style={{ fontFamily: 'var(--font-heading)', fontSize: '1.5rem', fontWeight: 800, color: '#7C3AED' }}>
                   {siteVisitsCount}
                 </div>
               </Card>
 
-              <Card variant="white" padding="md" style={{ borderLeft: '4px solid #0284C7' }}>
-                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Quotations Sent</div>
-                <div style={{ fontFamily: 'var(--font-heading)', fontSize: '1.75rem', fontWeight: 800, color: '#0284C7' }}>
+              <Card variant="white" padding="sm" style={{ borderLeft: '4px solid #0284C7', padding: '0.75rem 1rem' }}>
+                <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)' }}>Quotations</div>
+                <div style={{ fontFamily: 'var(--font-heading)', fontSize: '1.5rem', fontWeight: 800, color: '#0284C7' }}>
                   {quotationsCount}
                 </div>
               </Card>
 
-              <Card variant="white" padding="md" style={{ borderLeft: '4px solid #10B981' }}>
-                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Converted Projects</div>
-                <div style={{ fontFamily: 'var(--font-heading)', fontSize: '1.75rem', fontWeight: 800, color: '#059669' }}>
+              <Card variant="white" padding="sm" style={{ borderLeft: '4px solid #10B981', padding: '0.75rem 1rem' }}>
+                <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)' }}>Converted</div>
+                <div style={{ fontFamily: 'var(--font-heading)', fontSize: '1.5rem', fontWeight: 800, color: '#059669' }}>
                   {convertedCount}
                 </div>
               </Card>
             </div>
 
             {/* Filter and Action Header */}
-            <Card variant="white" padding="md" style={{ marginBottom: '1.5rem' }}>
+            <Card variant="white" padding="md" style={{ marginBottom: '1.25rem' }}>
               <div
                 style={{
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  gap: '1rem',
+                  gap: '0.75rem',
                   flexWrap: 'wrap',
                 }}
               >
                 {/* Search Input */}
-                <div style={{ position: 'relative', flex: '1 1 260px' }}>
+                <div style={{ position: 'relative', flex: '1 1 220px', minWidth: '200px' }}>
                   <Search
-                    size={18}
+                    size={17}
                     style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }}
                   />
                   <input
                     type="text"
-                    placeholder="Search by name, phone, town, or Ref ID..."
+                    placeholder="Search name, phone, town, Ref ID..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     style={{
                       width: '100%',
-                      height: '42px',
-                      paddingLeft: '38px',
+                      height: '40px',
+                      paddingLeft: '36px',
                       paddingRight: '12px',
                       borderRadius: 'var(--radius-md)',
                       border: '1.5px solid var(--border-subtle)',
                       fontFamily: 'inherit',
-                      fontSize: '0.88rem',
+                      fontSize: '0.86rem',
                     }}
                   />
                 </div>
 
                 {/* Filters */}
-                <div style={{ display: 'flex', gap: '0.65rem', flexWrap: 'wrap', alignItems: 'center' }}>
+                <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
                   <select
                     value={filterSource}
                     onChange={(e) => setFilterSource(e.target.value)}
                     style={{
-                      height: '42px',
-                      padding: '0 0.85rem',
+                      height: '40px',
+                      padding: '0 0.75rem',
                       borderRadius: 'var(--radius-md)',
                       border: '1.5px solid var(--border-subtle)',
                       fontFamily: 'inherit',
-                      fontSize: '0.84rem',
+                      fontSize: '0.82rem',
                       backgroundColor: '#FFFFFF',
                     }}
                   >
@@ -895,12 +908,12 @@ export const OwnerPortalPage: React.FC = () => {
                     value={filterStatus}
                     onChange={(e) => setFilterStatus(e.target.value)}
                     style={{
-                      height: '42px',
-                      padding: '0 0.85rem',
+                      height: '40px',
+                      padding: '0 0.75rem',
                       borderRadius: 'var(--radius-md)',
                       border: '1.5px solid var(--border-subtle)',
                       fontFamily: 'inherit',
-                      fontSize: '0.84rem',
+                      fontSize: '0.82rem',
                       backgroundColor: '#FFFFFF',
                     }}
                   >
@@ -1089,12 +1102,12 @@ export const OwnerPortalPage: React.FC = () => {
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'space-between',
-                          gap: '1rem',
+                          gap: '0.75rem',
                           flexWrap: 'wrap',
                         }}
                       >
                         {/* Direct Contact Buttons */}
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', flexWrap: 'wrap' }}>
                           <a
                             href={whatsappUrl}
                             target="_blank"
@@ -1105,16 +1118,17 @@ export const OwnerPortalPage: React.FC = () => {
                               gap: '0.4rem',
                               backgroundColor: '#25D366',
                               color: '#FFFFFF',
-                              padding: '0.42rem 0.85rem',
+                              padding: '0.45rem 0.8rem',
                               borderRadius: '8px',
                               fontSize: '0.8rem',
                               fontWeight: 700,
                               textDecoration: 'none',
+                              whiteSpace: 'nowrap',
                               boxShadow: '0 2px 6px rgba(37, 211, 102, 0.25)',
                             }}
                           >
                             <MessageCircle size={15} />
-                            <span>WhatsApp ({lead.phone})</span>
+                            <span>WhatsApp</span>
                           </a>
 
                           <a
@@ -1126,20 +1140,21 @@ export const OwnerPortalPage: React.FC = () => {
                               backgroundColor: '#FFFFFF',
                               color: 'var(--color-forest-green)',
                               border: '1.5px solid var(--border-medium)',
-                              padding: '0.42rem 0.85rem',
+                              padding: '0.45rem 0.8rem',
                               borderRadius: '8px',
                               fontSize: '0.8rem',
                               fontWeight: 700,
                               textDecoration: 'none',
+                              whiteSpace: 'nowrap',
                             }}
                           >
                             <Phone size={14} />
-                            <span>Call</span>
+                            <span>Call ({lead.phone})</span>
                           </a>
                         </div>
 
                         {/* Owner Note Input */}
-                        <div style={{ flex: '1 1 260px', maxWidth: '380px' }}>
+                        <div style={{ flex: '1 1 200px', minWidth: '180px' }}>
                           <input
                             type="text"
                             placeholder="Add follow-up note (e.g. site visit booked)..."
@@ -1147,7 +1162,7 @@ export const OwnerPortalPage: React.FC = () => {
                             onBlur={(e) => handleNotesChange(lead.id, e.target.value)}
                             style={{
                               width: '100%',
-                              padding: '0.42rem 0.75rem',
+                              padding: '0.45rem 0.75rem',
                               fontSize: '0.82rem',
                               borderRadius: '8px',
                               border: '1px solid var(--border-medium)',
@@ -1217,7 +1232,7 @@ export const OwnerPortalPage: React.FC = () => {
               </div>
             )}
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.5rem', marginBottom: '2rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem', marginBottom: '2rem' }}>
               {/* Homepage Sections Visibility Toggles */}
               <Card variant="white" padding="lg">
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
@@ -1586,7 +1601,7 @@ export const OwnerPortalPage: React.FC = () => {
               </p>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
                   <div>
                     <label style={{ display: 'block', fontSize: '0.84rem', fontWeight: 700, color: '#174B35', marginBottom: '0.35rem' }}>
                       Calling Phone Display
@@ -1638,7 +1653,7 @@ export const OwnerPortalPage: React.FC = () => {
                   </div>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
                   <div>
                     <label style={{ display: 'block', fontSize: '0.84rem', fontWeight: 700, color: '#174B35', marginBottom: '0.35rem' }}>
                       Official Email Address

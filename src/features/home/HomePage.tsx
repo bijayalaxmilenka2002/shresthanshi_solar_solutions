@@ -16,6 +16,7 @@ import { ImagePlaceholder } from '../../components/ui/ImagePlaceholder';
 import { ProcessTimeline } from '../../components/common/ProcessTimeline';
 import { CTASection } from '../../components/common/CTASection';
 import { SunchargeShowcaseSections } from '../../components/home/SunchargeShowcaseSections';
+import { EndToEndServiceSection } from '../../components/home/EndToEndServiceSection';
 import { SEO } from '../../components/common/SEO';
 import { useSolarGuideModal } from '../../hooks/useSolarGuideModal';
 import { useSiteSettings } from '../../app/providers';
@@ -214,14 +215,18 @@ export const HomePage: React.FC = () => {
       )}
 
       {/* =================================================================
-          SECTION 3 & 4 — SUNCHARGE REFERENCE SHOWCASE:
-          1) END-TO-END SERVICE (Sticky Left + Tiered Stacking Cards Right)
-          2) OUR SOLUTIONS (Staggered 2-Column Parallax Showcase)
+          SECTION 3 — OUR SOLUTIONS (Staggered 2-Column Parallax Showcase)
       ================================================================= */}
       <SunchargeShowcaseSections />
 
       {/* =================================================================
-          SECTION 5 — HOW THE PROCESS WORKS
+          SECTION 4 — END-TO-END SOLAR SERVICE (Complete Solar Lifecycle)
+          Placed directly above the 4 Simple Steps Process Timeline
+      ================================================================= */}
+      <EndToEndServiceSection />
+
+      {/* =================================================================
+          SECTION 5 — HOW THE PROCESS WORKS (4 Simple Steps)
       ================================================================= */}
       {settings.sections.processTimeline && (
         <section className="section bg-white">
