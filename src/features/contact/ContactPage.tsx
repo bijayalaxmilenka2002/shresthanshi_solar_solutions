@@ -10,6 +10,9 @@ import {
   BookOpen,
   Clock,
   MessageSquare,
+  MessageCircle,
+  Building2,
+  UserCheck,
 } from 'lucide-react';
 import { Container } from '../../components/ui/Container';
 import { Card } from '../../components/ui/Card';
@@ -21,6 +24,7 @@ import { SEO } from '../../components/common/SEO';
 import { companyConfig } from '../../data/company';
 import { submitContactEnquiry } from '../../services/enquiryService';
 import { useSolarGuideModal } from '../../hooks/useSolarGuideModal';
+import { useSiteSettings } from '../../app/providers';
 
 interface ContactErrors {
   name?: string;
@@ -33,6 +37,7 @@ interface ContactErrors {
 export const ContactPage: React.FC = () => {
   const [searchParams] = useSearchParams();
   const { openGuideModal } = useSolarGuideModal();
+  const { settings } = useSiteSettings();
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -209,114 +214,411 @@ export const ContactPage: React.FC = () => {
         <Container>
           <div className="contact-layout">
             {/* Left Column: Verified Business Contact Details */}
-            <div className="contact-layout__info">
-              <Card variant="soft-green" padding="lg">
-                <span className="badge" style={{ marginBottom: '0.75rem' }}>
-                  Verified Head Office
-                </span>
-                <h2>{companyConfig.legalName}</h2>
-                <p style={{ marginTop: '0.5rem', fontSize: 'var(--text-sm)' }}>
-                  Proprietor: <strong>{companyConfig.founder.name}</strong>
-                </p>
+            <div className="contact-layout__info" style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+              <Card
+                variant="soft-green"
+                padding="lg"
+                style={{
+                  borderRadius: '20px',
+                  border: '1.5px solid var(--border-medium)',
+                  backgroundColor: 'var(--color-soft-green)',
+                  boxShadow: '0 4px 20px rgba(23, 75, 53, 0.05)',
+                }}
+              >
+                {/* Header Tag & Title */}
+                <div style={{ marginBottom: '1.35rem' }}>
+                  <div
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.45rem',
+                      backgroundColor: '#FFFFFF',
+                      color: 'var(--color-forest-green)',
+                      padding: '0.35rem 0.85rem',
+                      borderRadius: '999px',
+                      fontSize: '0.74rem',
+                      fontWeight: 800,
+                      letterSpacing: '0.03em',
+                      textTransform: 'uppercase',
+                      border: '1px solid var(--border-medium)',
+                      marginBottom: '0.75rem',
+                      boxShadow: '0 1px 4px rgba(23, 75, 53, 0.06)',
+                    }}
+                  >
+                    <Building2 size={14} style={{ color: 'var(--color-forest-green)' }} />
+                    <span>Verified Head Office &amp; Operations</span>
+                  </div>
 
-                <div className="contact-info-list">
-                  <div className="contact-info-item">
-                    <div className="contact-info-item__icon">
+                  <h2
+                    style={{
+                      fontFamily: 'var(--font-heading)',
+                      fontSize: 'clamp(1.25rem, 1.8vw, 1.55rem)',
+                      fontWeight: 800,
+                      color: 'var(--color-forest-green)',
+                      lineHeight: 1.25,
+                      margin: 0,
+                    }}
+                  >
+                    M/s Shreshtanshi Construction &amp; Suppliers
+                  </h2>
+                  <div style={{ fontSize: '0.92rem', fontWeight: 600, color: 'var(--color-forest-green)', marginTop: '0.2rem' }}>
+                    (Shresthanshi Solar Solutions)
+                  </div>
+
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.45rem',
+                      marginTop: '0.65rem',
+                      fontSize: '0.82rem',
+                      color: 'var(--text-body)',
+                    }}
+                  >
+                    <UserCheck size={15} style={{ color: 'var(--color-forest-green)', flexShrink: 0 }} />
+                    <span>Proprietor: <strong>{settings?.contact?.proprietor || companyConfig.proprietor}</strong></span>
+                  </div>
+                </div>
+
+                {/* Modular Contact Cards List */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+                  {/* 1. Registered Office Address */}
+                  <div
+                    style={{
+                      backgroundColor: '#FFFFFF',
+                      borderRadius: '14px',
+                      border: '1px solid var(--border-medium)',
+                      padding: '1rem 1.15rem',
+                      display: 'flex',
+                      gap: '0.85rem',
+                      alignItems: 'flex-start',
+                      boxShadow: '0 2px 6px rgba(23, 75, 53, 0.03)',
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: '40px',
+                        height: '40px',
+                        borderRadius: '10px',
+                        backgroundColor: 'var(--color-soft-green)',
+                        color: 'var(--color-forest-green)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        flexShrink: 0,
+                        border: '1px solid var(--border-subtle)',
+                      }}
+                    >
                       <MapPin size={20} />
                     </div>
-                    <div>
-                      <h3>Registered Office Address</h3>
-                      <p>{companyConfig.contact.address.full}</p>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em', color: 'var(--text-muted)', marginBottom: '0.25rem' }}>
+                        Registered Office Address
+                      </div>
+                      <p style={{ margin: 0, fontSize: '0.88rem', color: 'var(--color-forest-green)', fontWeight: 600, lineHeight: 1.5 }}>
+                        {settings?.contact?.address || companyConfig.contact.address.full}
+                      </p>
                     </div>
                   </div>
 
-                  <div className="contact-info-item">
-                    <div className="contact-info-item__icon">
+                  {/* 2. Direct Call & WhatsApp */}
+                  <div
+                    style={{
+                      backgroundColor: '#FFFFFF',
+                      borderRadius: '14px',
+                      border: '1px solid var(--border-medium)',
+                      padding: '1rem 1.15rem',
+                      display: 'flex',
+                      gap: '0.85rem',
+                      alignItems: 'flex-start',
+                      boxShadow: '0 2px 6px rgba(23, 75, 53, 0.03)',
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: '40px',
+                        height: '40px',
+                        borderRadius: '10px',
+                        backgroundColor: 'var(--color-soft-green)',
+                        color: 'var(--color-forest-green)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        flexShrink: 0,
+                        border: '1px solid var(--border-subtle)',
+                      }}
+                    >
                       <Phone size={20} />
                     </div>
-                    <div>
-                      <h3>Phone &amp; Direct Call</h3>
-                      <p>
-                        <a href={companyConfig.contact.phoneHref} className="contact-action-link">
-                          {companyConfig.contact.phoneDisplay}
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em', color: 'var(--text-muted)', marginBottom: '0.25rem' }}>
+                        Calling Line &amp; Direct WhatsApp
+                      </div>
+                      <div style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--color-forest-green)', marginBottom: '0.65rem' }}>
+                        {settings?.contact?.phoneDisplay || companyConfig.contact.phoneDisplay}
+                      </div>
+
+                      <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap' }}>
+                        <a
+                          href={settings?.contact?.phoneHref || companyConfig.contact.phoneHref}
+                          style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '0.45rem',
+                            backgroundColor: 'var(--color-forest-green)',
+                            color: '#FFFFFF',
+                            padding: '0.45rem 1rem',
+                            borderRadius: '8px',
+                            fontSize: '0.82rem',
+                            fontWeight: 700,
+                            textDecoration: 'none',
+                            boxShadow: '0 2px 8px rgba(23, 75, 53, 0.2)',
+                            transition: 'opacity 150ms ease',
+                          }}
+                        >
+                          <Phone size={14} />
+                          <span>Call Now</span>
                         </a>
-                      </p>
-                      <div style={{ marginTop: '0.5rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                        <Button href={companyConfig.contact.phoneHref} variant="primary" size="sm">
-                          Call Now
-                        </Button>
-                        <Button
-                          href={companyConfig.contact.whatsappHref}
+
+                        <a
+                          href={`https://wa.me/91${(settings?.contact?.whatsappNumber || '9438080874').replace(/\D/g, '')}?text=${encodeURIComponent('Hello Shresthanshi Solar Solutions, I would like to inquire about solar installation.')}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          variant="outline"
-                          size="sm"
+                          style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '0.45rem',
+                            backgroundColor: '#25D366',
+                            color: '#FFFFFF',
+                            padding: '0.45rem 1rem',
+                            borderRadius: '8px',
+                            fontSize: '0.82rem',
+                            fontWeight: 700,
+                            textDecoration: 'none',
+                            boxShadow: '0 2px 8px rgba(37, 211, 102, 0.25)',
+                            transition: 'opacity 150ms ease',
+                          }}
                         >
-                          WhatsApp Us
-                        </Button>
+                          <MessageCircle size={15} />
+                          <span>WhatsApp Us</span>
+                        </a>
                       </div>
                     </div>
                   </div>
 
-                  <div className="contact-info-item">
-                    <div className="contact-info-item__icon">
+                  {/* 3. Email Inquiries */}
+                  <div
+                    style={{
+                      backgroundColor: '#FFFFFF',
+                      borderRadius: '14px',
+                      border: '1px solid var(--border-medium)',
+                      padding: '1rem 1.15rem',
+                      display: 'flex',
+                      gap: '0.85rem',
+                      alignItems: 'flex-start',
+                      boxShadow: '0 2px 6px rgba(23, 75, 53, 0.03)',
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: '40px',
+                        height: '40px',
+                        borderRadius: '10px',
+                        backgroundColor: 'var(--color-soft-green)',
+                        color: 'var(--color-forest-green)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        flexShrink: 0,
+                        border: '1px solid var(--border-subtle)',
+                      }}
+                    >
                       <Mail size={20} />
                     </div>
-                    <div>
-                      <h3>Email Address</h3>
-                      <p>
-                        <a href={companyConfig.contact.emailHref} className="contact-action-link">
-                          {companyConfig.contact.email}
-                        </a>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em', color: 'var(--text-muted)', marginBottom: '0.25rem' }}>
+                        Official Email Inquiries
+                      </div>
+                      <div style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--color-forest-green)', marginBottom: '0.65rem', overflowWrap: 'break-word' }}>
+                        {settings?.contact?.email || companyConfig.contact.email}
+                      </div>
+
+                      <a
+                        href={`mailto:${settings?.contact?.email || companyConfig.contact.email}`}
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '0.45rem',
+                          backgroundColor: '#FFFFFF',
+                          color: 'var(--color-forest-green)',
+                          border: '1.5px solid var(--border-medium)',
+                          padding: '0.42rem 0.95rem',
+                          borderRadius: '8px',
+                          fontSize: '0.82rem',
+                          fontWeight: 700,
+                          textDecoration: 'none',
+                          transition: 'all 150ms ease',
+                        }}
+                      >
+                        <Mail size={14} />
+                        <span>Send Email</span>
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* 4. Consultation & Response Hours */}
+                  <div
+                    style={{
+                      backgroundColor: '#FFFFFF',
+                      borderRadius: '14px',
+                      border: '1px solid var(--border-medium)',
+                      padding: '1rem 1.15rem',
+                      display: 'flex',
+                      gap: '0.85rem',
+                      alignItems: 'flex-start',
+                      boxShadow: '0 2px 6px rgba(23, 75, 53, 0.03)',
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: '40px',
+                        height: '40px',
+                        borderRadius: '10px',
+                        backgroundColor: 'var(--color-soft-green)',
+                        color: 'var(--color-forest-green)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        flexShrink: 0,
+                        border: '1px solid var(--border-subtle)',
+                      }}
+                    >
+                      <Clock size={20} />
+                    </div>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.25rem' }}>
+                        <span style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em', color: 'var(--text-muted)' }}>
+                          Consultation &amp; Working Hours
+                        </span>
+                        <span
+                          style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '0.3rem',
+                            fontSize: '0.7rem',
+                            fontWeight: 700,
+                            color: '#15803D',
+                            backgroundColor: '#DCFCE7',
+                            padding: '0.15rem 0.5rem',
+                            borderRadius: '999px',
+                          }}
+                        >
+                          <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#22C55E' }} />
+                          Active Response Line
+                        </span>
+                      </div>
+                      <p style={{ margin: 0, fontSize: '0.88rem', color: 'var(--color-forest-green)', fontWeight: 600, lineHeight: 1.5 }}>
+                        {settings?.contact?.workingHours || companyConfig.contact.workingHours}
                       </p>
-                      <div style={{ marginTop: '0.5rem' }}>
-                        <Button href={companyConfig.contact.emailHref} variant="outline" size="sm">
-                          Send an Email
-                        </Button>
+                    </div>
+                  </div>
+
+                  {/* 5. GSTIN & Official Registration */}
+                  <div
+                    style={{
+                      backgroundColor: '#FFFFFF',
+                      borderRadius: '14px',
+                      border: '1px solid var(--border-medium)',
+                      padding: '1rem 1.15rem',
+                      display: 'flex',
+                      gap: '0.85rem',
+                      alignItems: 'flex-start',
+                      boxShadow: '0 2px 6px rgba(23, 75, 53, 0.03)',
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: '40px',
+                        height: '40px',
+                        borderRadius: '10px',
+                        backgroundColor: 'var(--color-soft-green)',
+                        color: 'var(--color-forest-green)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        flexShrink: 0,
+                        border: '1px solid var(--border-subtle)',
+                      }}
+                    >
+                      <ShieldCheck size={20} />
+                    </div>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em', color: 'var(--text-muted)', marginBottom: '0.25rem' }}>
+                        GSTIN &amp; Government Registration
+                      </div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+                        <code style={{ fontSize: '0.92rem', fontWeight: 800, color: 'var(--color-forest-green)', backgroundColor: 'var(--color-soft-green)', padding: '0.2rem 0.55rem', borderRadius: '6px' }}>
+                          {companyConfig.gstin}
+                        </code>
+                        <span style={{ fontSize: '0.74rem', color: '#15803D', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
+                          <CheckCircle2 size={13} />
+                          <span>Registered Enterprise in Odisha</span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Integrated Guide Download Strip at Bottom of Card */}
+                <div
+                  style={{
+                    marginTop: '1.25rem',
+                    padding: '1rem 1.25rem',
+                    backgroundColor: '#FFFFFF',
+                    borderRadius: '14px',
+                    border: '1.5px dashed var(--color-forest-30)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    gap: '1rem',
+                    flexWrap: 'wrap',
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                    <div
+                      style={{
+                        width: '36px',
+                        height: '36px',
+                        borderRadius: '8px',
+                        backgroundColor: 'var(--color-soft-green)',
+                        color: 'var(--color-forest-green)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        flexShrink: 0,
+                      }}
+                    >
+                      <BookOpen size={18} />
+                    </div>
+                    <div>
+                      <div style={{ fontSize: '0.86rem', fontWeight: 700, color: 'var(--color-forest-green)' }}>
+                        Prefer to Read Our Solar Guide First?
+                      </div>
+                      <div style={{ fontSize: '0.76rem', color: 'var(--text-muted)' }}>
+                        Free pre-investment guide summary with checklist &amp; PM Surya Ghar details.
                       </div>
                     </div>
                   </div>
 
-                  <div className="contact-info-item">
-                    <div className="contact-info-item__icon">
-                      <Clock size={20} />
-                    </div>
-                    <div>
-                      <h3>Consultation Hours</h3>
-                      <p>{companyConfig.contact.workingHours}</p>
-                    </div>
-                  </div>
-
-                  <div className="contact-info-item">
-                    <div className="contact-info-item__icon">
-                      <ShieldCheck size={20} />
-                    </div>
-                    <div>
-                      <h3>GSTIN &amp; Verification</h3>
-                      <p>GSTIN: <strong>{companyConfig.gstin}</strong></p>
-                      <p style={{ fontSize: 'var(--text-xs)', marginTop: '0.25rem' }}>
-                        {companyConfig.contact.confirmationNote}
-                      </p>
-                    </div>
-                  </div>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => openGuideModal('Requested from Contact Us page')}
+                    style={{ whiteSpace: 'nowrap' }}
+                  >
+                    Get Free Guide (PDF)
+                  </Button>
                 </div>
-              </Card>
-
-              <Card variant="outlined" padding="lg" style={{ marginTop: '1.5rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                  <BookOpen size={18} color="var(--color-forest-green)" />
-                  <h3>Prefer to Read Our Guide First?</h3>
-                </div>
-                <p style={{ fontSize: 'var(--text-sm)', marginBottom: '1rem' }}>
-                  Download our practical pre-investment solar guide before scheduling a site visit.
-                </p>
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  onClick={() => openGuideModal('Requested from Contact Us page')}
-                >
-                  Get a Free Solar Guide
-                </Button>
               </Card>
             </div>
 
