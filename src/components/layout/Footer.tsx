@@ -8,9 +8,11 @@ import { companyConfig } from '../../data/company';
 import { footerLegalLinks } from '../../data/navigation';
 import { getSolarSolutions } from '../../data/solutions';
 import { useSolarGuideModal } from '../../hooks/useSolarGuideModal';
+import { useSiteSettings } from '../../app/providers';
 
 export const Footer: React.FC = () => {
   const { openGuideModal } = useSolarGuideModal();
+  const { settings } = useSiteSettings();
   const solutions = getSolarSolutions();
 
   return (
@@ -105,19 +107,19 @@ export const Footer: React.FC = () => {
             <ul className="site-footer__contact-list">
               <li>
                 <MapPin size={18} className="site-footer__contact-icon" />
-                <span>{companyConfig.contact.address.full}</span>
+                <span>{settings.contact.address || companyConfig.contact.address.full}</span>
               </li>
               <li>
                 <Phone size={18} className="site-footer__contact-icon" />
-                <a href={companyConfig.contact.phoneHref}>{companyConfig.contact.phoneDisplay}</a>
+                <a href={settings.contact.phoneHref || companyConfig.contact.phoneHref}>{settings.contact.phoneDisplay || companyConfig.contact.phoneDisplay}</a>
               </li>
               <li>
                 <Mail size={18} className="site-footer__contact-icon" />
-                <a href={companyConfig.contact.emailHref}>{companyConfig.contact.email}</a>
+                <a href={`mailto:${settings.contact.email || companyConfig.contact.email}`}>{settings.contact.email || companyConfig.contact.email}</a>
               </li>
             </ul>
             <div className="site-footer__proprietor">
-              <strong>Proprietor:</strong> {companyConfig.founder.name}
+              <strong>Proprietor:</strong> {settings.contact.proprietor || companyConfig.founder.name}
             </div>
           </div>
         </div>

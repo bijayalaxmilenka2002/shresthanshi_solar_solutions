@@ -223,7 +223,9 @@ export const HomePage: React.FC = () => {
           SECTION 4 — END-TO-END SOLAR SERVICE (Complete Solar Lifecycle)
           Placed directly above the 4 Simple Steps Process Timeline
       ================================================================= */}
-      <EndToEndServiceSection />
+      {settings.sections.coreServices && (
+        <EndToEndServiceSection />
+      )}
 
       {/* =================================================================
           SECTION 5 — HOW THE PROCESS WORKS (4 Simple Steps)

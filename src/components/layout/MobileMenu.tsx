@@ -7,6 +7,7 @@ import { getPrimaryNavigation } from '../../data/navigation';
 import { companyConfig } from '../../data/company';
 import { useSolarGuideModal } from '../../hooks/useSolarGuideModal';
 import { useQuoteModal } from '../../hooks/useQuoteModal';
+import { useSiteSettings } from '../../app/providers';
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -18,6 +19,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
   const navItems = getPrimaryNavigation();
   const { openGuideModal } = useSolarGuideModal();
   const { openQuoteModal } = useQuoteModal();
+  const { settings } = useSiteSettings();
 
   useEffect(() => {
     if (!isOpen) return;
@@ -164,13 +166,13 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
             Get a Free Solar Guide
           </Button>
           <div className="mobile-menu__contact">
-            <a href={companyConfig.contact.phoneHref}>
+            <a href={settings.contact.phoneHref || companyConfig.contact.phoneHref}>
               <Phone size={15} />
-              <span>{companyConfig.contact.phoneDisplay}</span>
+              <span>{settings.contact.phoneDisplay || companyConfig.contact.phoneDisplay}</span>
             </a>
-            <a href={companyConfig.contact.emailHref}>
+            <a href={`mailto:${settings.contact.email || companyConfig.contact.email}`}>
               <Mail size={15} />
-              <span>{companyConfig.contact.email}</span>
+              <span>{settings.contact.email || companyConfig.contact.email}</span>
             </a>
           </div>
         </div>

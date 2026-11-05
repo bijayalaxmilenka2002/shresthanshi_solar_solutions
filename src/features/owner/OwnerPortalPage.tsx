@@ -29,6 +29,7 @@ import {
   Lock,
   LogOut,
   Key,
+  Download,
 } from 'lucide-react';
 import { Container } from '../../components/ui/Container';
 import { Card } from '../../components/ui/Card';
@@ -45,6 +46,7 @@ import {
   updateLeadNotes,
   deleteLead,
   saveLead,
+  exportLeadsToCSV,
 } from '../../services/enquiryService';
 import { useSiteSettings } from '../../app/providers';
 import { SiteSettings } from '../../services/siteSettingsService';
@@ -143,21 +145,41 @@ export const OwnerPortalPage: React.FC = () => {
     };
   }, []);
 
-  // Filter leads
+  // Filter leads safely
   const filteredLeads = leads.filter((lead) => {
+    const q = searchQuery.toLowerCase().trim();
     const matchesSearch =
-      searchQuery === '' ||
-      lead.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      lead.phone.includes(searchQuery) ||
-      lead.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      lead.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      lead.category.toLowerCase().includes(searchQuery.toLowerCase());
+      q === '' ||
+      (lead.name || '').toLowerCase().includes(q) ||
+      (lead.phone || '').includes(q) ||
+      (lead.location || '').toLowerCase().includes(q) ||
+      (lead.id || '').toLowerCase().includes(q) ||
+      (lead.category || '').toLowerCase().includes(q) ||
+      (lead.details || '').toLowerCase().includes(q);
 
     const matchesSource = filterSource === 'All' || lead.source === filterSource;
     const matchesStatus = filterStatus === 'All' || lead.status === filterStatus;
 
     return matchesSearch && matchesSource && matchesStatus;
   });
+
+  const handleExportCSV = () => {
+    try {
+      const csv = exportLeadsToCSV();
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', `shresthanshi_solar_leads_${new Date().toISOString().slice(0, 10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error('Failed to export CSV', err);
+      alert('Unable to export leads to CSV.');
+    }
+  };
 
   // Metrics
   const totalLeads = leads.length;
@@ -797,6 +819,31 @@ export const OwnerPortalPage: React.FC = () => {
           </button>
         </div>
 
+        {/* Global Save Success Notification Banner */}
+        {saveSuccessMsg && (
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.65rem',
+              padding: '0.85rem 1.25rem',
+              backgroundColor: '#DCFCE7',
+              border: '1.5px solid #86EFAC',
+              color: '#166534',
+              borderRadius: 'var(--radius-md)',
+              marginBottom: '1.5rem',
+              fontWeight: 600,
+              fontSize: '0.92rem',
+              boxShadow: '0 2px 8px rgba(22, 101, 52, 0.08)',
+            }}
+          >
+            <CheckCircle2 size={20} color="#15803D" />
+            <span>
+              <strong>Settings Saved &amp; Synced!</strong> All public site pages now immediately reflect your latest updates.
+            </span>
+          </div>
+        )}
+
         {/* =========================================================================
             TAB 1: CLIENT LEADS & RESPONSES INBOX
             ========================================================================= */}
@@ -925,6 +972,17 @@ export const OwnerPortalPage: React.FC = () => {
                     <option value="Converted">Converted</option>
                     <option value="Closed">Closed</option>
                   </select>
+
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    iconLeft={<Download size={15} />}
+                    onClick={handleExportCSV}
+                    title="Export all leads as CSV spreadsheet"
+                  >
+                    Export CSV
+                  </Button>
 
                   <Button
                     type="button"
