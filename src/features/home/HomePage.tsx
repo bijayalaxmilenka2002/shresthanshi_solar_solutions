@@ -385,7 +385,7 @@ export const HomePage: React.FC = () => {
               </Button>
             </div>
 
-            <div className="grid-3" style={{ marginBottom: '2.5rem' }}>
+            <div className="grid-3">
               {homepageFieldHighlights.map((proj) => (
                 <Card key={proj.id} variant="white" padding="none" hoverable className="visual-card">
                   <div className="visual-card__media">
@@ -413,65 +413,6 @@ export const HomePage: React.FC = () => {
                   </div>
                 </Card>
               ))}
-            </div>
-
-            {/* Compact Verified Enterprise & Leadership Split */}
-            <div className="trust-proof-grid">
-              <Card variant="white" padding="lg" className="trust-proof-card">
-                <div className="trust-proof-card__badge">
-                  <ShieldCheck size={18} />
-                  <span>Verified Odisha Enterprise • GSTIN: {companyConfig.gstin}</span>
-                </div>
-                <h3>{companyConfig.legalName}</h3>
-                <p style={{ marginTop: '0.35rem' }}>{companyConfig.contact.address.full}</p>
-                <ul className="trust-proof-list">
-                  <li>
-                    <CheckCircle2 size={15} />
-                    <span>Solar water pump panels, sensor pumps &amp; community water filters</span>
-                  </li>
-                  <li>
-                    <CheckCircle2 size={15} />
-                    <span>Rooftop solar, commercial solar &amp; solar street lighting</span>
-                  </li>
-                  <li>
-                    <CheckCircle2 size={15} />
-                    <span>Heavy-duty elevated galvanized solar mounting structures</span>
-                  </li>
-                </ul>
-                <div style={{ marginTop: '1.25rem' }}>
-                  <Link to="/about" className="ui-text-link">
-                    <span>About Our Company</span>
-                    <ArrowRight size={16} />
-                  </Link>
-                </div>
-              </Card>
-
-              <Card variant="white" padding="lg" className="trust-proof-card">
-                <div className="trust-proof-card__founder">
-                  <div className="trust-proof-card__avatar-placeholder">
-                    <ImagePlaceholder
-                      label={companyConfig.founder.name}
-                      sublabel={companyConfig.founder.role}
-                      aspectRatio="3/4"
-                      variant="soft-green"
-                      src={companyConfig.founder.imageSrc}
-                      imgFit="cover"
-                    />
-                  </div>
-                  <div>
-                    <span className="badge" style={{ marginBottom: '0.4rem' }}>Leadership</span>
-                    <h3>{companyConfig.founder.name}</h3>
-                    <p className="trust-proof-card__role">{companyConfig.founder.role}</p>
-                    <p className="trust-proof-card__edu">MBA (BPUT) • Bhawanipatna, Kalahandi</p>
-                  </div>
-                </div>
-                <p className="visual-card__desc">
-                  Delivering practical solar energy, clean water infrastructure, and developmental supply works across Kalahandi and Odisha.
-                </p>
-                <div className="trust-proof-note">
-                  <span>Client Reference Note:</span> [Placeholder: Verified client references shared during consultation]
-                </div>
-              </Card>
             </div>
           </Container>
         </section>
