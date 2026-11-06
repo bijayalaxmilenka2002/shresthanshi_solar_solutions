@@ -3,13 +3,12 @@ export type MediaCategory =
   | 'awards'
   | 'videos'
   | 'installations'
-  | 'summits'
-  | 'branding';
+  | 'summits';
 
 export interface MediaItem {
   id: string;
   title: string;
-  category: 'awards' | 'videos' | 'installations' | 'summits' | 'branding';
+  category: 'awards' | 'videos' | 'installations' | 'summits';
   type: 'image' | 'video';
   fileUrl: string;
   thumbnailUrl?: string;
@@ -27,7 +26,6 @@ export const mediaCategories: { id: MediaCategory; label: string; count?: number
   { id: 'videos', label: 'Site Videos' },
   { id: 'installations', label: 'Field Installations' },
   { id: 'summits', label: 'National Summits' },
-  { id: 'branding', label: 'Company Brand' },
 ];
 
 export const mediaItems: MediaItem[] = [
@@ -394,33 +392,5 @@ export const mediaItems: MediaItem[] = [
     description:
       'Solar pumping field array coupled to an automated deep tubewell submersible pump, supplying fresh drinking and irrigation water directly to a community water reservoir.',
     verifiedBy: 'Rural Infrastructure & Drinking Water Project',
-  },
-
-  // ==========================================
-  // 5. OFFICIAL BRAND IDENTITY & ARTWORK
-  // ==========================================
-  {
-    id: 'brand-equipment-showcase',
-    title: 'Complete Solar Equipment Package',
-    category: 'branding',
-    type: 'image',
-    fileUrl: '/media/branding/shresthanshi-brand-equipment-showcase.jpg',
-    badge: 'Equipment Package',
-    location: 'Head Office: Narla Road, Kalahandi',
-    description:
-      'Official brand showcase depicting Shresthanshi’s comprehensive solar ecosystem: Tier-1 PV modules, digital solar inverter, stainless steel borehole submersible pump, and solar cabling.',
-    verifiedBy: 'M/s Shreshtanshi Construction & Suppliers',
-  },
-  {
-    id: 'brand-official-logo',
-    title: 'Official Company Logo & Seal',
-    category: 'branding',
-    type: 'image',
-    fileUrl: '/media/branding/shresthanshi-official-logo.jpg',
-    badge: 'Official Trademark',
-    location: 'Kalahandi, Odisha',
-    description:
-      'High-resolution official trademark insignia of Shresthanshi Construction & Suppliers featuring rising sun irradiation arcs and multi-cell solar panel arrays.',
-    verifiedBy: 'GSTIN: 21AVUPM9359D1Z6',
   },
 ];
