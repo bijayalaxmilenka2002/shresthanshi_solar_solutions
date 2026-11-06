@@ -17,9 +17,9 @@ interface CTASectionProps {
 
 export const CTASection: React.FC<CTASectionProps> = ({
   headline = 'Plan Your Solar Installation With Clarity.',
-  supportingCopy = 'Speak with our Kalahandi team for a straightforward site and energy assessment.',
+  supportingCopy = 'Speak with our engineering team in Bhubaneswar or our established Kalahandi department office for a straightforward assessment.',
   primaryLabel = 'Get a Solar Assessment',
-  secondaryLabel = 'Call Our Team',
+  secondaryLabel = 'Call Our Office',
   image = '[Image: rooftop solar installation]',
   imageSrc = '/images/cta-solar-rooftop.jpg',
   prefillTopic = 'assessment',

@@ -133,7 +133,7 @@ export const SolarStreetLightingPage: React.FC = () => {
     <div>
       <SEO
         title="Solar Street Lighting Systems in Odisha — Autonomous LED Street Lights"
-        description="Field-tested solar street lighting systems by Shresthanshi Solar Solutions. Dusk-to-dawn sensors, hot-dip galvanized poles, IP66 LED luminaires, and anti-theft battery enclosures across Kalahandi and Odisha."
+        description="Field-tested solar street lighting systems by Shresthanshi Solar Solutions. Dusk-to-dawn sensors, hot-dip galvanized poles, IP66 LED luminaires, and anti-theft battery enclosures across Bhubaneswar, Kalahandi and Odisha."
         canonicalPath="/solar-solutions/solar-street-lighting"
       />
 
@@ -149,7 +149,7 @@ export const SolarStreetLightingPage: React.FC = () => {
         <Container className="page-hero__grid">
           <div className="page-hero__content">
             <span className="badge" style={{ marginBottom: '1rem' }}>
-              Autonomous Outdoor Lighting • Kalahandi &amp; Across Odisha
+              Autonomous Outdoor Lighting • Bhubaneswar, Kalahandi &amp; Across Odisha
             </span>
             <h1 className="page-hero__title">Solar Street Lighting Systems</h1>
             <p className="page-hero__subtitle">
@@ -577,7 +577,7 @@ export const SolarStreetLightingPage: React.FC = () => {
       {/* CTA Section */}
       <CTASection
         headline="Illuminating Streets & Rural Communities."
-        supportingCopy="Speak with our Kalahandi office to plan street lighting layouts, pole counts, and technical specifications for your site."
+        supportingCopy="Speak with our engineering team in Bhubaneswar or our established Kalahandi department to plan street lighting layouts, pole counts, and technical specifications."
         prefillTopic="Solar Street Lighting Enquiry"
       />
     </div>

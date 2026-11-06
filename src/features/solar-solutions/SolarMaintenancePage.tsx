@@ -27,7 +27,7 @@ export const SolarMaintenancePage: React.FC = () => {
     <div>
       <SEO
         title="Solar Panel Cleaning, Maintenance & Health Audits in Odisha"
-        description="Professional solar panel cleaning, inverter diagnostics, earthing checks, and preventive maintenance across Kalahandi and Odisha to sustain peak generation."
+        description="Professional solar panel cleaning, inverter diagnostics, earthing checks, and preventive maintenance across Bhubaneswar, Kalahandi and Odisha to sustain peak generation."
         canonicalPath="/solar-solutions/solar-maintenance-support"
       />
       <Breadcrumbs

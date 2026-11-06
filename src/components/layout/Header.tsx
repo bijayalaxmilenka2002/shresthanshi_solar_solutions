@@ -104,7 +104,7 @@ export const Header: React.FC = () => {
             <span className="top-bar__divider">•</span>
             <span>GSTIN: {companyConfig.gstin}</span>
             <span className="top-bar__divider top-bar__hide-sm">•</span>
-            <span className="top-bar__hide-sm">Kalahandi, Odisha</span>
+            <span className="top-bar__hide-sm">Bhubaneswar (HQ) • Kalahandi Department</span>
           </div>
           <div className="top-bar__right">
             <button

@@ -1046,7 +1046,7 @@
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 0.3rem;
+  gap: 0.35rem;
   padding: 0.48rem 0.8rem;
   border-radius: var(--radius-full);
   font-family: var(--font-heading);
@@ -1062,9 +1062,32 @@
   display: inline-block;
 }
 
-.desktop-nav__link:hover {
+.desktop-nav__link:hover,
+.desktop-nav__item:hover .desktop-nav__link {
   background-color: var(--color-soft-green);
   color: var(--color-forest-green);
+}
+
+.desktop-nav__link:hover .desktop-nav__label,
+.desktop-nav__item:hover .desktop-nav__link .desktop-nav__label {
+  color: var(--color-forest-green);
+}
+
+.desktop-nav__chevron {
+  flex-shrink: 0;
+  opacity: 0.95;
+  color: var(--color-forest-green);
+  stroke: var(--color-forest-green);
+  stroke-width: 2.2px;
+  transition: transform 240ms var(--ease-out-expo), color var(--transition-fast);
+}
+
+.desktop-nav__link:hover .desktop-nav__chevron,
+.desktop-nav__item:hover .desktop-nav__link .desktop-nav__chevron {
+  color: #174B35 !important;
+  stroke: #174B35 !important;
+  stroke-width: 2.6px !important;
+  opacity: 1 !important;
 }
 
 .desktop-nav__link--active {
@@ -1077,15 +1100,31 @@
   color: var(--color-white);
 }
 
-.desktop-nav__chevron {
-  flex-shrink: 0;
-  opacity: 0.8;
-  transition: transform 240ms var(--ease-out-expo);
-}
-
 .desktop-nav__link--active .desktop-nav__chevron {
   opacity: 1;
   color: var(--color-white);
+  stroke: var(--color-white);
+}
+
+/* Active item on hover turns into soft green pill with bold forest green label & icon */
+.desktop-nav__link--active:hover,
+.desktop-nav__item:hover .desktop-nav__link--active {
+  background-color: var(--color-soft-green);
+  color: var(--color-forest-green);
+}
+
+.desktop-nav__link--active:hover .desktop-nav__label,
+.desktop-nav__item:hover .desktop-nav__link--active .desktop-nav__label {
+  color: var(--color-forest-green) !important;
+  font-weight: 700;
+}
+
+.desktop-nav__link--active:hover .desktop-nav__chevron,
+.desktop-nav__item:hover .desktop-nav__link--active .desktop-nav__chevron {
+  color: #174B35 !important;
+  stroke: #174B35 !important;
+  stroke-width: 2.6px !important;
+  opacity: 1 !important;
 }
 
 .desktop-nav__chevron--open {
@@ -1146,6 +1185,21 @@
 
 .desktop-dropdown__overview:hover {
   background-color: var(--color-soft-green);
+  color: #174B35;
+}
+
+.desktop-dropdown__overview svg {
+  color: var(--color-forest-green);
+  stroke: var(--color-forest-green);
+  stroke-width: 2.2px;
+  transition: transform var(--transition-fast), color var(--transition-fast);
+}
+
+.desktop-dropdown__overview:hover svg {
+  color: #174B35 !important;
+  stroke: #174B35 !important;
+  stroke-width: 2.6px !important;
+  transform: translate(2px, -2px);
 }
 
 .desktop-dropdown__list {

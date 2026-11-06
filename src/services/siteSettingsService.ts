@@ -51,10 +51,10 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
     proprietor: 'Mr. Shubham Pratap Singh',
   },
   hero: {
-    badge: 'Solar Energy & Solar Water Pumping • Kalahandi, Odisha',
+    badge: 'Solar Energy & Solar Water Pumping • Bhubaneswar & Across Odisha',
     title: 'Powering Homes, Farms & Businesses with Pure Solar Energy.',
     subtitle:
-      'Turnkey on-grid rooftop solar, agricultural solar pump panels, and street lighting engineered for Kalahandi and western Odisha. Clear engineering, honest sizing, and zero inflated promises.',
+      'Turnkey on-grid rooftop solar, agricultural solar pump panels, and street lighting engineered for Bhubaneswar, Kalahandi, and across Odisha. Clear engineering, honest sizing, and zero inflated promises.',
   },
   sections: {
     heroCaption: true,

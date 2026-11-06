@@ -46,8 +46,8 @@ export const AboutPage: React.FC = () => {
   return (
     <div>
       <SEO
-        title="About Us — Shresthanshi Solar Solutions, Kalahandi, Odisha"
-        description="Learn about M/s Shreshtanshi Construction & Suppliers (Shresthanshi Solar Solutions, Prop. Shubham Pratap Singh, GSTIN: 21AVUPM9359D1Z6). Field-proven solar energy and water pumping."
+        title="About Us — Shresthanshi Solar Solutions, Bhubaneswar & Kalahandi, Odisha"
+        description="Learn about M/s Shreshtanshi Construction & Suppliers (Shresthanshi Solar Solutions, Prop. Shubham Pratap Singh, GSTIN: 21AVUPM9359D1Z6). Prioritizing Bhubaneswar with established regional department in Kalahandi."
         canonicalPath="/about"
       />
       <Breadcrumbs items={[{ label: 'About Us' }]} />
@@ -63,7 +63,7 @@ export const AboutPage: React.FC = () => {
               Practical Solar Energy &amp; Water Pumping in Odisha.
             </h1>
             <p className="page-hero__subtitle">
-              Headquartered at Sargiguda, Narla Road in Kalahandi, <strong>{companyConfig.legalName}</strong> (GSTIN: {companyConfig.gstin}) delivers turnkey residential rooftop solar, commercial solar plants, agricultural solar water pump controllers, and community solar street lighting.
+              Prioritizing Bhubaneswar with an established department at Sargiguda, Narla Road in Kalahandi, <strong>{companyConfig.legalName}</strong> (GSTIN: {companyConfig.gstin}) delivers turnkey residential rooftop solar, commercial solar plants, agricultural solar water pump controllers, and community solar street lighting across Odisha.
             </p>
             <div className="page-hero__actions">
               <Button to="/contact" variant="primary" size="lg" iconRight={<ArrowRight size={18} />}>
@@ -77,7 +77,7 @@ export const AboutPage: React.FC = () => {
           <div className="page-hero__visual">
             <ImagePlaceholder
               label="[Hero image: solar panels on a modern home]"
-              sublabel="Kalahandi & Across Odisha"
+              sublabel="Bhubaneswar & Across Odisha"
               aspectRatio="16/10"
               variant="white"
               src="/images/page-hero-solar-home.jpg"
@@ -143,7 +143,7 @@ export const AboutPage: React.FC = () => {
                 <span className="badge" style={{ marginBottom: '0.85rem' }}>
                   Verified Biography
                 </span>
-                <h2>Committed to Kalahandi &amp; Odisha</h2>
+                <h2>Committed to Bhubaneswar, Kalahandi &amp; Odisha</h2>
                 {companyConfig.founder.bioParagraphs.map((para, i) => (
                   <p key={i} style={{ marginTop: '0.75rem' }}>
                     {para}
@@ -265,8 +265,8 @@ export const AboutPage: React.FC = () => {
       </section>
 
       <CTASection
-        headline="Speak With a Local Odisha Team You Can Verify."
-        supportingCopy="Visit our office at Sargiguda, Narla Road, Kalahandi or request a solar assessment."
+        headline="Speak With an Odisha Solar Team You Can Verify."
+        supportingCopy="Connect with our Bhubaneswar operations team or visit our established department office at Sargiguda, Narla Road, Kalahandi."
         prefillTopic="About Us Page Enquiry"
         image="[Image: rooftop solar installation]"
       />

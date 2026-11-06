@@ -51,7 +51,7 @@ export const SolarWaterPumpsPage: React.FC = () => {
     <div>
       <SEO
         title="Agricultural Solar Water Pumps in Odisha — PM-KUSUM Ready"
-        description="Reliable solar borewell and open well irrigation pumps for farmers across Kalahandi and Odisha. Replace diesel pumps with standalone solar power."
+        description="Reliable solar borewell and open well irrigation pumps for farmers across Bhubaneswar, Kalahandi and Odisha. Replace diesel pumps with standalone solar power."
         canonicalPath="/solar-solutions/solar-water-pumps"
       />
       <Breadcrumbs

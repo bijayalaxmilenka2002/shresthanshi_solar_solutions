@@ -38,7 +38,7 @@ export const CommercialSolarPage: React.FC = () => {
     <div>
       <SEO
         title="Commercial & Institutional Solar Plants in Odisha"
-        description="Cut daytime operational electricity costs for commercial roofs, showrooms, rice mills, schools, and offices in Kalahandi & Odisha with engineered solar plants."
+        description="Cut daytime operational electricity costs for commercial roofs, showrooms, rice mills, schools, and offices in Bhubaneswar, Kalahandi & Odisha with engineered solar plants."
         canonicalPath="/solar-solutions/commercial-solar"
       />
       <Breadcrumbs
@@ -146,7 +146,7 @@ export const CommercialSolarPage: React.FC = () => {
 
       <CTASection
         headline="Put Your Commercial Roof to Work."
-        supportingCopy="Request an on-site electrical and roof assessment from our Kalahandi team."
+        supportingCopy="Request an on-site electrical and roof assessment from our engineering team in Bhubaneswar or our Kalahandi department."
         prefillTopic="Commercial Solar Assessment"
         image="[Image: commercial solar installation]"
       />

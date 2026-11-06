@@ -180,8 +180,8 @@ export const ContactPage: React.FC = () => {
   return (
     <div>
       <SEO
-        title="Contact Us & Request Solar Site Assessment — Kalahandi, Odisha"
-        description="Connect with our Kalahandi office (+91 9438-080-874). Request an honest rooftop or farm borewell solar site assessment across Odisha."
+        title="Contact Us & Request Solar Site Assessment — Bhubaneswar & Kalahandi, Odisha"
+        description="Connect with our team in Bhubaneswar or our established Kalahandi department (+91 9438-080-874). Request an honest rooftop or farm borewell solar site assessment across Odisha."
         canonicalPath="/contact"
       />
       <Breadcrumbs items={[{ label: 'Contact Us' }]} />
@@ -194,13 +194,13 @@ export const ContactPage: React.FC = () => {
             </span>
             <h1 className="page-hero__title">Start Your Solar Conversation With Us.</h1>
             <p className="page-hero__subtitle">
-              Whether you are exploring rooftop solar for your home, daytime solar for a commercial property, or a solar water pump for agricultural irrigation in Odisha, reach out to our team in Kalahandi for clear, honest guidance.
+              Whether you are exploring rooftop solar for your home, daytime solar for a commercial property, or a solar water pump for agricultural irrigation in Odisha, reach out to our team in Bhubaneswar or our established Kalahandi department for clear, honest guidance.
             </p>
           </div>
           <div className="page-hero__visual">
             <ImagePlaceholder
               label="[Image: solar consultation & site evaluation]"
-              sublabel="Technical Solar Consultation • Kalahandi, Odisha"
+              sublabel="Technical Solar Consultation • Bhubaneswar & Kalahandi, Odisha"
               aspectRatio="1/1"
               variant="white"
               src="/images/solar-consultation-rooftop.jpg"
@@ -313,7 +313,7 @@ export const ContactPage: React.FC = () => {
                     </div>
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <div style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em', color: 'var(--text-muted)', marginBottom: '0.25rem' }}>
-                        Registered Office Address
+                        Operational Base &amp; Registered Department Office
                       </div>
                       <p style={{ margin: 0, fontSize: '0.88rem', color: 'var(--color-forest-green)', fontWeight: 600, lineHeight: 1.5 }}>
                         {settings?.contact?.address || companyConfig.contact.address.full}
@@ -646,7 +646,7 @@ export const ContactPage: React.FC = () => {
                       <strong>{solutionInterest}</strong> ({customerType}).
                     </p>
                     <p>
-                      Our team in Kalahandi will reach out to <strong>{name}</strong> via your preferred contact method (<strong>{preferredContactMethod}</strong> at <strong>{preferredContactMethod === 'Email' ? email : phone}</strong>).
+                      Our engineering team (Bhubaneswar HQ &amp; Kalahandi Department) will reach out to <strong>{name}</strong> via your preferred contact method (<strong>{preferredContactMethod}</strong> at <strong>{preferredContactMethod === 'Email' ? email : phone}</strong>).
                     </p>
                     <div style={{ marginTop: '1.5rem', display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
                       <Button variant="primary" size="md" onClick={handleReset}>
@@ -702,7 +702,7 @@ export const ContactPage: React.FC = () => {
                       <Input
                         label="Town / Block & District"
                         name="location"
-                        placeholder="e.g., Bhawanipatna, Kalahandi"
+                        placeholder="e.g., Bhubaneswar / Kalahandi"
                         value={location}
                         onChange={(e) => setLocation(e.target.value)}
                         error={errors.location}

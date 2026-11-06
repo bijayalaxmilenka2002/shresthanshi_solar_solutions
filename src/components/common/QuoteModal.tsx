@@ -313,7 +313,7 @@ export const QuoteModal: React.FC = () => {
               margin: '0 auto 1.5rem',
             }}
           >
-            Our engineering team in Kalahandi will evaluate your property in <strong>{location}</strong> and prepare a transparent capacity sizing and cost breakdown for <strong>{selectedSolarId}</strong>.
+            Our engineering team in Bhubaneswar and Kalahandi will evaluate your property in <strong>{location}</strong> and prepare a transparent capacity sizing and cost breakdown for <strong>{selectedSolarId}</strong>.
           </p>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', maxWidth: '380px', margin: '0 auto' }}>
@@ -434,7 +434,7 @@ export const QuoteModal: React.FC = () => {
               <Input
                 label="City / District in Odisha"
                 type="text"
-                placeholder="e.g. Bhawanipatna, Kalahandi"
+                placeholder="e.g. Bhubaneswar / Kalahandi"
                 value={location}
                 onChange={(e) => {
                   setLocation(e.target.value);
@@ -547,7 +547,7 @@ export const QuoteModal: React.FC = () => {
                 }}
               >
                 <ShieldCheck size={16} style={{ color: 'var(--color-forest-green)', flexShrink: 0 }} />
-                <span>Zero spam • Direct from Kalahandi engineering office</span>
+                <span>Zero spam • Direct from Bhubaneswar & Kalahandi engineering offices</span>
               </div>
 
               <div

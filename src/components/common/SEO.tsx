@@ -11,9 +11,9 @@ interface SEOProps {
   schema?: Record<string, unknown> | Array<Record<string, unknown>>;
 }
 
-const DEFAULT_TITLE = 'Shreshtanshi Solar Solutions | Kalahandi & Odisha';
+const DEFAULT_TITLE = 'Shreshtanshi Solar Solutions | Bhubaneswar, Kalahandi & Odisha';
 const DEFAULT_DESC =
-  'Engineered turnkey rooftop solar, agricultural solar water pumping, PM Surya Ghar subsidy assistance, and solar street lighting across Kalahandi and Odisha. GSTIN: 21AVUPM9359D1Z6.';
+  'Engineered turnkey rooftop solar, agricultural solar water pumping, PM Surya Ghar subsidy assistance, and solar street lighting prioritized in Bhubaneswar with existing operational department in Kalahandi, Odisha. GSTIN: 21AVUPM9359D1Z6.';
 const FALLBACK_PRODUCTION_URL = 'https://shresthanshisolarsolutions.vercel.app';
 
 export const SEO: React.FC<SEOProps> = ({

@@ -26,7 +26,7 @@ export const ResidentialSolarPage: React.FC = () => {
     <div>
       <SEO
         title="Residential Rooftop Solar Installation in Odisha — PM Surya Ghar"
-        description="Save up to 80% on household daytime power with turnkey residential rooftop solar in Kalahandi & Odisha. PM Surya Ghar subsidy guidance, net-metering & DISCOM approvals."
+        description="Save up to 80% on household daytime power with turnkey residential rooftop solar in Bhubaneswar, Kalahandi & Odisha. PM Surya Ghar subsidy guidance, net-metering & DISCOM approvals."
         canonicalPath="/solar-solutions/residential-rooftop-solar"
       />
       <Breadcrumbs

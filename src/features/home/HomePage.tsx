@@ -105,8 +105,8 @@ export const HomePage: React.FC = () => {
   return (
     <div className="home-page">
       <SEO
-        title="Solar Energy, Rooftop Solar & Agricultural Solar Pumps | Shresthanshi Solar Solutions"
-        description="Shreshtanshi Construction & Suppliers provides practical solar solutions for homes, farms, businesses, and institutions across Kalahandi and Odisha—including rooftop solar, solar water pumps, and routine maintenance."
+        title="Solar Energy, Rooftop Solar & Agricultural Solar Pumps | Bhubaneswar & Kalahandi"
+        description="Shreshtanshi Construction & Suppliers provides practical solar solutions for homes, farms, businesses, and institutions prioritized in Bhubaneswar, with an established operational department in Kalahandi and projects across Odisha."
         canonicalPath="/"
       />
       {/* =================================================================
@@ -161,7 +161,7 @@ export const HomePage: React.FC = () => {
                 <div className="hero-section__caption-card">
                   <MapPin size={18} />
                   <div>
-                    <strong>Rooted in Kalahandi, Serving Odisha</strong>
+                    <strong>Bhubaneswar (HQ) • Kalahandi Department</strong>
                     <span>Rooftop Solar • Solar Water Pumps • Solar Street Lighting</span>
                   </div>
                 </div>

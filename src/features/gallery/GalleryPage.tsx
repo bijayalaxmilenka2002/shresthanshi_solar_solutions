@@ -68,7 +68,7 @@ export const GalleryPage: React.FC = () => {
             <SectionHeading
               eyebrow="Installation Gallery"
               title="Solar &amp; Infrastructure Visuals"
-              subtitle={`Showing ${visiblePhotos.length} of ${galleryPhotos.length} verified project photos across Kalahandi and Odisha.`}
+              subtitle={`Showing ${visiblePhotos.length} of ${galleryPhotos.length} verified project photos across Bhubaneswar, Kalahandi, and Odisha.`}
             />
           </div>
 
@@ -180,7 +180,7 @@ export const GalleryPage: React.FC = () => {
 
       <CTASection
         headline="See How Solar Fits Your Property."
-        supportingCopy="Contact our team in Kalahandi to discuss rooftop solar, commercial installations, or solar water pumps."
+        supportingCopy="Contact our team in Bhubaneswar or our established Kalahandi department to discuss rooftop solar, commercial installations, or solar water pumps."
         prefillTopic="Gallery Page Enquiry"
         image="[Project gallery image]"
       />
