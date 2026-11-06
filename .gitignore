@@ -1,4 +1,5 @@
-# Dependencies
+# Local source documents
+documents/
 node_modules
 /.pnp
 .pnp.js

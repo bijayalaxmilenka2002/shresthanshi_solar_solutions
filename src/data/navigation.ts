@@ -86,8 +86,40 @@ export const getPrimaryNavigation = (): NavItem[] => {
       ],
     },
     {
+      label: 'Media',
+      path: '/media',
+      children: [
+        {
+          label: 'All Media & Verification',
+          path: '/media',
+          description: 'Official DISCOM awards, certificates, summits, and video walkthroughs.',
+        },
+        {
+          label: 'Awards & DISCOM Certificates',
+          path: '/media?category=awards',
+          description: 'TPWODL appreciation certificates and PM Surya Ghar Kalahandi awards.',
+        },
+        {
+          label: 'Field Videos & Walkthroughs',
+          path: '/media?category=videos',
+          description: 'On-site video recordings of live solar plants and inverter commissioning.',
+        },
+        {
+          label: 'GPS-Verified Installations',
+          path: '/media?category=installations',
+          description: 'Real field photos stamped with GPS coordinates, consumer accounts, and net meters.',
+        },
+        {
+          label: 'National Summits & MoUs',
+          path: '/media?category=summits',
+          description: 'Bharat RE Summit New Delhi participation with MNRE & TPWODL leaders.',
+        },
+      ],
+    },
+    {
       label: 'About',
       path: '/about',
+      children: undefined,
     },
     {
       label: 'Resources',

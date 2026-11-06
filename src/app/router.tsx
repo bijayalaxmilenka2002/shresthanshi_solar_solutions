@@ -14,6 +14,7 @@ import { AudienceDetailPage } from '../features/who-we-serve/AudienceDetailPage'
 import { ProjectsPage } from '../features/projects/ProjectsPage';
 import { AboutPage } from '../features/about/AboutPage';
 import { GalleryPage } from '../features/gallery/GalleryPage';
+import { MediaPage } from '../features/media/MediaPage';
 import { ResourcesOverviewPage } from '../features/resources/ResourcesOverviewPage';
 import { SolarFaqsPage } from '../features/resources/SolarFaqsPage';
 import { SubsidyGuidancePage } from '../features/resources/SubsidyGuidancePage';
@@ -79,10 +80,11 @@ export const AppRouter: React.FC = () => {
           element={<AudienceDetailPage audienceId="businesses-institutions" />}
         />
 
-        {/* Portfolio, About, Gallery */}
+        {/* Portfolio, About, Gallery, Media */}
         <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/gallery" element={<GalleryPage />} />
+        <Route path="/media" element={<MediaPage />} />
 
         {/* Resources */}
         <Route path="/resources" element={<ResourcesOverviewPage />} />

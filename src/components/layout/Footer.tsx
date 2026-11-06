@@ -90,6 +90,9 @@ export const Footer: React.FC = () => {
                 <Link to="/gallery">Project Gallery</Link>
               </li>
               <li>
+                <Link to="/media"><strong>Media &amp; Verification</strong></Link>
+              </li>
+              <li>
                 <Link to="/about">About Us</Link>
               </li>
               <li>
