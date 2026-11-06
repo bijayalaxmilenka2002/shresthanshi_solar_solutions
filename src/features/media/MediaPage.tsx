@@ -9,11 +9,11 @@ import {
   Search,
   Maximize2,
   Play,
-  CheckCircle2,
   ExternalLink,
   Sparkles,
   ArrowRight,
   Filter,
+  X,
 } from 'lucide-react';
 import { Container } from '../../components/ui/Container';
 import { Card } from '../../components/ui/Card';
@@ -79,7 +79,7 @@ export const MediaPage: React.FC = () => {
         ogImage="/media/awards-certificates/pm-surya-ghar-kalahandi-district-award.jpg"
       />
 
-      <Breadcrumbs items={[{ label: 'Media & Field Documents' }]} />
+      <Breadcrumbs items={[{ label: 'Media Gallery' }]} />
 
       {/* =========================================================================
           PAGE HERO SECTION
@@ -99,13 +99,13 @@ export const MediaPage: React.FC = () => {
               }}
             >
               <ShieldCheck size={14} color="#174B35" />
-              <span>Official Proof &amp; Verified Documentation</span>
+              <span>Real Proof &amp; Verified Documentation</span>
             </span>
             <h1 className="page-hero__title">
-              Authentic Project Media, DISCOM Awards &amp; Field Executions.
+              Our Awards, Field Installations &amp; Site Videos.
             </h1>
             <p className="page-hero__subtitle">
-              Transparency matters in solar. Explore our official TPWODL utility awards, national summit invitations from MNRE New Delhi, GPS-verified rooftop installations, and live video walkthroughs filmed on client sites across Kalahandi and western Odisha.
+              See our real work across Kalahandi and western Odisha. Browse our official government utility awards, GPS-verified rooftop installations, and on-site video walkthroughs.
             </p>
           </div>
 
@@ -121,15 +121,21 @@ export const MediaPage: React.FC = () => {
             >
               <img
                 src="/media/awards-certificates/pm-surya-ghar-kalahandi-district-award.jpg"
-                alt="Highest rooftop solar installations award in Kalahandi district"
-                style={{ width: '100%', height: 'auto', display: 'block', objectFit: 'cover' }}
+                alt="Highest solar rooftop installations award in Kalahandi district"
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  display: 'block',
+                  objectFit: 'cover',
+                  imageRendering: '-webkit-optimize-contrast',
+                }}
                 loading="eager"
               />
               <div
                 style={{
                   padding: '0.85rem 1rem',
                   backgroundColor: '#FFFFFF',
-                  fontSize: '0.82rem',
+                  fontSize: '0.85rem',
                   color: 'var(--color-forest-green)',
                   fontWeight: 700,
                   display: 'flex',
@@ -139,7 +145,7 @@ export const MediaPage: React.FC = () => {
                 }}
               >
                 <Award size={16} color="#15803D" />
-                <span>District Award: Highest PM Surya Ghar Installations in Kalahandi</span>
+                <span>District Award: Highest Solar Installations in Kalahandi</span>
               </div>
             </div>
           </div>
@@ -147,13 +153,13 @@ export const MediaPage: React.FC = () => {
       </section>
 
       {/* =========================================================================
-          VERIFICATION HIGHLIGHTS STRIP
+          TRUST STRIP
           ========================================================================= */}
       <div
         style={{
           backgroundColor: '#174B35',
           color: '#FFFFFF',
-          padding: '1.5rem 0',
+          padding: '1.25rem 0',
           borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
         }}
       >
@@ -161,13 +167,13 @@ export const MediaPage: React.FC = () => {
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-              gap: '1.25rem',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+              gap: '1rem',
               textAlign: 'center',
             }}
           >
             <div>
-              <div style={{ fontFamily: 'var(--font-heading)', fontSize: '1.85rem', fontWeight: 800, color: '#86EFAC' }}>
+              <div style={{ fontFamily: 'var(--font-heading)', fontSize: '1.75rem', fontWeight: 800, color: '#86EFAC' }}>
                 Top 100
               </div>
               <div style={{ fontSize: '0.82rem', color: '#E8F2E8', opacity: 0.9 }}>
@@ -176,29 +182,29 @@ export const MediaPage: React.FC = () => {
             </div>
 
             <div>
-              <div style={{ fontFamily: 'var(--font-heading)', fontSize: '1.85rem', fontWeight: 800, color: '#86EFAC' }}>
+              <div style={{ fontFamily: 'var(--font-heading)', fontSize: '1.75rem', fontWeight: 800, color: '#86EFAC' }}>
                 TPWODL
               </div>
               <div style={{ fontSize: '0.82rem', color: '#E8F2E8', opacity: 0.9 }}>
-                Multiple Official Certificates of Appreciation
+                Official DISCOM Appreciation Certificates
               </div>
             </div>
 
             <div>
-              <div style={{ fontFamily: 'var(--font-heading)', fontSize: '1.85rem', fontWeight: 800, color: '#86EFAC' }}>
-                100%
+              <div style={{ fontFamily: 'var(--font-heading)', fontSize: '1.75rem', fontWeight: 800, color: '#86EFAC' }}>
+                100% Real
               </div>
               <div style={{ fontSize: '0.82rem', color: '#E8F2E8', opacity: 0.9 }}>
-                GPS-Staggered Real Field Photographic Records
+                GPS-Tagged On-Site Photos
               </div>
             </div>
 
             <div>
-              <div style={{ fontFamily: 'var(--font-heading)', fontSize: '1.85rem', fontWeight: 800, color: '#86EFAC' }}>
-                5 HD
+              <div style={{ fontFamily: 'var(--font-heading)', fontSize: '1.75rem', fontWeight: 800, color: '#86EFAC' }}>
+                5 Site Videos
               </div>
               <div style={{ fontSize: '0.82rem', color: '#E8F2E8', opacity: 0.9 }}>
-                Field Video Walkthroughs with On-Site Audio
+                Live Rooftop Walkthroughs &amp; Testing
               </div>
             </div>
           </div>
@@ -208,7 +214,7 @@ export const MediaPage: React.FC = () => {
       {/* =========================================================================
           MAIN MEDIA GALLERY SECTION
           ========================================================================= */}
-      <section className="section bg-white" style={{ minHeight: '600px' }}>
+      <section className="section bg-white" style={{ minHeight: '600px', paddingTop: '2.5rem' }}>
         <Container>
           {/* Toolbar & Filters */}
           <div style={{ marginBottom: '2rem' }}>
@@ -224,10 +230,10 @@ export const MediaPage: React.FC = () => {
             >
               <div>
                 <h2 style={{ fontSize: '1.45rem', fontWeight: 800, color: 'var(--color-forest-green)', margin: 0 }}>
-                  Browse Documentation &amp; Media
+                  Project Gallery &amp; Proof
                 </h2>
                 <p style={{ fontSize: '0.86rem', color: 'var(--text-muted)', margin: '0.25rem 0 0' }}>
-                  Showing {filteredMedia.length} of {mediaItems.length} verified records
+                  Showing {filteredMedia.length} of {mediaItems.length} items
                 </p>
               </div>
 
@@ -245,14 +251,14 @@ export const MediaPage: React.FC = () => {
                 />
                 <input
                   type="text"
-                  placeholder="Filter by location, village, award..."
+                  placeholder="Search by village, award, or location..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   style={{
                     width: '100%',
                     height: '42px',
                     paddingLeft: '38px',
-                    paddingRight: '12px',
+                    paddingRight: searchQuery ? '36px' : '12px',
                     borderRadius: 'var(--radius-md)',
                     border: '1.5px solid var(--border-medium)',
                     fontSize: '0.86rem',
@@ -260,6 +266,26 @@ export const MediaPage: React.FC = () => {
                     backgroundColor: '#FAFCFA',
                   }}
                 />
+                {searchQuery && (
+                  <button
+                    type="button"
+                    onClick={() => setSearchQuery('')}
+                    style={{
+                      position: 'absolute',
+                      right: '10px',
+                      top: '50%',
+                      transform: 'translateY(-50%)',
+                      background: 'none',
+                      border: 'none',
+                      cursor: 'pointer',
+                      color: 'var(--text-muted)',
+                      padding: '2px',
+                    }}
+                    aria-label="Clear search"
+                  >
+                    <X size={15} />
+                  </button>
+                )}
               </div>
             </div>
 
@@ -344,38 +370,59 @@ export const MediaPage: React.FC = () => {
             <div
               style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
-                gap: '1.5rem',
+                gridTemplateColumns: 'repeat(auto-fill, minmax(290px, 1fr))',
+                gap: '1.35rem',
               }}
             >
               {filteredMedia.map((item) => {
                 const isVideo = item.type === 'video';
 
                 return (
-                  <Card
+                  <div
                     key={item.id}
-                    variant="white"
-                    padding="none"
+                    onClick={() => setSelectedMedia(item)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        setSelectedMedia(item);
+                      }
+                    }}
                     style={{
                       borderRadius: '16px',
                       overflow: 'hidden',
-                      border: '1.5px solid var(--border-medium)',
+                      backgroundColor: '#FFFFFF',
+                      border: '1.5px solid rgba(23, 75, 53, 0.12)',
+                      boxShadow: '0 4px 16px rgba(23, 75, 53, 0.05)',
                       display: 'flex',
                       flexDirection: 'column',
-                      boxShadow: '0 4px 18px rgba(23, 75, 53, 0.05)',
-                      transition: 'transform 200ms ease, box-shadow 200ms ease',
+                      cursor: 'pointer',
+                      transition: 'transform 250ms ease, box-shadow 250ms ease, border-color 250ms ease',
+                      outline: 'none',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = 'translateY(-4px)';
+                      e.currentTarget.style.boxShadow = '0 12px 28px -4px rgba(23, 75, 53, 0.14)';
+                      e.currentTarget.style.borderColor = '#174B35';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = 'translateY(0)';
+                      e.currentTarget.style.boxShadow = '0 4px 16px rgba(23, 75, 53, 0.05)';
+                      e.currentTarget.style.borderColor = 'rgba(23, 75, 53, 0.12)';
                     }}
                   >
-                    {/* Media Display Area */}
+                    {/* Media Visual Area — Large & Prominent, No Top-Left Icon/Badge */}
                     <div
                       style={{
                         position: 'relative',
-                        backgroundColor: '#0F3324',
-                        aspectRatio: '16/10',
+                        backgroundColor: '#0F2B1F',
+                        aspectRatio: '4/3',
                         overflow: 'hidden',
-                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
                       }}
-                      onClick={() => setSelectedMedia(item)}
                     >
                       {isVideo ? (
                         <div style={{ width: '100%', height: '100%', position: 'relative' }}>
@@ -401,6 +448,8 @@ export const MediaPage: React.FC = () => {
                               e.currentTarget.currentTime = 0;
                             }}
                           />
+
+                          {/* Clean Center Play Icon */}
                           <div
                             style={{
                               position: 'absolute',
@@ -408,27 +457,28 @@ export const MediaPage: React.FC = () => {
                               display: 'flex',
                               alignItems: 'center',
                               justifyContent: 'center',
-                              background: 'rgba(0,0,0,0.25)',
+                              background: 'rgba(0,0,0,0.22)',
                               pointerEvents: 'none',
                             }}
                           >
                             <div
                               style={{
-                                width: '48px',
-                                height: '48px',
+                                width: '52px',
+                                height: '52px',
                                 borderRadius: '50%',
-                                backgroundColor: 'rgba(23, 75, 53, 0.9)',
+                                backgroundColor: 'rgba(23, 75, 53, 0.92)',
                                 color: '#FFFFFF',
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                border: '2px solid rgba(255,255,255,0.7)',
-                                boxShadow: '0 4px 14px rgba(0,0,0,0.4)',
+                                border: '2px solid rgba(255,255,255,0.85)',
+                                boxShadow: '0 4px 16px rgba(0,0,0,0.4)',
                               }}
                             >
-                              <Play size={20} fill="#FFFFFF" style={{ marginLeft: '2px' }} />
+                              <Play size={22} fill="#FFFFFF" style={{ marginLeft: '2px' }} />
                             </div>
                           </div>
+
                           <span
                             style={{
                               position: 'absolute',
@@ -438,7 +488,7 @@ export const MediaPage: React.FC = () => {
                               color: '#FFFFFF',
                               padding: '0.2rem 0.5rem',
                               borderRadius: '4px',
-                              fontSize: '0.7rem',
+                              fontSize: '0.68rem',
                               fontWeight: 700,
                               letterSpacing: '0.04em',
                             }}
@@ -457,11 +507,14 @@ export const MediaPage: React.FC = () => {
                               height: '100%',
                               objectFit: 'cover',
                               display: 'block',
-                              transition: 'transform 300ms ease',
+                              imageRendering: '-webkit-optimize-contrast',
+                              transition: 'transform 350ms cubic-bezier(0.16, 1, 0.3, 1)',
                             }}
                             onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.04)')}
                             onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
                           />
+
+                          {/* Subtle Top-Right Expand Icon on Hover */}
                           <div
                             style={{
                               position: 'absolute',
@@ -476,143 +529,88 @@ export const MediaPage: React.FC = () => {
                               alignItems: 'center',
                               justifyContent: 'center',
                               backdropFilter: 'blur(4px)',
+                              boxShadow: '0 2px 8px rgba(0,0,0,0.3)',
                             }}
                           >
-                            <Maximize2 size={15} />
+                            <Maximize2 size={14} />
                           </div>
                         </div>
                       )}
-
-                      {/* Badge Top Left */}
-                      <span
-                        style={{
-                          position: 'absolute',
-                          top: '10px',
-                          left: '10px',
-                          backgroundColor: '#174B35',
-                          color: '#FFFFFF',
-                          padding: '0.25rem 0.65rem',
-                          borderRadius: '999px',
-                          fontSize: '0.72rem',
-                          fontWeight: 700,
-                          letterSpacing: '0.02em',
-                          boxShadow: '0 2px 6px rgba(0,0,0,0.3)',
-                        }}
-                      >
-                        {item.badge}
-                      </span>
                     </div>
 
-                    {/* Card Content */}
-                    <div style={{ padding: '1.25rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
+                    {/* Compact, Clean Card Footer — Less Text, Clear & Understandable */}
+                    <div
+                      style={{
+                        padding: '0.9rem 1.1rem 1rem',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-between',
+                        gap: '0.45rem',
+                        flex: 1,
+                      }}
+                    >
                       <h3
                         style={{
-                          fontSize: '1.02rem',
+                          fontSize: '0.98rem',
                           fontWeight: 700,
                           lineHeight: 1.35,
                           color: 'var(--color-forest-green)',
-                          marginBottom: '0.65rem',
+                          margin: 0,
                         }}
                       >
                         {item.title}
                       </h3>
 
-                      <p
-                        style={{
-                          fontSize: '0.84rem',
-                          color: 'var(--text-body)',
-                          lineHeight: 1.55,
-                          marginBottom: '1rem',
-                          flex: 1,
-                        }}
-                      >
-                        {item.description}
-                      </p>
-
-                      {/* Meta Tags */}
                       <div
                         style={{
                           display: 'flex',
-                          flexDirection: 'column',
-                          gap: '0.35rem',
-                          fontSize: '0.76rem',
-                          color: 'var(--text-muted)',
-                          paddingTop: '0.75rem',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                          gap: '0.5rem',
+                          paddingTop: '0.4rem',
                           borderTop: '1px solid var(--border-subtle)',
+                          fontSize: '0.78rem',
+                          color: 'var(--text-muted)',
                         }}
                       >
-                        {item.location && (
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                            <MapPin size={13} style={{ color: 'var(--color-forest-green)', flexShrink: 0 }} />
+                        {item.location ? (
+                          <div
+                            style={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              gap: '0.3rem',
+                              whiteSpace: 'nowrap',
+                              overflow: 'hidden',
+                              textOverflow: 'ellipsis',
+                            }}
+                          >
+                            <MapPin size={12} color="#174B35" style={{ flexShrink: 0 }} />
                             <span style={{ fontWeight: 600, color: 'var(--color-forest-green)' }}>
-                              {item.location}
+                              {item.location.split(',')[0]}
                             </span>
                           </div>
+                        ) : (
+                          <span style={{ fontWeight: 600, color: 'var(--color-forest-green)' }}>
+                            Verified Record
+                          </span>
                         )}
 
-                        {item.coordinates && (
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                            <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
-                              📍 GPS: {item.coordinates}
-                            </span>
-                          </div>
-                        )}
-
-                        {item.verifiedBy && (
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', marginTop: '2px' }}>
-                            <ShieldCheck size={13} style={{ color: '#16A34A', flexShrink: 0 }} />
-                            <span style={{ color: '#166534', fontWeight: 600 }}>
-                              Verified: {item.verifiedBy}
-                            </span>
-                          </div>
-                        )}
-                      </div>
-
-                      {/* Action Button */}
-                      <div style={{ marginTop: '1rem' }}>
-                        <button
-                          type="button"
-                          onClick={() => setSelectedMedia(item)}
+                        <span
                           style={{
-                            width: '100%',
-                            padding: '0.6rem 0.85rem',
-                            borderRadius: '8px',
-                            backgroundColor: 'var(--color-soft-green)',
-                            color: 'var(--color-forest-green)',
-                            border: '1px solid var(--border-medium)',
-                            fontSize: '0.82rem',
                             fontWeight: 700,
-                            display: 'flex',
+                            color: '#15803D',
+                            fontSize: '0.74rem',
+                            display: 'inline-flex',
                             alignItems: 'center',
-                            justifyContent: 'center',
-                            gap: '0.4rem',
-                            cursor: 'pointer',
-                            transition: 'all 150ms ease',
-                          }}
-                          onMouseEnter={(e) => {
-                            e.currentTarget.style.backgroundColor = '#174B35';
-                            e.currentTarget.style.color = '#FFFFFF';
-                          }}
-                          onMouseLeave={(e) => {
-                            e.currentTarget.style.backgroundColor = 'var(--color-soft-green)';
-                            e.currentTarget.style.color = 'var(--color-forest-green)';
+                            gap: '0.25rem',
+                            flexShrink: 0,
                           }}
                         >
-                          {isVideo ? (
-                            <>
-                              <Play size={14} fill="currentColor" />
-                              <span>Play Full Video</span>
-                            </>
-                          ) : (
-                            <>
-                              <Maximize2 size={14} />
-                              <span>View Full Document</span>
-                            </>
-                          )}
-                        </button>
+                          {isVideo ? 'Watch Video' : 'View Full'} &rarr;
+                        </span>
                       </div>
                     </div>
-                  </Card>
+                  </div>
                 );
               })}
             </div>
@@ -630,18 +628,19 @@ export const MediaPage: React.FC = () => {
           maxWidth="860px"
           titleId="media-modal-title"
         >
-          <div style={{ padding: '0.5rem 0' }}>
-            {/* Modal Media Content */}
+          <div style={{ padding: '0.25rem 0' }}>
+            {/* Modal Media Content — High Resolution Display */}
             <div
               style={{
                 borderRadius: '12px',
                 overflow: 'hidden',
-                backgroundColor: '#0F3324',
+                backgroundColor: '#0A2016',
                 marginBottom: '1.25rem',
-                maxHeight: '65vh',
+                maxHeight: '68vh',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
+                boxShadow: 'inset 0 0 40px rgba(0,0,0,0.5)',
               }}
             >
               {selectedMedia.type === 'video' ? (
@@ -649,18 +648,29 @@ export const MediaPage: React.FC = () => {
                   src={selectedMedia.fileUrl}
                   controls
                   autoPlay
-                  style={{ width: '100%', maxHeight: '65vh', display: 'block', backgroundColor: '#000000' }}
+                  style={{
+                    width: '100%',
+                    maxHeight: '68vh',
+                    display: 'block',
+                    backgroundColor: '#000000',
+                  }}
                 />
               ) : (
                 <img
                   src={selectedMedia.fileUrl}
                   alt={selectedMedia.title}
-                  style={{ width: '100%', maxHeight: '65vh', objectFit: 'contain', display: 'block' }}
+                  style={{
+                    width: '100%',
+                    maxHeight: '68vh',
+                    objectFit: 'contain',
+                    display: 'block',
+                    imageRendering: '-webkit-optimize-contrast',
+                  }}
                 />
               )}
             </div>
 
-            {/* Details */}
+            {/* Modal Details */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
                 <span
@@ -757,7 +767,7 @@ export const MediaPage: React.FC = () => {
                     textDecoration: 'underline',
                   }}
                 >
-                  <span>Open Full Asset in New Tab</span>
+                  <span>Open Full High-Res Asset</span>
                   <ExternalLink size={13} />
                 </a>
 
