@@ -53,7 +53,10 @@ export const Modal: React.FC<ModalProps> = ({
     >
       <div
         className={`ui-modal-panel ${className}`.trim()}
-        style={maxWidth ? { maxWidth } : undefined}
+        style={{
+          margin: 'auto',
+          ...(maxWidth ? { maxWidth } : {}),
+        }}
       >
         <button
           type="button"

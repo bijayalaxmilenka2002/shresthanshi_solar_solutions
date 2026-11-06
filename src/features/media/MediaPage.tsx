@@ -619,28 +619,29 @@ export const MediaPage: React.FC = () => {
       </section>
 
       {/* =========================================================================
-          LIGHTBOX MODAL FOR FULL-RESOLUTION MEDIA INSPECTION
+          LIGHTBOX MODAL FOR CENTERED FULL-RESOLUTION MEDIA & VIDEO PLAYBACK
           ========================================================================= */}
       {selectedMedia && (
         <Modal
           isOpen={Boolean(selectedMedia)}
           onClose={() => setSelectedMedia(null)}
-          maxWidth="860px"
+          maxWidth="840px"
+          className="media-lightbox-panel"
           titleId="media-modal-title"
         >
-          <div style={{ padding: '0.25rem 0' }}>
-            {/* Modal Media Content — High Resolution Display */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+            {/* Centered Media Player Area */}
             <div
               style={{
                 borderRadius: '12px',
                 overflow: 'hidden',
-                backgroundColor: '#0A2016',
-                marginBottom: '1.25rem',
-                maxHeight: '68vh',
+                backgroundColor: selectedMedia.type === 'video' ? '#000000' : '#0B2419',
+                maxHeight: '58vh',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                boxShadow: 'inset 0 0 40px rgba(0,0,0,0.5)',
+                boxShadow: '0 8px 24px rgba(0,0,0,0.25)',
+                position: 'relative',
               }}
             >
               {selectedMedia.type === 'video' ? (
@@ -648,11 +649,15 @@ export const MediaPage: React.FC = () => {
                   src={selectedMedia.fileUrl}
                   controls
                   autoPlay
+                  playsInline
                   style={{
                     width: '100%',
-                    maxHeight: '68vh',
+                    maxHeight: '58vh',
+                    aspectRatio: '16/9',
+                    objectFit: 'contain',
                     display: 'block',
                     backgroundColor: '#000000',
+                    margin: '0 auto',
                   }}
                 />
               ) : (
@@ -660,87 +665,113 @@ export const MediaPage: React.FC = () => {
                   src={selectedMedia.fileUrl}
                   alt={selectedMedia.title}
                   style={{
-                    width: '100%',
-                    maxHeight: '68vh',
+                    maxWidth: '100%',
+                    maxHeight: '58vh',
                     objectFit: 'contain',
                     display: 'block',
+                    margin: '0 auto',
                     imageRendering: '-webkit-optimize-contrast',
                   }}
                 />
               )}
             </div>
 
-            {/* Modal Details */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
-                <span
+            {/* Compact Header & Info */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.75rem', flexWrap: 'wrap' }}>
+                <h2
+                  id="media-modal-title"
                   style={{
-                    backgroundColor: 'var(--color-soft-green)',
+                    fontSize: '1.2rem',
+                    fontWeight: 800,
                     color: 'var(--color-forest-green)',
-                    border: '1px solid var(--border-medium)',
-                    padding: '0.2rem 0.75rem',
-                    borderRadius: '999px',
-                    fontSize: '0.76rem',
-                    fontWeight: 700,
+                    margin: 0,
+                    lineHeight: 1.3,
                   }}
                 >
-                  {selectedMedia.badge}
-                </span>
+                  {selectedMedia.title}
+                </h2>
 
-                {selectedMedia.date && (
-                  <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-                    <Calendar size={13} style={{ display: 'inline', marginRight: '4px' }} />
-                    {selectedMedia.date}
-                  </span>
-                )}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flexWrap: 'wrap' }}>
+                  {selectedMedia.location && (
+                    <span
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '0.3rem',
+                        fontSize: '0.78rem',
+                        fontWeight: 600,
+                        color: 'var(--color-forest-green)',
+                        backgroundColor: 'var(--color-soft-green)',
+                        padding: '0.2rem 0.65rem',
+                        borderRadius: '999px',
+                        border: '1px solid var(--border-medium)',
+                      }}
+                    >
+                      <MapPin size={12} color="#174B35" />
+                      <span>{selectedMedia.location}</span>
+                    </span>
+                  )}
+                  {selectedMedia.date && (
+                    <span
+                      style={{
+                        fontSize: '0.76rem',
+                        color: 'var(--text-muted)',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '0.25rem',
+                      }}
+                    >
+                      <Calendar size={12} />
+                      <span>{selectedMedia.date}</span>
+                    </span>
+                  )}
+                </div>
               </div>
 
-              <h2
-                id="media-modal-title"
-                style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--color-forest-green)', margin: 0 }}
+              <p
+                style={{
+                  fontSize: '0.86rem',
+                  color: 'var(--text-body)',
+                  lineHeight: 1.5,
+                  margin: 0,
+                }}
               >
-                {selectedMedia.title}
-              </h2>
-
-              <p style={{ fontSize: '0.92rem', color: 'var(--text-body)', lineHeight: 1.6, margin: 0 }}>
                 {selectedMedia.description}
               </p>
 
-              {/* Geographic & Verification Details Box */}
-              <div
-                style={{
-                  backgroundColor: 'var(--color-soft-green)',
-                  border: '1px solid var(--border-medium)',
-                  borderRadius: '10px',
-                  padding: '0.85rem 1rem',
-                  fontSize: '0.82rem',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '0.45rem',
-                  marginTop: '0.35rem',
-                }}
-              >
-                {selectedMedia.location && (
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
-                    <MapPin size={15} color="#174B35" />
-                    <strong>Location:</strong> <span>{selectedMedia.location}</span>
-                  </div>
-                )}
-                {selectedMedia.coordinates && (
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
-                    <Sparkles size={14} color="#174B35" />
-                    <strong>GPS Coordinates:</strong> <code>{selectedMedia.coordinates}</code>
-                  </div>
-                )}
-                {selectedMedia.verifiedBy && (
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: '#166534' }}>
-                    <ShieldCheck size={15} color="#166534" />
-                    <strong>Verification Authority:</strong> <span>{selectedMedia.verifiedBy}</span>
-                  </div>
-                )}
-              </div>
+              {/* Technical / Verification Authority Tag */}
+              {(selectedMedia.verifiedBy || selectedMedia.coordinates) && (
+                <div
+                  style={{
+                    fontSize: '0.76rem',
+                    color: '#166534',
+                    backgroundColor: '#F0FDF4',
+                    border: '1px solid #BBF7D0',
+                    borderRadius: '8px',
+                    padding: '0.45rem 0.75rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    gap: '0.5rem',
+                    flexWrap: 'wrap',
+                  }}
+                >
+                  {selectedMedia.verifiedBy && (
+                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
+                      <ShieldCheck size={13} color="#16A34A" />
+                      <strong>Verified by:</strong> {selectedMedia.verifiedBy}
+                    </span>
+                  )}
+                  {selectedMedia.coordinates && (
+                    <span style={{ color: 'var(--text-muted)' }}>
+                      📍 {selectedMedia.coordinates}
+                    </span>
+                  )}
+                </div>
+              )}
 
-              {/* Action Buttons */}
+              {/* Bottom Actions Row */}
               <div
                 style={{
                   display: 'flex',
@@ -748,8 +779,7 @@ export const MediaPage: React.FC = () => {
                   justifyContent: 'space-between',
                   gap: '0.75rem',
                   flexWrap: 'wrap',
-                  marginTop: '0.75rem',
-                  paddingTop: '0.75rem',
+                  paddingTop: '0.5rem',
                   borderTop: '1px solid var(--border-subtle)',
                 }}
               >
@@ -761,25 +791,35 @@ export const MediaPage: React.FC = () => {
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: '0.35rem',
-                    fontSize: '0.82rem',
+                    fontSize: '0.8rem',
                     color: 'var(--color-forest-green)',
                     fontWeight: 700,
                     textDecoration: 'underline',
                   }}
                 >
-                  <span>Open Full High-Res Asset</span>
+                  <span>{selectedMedia.type === 'video' ? 'Open Raw Video' : 'Open Full High-Res'}</span>
                   <ExternalLink size={13} />
                 </a>
 
-                <Button
-                  to="/contact?intent=assessment"
-                  variant="primary"
-                  size="sm"
-                  iconRight={<ArrowRight size={15} />}
-                  onClick={() => setSelectedMedia(null)}
-                >
-                  Inquire for Your Property
-                </Button>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setSelectedMedia(null)}
+                  >
+                    Close
+                  </Button>
+                  <Button
+                    to="/contact?intent=assessment"
+                    variant="primary"
+                    size="sm"
+                    iconRight={<ArrowRight size={14} />}
+                    onClick={() => setSelectedMedia(null)}
+                  >
+                    Inquire for Site
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
