@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, Link } from 'react-router-dom';
 import {
   Award,
   Video,
@@ -14,6 +14,9 @@ import {
   ArrowRight,
   Filter,
   X,
+  Layers,
+  Landmark,
+  CheckCircle2,
 } from 'lucide-react';
 import { Container } from '../../components/ui/Container';
 import { Card } from '../../components/ui/Card';
@@ -26,25 +29,27 @@ import { mediaItems, mediaCategories, MediaCategory, MediaItem } from '../../dat
 
 export const MediaPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const initialCategory = (searchParams.get('category') as MediaCategory) || 'all';
 
-  const [activeCategory, setActiveCategory] = useState<MediaCategory>(
-    mediaCategories.some((c) => c.id === initialCategory) ? initialCategory : 'all'
-  );
+  // Reactive URL-driven category state: updates instantly when navbar dropdown or browser navigation triggers
+  const categoryParam = searchParams.get('category') as MediaCategory | null;
+  const activeCategory: MediaCategory =
+    categoryParam && mediaCategories.some((c) => c.id === categoryParam)
+      ? categoryParam
+      : 'all';
+
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedMedia, setSelectedMedia] = useState<MediaItem | null>(null);
 
   const handleCategoryChange = (cat: MediaCategory) => {
-    setActiveCategory(cat);
     if (cat === 'all') {
       searchParams.delete('category');
-      setSearchParams(searchParams, { replace: true });
+      setSearchParams(searchParams);
     } else {
-      setSearchParams({ category: cat }, { replace: true });
+      setSearchParams({ category: cat });
     }
   };
 
-  // Filtered Media List
+  // Filtered Media List based on active category & search query
   const filteredMedia = useMemo(() => {
     return mediaItems.filter((item) => {
       const matchesCategory = activeCategory === 'all' || item.category === activeCategory;
@@ -70,6 +75,8 @@ export const MediaPage: React.FC = () => {
     return counts;
   }, []);
 
+  const activeCategoryMeta = mediaCategories.find((c) => c.id === activeCategory);
+
   return (
     <div>
       <SEO
@@ -79,7 +86,7 @@ export const MediaPage: React.FC = () => {
         ogImage="/media/awards-certificates/pm-surya-ghar-kalahandi-district-award.jpg"
       />
 
-      <Breadcrumbs items={[{ label: 'Media Gallery' }]} />
+      <Breadcrumbs items={[{ label: 'Media & Verification' }]} />
 
       {/* =========================================================================
           PAGE HERO SECTION
@@ -99,13 +106,13 @@ export const MediaPage: React.FC = () => {
               }}
             >
               <ShieldCheck size={14} color="#174B35" />
-              <span>Real Proof &amp; Verified Documentation</span>
+              <span>Authentic Project Proof &amp; Verification Hub</span>
             </span>
             <h1 className="page-hero__title">
-              Our Awards, Field Installations &amp; Site Videos.
+              Official Awards, Field Installations &amp; Site Videos.
             </h1>
             <p className="page-hero__subtitle">
-              See our real work across Kalahandi and western Odisha. Browse our official government utility awards, GPS-verified rooftop installations, and on-site video walkthroughs.
+              Real transparency in solar. Explore our highest-performance DISCOM awards, national summit invitations from MNRE New Delhi, GPS-stamped rooftop installations, and live video walkthroughs.
             </p>
           </div>
 
@@ -153,7 +160,7 @@ export const MediaPage: React.FC = () => {
       </section>
 
       {/* =========================================================================
-          TRUST STRIP
+          KEY STATS STRIP
           ========================================================================= */}
       <div
         style={{
@@ -212,141 +219,190 @@ export const MediaPage: React.FC = () => {
       </div>
 
       {/* =========================================================================
-          MAIN MEDIA GALLERY SECTION
+          MAIN GALLERY SECTION WITH CATEGORY TABS & FILTER
           ========================================================================= */}
       <section className="section bg-white" style={{ minHeight: '600px', paddingTop: '2.5rem' }}>
         <Container>
-          {/* Toolbar & Filters */}
-          <div style={{ marginBottom: '2rem' }}>
+          {/* Header & Search Bar */}
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              flexWrap: 'wrap',
+              gap: '1rem',
+              marginBottom: '1.5rem',
+            }}
+          >
+            <div>
+              <h2 style={{ fontSize: '1.45rem', fontWeight: 800, color: 'var(--color-forest-green)', margin: 0 }}>
+                {activeCategory === 'all'
+                  ? 'All Verified Records & Media'
+                  : activeCategoryMeta?.label || 'Project Gallery'}
+              </h2>
+              <p style={{ fontSize: '0.86rem', color: 'var(--text-muted)', margin: '0.25rem 0 0' }}>
+                Showing {filteredMedia.length} of {categoryCounts[activeCategory] || mediaItems.length} records
+              </p>
+            </div>
+
+            {/* Search Input */}
+            <div style={{ position: 'relative', width: '100%', maxWidth: '320px' }}>
+              <Search
+                size={16}
+                style={{
+                  position: 'absolute',
+                  left: '12px',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  color: 'var(--text-muted)',
+                }}
+              />
+              <input
+                type="text"
+                placeholder="Search village, project, award..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                style={{
+                  width: '100%',
+                  height: '42px',
+                  paddingLeft: '38px',
+                  paddingRight: searchQuery ? '36px' : '12px',
+                  borderRadius: 'var(--radius-md)',
+                  border: '1.5px solid var(--border-medium)',
+                  fontSize: '0.86rem',
+                  outline: 'none',
+                  backgroundColor: '#FAFCFA',
+                }}
+              />
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery('')}
+                  style={{
+                    position: 'absolute',
+                    right: '10px',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    color: 'var(--text-muted)',
+                    padding: '2px',
+                  }}
+                  aria-label="Clear search"
+                >
+                  <X size={15} />
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* Category Tabs Strip */}
+          <div
+            style={{
+              display: 'flex',
+              gap: '0.5rem',
+              overflowX: 'auto',
+              paddingBottom: '0.75rem',
+              marginBottom: '1.5rem',
+              WebkitOverflowScrolling: 'touch',
+            }}
+          >
+            {mediaCategories.map((cat) => {
+              const isActive = activeCategory === cat.id;
+              const count = categoryCounts[cat.id] || 0;
+
+              return (
+                <button
+                  key={cat.id}
+                  type="button"
+                  onClick={() => handleCategoryChange(cat.id)}
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    padding: '0.6rem 1.15rem',
+                    borderRadius: '999px',
+                    fontSize: '0.85rem',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    border: isActive ? '1.5px solid #174B35' : '1.5px solid var(--border-subtle)',
+                    backgroundColor: isActive ? '#174B35' : 'var(--color-soft-green)',
+                    color: isActive ? '#FFFFFF' : 'var(--color-forest-green)',
+                    whiteSpace: 'nowrap',
+                    transition: 'all 150ms ease',
+                    flexShrink: 0,
+                    boxShadow: isActive ? '0 4px 12px rgba(23, 75, 53, 0.2)' : 'none',
+                  }}
+                >
+                  {cat.id === 'all' && <Layers size={14} />}
+                  {cat.id === 'awards' && <Award size={14} />}
+                  {cat.id === 'videos' && <Video size={14} />}
+                  {cat.id === 'installations' && <MapPin size={14} />}
+                  {cat.id === 'summits' && <Landmark size={14} />}
+                  <span>{cat.label}</span>
+                  <span
+                    style={{
+                      backgroundColor: isActive ? 'rgba(255, 255, 255, 0.25)' : 'rgba(23, 75, 53, 0.15)',
+                      color: isActive ? '#FFFFFF' : '#174B35',
+                      borderRadius: '999px',
+                      padding: '0.1rem 0.45rem',
+                      fontSize: '0.74rem',
+                      fontWeight: 800,
+                    }}
+                  >
+                    {count}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Active Filter Notice Bar (if viewing a filtered subset) */}
+          {activeCategory !== 'all' && (
             <div
               style={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
+                backgroundColor: '#F0FDF4',
+                border: '1px solid #BBF7D0',
+                borderRadius: '10px',
+                padding: '0.65rem 1rem',
+                marginBottom: '1.5rem',
+                fontSize: '0.84rem',
+                color: '#166534',
                 flexWrap: 'wrap',
-                gap: '1rem',
-                marginBottom: '1.25rem',
-              }}
-            >
-              <div>
-                <h2 style={{ fontSize: '1.45rem', fontWeight: 800, color: 'var(--color-forest-green)', margin: 0 }}>
-                  Project Gallery &amp; Proof
-                </h2>
-                <p style={{ fontSize: '0.86rem', color: 'var(--text-muted)', margin: '0.25rem 0 0' }}>
-                  Showing {filteredMedia.length} of {mediaItems.length} items
-                </p>
-              </div>
-
-              {/* Search Bar */}
-              <div style={{ position: 'relative', width: '100%', maxWidth: '320px' }}>
-                <Search
-                  size={16}
-                  style={{
-                    position: 'absolute',
-                    left: '12px',
-                    top: '50%',
-                    transform: 'translateY(-50%)',
-                    color: 'var(--text-muted)',
-                  }}
-                />
-                <input
-                  type="text"
-                  placeholder="Search by village, award, or location..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  style={{
-                    width: '100%',
-                    height: '42px',
-                    paddingLeft: '38px',
-                    paddingRight: searchQuery ? '36px' : '12px',
-                    borderRadius: 'var(--radius-md)',
-                    border: '1.5px solid var(--border-medium)',
-                    fontSize: '0.86rem',
-                    outline: 'none',
-                    backgroundColor: '#FAFCFA',
-                  }}
-                />
-                {searchQuery && (
-                  <button
-                    type="button"
-                    onClick={() => setSearchQuery('')}
-                    style={{
-                      position: 'absolute',
-                      right: '10px',
-                      top: '50%',
-                      transform: 'translateY(-50%)',
-                      background: 'none',
-                      border: 'none',
-                      cursor: 'pointer',
-                      color: 'var(--text-muted)',
-                      padding: '2px',
-                    }}
-                    aria-label="Clear search"
-                  >
-                    <X size={15} />
-                  </button>
-                )}
-              </div>
-            </div>
-
-            {/* Category Filter Pills */}
-            <div
-              style={{
-                display: 'flex',
                 gap: '0.5rem',
-                overflowX: 'auto',
-                paddingBottom: '0.5rem',
-                WebkitOverflowScrolling: 'touch',
               }}
             >
-              {mediaCategories.map((cat) => {
-                const isActive = activeCategory === cat.id;
-                const count = categoryCounts[cat.id] || 0;
-
-                return (
-                  <button
-                    key={cat.id}
-                    type="button"
-                    onClick={() => handleCategoryChange(cat.id)}
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '0.45rem',
-                      padding: '0.55rem 1rem',
-                      borderRadius: '999px',
-                      fontSize: '0.84rem',
-                      fontWeight: 700,
-                      cursor: 'pointer',
-                      border: isActive ? '1.5px solid #174B35' : '1.5px solid var(--border-subtle)',
-                      backgroundColor: isActive ? '#174B35' : 'var(--color-soft-green)',
-                      color: isActive ? '#FFFFFF' : 'var(--color-forest-green)',
-                      whiteSpace: 'nowrap',
-                      transition: 'all 150ms ease',
-                      flexShrink: 0,
-                    }}
-                  >
-                    <span>{cat.label}</span>
-                    <span
-                      style={{
-                        backgroundColor: isActive ? 'rgba(255, 255, 255, 0.25)' : 'rgba(23, 75, 53, 0.15)',
-                        color: isActive ? '#FFFFFF' : '#174B35',
-                        borderRadius: '999px',
-                        padding: '0.1rem 0.45rem',
-                        fontSize: '0.74rem',
-                        fontWeight: 800,
-                      }}
-                    >
-                      {count}
-                    </span>
-                  </button>
-                );
-              })}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <CheckCircle2 size={16} color="#16A34A" />
+                <span>
+                  Filtering by <strong>{activeCategoryMeta?.label}</strong> ({filteredMedia.length} results)
+                </span>
+              </div>
+              <button
+                type="button"
+                onClick={() => handleCategoryChange('all')}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  color: '#15803D',
+                  fontWeight: 700,
+                  fontSize: '0.8rem',
+                  cursor: 'pointer',
+                  textDecoration: 'underline',
+                }}
+              >
+                Show All Media &rarr;
+              </button>
             </div>
-          </div>
+          )}
 
           {/* Media Grid */}
           {filteredMedia.length === 0 ? (
-            <Card variant="white" padding="lg" style={{ textAlign: 'center', padding: '3rem 1rem' }}>
+            <Card variant="white" padding="lg" style={{ textAlign: 'center', padding: '3.5rem 1rem' }}>
               <Filter size={40} color="#174B35" style={{ opacity: 0.3, margin: '0 auto 1rem' }} />
               <h3 style={{ fontSize: '1.2rem', color: '#174B35', marginBottom: '0.5rem' }}>No Media Found</h3>
               <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', maxWidth: '420px', margin: '0 auto' }}>
@@ -359,7 +415,7 @@ export const MediaPage: React.FC = () => {
                   size="sm"
                   onClick={() => {
                     setSearchQuery('');
-                    setActiveCategory('all');
+                    handleCategoryChange('all');
                   }}
                 >
                   Reset Filter
@@ -412,7 +468,7 @@ export const MediaPage: React.FC = () => {
                       e.currentTarget.style.borderColor = 'rgba(23, 75, 53, 0.12)';
                     }}
                   >
-                    {/* Media Visual Area — Large & Prominent, No Top-Left Icon/Badge */}
+                    {/* Media Visual Container — Large & Edge-to-Edge */}
                     <div
                       style={{
                         position: 'relative',
@@ -449,7 +505,7 @@ export const MediaPage: React.FC = () => {
                             }}
                           />
 
-                          {/* Clean Center Play Icon */}
+                          {/* Center Play Icon */}
                           <div
                             style={{
                               position: 'absolute',
@@ -538,7 +594,7 @@ export const MediaPage: React.FC = () => {
                       )}
                     </div>
 
-                    {/* Compact, Clean Card Footer — Less Text, Clear & Understandable */}
+                    {/* Card Body — Clean, Simple Title & Location */}
                     <div
                       style={{
                         padding: '0.9rem 1.1rem 1rem',

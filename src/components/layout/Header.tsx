@@ -24,7 +24,7 @@ export const Header: React.FC = () => {
   useEffect(() => {
     setMobileMenuOpen(false);
     setActiveDropdown(null);
-  }, [location.pathname]);
+  }, [location.pathname, location.search]);
 
   useEffect(() => {
     const onScroll = () => {
@@ -176,23 +176,28 @@ export const Header: React.FC = () => {
                             </Link>
                           </div>
                           <ul className="desktop-dropdown__list">
-                            {item.children.map((sub) => (
-                              <li key={sub.path}>
-                                <NavLink
-                                  to={sub.path}
-                                  className={({ isActive }) =>
-                                    `desktop-dropdown__item ${
-                                      isActive ? 'desktop-dropdown__item--active' : ''
-                                    }`
-                                  }
-                                >
-                                  <span className="desktop-dropdown__title">{sub.label}</span>
-                                  {sub.description && (
-                                    <span className="desktop-dropdown__desc">{sub.description}</span>
-                                  )}
-                                </NavLink>
-                              </li>
-                            ))}
+                            {item.children.map((sub) => {
+                              const isSubActive = sub.path.includes('?')
+                                ? (location.pathname + location.search) === sub.path
+                                : location.pathname === sub.path && !location.search;
+
+                              return (
+                                <li key={sub.path}>
+                                  <Link
+                                    to={sub.path}
+                                    onClick={() => setActiveDropdown(null)}
+                                    className={`desktop-dropdown__item ${
+                                      isSubActive ? 'desktop-dropdown__item--active' : ''
+                                    }`}
+                                  >
+                                    <span className="desktop-dropdown__title">{sub.label}</span>
+                                    {sub.description && (
+                                      <span className="desktop-dropdown__desc">{sub.description}</span>
+                                    )}
+                                  </Link>
+                                </li>
+                              );
+                            })}
                           </ul>
                         </div>
                       </div>

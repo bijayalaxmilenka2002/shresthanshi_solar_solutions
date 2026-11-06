@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link, useLocation } from 'react-router-dom';
 import { X, ChevronDown, Phone, BookOpen, Mail } from 'lucide-react';
 import { Logo } from '../common/Logo';
 import { Button } from '../ui/Button';
@@ -16,6 +16,7 @@ interface MobileMenuProps {
 
 export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
   const [expandedItem, setExpandedItem] = useState<string | null>(null);
+  const location = useLocation();
   const navItems = getPrimaryNavigation();
   const { openGuideModal } = useSolarGuideModal();
   const { openQuoteModal } = useQuoteModal();
@@ -117,21 +118,25 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
                           Overview: All {item.label}
                         </NavLink>
                       </li>
-                      {item.children.map((sub) => (
-                        <li key={sub.path}>
-                          <NavLink
-                            to={sub.path}
-                            onClick={onClose}
-                            className={({ isActive }) =>
-                              `mobile-menu__sublink ${
-                                isActive ? 'mobile-menu__sublink--active' : ''
-                              }`
-                            }
-                          >
-                            {sub.label}
-                          </NavLink>
-                        </li>
-                      ))}
+                      {item.children.map((sub) => {
+                        const isSubActive = sub.path.includes('?')
+                          ? (location.pathname + location.search) === sub.path
+                          : location.pathname === sub.path && !location.search;
+
+                        return (
+                          <li key={sub.path}>
+                            <Link
+                              to={sub.path}
+                              onClick={onClose}
+                              className={`mobile-menu__sublink ${
+                                isSubActive ? 'mobile-menu__sublink--active' : ''
+                              }`}
+                            >
+                              {sub.label}
+                            </Link>
+                          </li>
+                        );
+                      })}
                     </ul>
                   )}
                 </li>
