@@ -4714,3 +4714,87 @@
     gap: 1.25rem;
   }
 }
+
+/* ==========================================================================
+   21. MOBILE UX & RESPONSIVENESS ENHANCEMENTS (< 480px and 360px)
+   ========================================================================== */
+@media (max-width: 480px) {
+  /* Prevent any horizontal page blowout */
+  html, body {
+    overflow-x: hidden !important;
+    width: 100%;
+  }
+
+  /* Safe container guttering for mobile screens */
+  .container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  /* Top info bar compact display */
+  .top-bar__inner {
+    padding: 0.2rem 0;
+  }
+  .top-bar__right {
+    gap: 0.5rem;
+    font-size: 0.72rem;
+  }
+  .top-bar__guide-trigger {
+    padding: 0.2rem 0.5rem;
+    font-size: 0.72rem;
+  }
+  .top-bar__phone {
+    font-size: 0.76rem;
+  }
+
+  /* Form actions full-width on mobile for easy thumb reach */
+  .contact-layout__form .ui-btn,
+  .quote-modal__footer .ui-btn,
+  .guide-modal__footer .ui-btn {
+    width: 100%;
+    min-height: 46px;
+    justify-content: center;
+  }
+
+  /* Section headings scale smoothly on small screens */
+  .section-heading__title {
+    font-size: clamp(1.4rem, 6vw, 1.75rem) !important;
+    line-height: 1.25 !important;
+  }
+
+  /* Footer compact links and safe touch targets */
+  .site-footer__links a,
+  .site-footer__contact-list a {
+    min-height: 38px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Process CTA and Trust CTA bars stack vertically */
+  .process-cta-bar,
+  .trust-cta-bar {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    text-align: center;
+    gap: 1rem;
+    padding: 1.25rem 1rem !important;
+  }
+  .process-cta-bar .ui-btn,
+  .trust-cta-bar .ui-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 360px) {
+  /* Ultra-small phones (e.g. 320px screen width) */
+  .top-bar__guide-trigger span {
+    max-width: 110px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .top-bar__phone span {
+    font-size: 0.72rem;
+  }
+}

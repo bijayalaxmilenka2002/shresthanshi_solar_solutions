@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { MainLayout } from '../components/layout/MainLayout';
 import { HomePage } from '../features/home/HomePage';
@@ -9,7 +9,6 @@ import { CommercialSolarPage } from '../features/solar-solutions/CommercialSolar
 import { SolarWaterPumpsPage } from '../features/solar-solutions/SolarWaterPumpsPage';
 import { SolarStreetLightingPage } from '../features/solar-solutions/SolarStreetLightingPage';
 import { SolarMaintenancePage } from '../features/solar-solutions/SolarMaintenancePage';
-import { OwnerPortalPage } from '../features/owner/OwnerPortalPage';
 import { WhoWeServeOverviewPage } from '../features/who-we-serve/WhoWeServeOverviewPage';
 import { AudienceDetailPage } from '../features/who-we-serve/AudienceDetailPage';
 import { ProjectsPage } from '../features/projects/ProjectsPage';
@@ -22,13 +21,23 @@ import { ResourceArticleDetailPage } from '../features/resources/ResourceArticle
 import { ContactPage } from '../features/contact/ContactPage';
 import { LegalPage } from '../features/legal/LegalPages';
 
+// Lazy load Owner Portal so clients never download its bundle
+const OwnerPortalPage = lazy(() =>
+  import('../features/owner/OwnerPortalPage').then((m) => ({ default: m.OwnerPortalPage }))
+);
+
 export const AppRouter: React.FC = () => {
   return (
     <Routes>
-      {/* Standalone Owner Management Portal (Separate Layout, Not accessible by regular clients) */}
-      <Route path="/owner-portal" element={<OwnerPortalPage />} />
-      <Route path="/admin" element={<Navigate to="/owner-portal" replace />} />
-      <Route path="/owner" element={<Navigate to="/owner-portal" replace />} />
+      {/* Standalone Protected Owner Console (Isolated code chunk, no public links) */}
+      <Route
+        path="/owner-portal"
+        element={
+          <Suspense fallback={<div style={{ minHeight: '100vh', backgroundColor: '#0F3324' }} />}>
+            <OwnerPortalPage />
+          </Suspense>
+        }
+      />
 
       {/* Public Client Website */}
       <Route element={<MainLayout />}>

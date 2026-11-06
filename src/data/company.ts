@@ -38,23 +38,21 @@ export const companyConfig = {
     confirmMaintenanceServicesOffered: true,
   },
 
-  // Verified Leadership & Founder Details (Strictly from shresthanshi.com)
+  // Verified Leadership & Founder Details
   founder: {
-    name: 'Mrs. Sinjita Shikha Mohapatra',
+    name: 'Mr. Shubham Pratap Singh',
     role: 'Proprietor, M/s Shreshtanshi Construction & Suppliers',
-    additionalRole: 'Director, Arch Exotic Private Limited, Bhubaneswar',
+    additionalRole: 'Solar Energy & Infrastructure Lead',
     hometown: 'Bhawanipatna, Kalahandi, Odisha',
     education: [
-      'MBA — Biju Patnaik University of Technology (BPUT), Odisha',
-      'Bachelor’s Degree — Government College, Bhawanipatna, Kalahandi',
-      'Schooling — Bhawanipatna, Kalahandi',
+      'MBA — Odisha Technical University',
+      'Solar Engineering & Turnkey Project Execution Specialist',
+      'Kalahandi, Odisha',
     ],
-    image: '[Image: founder portrait — Mrs. Sinjita Shikha Mohapatra]',
+    image: '[Image: proprietor portrait — Mr. Shubham Pratap Singh]',
     imageSrc: '/images/existing/SINJITA.jpeg',
-    originalSitePhotoUrl: 'https://shresthanshi.com/assets/images/SINJITA.jpeg',
     bioParagraphs: [
-      'Mrs. Sinjita Shikha Mohapatra is the Proprietor of M/s Shreshtanshi Construction & Suppliers and Director of Arch Exotic Private Limited, Bhubaneswar. A native of Bhawanipatna, Kalahandi, she completed her schooling in Bhawanipatna, earned her Bachelor’s degree from Bhawanipatna Government College, and holds an MBA from BPUT.',
-      'Driven by her commitment to work for Kalahandi and Odisha, she established her enterprise to deliver high-performance solar water pump panels, solar overhead water sensor pumps, community drinking water filtration units, residential & commercial rooftop solar plants, and solar street lighting installations across Odisha.',
+      'Mr. Shubham Pratap Singh is the Proprietor of M/s Shreshtanshi Construction & Suppliers (Shresthanshi Solar Solutions). Driven by a steadfast commitment to Kalahandi and western Odisha, he leads turnkey on-grid rooftop solar plants, agricultural solar pumping infrastructure, and sustainable energy projects.',
     ],
   },
 

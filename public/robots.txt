@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /owner-portal
 
+Sitemap: https://shresthanshisolarsolutions.vercel.app/sitemap.xml
 Sitemap: https://shresthanshi.com/sitemap.xml
 

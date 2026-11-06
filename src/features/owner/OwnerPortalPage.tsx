@@ -67,33 +67,81 @@ export const OwnerPortalPage: React.FC = () => {
   const [rememberMe, setRememberMe] = useState(true);
   const [authError, setAuthError] = useState('');
   const [loginLoading, setLoginLoading] = useState(false);
+  const [failedAttempts, setFailedAttempts] = useState<number>(() => {
+    return parseInt(sessionStorage.getItem('shresthanshi_fail_count') || '0', 10);
+  });
+  const [lockoutUntil, setLockoutUntil] = useState<number>(() => {
+    return parseInt(sessionStorage.getItem('shresthanshi_lockout_until') || '0', 10);
+  });
 
-  const handleLogin = (e: React.FormEvent) => {
+  const sha256Hex = async (text: string): Promise<string> => {
+    const enc = new TextEncoder().encode(text);
+    const hashBuf = await window.crypto.subtle.digest('SHA-256', enc);
+    return Array.from(new Uint8Array(hashBuf))
+      .map((b) => b.toString(16).padStart(2, '0'))
+      .join('');
+  };
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Check if security lockout is active
+    const now = Date.now();
+    if (lockoutUntil > now) {
+      const remainingMins = Math.ceil((lockoutUntil - now) / (1000 * 60));
+      setAuthError(`Security lockout active. Please wait ${remainingMins} minute(s) before retrying.`);
+      return;
+    }
+
     setLoginLoading(true);
     setAuthError('');
 
-    setTimeout(() => {
+    try {
       const u = loginUsername.trim().toLowerCase();
       const p = loginPassword.trim();
 
-      // Owner valid credentials:
-      // Username: admin OR shubham@shresthanshi.com
-      // Password: shresthanshi2026 OR admin123
-      if (
-        (u === 'admin' || u === 'shubham@shresthanshi.com') &&
-        (p === 'shresthanshi2026' || p === 'admin123')
-      ) {
+      const userHash = await sha256Hex(u);
+      const passHash = await sha256Hex(p);
+
+      // Authorized cryptographic hashes:
+      // Usernames: 'admin', 'shubham', 'shubham@shresthanshi.com'
+      const validUserHashes = [
+        '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', // admin
+        '10f6d3ce9d854d1ebfc1ca7d1981fafc122a9970093382f2c5c72cfa6ab47572', // shubham
+        '598c261e125de57e8e38ff2e6d86e5f1e376b4a0bf8018c83f19ac9d4c06b1cf', // shubham@shresthanshi.com
+      ];
+
+      // Password hash: 'shresthanshi2026'
+      const validPassHash = '13d1832743bde8780d5f2f0ecc1dba9fda16a99d73cb5c562ed4de0ed71d6245';
+
+      if (validUserHashes.includes(userHash) && passHash === validPassHash) {
+        // Successful authentication
         sessionStorage.setItem('shresthanshi_owner_auth', 'true');
+        sessionStorage.removeItem('shresthanshi_fail_count');
+        sessionStorage.removeItem('shresthanshi_lockout_until');
         if (rememberMe) {
           localStorage.setItem('shresthanshi_owner_remember', 'true');
         }
         setIsAuthenticated(true);
       } else {
-        setAuthError('Invalid owner credentials. Access denied.');
+        const newCount = failedAttempts + 1;
+        setFailedAttempts(newCount);
+        sessionStorage.setItem('shresthanshi_fail_count', newCount.toString());
+
+        if (newCount >= 5) {
+          const lockTime = Date.now() + 15 * 60 * 1000; // 15 mins lock
+          setLockoutUntil(lockTime);
+          sessionStorage.setItem('shresthanshi_lockout_until', lockTime.toString());
+          setAuthError('Too many failed attempts. Security lockout active for 15 minutes.');
+        } else {
+          setAuthError(`Invalid credentials. Access denied. (${5 - newCount} attempt(s) remaining)`);
+        }
       }
+    } catch {
+      setAuthError('Authentication verification failed.');
+    } finally {
       setLoginLoading(false);
-    }, 350);
+    }
   };
 
   const handleLogout = () => {
@@ -280,6 +328,7 @@ export const OwnerPortalPage: React.FC = () => {
           title="Owner Portal Login — Shresthanshi Solar Solutions"
           description="Restricted Owner Administration Console"
           canonicalPath="/owner-portal"
+          noIndex={true}
         />
 
         <div
@@ -522,24 +571,6 @@ export const OwnerPortalPage: React.FC = () => {
               </button>
             </form>
 
-            {/* Quick credentials hint for proprietor */}
-            <div
-              style={{
-                marginTop: '1.5rem',
-                padding: '0.85rem',
-                backgroundColor: 'var(--color-soft-green)',
-                borderRadius: '10px',
-                border: '1px solid var(--border-medium)',
-                fontSize: '0.76rem',
-                color: 'var(--color-forest-green)',
-                lineHeight: 1.5,
-              }}
-            >
-              <strong>Default Owner Credentials:</strong>
-              <div>Username: <code style={{ fontWeight: 700 }}>admin</code></div>
-              <div>Password: <code style={{ fontWeight: 700 }}>shresthanshi2026</code></div>
-            </div>
-
             <div style={{ textAlign: 'center', marginTop: '1.5rem' }}>
               <Link
                 to="/"
@@ -567,6 +598,7 @@ export const OwnerPortalPage: React.FC = () => {
         title="Owner Portal — Response Management & Section Controls | Shresthanshi Solar"
         description="Owner management portal for Shresthanshi Solar Solutions to review client form responses, manage leads, and customize live website sections."
         canonicalPath="/owner-portal"
+        noIndex={true}
       />
 
       {/* Top Bar for Owner Portal */}
