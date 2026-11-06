@@ -1,5 +1,5 @@
-import React, { useState, useMemo } from 'react';
-import { useSearchParams, Link } from 'react-router-dom';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import {
   Award,
   Video,
@@ -26,6 +26,126 @@ import { Breadcrumbs } from '../../components/common/Breadcrumbs';
 import { SEO } from '../../components/common/SEO';
 import { CTASection } from '../../components/common/CTASection';
 import { mediaItems, mediaCategories, MediaCategory, MediaItem } from '../../data/mediaData';
+
+/**
+ * Mobile-optimised Lightbox Video Player Component
+ * Supports both landscape (16:9) and vertical portrait (9:16) videos.
+ * Handles mobile browser autoplay restrictions with graceful tap-to-play fallback.
+ */
+const LightboxVideoPlayer: React.FC<{
+  src: string;
+  poster?: string;
+  title: string;
+}> = ({ src, poster, title }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  useEffect(() => {
+    const v = videoRef.current;
+    if (v) {
+      // Attempt play on mount
+      const playPromise = v.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => setIsPlaying(true))
+          .catch(() => {
+            // Autoplay blocked by mobile browser (normal on iOS/Android without mute)
+            setIsPlaying(false);
+          });
+      }
+    }
+  }, [src]);
+
+  const handleTogglePlay = (e: React.MouseEvent) => {
+    // Only toggle if clicked directly on the overlay, let native controls handle their own clicks
+    const v = videoRef.current;
+    if (v) {
+      if (v.paused) {
+        v.play()
+          .then(() => setIsPlaying(true))
+          .catch(() => {});
+      } else {
+        v.pause();
+        setIsPlaying(false);
+      }
+    }
+  };
+
+  return (
+    <div
+      style={{
+        borderRadius: '12px',
+        overflow: 'hidden',
+        backgroundColor: '#000000',
+        width: '100%',
+        maxHeight: '52vh',
+        minHeight: '220px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'relative',
+        boxShadow: '0 8px 24px rgba(0,0,0,0.3)',
+      }}
+    >
+      <video
+        ref={videoRef}
+        src={src}
+        poster={poster}
+        controls
+        playsInline
+        preload="auto"
+        onPlay={() => setIsPlaying(true)}
+        onPause={() => setIsPlaying(false)}
+        style={{
+          width: '100%',
+          maxHeight: '52vh',
+          objectFit: 'contain',
+          display: 'block',
+          backgroundColor: '#000000',
+          margin: '0 auto',
+        }}
+      />
+
+      {/* Prominent Tap to Play overlay when paused or when mobile autoplay was blocked */}
+      {!isPlaying && (
+        <button
+          type="button"
+          onClick={handleTogglePlay}
+          aria-label={`Play ${title}`}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: 'rgba(0,0,0,0.4)',
+            border: 'none',
+            cursor: 'pointer',
+            padding: 0,
+            transition: 'background-color 200ms ease',
+          }}
+        >
+          <div
+            style={{
+              width: '64px',
+              height: '64px',
+              borderRadius: '50%',
+              backgroundColor: 'rgba(23, 75, 53, 0.95)',
+              color: '#FFFFFF',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              border: '2.5px solid rgba(255,255,255,0.95)',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.5)',
+            }}
+          >
+            <Play size={28} fill="#FFFFFF" style={{ marginLeft: '3px' }} />
+          </div>
+        </button>
+      )}
+    </div>
+  );
+};
 
 export const MediaPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -174,7 +294,7 @@ export const MediaPage: React.FC = () => {
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
               gap: '1rem',
               textAlign: 'center',
             }}
@@ -297,17 +417,8 @@ export const MediaPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Category Tabs Strip */}
-          <div
-            style={{
-              display: 'flex',
-              gap: '0.5rem',
-              overflowX: 'auto',
-              paddingBottom: '0.75rem',
-              marginBottom: '1.5rem',
-              WebkitOverflowScrolling: 'touch',
-            }}
-          >
+          {/* Category Tabs Strip — Responsive horizontal scroll with hidden scrollbars */}
+          <div className="media-category-tabs" style={{ marginBottom: '1.5rem' }}>
             {mediaCategories.map((cat) => {
               const isActive = activeCategory === cat.id;
               const count = categoryCounts[cat.id] || 0;
@@ -332,6 +443,7 @@ export const MediaPage: React.FC = () => {
                     whiteSpace: 'nowrap',
                     transition: 'all 150ms ease',
                     flexShrink: 0,
+                    minHeight: '42px',
                     boxShadow: isActive ? '0 4px 12px rgba(23, 75, 53, 0.2)' : 'none',
                   }}
                 >
@@ -400,7 +512,7 @@ export const MediaPage: React.FC = () => {
             </div>
           )}
 
-          {/* Media Grid */}
+          {/* Media Grid — Responsive 1-col on mobile phones, multi-col on tablets/desktops */}
           {filteredMedia.length === 0 ? (
             <Card variant="white" padding="lg" style={{ textAlign: 'center', padding: '3.5rem 1rem' }}>
               <Filter size={40} color="#174B35" style={{ opacity: 0.3, margin: '0 auto 1rem' }} />
@@ -423,13 +535,7 @@ export const MediaPage: React.FC = () => {
               </div>
             </Card>
           ) : (
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fill, minmax(290px, 1fr))',
-                gap: '1.35rem',
-              }}
-            >
+            <div className="media-gallery-grid">
               {filteredMedia.map((item) => {
                 const isVideo = item.type === 'video';
 
@@ -468,7 +574,7 @@ export const MediaPage: React.FC = () => {
                       e.currentTarget.style.borderColor = 'rgba(23, 75, 53, 0.12)';
                     }}
                   >
-                    {/* Media Visual Container — Large & Edge-to-Edge */}
+                    {/* Media Visual Container — Large, Clean & Mobile Poster Ready */}
                     <div
                       style={{
                         position: 'relative',
@@ -484,16 +590,17 @@ export const MediaPage: React.FC = () => {
                         <div style={{ width: '100%', height: '100%', position: 'relative' }}>
                           <video
                             src={item.fileUrl}
-                            preload="metadata"
+                            poster={item.thumbnailUrl}
+                            preload="none"
+                            muted
+                            playsInline
+                            loop
                             style={{
                               width: '100%',
                               height: '100%',
                               objectFit: 'cover',
                               display: 'block',
                             }}
-                            muted
-                            playsInline
-                            loop
                             onMouseEnter={(e) => {
                               try {
                                 e.currentTarget.play();
@@ -570,7 +677,7 @@ export const MediaPage: React.FC = () => {
                             onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
                           />
 
-                          {/* Subtle Top-Right Expand Icon on Hover */}
+                          {/* Top-Right Expand Icon on Hover */}
                           <div
                             style={{
                               position: 'absolute',
@@ -675,7 +782,7 @@ export const MediaPage: React.FC = () => {
       </section>
 
       {/* =========================================================================
-          LIGHTBOX MODAL FOR CENTERED FULL-RESOLUTION MEDIA & VIDEO PLAYBACK
+          LIGHTBOX MODAL FOR CENTERED FULL-RESOLUTION MEDIA & MOBILE VIDEO PLAYBACK
           ========================================================================= */}
       {selectedMedia && (
         <Modal
@@ -685,60 +792,51 @@ export const MediaPage: React.FC = () => {
           className="media-lightbox-panel"
           titleId="media-modal-title"
         >
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
-            {/* Centered Media Player Area */}
-            <div
-              style={{
-                borderRadius: '12px',
-                overflow: 'hidden',
-                backgroundColor: selectedMedia.type === 'video' ? '#000000' : '#0B2419',
-                maxHeight: '58vh',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                boxShadow: '0 8px 24px rgba(0,0,0,0.25)',
-                position: 'relative',
-              }}
-            >
-              {selectedMedia.type === 'video' ? (
-                <video
-                  src={selectedMedia.fileUrl}
-                  controls
-                  autoPlay
-                  playsInline
-                  style={{
-                    width: '100%',
-                    maxHeight: '58vh',
-                    aspectRatio: '16/9',
-                    objectFit: 'contain',
-                    display: 'block',
-                    backgroundColor: '#000000',
-                    margin: '0 auto',
-                  }}
-                />
-              ) : (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+            {/* Centered Media Player Area — Mobile Friendly */}
+            {selectedMedia.type === 'video' ? (
+              <LightboxVideoPlayer
+                src={selectedMedia.fileUrl}
+                poster={selectedMedia.thumbnailUrl}
+                title={selectedMedia.title}
+              />
+            ) : (
+              <div
+                style={{
+                  borderRadius: '12px',
+                  overflow: 'hidden',
+                  backgroundColor: '#0B2419',
+                  maxHeight: '52vh',
+                  minHeight: '220px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  boxShadow: '0 8px 24px rgba(0,0,0,0.25)',
+                  position: 'relative',
+                }}
+              >
                 <img
                   src={selectedMedia.fileUrl}
                   alt={selectedMedia.title}
                   style={{
                     maxWidth: '100%',
-                    maxHeight: '58vh',
+                    maxHeight: '52vh',
                     objectFit: 'contain',
                     display: 'block',
                     margin: '0 auto',
                     imageRendering: '-webkit-optimize-contrast',
                   }}
                 />
-              )}
-            </div>
+              </div>
+            )}
 
             {/* Compact Header & Info */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.75rem', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem', flexWrap: 'wrap' }}>
                 <h2
                   id="media-modal-title"
                   style={{
-                    fontSize: '1.2rem',
+                    fontSize: '1.15rem',
                     fontWeight: 800,
                     color: 'var(--color-forest-green)',
                     margin: 0,
@@ -748,37 +846,37 @@ export const MediaPage: React.FC = () => {
                   {selectedMedia.title}
                 </h2>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flexWrap: 'wrap' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', flexWrap: 'wrap' }}>
                   {selectedMedia.location && (
                     <span
                       style={{
                         display: 'inline-flex',
                         alignItems: 'center',
-                        gap: '0.3rem',
-                        fontSize: '0.78rem',
+                        gap: '0.25rem',
+                        fontSize: '0.76rem',
                         fontWeight: 600,
                         color: 'var(--color-forest-green)',
                         backgroundColor: 'var(--color-soft-green)',
-                        padding: '0.2rem 0.65rem',
+                        padding: '0.2rem 0.6rem',
                         borderRadius: '999px',
                         border: '1px solid var(--border-medium)',
                       }}
                     >
-                      <MapPin size={12} color="#174B35" />
+                      <MapPin size={11} color="#174B35" />
                       <span>{selectedMedia.location}</span>
                     </span>
                   )}
                   {selectedMedia.date && (
                     <span
                       style={{
-                        fontSize: '0.76rem',
+                        fontSize: '0.74rem',
                         color: 'var(--text-muted)',
                         display: 'inline-flex',
                         alignItems: 'center',
                         gap: '0.25rem',
                       }}
                     >
-                      <Calendar size={12} />
+                      <Calendar size={11} />
                       <span>{selectedMedia.date}</span>
                     </span>
                   )}
@@ -787,9 +885,9 @@ export const MediaPage: React.FC = () => {
 
               <p
                 style={{
-                  fontSize: '0.86rem',
+                  fontSize: '0.84rem',
                   color: 'var(--text-body)',
-                  lineHeight: 1.5,
+                  lineHeight: 1.45,
                   margin: 0,
                 }}
               >
@@ -800,22 +898,22 @@ export const MediaPage: React.FC = () => {
               {(selectedMedia.verifiedBy || selectedMedia.coordinates) && (
                 <div
                   style={{
-                    fontSize: '0.76rem',
+                    fontSize: '0.74rem',
                     color: '#166534',
                     backgroundColor: '#F0FDF4',
                     border: '1px solid #BBF7D0',
                     borderRadius: '8px',
-                    padding: '0.45rem 0.75rem',
+                    padding: '0.4rem 0.65rem',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    gap: '0.5rem',
+                    gap: '0.4rem',
                     flexWrap: 'wrap',
                   }}
                 >
                   {selectedMedia.verifiedBy && (
                     <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
-                      <ShieldCheck size={13} color="#16A34A" />
+                      <ShieldCheck size={12} color="#16A34A" />
                       <strong>Verified by:</strong> {selectedMedia.verifiedBy}
                     </span>
                   )}
@@ -827,15 +925,15 @@ export const MediaPage: React.FC = () => {
                 </div>
               )}
 
-              {/* Bottom Actions Row */}
+              {/* Bottom Actions Row — Full Touch-friendly Targets on Phone */}
               <div
                 style={{
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  gap: '0.75rem',
+                  gap: '0.65rem',
                   flexWrap: 'wrap',
-                  paddingTop: '0.5rem',
+                  paddingTop: '0.45rem',
                   borderTop: '1px solid var(--border-subtle)',
                 }}
               >
@@ -847,17 +945,18 @@ export const MediaPage: React.FC = () => {
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: '0.35rem',
-                    fontSize: '0.8rem',
+                    fontSize: '0.78rem',
                     color: 'var(--color-forest-green)',
                     fontWeight: 700,
                     textDecoration: 'underline',
+                    padding: '0.4rem 0',
                   }}
                 >
                   <span>{selectedMedia.type === 'video' ? 'Open Raw Video' : 'Open Full High-Res'}</span>
-                  <ExternalLink size={13} />
+                  <ExternalLink size={12} />
                 </a>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                   <Button
                     type="button"
                     variant="outline"
@@ -870,7 +969,7 @@ export const MediaPage: React.FC = () => {
                     to="/contact?intent=assessment"
                     variant="primary"
                     size="sm"
-                    iconRight={<ArrowRight size={14} />}
+                    iconRight={<ArrowRight size={13} />}
                     onClick={() => setSelectedMedia(null)}
                   >
                     Inquire for Site
