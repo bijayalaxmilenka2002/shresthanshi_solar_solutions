@@ -20,6 +20,7 @@ import { Button } from '../ui/Button';
 export interface FeaturedAward {
   id: string;
   title: string;
+  shortTitle: string;
   badge: string;
   category: string;
   authority: string;
@@ -27,6 +28,7 @@ export interface FeaturedAward {
   location: string;
   imageSrc: string;
   imageAlt: string;
+  shortTagline: string;
   summary: string;
   fullDescription: string;
   highlights: string[];
@@ -36,6 +38,7 @@ export const featuredAwards: FeaturedAward[] = [
   {
     id: 'summit-bre-mnre-tpwodl-leader',
     title: 'National Solar Summit Delegate (Bharat Mandapam, New Delhi)',
+    shortTitle: 'National Solar Summit Delegate',
     badge: 'National Conclave Delegate',
     category: 'Govt of India Recognition',
     authority: 'Ministry of New & Renewable Energy (MNRE)',
@@ -43,6 +46,7 @@ export const featuredAwards: FeaturedAward[] = [
     location: 'Bharat Mandapam, New Delhi',
     imageSrc: '/media/summits-leadership/bre-summit-mnre-tpwodl-er-satyabrata-panda.jpg',
     imageAlt: 'National Solar Summit Delegate Shubham Pratap Singh with Er. Satyabrata Panda of TPWODL',
+    shortTagline: 'Top 100 Vendor Invitation at Bharat Mandapam, New Delhi with TPWODL leadership.',
     summary:
       'Invited as one of the Top 100 Renewable Energy Vendors of Odisha at Bharat Mandapam, New Delhi alongside TPWODL leadership.',
     fullDescription:
@@ -56,13 +60,15 @@ export const featuredAwards: FeaturedAward[] = [
   {
     id: 'award-kalahandi-highest-pm-surya-ghar',
     title: 'District 1st Place Award — Highest PM Surya Ghar Installations',
+    shortTitle: 'District 1st Place Award',
     badge: 'District 1st Place',
     category: 'PM Surya Ghar Muft Bijli Yojana',
-    authority: 'District Administration & Renewable Energy Cell',
+    authority: 'District Administration & RE Cell',
     date: '2025 – 2026',
     location: 'Bhawanipatna, Kalahandi',
     imageSrc: '/media/awards-certificates/pm-surya-ghar-kalahandi-district-award.jpg',
     imageAlt: 'District 1st Place Award for Highest PM Surya Ghar Solar Installations',
+    shortTagline: 'Highest number of verified residential rooftop solar installations across Kalahandi.',
     summary:
       'Awarded First Place for executing the highest number of verified residential rooftop solar installations across Kalahandi district.',
     fullDescription:
@@ -76,6 +82,7 @@ export const featuredAwards: FeaturedAward[] = [
   {
     id: 'award-tpwodl-utility-aggregation',
     title: 'TPWODL Utility-Led Aggregation Award (Tata Power JV)',
+    shortTitle: 'TPWODL Utility Aggregation Award',
     badge: 'Top DISCOM Partner Award',
     category: 'Utility Solar Excellence',
     authority: 'TPWODL (Tata Power & Govt of Odisha JV)',
@@ -83,6 +90,7 @@ export const featuredAwards: FeaturedAward[] = [
     location: 'Western Odisha DISCOM',
     imageSrc: '/media/awards-certificates/tpwodl-utility-led-aggregation-award.jpg',
     imageAlt: 'TPWODL Utility-Led Solar Aggregation Award',
+    shortTagline: 'Top solar EPC partner in Western Odisha for residential & commercial aggregation.',
     summary:
       'Honored by TP Western Odisha Distribution Limited as the top solar EPC partner for residential and commercial aggregation.',
     fullDescription:
@@ -96,13 +104,15 @@ export const featuredAwards: FeaturedAward[] = [
   {
     id: 'cert-tpwodl-nov-2025',
     title: 'DISCOM Certified Net-Meter Synchronization Certificate',
+    shortTitle: 'DISCOM Net-Meter Certificate',
     badge: 'Official DISCOM Certificate',
     category: 'Rapid Grid Synchronization',
-    authority: 'Signed by Chief Technology & RE Officer, TPWODL',
+    authority: 'Chief Technology & RE Officer, TPWODL',
     date: 'November 2025',
     location: 'Balangir & Kalahandi, Odisha',
     imageSrc: '/media/awards-certificates/tpwodl-certificate-nov-2025.jpg',
     imageAlt: 'TPWODL Official Appreciation Certificate for Rooftop Solar Synchronizations',
+    shortTagline: 'Official appreciation certifying 26 verified rapid rooftop solar synchronizations.',
     summary:
       'Official letter of appreciation certifying 26 verified rooftop solar installations with seamless net-meter synchronizations.',
     fullDescription:
@@ -191,7 +201,7 @@ export const AwardsAndCertificationsSection: React.FC = () => {
                 </button>
               </div>
 
-              {/* Card Body */}
+              {/* Card Body — Clean, Focused & High-Impact */}
               <div className="home-award-card__body">
                 <div className="home-award-card__meta">
                   <span className="home-award-card__authority">
@@ -200,19 +210,9 @@ export const AwardsAndCertificationsSection: React.FC = () => {
                   </span>
                 </div>
 
-                <h3 className="home-award-card__title">{award.title}</h3>
+                <h3 className="home-award-card__title">{award.shortTitle}</h3>
 
-                <p className="home-award-card__summary">{award.summary}</p>
-
-                {/* Micro Highlights */}
-                <ul className="home-award-card__highlights">
-                  {award.highlights.slice(0, 2).map((hl, i) => (
-                    <li key={i}>
-                      <CheckCircle2 size={13} className="home-award-card__check-icon" />
-                      <span>{hl}</span>
-                    </li>
-                  ))}
-                </ul>
+                <p className="home-award-card__tagline">{award.shortTagline}</p>
 
                 {/* Card Action Footer */}
                 <div className="home-award-card__footer">
