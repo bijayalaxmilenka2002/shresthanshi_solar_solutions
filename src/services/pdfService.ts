@@ -40,7 +40,7 @@ export const generateSolarGuidePDF = (options: SolarGuidePdfOptions = {}): void 
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(9);
   doc.text('M/s Shreshtanshi Construction & Suppliers • Prop. Shubham Pratap Singh', margin, 20);
-  doc.text(`Registered GSTIN: ${companyConfig.gstin} | Kalahandi & Across Odisha`, margin, 25);
+  doc.text(`Registered GSTIN: ${companyConfig.gstin} | Bhubaneswar, Kalahandi & Across Odisha`, margin, 25);
 
   // Official Seal Badge
   doc.setFillColor(255, 255, 255);
@@ -201,7 +201,7 @@ export const generateSolarGuidePDF = (options: SolarGuidePdfOptions = {}): void 
   doc.setTextColor(...mutedText);
   doc.setFontSize(7);
   doc.text(
-    `© ${new Date().getFullYear()} ${companyConfig.legalName}. Educational Guide for Solar Consumers in Kalahandi & Odisha.`,
+    `© ${new Date().getFullYear()} ${companyConfig.legalName}. Educational Guide for Solar Consumers in Bhubaneswar, Kalahandi & Odisha.`,
     margin,
     289
   );

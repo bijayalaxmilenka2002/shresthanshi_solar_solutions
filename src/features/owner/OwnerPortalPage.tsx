@@ -266,7 +266,7 @@ export const OwnerPortalPage: React.FC = () => {
       name: newLeadName.trim(),
       phone: newLeadPhone.trim(),
       email: newLeadEmail.trim() || undefined,
-      location: newLeadLocation.trim() || 'Kalahandi, Odisha',
+      location: newLeadLocation.trim() || 'Bhubaneswar, Odisha',
       category: newLeadCategory,
       details: newLeadDetails.trim() || 'Manual inquiry recorded in owner portal',
       preferredContactMethod: 'Phone Call',
@@ -1339,6 +1339,11 @@ export const OwnerPortalPage: React.FC = () => {
                         key: 'applications' as const,
                         title: 'Where Solar Fits In (Applications Grid)',
                         desc: '3 visual cards for Home, Farm, and Commercial applications.',
+                      },
+                      {
+                        key: 'awardsSection' as const,
+                        title: 'National Awards & Official Certifications',
+                        desc: 'Government & DISCOM recognition, MNRE summit delegation, and utility aggregation awards.',
                       },
                       {
                         key: 'coreServices' as const,

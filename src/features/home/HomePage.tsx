@@ -16,6 +16,7 @@ import { ImagePlaceholder } from '../../components/ui/ImagePlaceholder';
 import { ProcessTimeline } from '../../components/common/ProcessTimeline';
 import { CTASection } from '../../components/common/CTASection';
 import { SunchargeShowcaseSections } from '../../components/home/SunchargeShowcaseSections';
+import { AwardsAndCertificationsSection } from '../../components/home/AwardsAndCertificationsSection';
 import { EndToEndServiceSection } from '../../components/home/EndToEndServiceSection';
 import { SEO } from '../../components/common/SEO';
 import { useSolarGuideModal } from '../../hooks/useSolarGuideModal';
@@ -220,7 +221,15 @@ export const HomePage: React.FC = () => {
       <SunchargeShowcaseSections />
 
       {/* =================================================================
-          SECTION 4 — END-TO-END SOLAR SERVICE (Complete Solar Lifecycle)
+          SECTION 4 — NATIONAL AWARDS & OFFICIAL CERTIFICATIONS
+          Prominently placed above the End-to-End Solar Service Section
+      ================================================================= */}
+      {(settings.sections.awardsSection ?? true) && (
+        <AwardsAndCertificationsSection />
+      )}
+
+      {/* =================================================================
+          SECTION 5 — END-TO-END SOLAR SERVICE (Complete Solar Lifecycle)
           Placed directly above the 4 Simple Steps Process Timeline
       ================================================================= */}
       {settings.sections.coreServices && (

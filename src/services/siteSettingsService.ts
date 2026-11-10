@@ -25,6 +25,7 @@ export interface SiteSettings {
   sections: {
     heroCaption: boolean;
     applications: boolean;
+    awardsSection: boolean;
     coreServices: boolean;
     processTimeline: boolean;
     fieldHighlights: boolean;
@@ -59,6 +60,7 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
   sections: {
     heroCaption: true,
     applications: true,
+    awardsSection: true,
     coreServices: true,
     processTimeline: true,
     fieldHighlights: true,
