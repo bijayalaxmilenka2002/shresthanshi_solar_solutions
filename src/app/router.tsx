@@ -25,9 +25,12 @@ import { ResourceArticleDetailPage } from '../features/resources/ResourceArticle
 import { ContactPage } from '../features/contact/ContactPage';
 import { LegalPage } from '../features/legal/LegalPages';
 
-// Lazy load Owner Portal so clients never download its bundle
+// Lazy load Owner Portal & Super Admin Portal so clients never download their bundle
 const OwnerPortalPage = lazy(() =>
   import('../features/owner/OwnerPortalPage').then((m) => ({ default: m.OwnerPortalPage }))
+);
+const SuperAdminPortalPage = lazy(() =>
+  import('../features/owner/SuperAdminPortalPage').then((m) => ({ default: m.SuperAdminPortalPage }))
 );
 
 export const AppRouter: React.FC = () => {
@@ -42,6 +45,18 @@ export const AppRouter: React.FC = () => {
           </Suspense>
         }
       />
+      <Route path="/owner" element={<Navigate to="/owner-portal" replace />} />
+
+      {/* Standalone Protected Super Admin Oversight Console */}
+      <Route
+        path="/super-admin"
+        element={
+          <Suspense fallback={<div style={{ minHeight: '100vh', backgroundColor: '#0A2518' }} />}>
+            <SuperAdminPortalPage />
+          </Suspense>
+        }
+      />
+      <Route path="/super-admin-portal" element={<Navigate to="/super-admin" replace />} />
 
       {/* Public Client Website */}
       <Route element={<MainLayout />}>

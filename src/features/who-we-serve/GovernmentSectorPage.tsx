@@ -354,7 +354,7 @@ export const GovernmentSectorPage: React.FC = () => {
       {/* Bottom CTA */}
       <CTASection
         headline="Collaborate on Public Sector &amp; Environmental Solar Projects."
-        supportingCopy="Connect with our institutional project engineers in Bhubaneswar and Kalahandi for tender inquiries and technical site evaluations."
+        supportingCopy="Connect with our institutional project engineers at our Kalahandi Head Office and Bhubaneswar sub-branch for tender inquiries and technical site evaluations."
         primaryLabel="Consult Government Project Desk"
         secondaryLabel={`Call ${companyConfig.contact.primaryPhoneDisplay}`}
       />

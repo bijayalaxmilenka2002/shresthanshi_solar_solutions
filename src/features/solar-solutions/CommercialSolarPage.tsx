@@ -146,7 +146,7 @@ export const CommercialSolarPage: React.FC = () => {
 
       <CTASection
         headline="Put Your Commercial Roof to Work."
-        supportingCopy="Request an on-site electrical and roof assessment from our engineering team in Bhubaneswar or our Kalahandi department."
+        supportingCopy="Request an on-site electrical and roof assessment from our engineering team at our Kalahandi Head Office or Bhubaneswar sub-branch."
         prefillTopic="Commercial Solar Assessment"
         image="[Image: commercial solar installation]"
       />

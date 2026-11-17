@@ -31,8 +31,8 @@ export const ProjectsPage: React.FC = () => {
   return (
     <div>
       <SEO
-        title="Field Projects & Executed Works in Bhubaneswar, Kalahandi & Odisha"
-        description="Review field-executed projects by Shreshtanshi: solar water pumps, rural drinking water pipelines, tubewell drilling, and community infrastructure across Bhubaneswar, Kalahandi, and Odisha."
+        title="Field Projects & Executed Works | Kalahandi (Head Office) & Across Odisha"
+        description="Review field-executed projects by Shreshtanshi: solar water pumps, rural drinking water pipelines, rooftop solar, and community infrastructure from our Kalahandi Head Office and Bhubaneswar sub-branch across Odisha."
         canonicalPath="/projects"
       />
       <Breadcrumbs items={[{ label: 'Our Projects' }]} />
@@ -164,7 +164,7 @@ export const ProjectsPage: React.FC = () => {
 
       <CTASection
         headline="Planning a Solar or Water Project in Odisha?"
-        supportingCopy="Speak with our team in Bhubaneswar or our established Kalahandi department to evaluate your site."
+        supportingCopy="Speak with our team at our Kalahandi Head Office or our Bhubaneswar sub-branch to evaluate your site."
         prefillTopic="Project Consultation Enquiry"
         image="[Project gallery image]"
       />

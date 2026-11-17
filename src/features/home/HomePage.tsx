@@ -120,8 +120,8 @@ export const HomePage: React.FC = () => {
   return (
     <div className="home-page">
       <SEO
-        title="Solar Energy, Rooftop Solar & Agricultural Solar Pumps | Bhubaneswar & Kalahandi"
-        description="Shreshtanshi Construction & Suppliers provides practical solar solutions for homes, farms, businesses, and institutions prioritized in Bhubaneswar, with an established operational department in Kalahandi and projects across Odisha."
+        title="Solar Energy, Rooftop Solar & Agricultural Solar Pumps | Kalahandi & Bhubaneswar, Odisha"
+        description="Shreshtanshi Construction & Suppliers provides practical solar solutions for homes, farms, businesses, and government sectors from our Head Office in Kalahandi and our Bhubaneswar sub-branch across Odisha."
         canonicalPath="/"
       />
       {/* =================================================================
@@ -176,7 +176,7 @@ export const HomePage: React.FC = () => {
                 <div className="hero-section__caption-card">
                   <MapPin size={18} />
                   <div>
-                    <strong>Bhubaneswar (HQ) • Kalahandi Department</strong>
+                    <strong>Kalahandi (Head Office) • Bhubaneswar Sub-Branch</strong>
                     <span>Rooftop Solar • Solar Water Pumps • Solar Street Lighting</span>
                   </div>
                 </div>
@@ -199,7 +199,7 @@ export const HomePage: React.FC = () => {
               Odisha’s Verified Engineering Partner for Clean Solar Power &amp; Sustainable Water.
             </h2>
             <p style={{ fontSize: '1.05rem', lineHeight: 1.75, color: 'var(--text-body)', margin: '0 auto 1.5rem' }}>
-              Operating from our primary hub in <strong>Bhubaneswar</strong> with an established operational department in <strong>Kalahandi</strong>, <strong>{companyConfig.legalName}</strong> (GSTIN: {companyConfig.gstin}) delivers turnkey on-grid rooftop solar plants, agricultural solar pumping infrastructure, and government-sector projects across Odisha with verified DISCOM synchronization.
+              Operating from our Head Office in <strong>Kalahandi</strong> with a dedicated sub-branch office in <strong>Bhubaneswar</strong>, <strong>{companyConfig.legalName}</strong> (GSTIN: {companyConfig.gstin}) delivers turnkey on-grid rooftop solar plants, agricultural solar pumping infrastructure, and government-sector projects across Odisha with verified DISCOM synchronization.
             </p>
             <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
               <Link to="/about" className="ui-btn ui-btn--primary ui-btn--md">

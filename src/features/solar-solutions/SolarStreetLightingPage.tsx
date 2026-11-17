@@ -149,7 +149,7 @@ export const SolarStreetLightingPage: React.FC = () => {
         <Container className="page-hero__grid">
           <div className="page-hero__content">
             <span className="badge" style={{ marginBottom: '1rem' }}>
-              Autonomous Outdoor Lighting • Bhubaneswar, Kalahandi &amp; Across Odisha
+              Autonomous Outdoor Lighting • Kalahandi (Head Office) &amp; Bhubaneswar Sub-Branch
             </span>
             <h1 className="page-hero__title">Solar Street Lighting Systems</h1>
             <p className="page-hero__subtitle">
@@ -577,7 +577,7 @@ export const SolarStreetLightingPage: React.FC = () => {
       {/* CTA Section */}
       <CTASection
         headline="Illuminating Streets & Rural Communities."
-        supportingCopy="Speak with our engineering team in Bhubaneswar or our established Kalahandi department to plan street lighting layouts, pole counts, and technical specifications."
+        supportingCopy="Speak with our engineering team at our Kalahandi Head Office or our Bhubaneswar sub-branch to plan street lighting layouts, pole counts, and technical specifications."
         prefillTopic="Solar Street Lighting Enquiry"
       />
     </div>

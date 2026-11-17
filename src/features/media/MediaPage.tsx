@@ -200,8 +200,8 @@ export const MediaPage: React.FC = () => {
   return (
     <div>
       <SEO
-        title="Verified Media, DISCOM Awards & Field Videos — Bhubaneswar, Kalahandi & Odisha"
-        description="Browse official TPWODL awards, MNRE national summit credentials, GPS-tagged rooftop solar installations across Bhubaneswar and our established Kalahandi department."
+        title="Verified Media, DISCOM Awards & Field Videos — Kalahandi (Head Office) & Bhubaneswar Sub-Branch"
+        description="Browse official TPCODL/TPWODL awards, MNRE national summit credentials, GPS-tagged rooftop solar installations from our Kalahandi Head Office and Bhubaneswar sub-branch across Odisha."
         canonicalPath="/media"
         ogImage="/media/awards-certificates/pm-surya-ghar-kalahandi-district-award.jpg"
       />
@@ -986,7 +986,7 @@ export const MediaPage: React.FC = () => {
           ========================================================================= */}
       <CTASection
         headline="Experience Proven Solar Engineering for Your Home, Farm or Business."
-        supportingCopy="Our verified field installations and DISCOM awards speak for themselves. Reach out to our engineering team in Bhubaneswar or our established Kalahandi department office for an honest site assessment."
+        supportingCopy="Our verified field installations and DISCOM awards speak for themselves. Reach out to our engineering team at our Kalahandi Head Office or our Bhubaneswar sub-branch for an honest site assessment."
         primaryLabel="Request Free Site Assessment"
         secondaryLabel="Call Our Office"
         imageSrc="/media/awards-certificates/pm-surya-ghar-kalahandi-district-award.jpg"

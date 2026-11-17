@@ -145,7 +145,7 @@ export const ServicesPage: React.FC = () => {
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
               <ShieldCheck size={18} />
               <span>
-                <strong>Verified Enterprise Contractor:</strong> Registered GSTIN: {companyConfig.gstin} • Bhubaneswar (HQ) • Kalahandi Department
+                <strong>Verified Enterprise Contractor:</strong> Registered GSTIN: {companyConfig.gstin} • Kalahandi (Head Office) • Bhubaneswar Sub-Branch
               </span>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
@@ -323,7 +323,7 @@ export const ServicesPage: React.FC = () => {
       {/* CTA Section */}
       <CTASection
         headline="Need a Custom Solar Assessment or System Quotation?"
-        supportingCopy="Our engineering team in Bhubaneswar and Kalahandi will review your rooftop space, monthly electricity bills, or agricultural pump specifications to design the optimal solar system."
+        supportingCopy="Our engineering team at our Kalahandi Head Office and Bhubaneswar sub-branch will review your rooftop space, monthly electricity bills, or agricultural pump specifications to design the optimal solar system."
         prefillTopic="Solar Services Enquiry"
       />
     </div>

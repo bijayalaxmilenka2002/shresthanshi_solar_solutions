@@ -180,8 +180,8 @@ export const ContactPage: React.FC = () => {
   return (
     <div>
       <SEO
-        title="Contact Us & Request Solar Site Assessment — Bhubaneswar & Kalahandi, Odisha"
-        description="Connect with our team in Bhubaneswar or our established Kalahandi department (+91 9438-080-874). Request an honest rooftop or farm borewell solar site assessment across Odisha."
+        title="Contact Us & Request Solar Site Assessment — Kalahandi (Head Office) & Bhubaneswar Sub-Branch"
+        description="Connect with our team at our Kalahandi Head Office (+91 99370 00624) or our Bhubaneswar sub-branch (+91 9438-080-874). Request an honest rooftop or farm borewell solar site assessment across Odisha."
         canonicalPath="/contact"
       />
       <Breadcrumbs items={[{ label: 'Contact Us' }]} />
@@ -194,13 +194,13 @@ export const ContactPage: React.FC = () => {
             </span>
             <h1 className="page-hero__title">Start Your Solar Conversation With Us.</h1>
             <p className="page-hero__subtitle">
-              Whether you are exploring rooftop solar for your home, daytime solar for a commercial property, or a solar water pump for agricultural irrigation in Odisha, reach out to our team in Bhubaneswar or our established Kalahandi department for clear, honest guidance.
+              Whether you are exploring rooftop solar for your home, daytime solar for a commercial property, or a solar water pump for agricultural irrigation in Odisha, reach out to our team at our Kalahandi Head Office or our Bhubaneswar sub-branch for clear, honest guidance.
             </p>
           </div>
           <div className="page-hero__visual">
             <ImagePlaceholder
               label="[Image: solar consultation & site evaluation]"
-              sublabel="Technical Solar Consultation • Bhubaneswar & Kalahandi, Odisha"
+              sublabel="Technical Solar Consultation • Kalahandi (Head Office) & Bhubaneswar Sub-Branch"
               aspectRatio="1/1"
               variant="white"
               src="/images/solar-consultation-rooftop.jpg"
@@ -706,7 +706,7 @@ export const ContactPage: React.FC = () => {
                       <strong>{solutionInterest}</strong> ({customerType}).
                     </p>
                     <p>
-                      Our engineering team (Bhubaneswar HQ &amp; Kalahandi Department) will reach out to <strong>{name}</strong> via your preferred contact method (<strong>{preferredContactMethod}</strong> at <strong>{preferredContactMethod === 'Email' ? email : phone}</strong>).
+                      Our engineering team (Kalahandi Head Office &amp; Bhubaneswar Sub-Branch) will reach out to <strong>{name}</strong> via your preferred contact method (<strong>{preferredContactMethod}</strong> at <strong>{preferredContactMethod === 'Email' ? email : phone}</strong>).
                     </p>
                     <div style={{ marginTop: '1.5rem', display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
                       <Button variant="primary" size="md" onClick={handleReset}>

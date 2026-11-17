@@ -86,7 +86,7 @@ export const AboutPage: React.FC = () => {
               Engineering Clean Solar Power &amp; Sustainable Water Across Odisha.
             </h1>
             <p className="page-hero__subtitle">
-              Prioritizing Bhubaneswar headquarters with an established department at Sargiguda, Narla Road in Kalahandi, <strong>{companyConfig.legalName}</strong> (GSTIN: {companyConfig.gstin}) delivers turnkey on-grid rooftop solar, utility aggregation, agricultural solar pumping, and environmental solar infrastructure.
+              Headquartered at Sargiguda, Narla Road in Kalahandi with our sub-branch office in Bhubaneswar, <strong>{companyConfig.legalName}</strong> (GSTIN: {companyConfig.gstin}) delivers turnkey on-grid rooftop solar, utility aggregation, agricultural solar pumping, and environmental solar infrastructure.
             </p>
             <div className="page-hero__actions" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
               <Button to="/contact" variant="primary" size="lg" iconRight={<ArrowRight size={18} />}>
@@ -560,7 +560,7 @@ export const AboutPage: React.FC = () => {
                 <span className="badge" style={{ marginBottom: '0.85rem' }}>
                   Leadership Profile
                 </span>
-                <h2>Committed to Bhubaneswar, Kalahandi &amp; Odisha</h2>
+                <h2>Committed to Kalahandi, Bhubaneswar &amp; Odisha</h2>
                 {companyConfig.founder.bioParagraphs.map((para, i) => (
                   <p key={i} style={{ marginTop: '0.75rem' }}>
                     {para}
@@ -670,7 +670,7 @@ export const AboutPage: React.FC = () => {
       {/* Bottom CTA */}
       <CTASection
         headline="Speak With an Odisha Solar Team You Can Verify."
-        supportingCopy="Connect with our Bhubaneswar operations team or visit our established department office at Sargiguda, Narla Road, Kalahandi."
+        supportingCopy="Connect with our team at our Kalahandi Head Office (Sargiguda, Narla Road) or our Bhubaneswar sub-branch office."
         prefillTopic="About Us Page Enquiry"
       />
     </div>

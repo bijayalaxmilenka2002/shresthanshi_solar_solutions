@@ -469,7 +469,7 @@ export const TestimonialsPage: React.FC = () => {
       {/* Bottom CTA */}
       <CTASection
         headline="Ready to Experience Dependable Solar Energy?"
-        supportingCopy="Speak with our engineering team in Bhubaneswar or our established Kalahandi department for a transparent site assessment."
+        supportingCopy="Speak with our engineering team at our Kalahandi Head Office or our Bhubaneswar sub-branch for a transparent site assessment."
         primaryLabel="Request Solar Assessment"
         secondaryLabel={`Call ${companyConfig.contact.primaryPhoneDisplay}`}
       />

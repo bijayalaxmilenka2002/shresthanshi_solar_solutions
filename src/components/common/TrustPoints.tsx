@@ -15,7 +15,7 @@ export const TrustPoints: React.FC<TrustPointsProps> = ({ compact = false }) => 
     {
       icon: <ShieldCheck size={20} />,
       title: 'Verified Odisha Enterprise',
-      detail: 'Registered GSTIN (21AVUPM9359D1Z6) serving Bhubaneswar with established department in Kalahandi.',
+      detail: 'Registered GSTIN (21AVUPM9359D1Z6) with Head Office in Kalahandi and Bhubaneswar sub-branch.',
     },
     {
       icon: <FileCheck2 size={20} />,

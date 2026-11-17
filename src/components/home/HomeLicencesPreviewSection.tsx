@@ -4,46 +4,54 @@ import {
   ShieldCheck,
   FileCheck2,
   ArrowRight,
-  ExternalLink,
-  Award,
+  Maximize2,
 } from 'lucide-react';
 import { Container } from '../ui/Container';
 import { Card } from '../ui/Card';
 import { licencesAndCertifications } from '../../data/licencesData';
 
 export const HomeLicencesPreviewSection: React.FC = () => {
-  // Select top 3 representative licence and certification credentials
+  // Top 3 representative credentials (TPCODL Registration, TPCODL Empanelment, ISO 9001)
   const previewItems = licencesAndCertifications.slice(0, 3);
 
   return (
     <section
       className="home-licences-section section bg-white"
       id="licences-certifications-preview"
-      style={{ paddingTop: '4.5rem', paddingBottom: '4.5rem', borderBottom: '1px solid var(--border-subtle)' }}
+      style={{ paddingTop: '4rem', paddingBottom: '4.5rem', borderBottom: '1px solid var(--border-subtle)' }}
     >
       <Container>
         {/* Header with Title and "View All Licences & Certifications" button */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: '2rem', marginBottom: '3rem', flexWrap: 'wrap' }}>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'flex-end',
+            gap: '2rem',
+            marginBottom: '2.5rem',
+            flexWrap: 'wrap',
+          }}
+        >
           <div style={{ maxWidth: '750px' }}>
-            <span className="badge" style={{ marginBottom: '0.85rem' }}>
-              <ShieldCheck size={14} style={{ marginRight: '0.4rem' }} />
-              Official Credentials &amp; Approvals
+            <span className="badge" style={{ marginBottom: '0.75rem' }}>
+              <ShieldCheck size={14} style={{ marginRight: '0.35rem' }} />
+              Verifiable Government &amp; DISCOM Accreditations
             </span>
             <h2
               style={{
                 fontFamily: 'var(--font-heading)',
-                fontSize: 'clamp(2rem, 3.5vw, 2.85rem)',
+                fontSize: 'clamp(1.9rem, 3.2vw, 2.7rem)',
                 fontWeight: 800,
                 color: 'var(--color-forest-green)',
-                lineHeight: 1.18,
+                lineHeight: 1.2,
                 letterSpacing: '-0.02em',
-                marginBottom: '0.85rem',
+                marginBottom: '0.65rem',
               }}
             >
               Licences, Registrations &amp; Certifications
             </h2>
-            <p style={{ fontSize: '1.02rem', lineHeight: 1.65, color: 'var(--text-body)', margin: 0 }}>
-              Officially registered GSTIN enterprise, PM Surya Ghar empaneled vendor, and TPWODL (Tata Power JV) utility-approved solar contractor.
+            <p style={{ fontSize: '1rem', lineHeight: 1.6, color: 'var(--text-body)', margin: 0 }}>
+              Official PM Surya Ghar vendor registration by TPCODL (Tata Power JV), ISO 9001:2015 quality certification, UDYAM MSME, and GSTIN registered enterprise.
             </p>
           </div>
 
@@ -58,11 +66,11 @@ export const HomeLicencesPreviewSection: React.FC = () => {
           </div>
         </div>
 
-        {/* 3 Compact Preview Cards */}
+        {/* 3 Visual Image-Forward Cards (Little Text, More Image) */}
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
             gap: '1.75rem',
             alignItems: 'stretch',
           }}
@@ -74,79 +82,170 @@ export const HomeLicencesPreviewSection: React.FC = () => {
               padding="none"
               hoverable
               style={{
-                borderRadius: '20px',
+                borderRadius: '18px',
                 border: '1.5px solid var(--border-medium)',
                 overflow: 'hidden',
                 display: 'flex',
                 flexDirection: 'column',
+                backgroundColor: '#FFFFFF',
+                boxShadow: '0 4px 16px rgba(23, 75, 53, 0.04)',
+                transition: 'transform 200ms ease, box-shadow 200ms ease',
               }}
             >
-              <div style={{ position: 'relative', width: '100%', aspectRatio: '16/10', backgroundColor: '#0B2419', overflow: 'hidden' }}>
-                <img
-                  src={item.imageSrc}
-                  alt={item.imageAlt}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                  loading="lazy"
-                />
-                <span
+              <Link
+                to="/licences-and-certifications"
+                style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column', height: '100%' }}
+              >
+                {/* Visual Certificate Frame */}
+                <div
                   style={{
-                    position: 'absolute',
-                    top: '12px',
-                    left: '12px',
-                    backgroundColor: 'rgba(23, 75, 53, 0.94)',
-                    color: '#FFFFFF',
-                    fontSize: '0.72rem',
-                    fontWeight: 700,
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.04em',
-                    padding: '0.3rem 0.75rem',
-                    borderRadius: '999px',
-                    backdropFilter: 'blur(4px)',
+                    position: 'relative',
+                    width: '100%',
+                    aspectRatio: '1 / 1.22',
+                    backgroundColor: '#F3F6F4',
+                    overflow: 'hidden',
+                    borderBottom: '1px solid var(--border-subtle)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '0.65rem',
                   }}
                 >
-                  {item.badge}
-                </span>
-              </div>
+                  <img
+                    src={item.imageSrc}
+                    alt={item.imageAlt}
+                    style={{
+                      maxWidth: '100%',
+                      maxHeight: '100%',
+                      objectFit: 'contain',
+                      borderRadius: '8px',
+                      boxShadow: '0 2px 10px rgba(0, 0, 0, 0.08)',
+                      transition: 'transform 0.3s ease',
+                    }}
+                    loading="lazy"
+                  />
 
-              <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-                <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', color: 'var(--color-forest-green)', fontSize: '0.76rem', fontWeight: 700, textTransform: 'uppercase', marginBottom: '0.45rem' }}>
-                  <ShieldCheck size={15} />
-                  <span>{item.issuingAuthority}</span>
-                </div>
-
-                <h3
-                  style={{
-                    fontFamily: 'var(--font-heading)',
-                    fontSize: '1.15rem',
-                    fontWeight: 800,
-                    color: 'var(--color-forest-green)',
-                    lineHeight: 1.3,
-                    marginBottom: '0.65rem',
-                  }}
-                >
-                  {item.shortTitle}
-                </h3>
-
-                {item.registrationNumber && (
-                  <div style={{ fontSize: '0.82rem', color: 'var(--color-forest-green)', fontWeight: 600, marginBottom: '0.5rem' }}>
-                    Ref: <span style={{ fontFamily: 'monospace' }}>{item.registrationNumber}</span>
-                  </div>
-                )}
-
-                <p style={{ fontSize: '0.88rem', color: 'var(--text-body)', lineHeight: 1.55, margin: 0, flexGrow: 1 }}>
-                  {item.description}
-                </p>
-
-                <div style={{ paddingTop: '0.85rem', marginTop: '1rem', borderTop: '1px solid var(--border-subtle)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <Link to="/licences-and-certifications" className="ui-text-link" style={{ fontSize: '0.84rem', fontWeight: 700 }}>
-                    <span>Inspect Document</span>
-                    <ArrowRight size={14} />
-                  </Link>
-                  <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-                    {item.date}
+                  <span
+                    style={{
+                      position: 'absolute',
+                      top: '12px',
+                      left: '12px',
+                      backgroundColor: 'rgba(23, 75, 53, 0.94)',
+                      color: '#FFFFFF',
+                      fontSize: '0.7rem',
+                      fontWeight: 800,
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.03em',
+                      padding: '0.25rem 0.65rem',
+                      borderRadius: '999px',
+                      backdropFilter: 'blur(4px)',
+                      boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
+                    }}
+                  >
+                    {item.badge}
                   </span>
+
+                  <div
+                    title="Inspect Document"
+                    style={{
+                      position: 'absolute',
+                      top: '12px',
+                      right: '12px',
+                      width: '32px',
+                      height: '32px',
+                      borderRadius: '50%',
+                      backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                      color: 'var(--color-forest-green)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      border: '1px solid rgba(23, 75, 53, 0.2)',
+                      boxShadow: '0 2px 6px rgba(0,0,0,0.15)',
+                    }}
+                  >
+                    <Maximize2 size={14} />
+                  </div>
                 </div>
-              </div>
+
+                {/* Minimal Text Footer */}
+                <div style={{ padding: '1.15rem 1.35rem 1.15rem', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.35rem',
+                      color: '#15803D',
+                      fontSize: '0.72rem',
+                      fontWeight: 800,
+                      textTransform: 'uppercase',
+                      marginBottom: '0.35rem',
+                    }}
+                  >
+                    <ShieldCheck size={13} style={{ flexShrink: 0 }} />
+                    <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                      {item.issuingAuthority}
+                    </span>
+                  </div>
+
+                  <h3
+                    style={{
+                      fontFamily: 'var(--font-heading)',
+                      fontSize: '1.02rem',
+                      fontWeight: 800,
+                      color: 'var(--color-forest-green)',
+                      lineHeight: 1.3,
+                      margin: '0 0 0.45rem 0',
+                    }}
+                  >
+                    {item.title}
+                  </h3>
+
+                  <div style={{ marginBottom: '0.75rem' }}>
+                    <code
+                      style={{
+                        fontSize: '0.74rem',
+                        fontWeight: 700,
+                        color: 'var(--color-forest-green)',
+                        backgroundColor: 'var(--color-soft-green)',
+                        padding: '0.2rem 0.5rem',
+                        borderRadius: '5px',
+                        display: 'inline-block',
+                        wordBreak: 'break-all',
+                      }}
+                    >
+                      {item.documentNumber}
+                    </code>
+                  </div>
+
+                  <div
+                    style={{
+                      marginTop: 'auto',
+                      paddingTop: '0.65rem',
+                      borderTop: '1px solid var(--border-subtle)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                    }}
+                  >
+                    <span style={{ fontSize: '0.74rem', color: 'var(--text-muted)', fontWeight: 600 }}>
+                      {item.validityOrDate}
+                    </span>
+                    <span
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '0.3rem',
+                        fontSize: '0.78rem',
+                        fontWeight: 800,
+                        color: 'var(--color-forest-green)',
+                      }}
+                    >
+                      <span>Inspect</span>
+                      <ArrowRight size={13} />
+                    </span>
+                  </div>
+                </div>
+              </Link>
             </Card>
           ))}
         </div>

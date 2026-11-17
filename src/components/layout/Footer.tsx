@@ -23,7 +23,7 @@ export const Footer: React.FC = () => {
           <div className="site-footer__brand">
             <Logo variant="dark-bg" />
             <p className="site-footer__desc">
-              Solar energy, borewell irrigation, and sustainable infrastructure prioritized in Bhubaneswar, with established regional department office in Kalahandi, Odisha.
+              Solar energy, borewell irrigation, and sustainable infrastructure engineered from our Head Office in Kalahandi, with our sub-branch in Bhubaneswar, Odisha.
             </p>
             <div className="site-footer__gst-badge">
               <ShieldCheck size={16} />

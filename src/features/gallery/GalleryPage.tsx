@@ -180,7 +180,7 @@ export const GalleryPage: React.FC = () => {
 
       <CTASection
         headline="See How Solar Fits Your Property."
-        supportingCopy="Contact our team in Bhubaneswar or our established Kalahandi department to discuss rooftop solar, commercial installations, or solar water pumps."
+        supportingCopy="Contact our team at our Kalahandi Head Office or our Bhubaneswar sub-branch to discuss rooftop solar, commercial installations, or solar water pumps."
         prefillTopic="Gallery Page Enquiry"
         image="[Project gallery image]"
       />
