@@ -21,6 +21,11 @@ export interface SiteSettings {
     address: string;
     proprietor: string;
   };
+  social?: {
+    facebook: string;
+    instagram: string;
+    youtube: string;
+  };
   hero: {
     badge: string;
     title: string;
@@ -62,6 +67,11 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
     workingHours: companyConfig.contact.workingHours,
     address: companyConfig.contact.address.full,
     proprietor: 'Mr. Shubham Pratap Singh',
+  },
+  social: {
+    facebook: companyConfig.social.facebook,
+    instagram: companyConfig.social.instagram,
+    youtube: companyConfig.social.youtube,
   },
   hero: {
     badge: 'Solar Energy & Solar Water Pumping • Kalahandi (HQ) & Bhubaneswar Sub-Branch',

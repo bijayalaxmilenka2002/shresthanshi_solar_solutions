@@ -44,6 +44,13 @@ export const companyConfig = {
     confirmationNote: 'Verified from shresthanshi.com (GSTIN: 21AVUPM9359D1Z6).',
   },
 
+  // Social Media Profiles (Connect With Us)
+  social: {
+    facebook: 'https://www.facebook.com',
+    instagram: 'https://www.instagram.com',
+    youtube: 'https://www.youtube.com',
+  },
+
   // Major Achievements & Installation Milestones
   achievements: {
     pmSuryaGhar: {

@@ -2211,6 +2211,98 @@ export const OwnerPortalPage: React.FC = () => {
                     />
                   </div>
 
+                  {/* Social Media Links Section */}
+                  <div style={{ marginTop: '0.5rem', paddingTop: '1rem', borderTop: '1px solid var(--border-subtle)' }}>
+                    <div style={{ fontSize: '0.86rem', fontWeight: 700, color: '#174B35', marginBottom: '0.75rem' }}>
+                      Footer Social Media Channel Links
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
+                      <div>
+                        <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, color: '#174B35', marginBottom: '0.35rem' }}>
+                          Facebook Page URL
+                        </label>
+                        <input
+                          type="url"
+                          placeholder="https://facebook.com/your-profile"
+                          value={editSettings.social?.facebook || ''}
+                          onChange={(e) =>
+                            setEditSettings({
+                              ...editSettings,
+                              social: {
+                                facebook: e.target.value,
+                                instagram: editSettings.social?.instagram || '',
+                                youtube: editSettings.social?.youtube || '',
+                              },
+                            })
+                          }
+                          style={{
+                            width: '100%',
+                            padding: '0.55rem 0.85rem',
+                            borderRadius: 'var(--radius-md)',
+                            border: '1.5px solid var(--border-subtle)',
+                            fontSize: '0.88rem',
+                          }}
+                        />
+                      </div>
+
+                      <div>
+                        <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, color: '#174B35', marginBottom: '0.35rem' }}>
+                          Instagram Profile URL
+                        </label>
+                        <input
+                          type="url"
+                          placeholder="https://instagram.com/your-profile"
+                          value={editSettings.social?.instagram || ''}
+                          onChange={(e) =>
+                            setEditSettings({
+                              ...editSettings,
+                              social: {
+                                facebook: editSettings.social?.facebook || '',
+                                instagram: e.target.value,
+                                youtube: editSettings.social?.youtube || '',
+                              },
+                            })
+                          }
+                          style={{
+                            width: '100%',
+                            padding: '0.55rem 0.85rem',
+                            borderRadius: 'var(--radius-md)',
+                            border: '1.5px solid var(--border-subtle)',
+                            fontSize: '0.88rem',
+                          }}
+                        />
+                      </div>
+
+                      <div>
+                        <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, color: '#174B35', marginBottom: '0.35rem' }}>
+                          YouTube Channel URL
+                        </label>
+                        <input
+                          type="url"
+                          placeholder="https://youtube.com/@your-channel"
+                          value={editSettings.social?.youtube || ''}
+                          onChange={(e) =>
+                            setEditSettings({
+                              ...editSettings,
+                              social: {
+                                facebook: editSettings.social?.facebook || '',
+                                instagram: editSettings.social?.instagram || '',
+                                youtube: e.target.value,
+                              },
+                            })
+                          }
+                          style={{
+                            width: '100%',
+                            padding: '0.55rem 0.85rem',
+                            borderRadius: 'var(--radius-md)',
+                            border: '1.5px solid var(--border-subtle)',
+                            fontSize: '0.88rem',
+                          }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+
                   <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.5rem' }}>
                     <Button
                       type="button"
