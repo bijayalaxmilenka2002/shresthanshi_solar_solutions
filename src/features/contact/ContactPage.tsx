@@ -327,7 +327,7 @@ export const ContactPage: React.FC = () => {
                       backgroundColor: '#FFFFFF',
                       borderRadius: '14px',
                       border: '1px solid var(--border-medium)',
-                      padding: '1rem 1.15rem',
+                      padding: '1.15rem 1.15rem',
                       display: 'flex',
                       gap: '0.85rem',
                       alignItems: 'flex-start',
@@ -351,16 +351,55 @@ export const ContactPage: React.FC = () => {
                       <Phone size={20} />
                     </div>
                     <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em', color: 'var(--text-muted)', marginBottom: '0.25rem' }}>
-                        Calling Line &amp; Direct WhatsApp
-                      </div>
-                      <div style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--color-forest-green)', marginBottom: '0.65rem' }}>
-                        {settings?.contact?.phoneDisplay || companyConfig.contact.phoneDisplay}
+                      <div style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em', color: 'var(--text-muted)', marginBottom: '0.4rem' }}>
+                        Calling Lines &amp; Direct WhatsApp
                       </div>
 
+                      {/* Primary Contact Number (Prominent) */}
+                      <div style={{ marginBottom: '0.75rem', paddingBottom: '0.65rem', borderBottom: '1px dashed var(--border-subtle)' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.2rem' }}>
+                          <span style={{ fontSize: '0.72rem', fontWeight: 800, color: '#15803D', textTransform: 'uppercase', letterSpacing: '0.04em', backgroundColor: '#DCFCE7', padding: '0.1rem 0.45rem', borderRadius: '4px' }}>
+                            Primary Number
+                          </span>
+                        </div>
+                        <a
+                          href={companyConfig.contact.primaryPhoneHref}
+                          style={{
+                            fontSize: '1.25rem',
+                            fontWeight: 800,
+                            color: 'var(--color-forest-green)',
+                            textDecoration: 'none',
+                            display: 'inline-block',
+                            letterSpacing: '-0.01em',
+                          }}
+                        >
+                          {companyConfig.contact.primaryPhoneDisplay}
+                        </a>
+                      </div>
+
+                      {/* Secondary / Existing Contact Number */}
+                      <div style={{ marginBottom: '0.9rem' }}>
+                        <div style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '0.2rem' }}>
+                          Secondary / Existing Contact
+                        </div>
+                        <a
+                          href={companyConfig.contact.secondaryPhoneHref}
+                          style={{
+                            fontSize: '1.02rem',
+                            fontWeight: 700,
+                            color: 'var(--text-body)',
+                            textDecoration: 'none',
+                            display: 'inline-block',
+                          }}
+                        >
+                          {companyConfig.contact.secondaryPhoneDisplay}
+                        </a>
+                      </div>
+
+                      {/* Clickable Actions */}
                       <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap' }}>
                         <a
-                          href={settings?.contact?.phoneHref || companyConfig.contact.phoneHref}
+                          href={companyConfig.contact.primaryPhoneHref}
                           style={{
                             display: 'inline-flex',
                             alignItems: 'center',
@@ -377,11 +416,32 @@ export const ContactPage: React.FC = () => {
                           }}
                         >
                           <Phone size={14} />
-                          <span>Call Now</span>
+                          <span>Call Primary</span>
                         </a>
 
                         <a
-                          href={`https://wa.me/91${(settings?.contact?.whatsappNumber || '9438080874').replace(/\D/g, '')}?text=${encodeURIComponent('Hello Shresthanshi Solar Solutions, I would like to inquire about solar installation.')}`}
+                          href={companyConfig.contact.secondaryPhoneHref}
+                          style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '0.45rem',
+                            backgroundColor: '#FFFFFF',
+                            color: 'var(--color-forest-green)',
+                            border: '1.5px solid var(--border-medium)',
+                            padding: '0.42rem 0.85rem',
+                            borderRadius: '8px',
+                            fontSize: '0.82rem',
+                            fontWeight: 700,
+                            textDecoration: 'none',
+                            transition: 'all 150ms ease',
+                          }}
+                        >
+                          <Phone size={14} />
+                          <span>Call Secondary</span>
+                        </a>
+
+                        <a
+                          href={`https://wa.me/91${companyConfig.contact.primaryPhone.replace(/\D/g, '')}?text=${encodeURIComponent('Hello Shresthanshi Solar Solutions, I would like to inquire about solar installation.')}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           style={{
@@ -400,7 +460,7 @@ export const ContactPage: React.FC = () => {
                           }}
                         >
                           <MessageCircle size={15} />
-                          <span>WhatsApp Us</span>
+                          <span>WhatsApp</span>
                         </a>
                       </div>
                     </div>
@@ -652,8 +712,8 @@ export const ContactPage: React.FC = () => {
                       <Button variant="primary" size="md" onClick={handleReset}>
                         Submit Another Enquiry
                       </Button>
-                      <Button href={companyConfig.contact.phoneHref} variant="outline" size="md">
-                        Call {companyConfig.contact.phoneDisplay}
+                      <Button href={companyConfig.contact.primaryPhoneHref} variant="outline" size="md">
+                        Call {companyConfig.contact.primaryPhoneDisplay}
                       </Button>
                     </div>
                   </div>

@@ -171,9 +171,13 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
             Get a Free Solar Guide
           </Button>
           <div className="mobile-menu__contact">
-            <a href={settings.contact.phoneHref || companyConfig.contact.phoneHref}>
+            <a href={companyConfig.contact.primaryPhoneHref} style={{ fontWeight: 700 }}>
               <Phone size={15} />
-              <span>{settings.contact.phoneDisplay || companyConfig.contact.phoneDisplay}</span>
+              <span>Primary: {companyConfig.contact.primaryPhoneDisplay}</span>
+            </a>
+            <a href={companyConfig.contact.secondaryPhoneHref} style={{ opacity: 0.9 }}>
+              <Phone size={15} />
+              <span>Secondary: {companyConfig.contact.secondaryPhoneDisplay}</span>
             </a>
             <a href={`mailto:${settings.contact.email || companyConfig.contact.email}`}>
               <Mail size={15} />

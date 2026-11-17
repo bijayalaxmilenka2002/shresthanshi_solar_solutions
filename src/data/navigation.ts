@@ -67,6 +67,11 @@ export const getPrimaryNavigation = (): NavItem[] => {
           path: '/who-we-serve/businesses-institutions',
           description: 'Manage daytime operational power costs across commercial and community properties.',
         },
+        {
+          label: 'Government & Public Sector',
+          path: '/who-we-serve/government',
+          description: 'Agro Odisha irrigation & Forest Department solar water pumps, plantations, and elephant protection fencing.',
+        },
       ],
     },
     {
@@ -86,40 +91,33 @@ export const getPrimaryNavigation = (): NavItem[] => {
       ],
     },
     {
-      label: 'Media',
-      path: '/media',
-      children: [
-        {
-          label: 'All Media & Verification',
-          path: '/media',
-          description: 'Official DISCOM awards, certificates, summits, and video walkthroughs.',
-        },
-        {
-          label: 'Awards & DISCOM Certificates',
-          path: '/media?category=awards',
-          description: 'TPWODL appreciation certificates and PM Surya Ghar Kalahandi awards.',
-        },
-        {
-          label: 'Field Videos & Walkthroughs',
-          path: '/media?category=videos',
-          description: 'On-site video recordings of live solar plants and inverter commissioning.',
-        },
-        {
-          label: 'GPS-Verified Installations',
-          path: '/media?category=installations',
-          description: 'Real field photos stamped with GPS coordinates, consumer accounts, and net meters.',
-        },
-        {
-          label: 'National Summits & MoUs',
-          path: '/media?category=summits',
-          description: 'Bharat RE Summit New Delhi participation with MNRE & TPWODL leaders.',
-        },
-      ],
+      label: 'Testimonials',
+      path: '/testimonials',
     },
     {
-      label: 'About',
+      label: 'Licences & Certifications',
+      path: '/licences-and-certifications',
+    },
+    {
+      label: 'About Us',
       path: '/about',
-      children: undefined,
+      children: [
+        {
+          label: 'About Company & Journey',
+          path: '/about',
+          description: 'Proprietor Shubham Pratap Singh, company mission, journey, and milestones.',
+        },
+        {
+          label: 'Media Coverage & Videos',
+          path: '/about#media-coverage',
+          description: 'Field recordings, news, and official project video walkthroughs.',
+        },
+        {
+          label: 'National Summits & Events',
+          path: '/about#events-summits',
+          description: 'MNRE Bharat Mandapam Conclave, MoU signings, and official DISCOM awards.',
+        },
+      ],
     },
     {
       label: 'Resources',

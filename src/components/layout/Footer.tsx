@@ -84,19 +84,25 @@ export const Footer: React.FC = () => {
                 <Link to="/who-we-serve/businesses-institutions">For Businesses &amp; Institutions</Link>
               </li>
               <li>
+                <Link to="/who-we-serve/government"><strong>Government &amp; Public Sector</strong></Link>
+              </li>
+              <li>
+                <Link to="/testimonials">Customer Testimonials</Link>
+              </li>
+              <li>
+                <Link to="/licences-and-certifications"><strong>Licences &amp; Certifications</strong></Link>
+              </li>
+              <li>
                 <Link to="/projects">Our Projects</Link>
               </li>
               <li>
                 <Link to="/gallery">Project Gallery</Link>
               </li>
               <li>
-                <Link to="/media"><strong>Media &amp; Verification</strong></Link>
+                <Link to="/about">About Us &amp; Media</Link>
               </li>
               <li>
-                <Link to="/about">About Us</Link>
-              </li>
-              <li>
-                <Link to="/resources">Resources</Link>
+                <Link to="/resources">Resources &amp; Subsidy</Link>
               </li>
               <li>
                 <Link to="/contact">Contact Us</Link>
@@ -114,7 +120,14 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <Phone size={18} className="site-footer__contact-icon" />
-                <a href={settings.contact.phoneHref || companyConfig.contact.phoneHref}>{settings.contact.phoneDisplay || companyConfig.contact.phoneDisplay}</a>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
+                  <a href={companyConfig.contact.primaryPhoneHref} style={{ fontWeight: 700 }}>
+                    {companyConfig.contact.primaryPhoneDisplay} <span style={{ fontSize: '0.75rem', color: 'var(--color-soft-green)' }}>(Primary)</span>
+                  </a>
+                  <a href={companyConfig.contact.secondaryPhoneHref} style={{ opacity: 0.9 }}>
+                    {companyConfig.contact.secondaryPhoneDisplay} <span style={{ fontSize: '0.75rem', opacity: 0.8 }}>(Secondary)</span>
+                  </a>
+                </div>
               </li>
               <li>
                 <Mail size={18} className="site-footer__contact-icon" />

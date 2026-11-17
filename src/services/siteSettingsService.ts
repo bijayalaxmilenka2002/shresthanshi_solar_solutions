@@ -9,6 +9,10 @@ export interface SiteSettings {
     linkUrl: string;
   };
   contact: {
+    primaryPhoneDisplay?: string;
+    primaryPhoneHref?: string;
+    secondaryPhoneDisplay?: string;
+    secondaryPhoneHref?: string;
     phoneDisplay: string;
     phoneHref: string;
     whatsappNumber: string;
@@ -24,8 +28,12 @@ export interface SiteSettings {
   };
   sections: {
     heroCaption: boolean;
+    achievementsSection?: boolean;
     applications: boolean;
-    awardsSection: boolean;
+    governmentProjects?: boolean;
+    awardsSection?: boolean;
+    licencesSection?: boolean;
+    testimonialsSection?: boolean;
     coreServices: boolean;
     processTimeline: boolean;
     fieldHighlights: boolean;
@@ -43,9 +51,13 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
     linkUrl: '/resources/subsidy-scheme-guidance',
   },
   contact: {
-    phoneDisplay: companyConfig.contact.phoneDisplay,
-    phoneHref: companyConfig.contact.phoneHref,
-    whatsappNumber: '9438080874',
+    primaryPhoneDisplay: companyConfig.contact.primaryPhoneDisplay,
+    primaryPhoneHref: companyConfig.contact.primaryPhoneHref,
+    secondaryPhoneDisplay: companyConfig.contact.secondaryPhoneDisplay,
+    secondaryPhoneHref: companyConfig.contact.secondaryPhoneHref,
+    phoneDisplay: companyConfig.contact.primaryPhoneDisplay,
+    phoneHref: companyConfig.contact.primaryPhoneHref,
+    whatsappNumber: '9937000624',
     email: companyConfig.contact.email,
     workingHours: companyConfig.contact.workingHours,
     address: companyConfig.contact.address.full,
@@ -59,8 +71,12 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
   },
   sections: {
     heroCaption: true,
+    achievementsSection: true,
     applications: true,
+    governmentProjects: true,
     awardsSection: true,
+    licencesSection: true,
+    testimonialsSection: true,
     coreServices: true,
     processTimeline: true,
     fieldHighlights: true,

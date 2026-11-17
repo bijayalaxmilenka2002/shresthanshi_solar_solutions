@@ -46,10 +46,10 @@ export const CTASection: React.FC<CTASectionProps> = ({
               <Button
                 variant="outline-inverse"
                 size="lg"
-                href={companyConfig.contact.phoneHref}
+                href={companyConfig.contact.primaryPhoneHref}
                 iconLeft={<Phone size={18} />}
               >
-                {secondaryLabel} ({companyConfig.contact.phoneDisplay})
+                {secondaryLabel} ({companyConfig.contact.primaryPhoneDisplay})
               </Button>
             </div>
             <p className="cta-banner__trust">

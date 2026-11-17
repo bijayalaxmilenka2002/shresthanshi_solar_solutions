@@ -11,10 +11,13 @@ import { SolarStreetLightingPage } from '../features/solar-solutions/SolarStreet
 import { SolarMaintenancePage } from '../features/solar-solutions/SolarMaintenancePage';
 import { WhoWeServeOverviewPage } from '../features/who-we-serve/WhoWeServeOverviewPage';
 import { AudienceDetailPage } from '../features/who-we-serve/AudienceDetailPage';
+import { GovernmentSectorPage } from '../features/who-we-serve/GovernmentSectorPage';
 import { ProjectsPage } from '../features/projects/ProjectsPage';
 import { AboutPage } from '../features/about/AboutPage';
 import { GalleryPage } from '../features/gallery/GalleryPage';
 import { MediaPage } from '../features/media/MediaPage';
+import { TestimonialsPage } from '../features/testimonials/TestimonialsPage';
+import { LicencesPage } from '../features/licences/LicencesPage';
 import { ResourcesOverviewPage } from '../features/resources/ResourcesOverviewPage';
 import { SolarFaqsPage } from '../features/resources/SolarFaqsPage';
 import { SubsidyGuidancePage } from '../features/resources/SubsidyGuidancePage';
@@ -79,12 +82,19 @@ export const AppRouter: React.FC = () => {
           path="/who-we-serve/businesses-institutions"
           element={<AudienceDetailPage audienceId="businesses-institutions" />}
         />
+        <Route path="/who-we-serve/government" element={<GovernmentSectorPage />} />
 
         {/* Portfolio, About, Gallery, Media */}
         <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/gallery" element={<GalleryPage />} />
         <Route path="/media" element={<MediaPage />} />
+
+        {/* Testimonials & Licences */}
+        <Route path="/testimonials" element={<TestimonialsPage />} />
+        <Route path="/licences-and-certifications" element={<LicencesPage />} />
+        <Route path="/licences" element={<Navigate to="/licences-and-certifications" replace />} />
+        <Route path="/certifications" element={<Navigate to="/licences-and-certifications" replace />} />
 
         {/* Resources */}
         <Route path="/resources" element={<ResourcesOverviewPage />} />

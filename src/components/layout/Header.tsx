@@ -115,10 +115,26 @@ export const Header: React.FC = () => {
               <BookOpen size={14} />
               <span>Get a Free Solar Guide</span>
             </button>
-            <a href={settings.contact.phoneHref} className="top-bar__phone">
-              <Phone size={14} />
-              <span>{settings.contact.phoneDisplay}</span>
-            </a>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+              <a
+                href={companyConfig.contact.primaryPhoneHref}
+                className="top-bar__phone"
+                title="Primary Contact"
+                style={{ fontWeight: 700 }}
+              >
+                <Phone size={14} />
+                <span>{companyConfig.contact.primaryPhoneDisplay}</span>
+              </a>
+              <span className="top-bar__divider top-bar__hide-sm">•</span>
+              <a
+                href={companyConfig.contact.secondaryPhoneHref}
+                className="top-bar__phone top-bar__hide-sm"
+                title="Secondary Contact"
+                style={{ opacity: 0.9, fontSize: '0.78rem' }}
+              >
+                <span>{companyConfig.contact.secondaryPhoneDisplay}</span>
+              </a>
+            </div>
           </div>
         </Container>
       </div>

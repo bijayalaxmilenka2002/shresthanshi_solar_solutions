@@ -16,6 +16,10 @@ import { ImagePlaceholder } from '../../components/ui/ImagePlaceholder';
 import { ProcessTimeline } from '../../components/common/ProcessTimeline';
 import { CTASection } from '../../components/common/CTASection';
 import { SunchargeShowcaseSections } from '../../components/home/SunchargeShowcaseSections';
+import { HomeAchievementsSection } from '../../components/home/HomeAchievementsSection';
+import { HomeGovernmentSection } from '../../components/home/HomeGovernmentSection';
+import { HomeLicencesPreviewSection } from '../../components/home/HomeLicencesPreviewSection';
+import { HomeTestimonialsPreviewSection } from '../../components/home/HomeTestimonialsPreviewSection';
 import { AwardsAndCertificationsSection } from '../../components/home/AwardsAndCertificationsSection';
 import { EndToEndServiceSection } from '../../components/home/EndToEndServiceSection';
 import { SEO } from '../../components/common/SEO';
@@ -67,6 +71,16 @@ export const HomePage: React.FC = () => {
       summary: 'Convert RCC roofs and industrial sheds into dependable daytime power.',
       linkPath: '/solar-solutions/commercial-solar',
       linkLabel: 'Commercial Solar',
+    },
+    {
+      title: 'Government & Public Sector',
+      tag: 'Government',
+      imageLabel: '[Image: solar water pump in forest]',
+      imageSrc: '/images/government/solar-water-pump-forest.jpg',
+      imgFit: 'cover',
+      summary: 'Agro Odisha irrigation, Forest Dept water management, plantations & solar elephant fencing.',
+      linkPath: '/who-we-serve/government',
+      linkLabel: 'Government Projects',
     },
   ];
 
@@ -173,21 +187,61 @@ export const HomePage: React.FC = () => {
       </section>
 
       {/* =================================================================
-          SECTION 2 — WHERE SOLAR FITS IN (3 Visual Image Cards)
+          SECTION 2 — COMPANY INTRODUCTION
+      ================================================================= */}
+      <section className="section bg-white" style={{ paddingTop: '3.5rem', paddingBottom: '3.5rem', borderBottom: '1px solid var(--border-subtle)' }}>
+        <Container>
+          <div style={{ maxWidth: '920px', margin: '0 auto', textAlign: 'center' }}>
+            <span className="badge" style={{ marginBottom: '0.85rem' }}>
+              Welcome to {companyConfig.shortName}
+            </span>
+            <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.9rem, 3.2vw, 2.6rem)', fontWeight: 800, color: 'var(--color-forest-green)', lineHeight: 1.25, marginBottom: '1rem' }}>
+              Odisha’s Verified Engineering Partner for Clean Solar Power &amp; Sustainable Water.
+            </h2>
+            <p style={{ fontSize: '1.05rem', lineHeight: 1.75, color: 'var(--text-body)', margin: '0 auto 1.5rem' }}>
+              Operating from our primary hub in <strong>Bhubaneswar</strong> with an established operational department in <strong>Kalahandi</strong>, <strong>{companyConfig.legalName}</strong> (GSTIN: {companyConfig.gstin}) delivers turnkey on-grid rooftop solar plants, agricultural solar pumping infrastructure, and government-sector projects across Odisha with verified DISCOM synchronization.
+            </p>
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+              <Link to="/about" className="ui-btn ui-btn--primary ui-btn--md">
+                <span>Learn About Our Company</span>
+                <ArrowRight size={16} />
+              </Link>
+              <Link to="/licences-and-certifications" className="ui-btn ui-btn--outline ui-btn--md">
+                <span>View Licences &amp; Certifications</span>
+              </Link>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* =================================================================
+          SECTION 3 — KEY ACHIEVEMENTS (350+ PM Surya Ghar & Utility Aggregation)
+      ================================================================= */}
+      {(settings.sections.achievementsSection ?? true) && (
+        <HomeAchievementsSection />
+      )}
+
+      {/* =================================================================
+          SECTION 4 — OUR SOLAR SOLUTIONS (Parallax Showcase)
+      ================================================================= */}
+      <SunchargeShowcaseSections />
+
+      {/* =================================================================
+          SECTION 5 — WHO WE SERVE (Residential, Farm, Commercial, Government)
       ================================================================= */}
       {settings.sections.applications && (
-        <section id="applications" className="section bg-soft-green">
+        <section id="applications" className="section bg-white" style={{ paddingTop: '4rem', paddingBottom: '4.5rem', borderBottom: '1px solid var(--border-subtle)' }}>
           <Container>
             <SectionHeading
-              eyebrow="Where Solar Fits In"
-              title="Built for Every Property Type."
-              subtitle="Choose your application to see how solar fits your daily energy or water needs."
+              eyebrow="Who We Serve"
+              title="Built for Every Property &amp; Public Sector."
+              subtitle="Choose your application to see how solar fits your daily energy, water, or institutional needs."
               align="center"
             />
 
-            <div className="grid-3">
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.5rem' }}>
               {applicationCards.map((card) => (
-                <Card key={card.title} variant="white" padding="none" hoverable className="visual-card">
+                <Card key={card.title} variant="white" padding="none" hoverable className="visual-card" style={{ border: '1.5px solid var(--border-medium)', borderRadius: '18px', overflow: 'hidden' }}>
                   <div className="visual-card__media">
                     <ImagePlaceholder
                       label={card.imageLabel}
@@ -216,171 +270,14 @@ export const HomePage: React.FC = () => {
       )}
 
       {/* =================================================================
-          SECTION 3 — OUR SOLUTIONS (Staggered 2-Column Parallax Showcase)
+          SECTION 6 — GOVERNMENT PROJECTS (Agro Odisha & Forest Department)
       ================================================================= */}
-      <SunchargeShowcaseSections />
-
-      {/* =================================================================
-          SECTION 4 — NATIONAL AWARDS & OFFICIAL CERTIFICATIONS
-          Prominently placed above the End-to-End Solar Service Section
-      ================================================================= */}
-      {(settings.sections.awardsSection ?? true) && (
-        <AwardsAndCertificationsSection />
+      {(settings.sections.governmentProjects ?? true) && (
+        <HomeGovernmentSection />
       )}
 
       {/* =================================================================
-          SECTION 5 — END-TO-END SOLAR SERVICE (Complete Solar Lifecycle)
-          Placed directly above the 4 Simple Steps Process Timeline
-      ================================================================= */}
-      {settings.sections.coreServices && (
-        <EndToEndServiceSection />
-      )}
-
-      {/* =================================================================
-          SECTION 5 — HOW THE PROCESS WORKS (4 Simple Steps)
-      ================================================================= */}
-      {settings.sections.processTimeline && (
-        <section className="section bg-white">
-          <Container>
-            <SectionHeading
-              eyebrow="4 Simple Steps"
-              title="From First Question to Solar Installation."
-              align="center"
-            />
-
-            <ProcessTimeline />
-
-            <div className="process-cta-bar">
-              <p>Ready to review your electricity bill, terrace space, or agricultural pumping load?</p>
-              <Button
-                to="/contact?intent=assessment"
-                variant="primary"
-                size="md"
-                iconRight={<ArrowRight size={16} />}
-              >
-                Get a Solar Assessment
-              </Button>
-            </div>
-          </Container>
-        </section>
-      )}
-
-      {/* =================================================================
-          CORE SOLAR SERVICES — 100% SOLAR ENERGY SOLUTIONS
-      ================================================================= */}
-      {settings.sections.coreServices && (
-        <section className="section bg-soft-green" aria-label="Solar Energy Services">
-          <Container>
-            <div className="trust-projects-preview__header">
-              <SectionHeading
-                eyebrow="Our Core Offerings • 100% Solar Energy"
-                title="Comprehensive Solar Energy Services"
-                subtitle="Field-tested solar installations engineered for homes, farms, institutions, and rural habitations across Odisha."
-              />
-              <Button to="/services" variant="primary" size="md" iconRight={<ArrowRight size={16} />}>
-                Explore All Solar Services
-              </Button>
-            </div>
-
-            <div className="grid-4" style={{ marginBottom: '1.5rem' }}>
-              <Card variant="white" padding="none" hoverable className="visual-card">
-                <div className="visual-card__media">
-                  <img
-                    src="/images/homeowners-rooftop-solar.jpg"
-                    alt="Residential rooftop solar installation in Kalahandi"
-                    loading="lazy"
-                  />
-                  <span className="visual-card__tag">Homes &amp; Residences</span>
-                </div>
-                <div className="visual-card__body">
-                  <h3 className="visual-card__title">Residential Rooftop Solar</h3>
-                  <p className="visual-card__desc">
-                    Turnkey on-grid and hybrid solar installations for independent homes, lowering monthly electricity bills with PM Surya Ghar assistance.
-                  </p>
-                  <div className="visual-card__footer">
-                    <Link to="/solar-solutions/residential-rooftop-solar" className="ui-text-link">
-                      <span>Learn More</span>
-                      <ArrowRight size={15} />
-                    </Link>
-                  </div>
-                </div>
-              </Card>
-
-              <Card variant="white" padding="none" hoverable className="visual-card">
-                <div className="visual-card__media">
-                  <img
-                    src="/images/agricultural-tubewell-borewell.jpg"
-                    alt="Agricultural solar water pump and controller in Odisha"
-                    loading="lazy"
-                  />
-                  <span className="visual-card__tag">Farms &amp; Irrigation</span>
-                </div>
-                <div className="visual-card__body">
-                  <h3 className="visual-card__title">Solar Water Pump Panels</h3>
-                  <p className="visual-card__desc">
-                    Dual-mode DC-to-AC solar pumping controllers that run on solar by day and electric grid by night for reliable farmland irrigation.
-                  </p>
-                  <div className="visual-card__footer">
-                    <Link to="/solar-solutions/solar-water-pumps" className="ui-text-link">
-                      <span>Learn More</span>
-                      <ArrowRight size={15} />
-                    </Link>
-                  </div>
-                </div>
-              </Card>
-
-              <Card variant="white" padding="none" hoverable className="visual-card">
-                <div className="visual-card__media">
-                  <img
-                    src="/images/rural-water-pipeline-distribution.jpg"
-                    alt="Solar overhead water sensor pump system in Odisha"
-                    loading="lazy"
-                  />
-                  <span className="visual-card__tag">Automated Drinking Water</span>
-                </div>
-                <div className="visual-card__body">
-                  <h3 className="visual-card__title">Overhead Sensor Pumps</h3>
-                  <p className="visual-card__desc">
-                    Automated solar water lifting with water-level sensors in elevated tanks to prevent overflow and deliver continuous filtered water.
-                  </p>
-                  <div className="visual-card__footer">
-                    <Link to="/services" className="ui-text-link">
-                      <span>Learn More</span>
-                      <ArrowRight size={15} />
-                    </Link>
-                  </div>
-                </div>
-              </Card>
-
-              <Card variant="white" padding="none" hoverable className="visual-card">
-                <div className="visual-card__media">
-                  <img
-                    src="/images/solar/solar-street-light-road.jpg"
-                    alt="Solar street lighting installation along road in Odisha"
-                    loading="lazy"
-                  />
-                  <span className="visual-card__tag">Public &amp; Campus</span>
-                </div>
-                <div className="visual-card__body">
-                  <h3 className="visual-card__title">Solar Street Lighting</h3>
-                  <p className="visual-card__desc">
-                    Autonomous dusk-to-dawn outdoor solar LED street lights with high-capacity battery storage and galvanized anti-theft poles.
-                  </p>
-                  <div className="visual-card__footer">
-                    <Link to="/solar-solutions/solar-street-lighting" className="ui-text-link">
-                      <span>Learn More</span>
-                      <ArrowRight size={15} />
-                    </Link>
-                  </div>
-                </div>
-              </Card>
-            </div>
-          </Container>
-        </section>
-      )}
-
-      {/* =================================================================
-          SECTION 6 — PROJECT GALLERY PREVIEW & VERIFIED CREDENTIALS
+          SECTION 7 — PROJECT HIGHLIGHTS & FIELD PORTFOLIO
       ================================================================= */}
       {settings.sections.fieldHighlights && (
         <section className="section bg-white">
@@ -430,7 +327,64 @@ export const HomePage: React.FC = () => {
       )}
 
       {/* =================================================================
-          SECTION 7 — SUBSIDY & SCHEME CLARITY (Side-by-Side Image + Text)
+          SECTION 8 — LICENCES & CERTIFICATIONS (Homepage Preview)
+      ================================================================= */}
+      {(settings.sections.licencesSection ?? true) && (
+        <HomeLicencesPreviewSection />
+      )}
+
+      {/* =================================================================
+          SECTION 9 — TESTIMONIALS (Customer Feedback Hub Preview)
+      ================================================================= */}
+      {(settings.sections.testimonialsSection ?? true) && (
+        <HomeTestimonialsPreviewSection />
+      )}
+
+      {/* =================================================================
+          SECTION 10 — NATIONAL AWARDS & OFFICIAL CERTIFICATIONS
+      ================================================================= */}
+      {(settings.sections.awardsSection ?? true) && (
+        <AwardsAndCertificationsSection />
+      )}
+
+      {/* =================================================================
+          SECTION 11 — END-TO-END SOLAR SERVICE (Complete Solar Lifecycle)
+      ================================================================= */}
+      {settings.sections.coreServices && (
+        <EndToEndServiceSection />
+      )}
+
+      {/* =================================================================
+          SECTION 12 — HOW THE PROCESS WORKS (4 Simple Steps)
+      ================================================================= */}
+      {settings.sections.processTimeline && (
+        <section className="section bg-white">
+          <Container>
+            <SectionHeading
+              eyebrow="4 Simple Steps"
+              title="From First Question to Solar Installation."
+              align="center"
+            />
+
+            <ProcessTimeline />
+
+            <div className="process-cta-bar">
+              <p>Ready to review your electricity bill, terrace space, or agricultural pumping load?</p>
+              <Button
+                to="/contact?intent=assessment"
+                variant="primary"
+                size="md"
+                iconRight={<ArrowRight size={16} />}
+              >
+                Get a Solar Assessment
+              </Button>
+            </div>
+          </Container>
+        </section>
+      )}
+
+      {/* =================================================================
+          SECTION 13 — SUBSIDY & SCHEME CLARITY
       ================================================================= */}
       {settings.sections.trustBanner && (
         <section className="section bg-white">

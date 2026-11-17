@@ -441,4 +441,59 @@ export const audienceProfiles: AudienceProfile[] = [
     ],
     ctaText: 'Get a Solar Assessment',
   },
+  {
+    id: 'government',
+    slug: 'government',
+    title: 'Government & Public Sector',
+    path: '/who-we-serve/government',
+    headline: 'Solar Infrastructure for Agro Odisha & Forest Department',
+    subtitle:
+      'Engineered solar water pumping, agricultural irrigation, afforestation nursery support, and solar fencing for elephant protection across Odisha.',
+    image: '[Image: solar water pumping in forest reservoir]',
+    imageSrc: '/images/government/solar-water-pump-forest.jpg',
+    challengeTitle: 'Public & Environmental Initiatives We Support',
+    challenges: [
+      'Agro Odisha: High-capacity agricultural solar irrigation and tube-well pumping',
+      'Forest Department: Solar water pumps for remote wildlife reservoirs and nurseries',
+      'Plantation Support: Solar-powered nursery irrigation and afforestation infrastructure',
+      'Wildlife Mitigation: Non-lethal solar fencing to mitigate human-elephant conflict',
+    ],
+    recommendedSolutions: [
+      {
+        title: 'Forest Dept Solar Water Pumps',
+        description: 'Heavy-duty solar pumping systems for forest water bodies and wildlife sanctuaries.',
+        path: '/who-we-serve/government#forest-department',
+      },
+      {
+        title: 'Solar Fencing for Elephant Protection',
+        description: 'Certified non-lethal solar energizer fencing preventing elephant intrusion into human habitations.',
+        path: '/who-we-serve/government#elephant-fencing',
+      },
+      {
+        title: 'Agro Odisha Solar Irrigation',
+        description: 'Solar-powered agricultural irrigation and tube-well infrastructure for agrarian development.',
+        path: '/who-we-serve/government#agro-odisha',
+      },
+      {
+        title: 'Plantation & Afforestation Infrastructure',
+        description: 'Solar power solutions driving nursery irrigation and forestry afforestation schemes.',
+        path: '/who-we-serve/government#forest-department',
+      },
+    ],
+    considerations: [
+      {
+        title: 'Tender & Technical Standards',
+        description: 'Full adherence to MNRE, Forest Department, and Agro Odisha engineering specifications.',
+      },
+      {
+        title: 'Remote & Forest Terrain Execution',
+        description: 'Experienced in deploying in off-grid rural and forest fringe locations with anti-theft safeguards.',
+      },
+      {
+        title: 'Humane Wildlife Protection',
+        description: 'Certified non-lethal energizer specifications to deter wildlife without injury.',
+      },
+    ],
+    ctaText: 'Explore Government Solutions',
+  },
 ];
