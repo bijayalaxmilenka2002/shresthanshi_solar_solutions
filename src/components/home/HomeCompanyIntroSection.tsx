@@ -61,8 +61,8 @@ const introCards: IntroHighlightCard[] = [
         caption: 'High-Efficiency Mono PERC Solar Panels on RCC Terrace Structure',
       },
       {
-        src: '/media/awards-certificates/pm-surya-ghar-kalahandi-district-award.jpg',
-        caption: 'District 1st Place Award for Highest PM Surya Ghar Installations',
+        src: '/images/for-your-home-solar.jpg',
+        caption: 'Residential Rooftop Solar System Lowering Household Electricity Tariffs',
       },
     ],
     highlights: [
@@ -85,44 +85,44 @@ const introCards: IntroHighlightCard[] = [
     },
   },
   {
-    id: 'discom-empanelment',
-    tag: 'DISCOM Empaneled EPC',
-    category: 'TPCODL & TPWODL Approved Vendor',
-    title: 'Utility-Led Aggregation & Synchronization',
+    id: 'utility-led-aggregation',
+    tag: 'Utility-Led Aggregation',
+    category: 'DISCOM Utility Programs',
+    title: 'Utility-Led Aggregation Solar Installations',
     summary:
-      'Officially empaneled DISCOM vendor (Vendor Code #5493) executing feasibility approvals, net-metering, and utility-led rooftop aggregation.',
-    imageSrc: '/images/licences/tpcodl-vendor-registration-certificate.jpg',
-    imageAlt: 'DISCOM Empaneled Solar Vendor Certificate',
+      'Delivering reliable solar power through Utility-Led Aggregation within 1 year, accelerating household adoption of clean electricity across Odisha.',
+    imageSrc: '/images/solar/commercial-rooftop.jpg',
+    imageAlt: 'Utility-Led Aggregation Solar Installation in Odisha',
     galleryImages: [
       {
-        src: '/images/licences/tpcodl-vendor-registration-certificate.jpg',
-        caption: 'Official TPCODL Vendor Registration Certificate (Vendor Code #5493)',
+        src: '/images/solar/commercial-rooftop.jpg',
+        caption: 'Multi-Row Rooftop Solar Array Commissioned under Utility-Led Aggregation',
       },
       {
-        src: '/media/awards-certificates/tpwodl-utility-led-aggregation-award.jpg',
-        caption: 'DISCOM Utility-Led Aggregation Excellence Award & Presentation',
+        src: '/images/for-your-business-solar.jpg',
+        caption: 'High-Yield Grid-Tied Solar System with Bi-Directional Net-Meter Synchronization',
       },
       {
-        src: '/images/licences/tpcodl-empanelment-order.jpg',
-        caption: 'Official DISCOM Net-Meter Synchronization Order & Empanelment',
+        src: '/images/cta-solar-rooftop.jpg',
+        caption: 'Elevated Solar Mounting Structures Engineered for Utility-Led Rooftops',
       },
     ],
     highlights: [
-      'Official DISCOM vendor registration code 5493',
-      'Utility-led aggregation execution with zero consumer paperwork',
-      'Compliant grid-synchronous inverters & bi-directional metering',
+      'Successful household solar installations under Utility-Led Aggregation within 1 year',
+      'End-to-end DISCOM feasibility clearances and bi-directional net-meter sync',
+      'Accelerating adoption of clean, sustainable, and affordable household electricity',
     ],
-    linkPath: '/licences-and-certifications',
-    linkLabel: 'View DISCOM Licences',
+    linkPath: '/solutions/residential',
+    linkLabel: 'Explore Aggregation Solar',
     modalDetails: {
-      fullTitle: 'TPCODL / TPWODL Empaneled Solar Contractor & Utility Aggregator',
+      fullTitle: 'Utility-Led Aggregation — 1-Year Household Solar Achievement',
       description:
-        'M/s Shreshtanshi Construction & Suppliers is an officially recognized vendor by Odisha electricity distribution companies. We manage the entire lifecycle of utility documentation, load sanctions, site feasibility clearance, and DISCOM meter commissioning.',
+        'Delivering reliable solar energy solutions through Utility-Led Aggregation, Shreshtanshi Solar Solutions has successfully completed household rooftop solar installations within just one year, accelerating clean energy adoption with verified DISCOM grid synchronization.',
       points: [
-        'Empaneled vendor for utility-led rooftop aggregation programs (Vendor Code #5493)',
-        'Turnkey liaisoning with local electrical divisions and sub-divisional offices',
-        'Compliant with CEA & OERC safety, earthing, and lightning protection standards',
-        'Proven track record honored with official DISCOM letters of appreciation',
+        'Executed household rooftop solar plants under the utility-led aggregation framework within 1 year',
+        'Direct coordination with DISCOM technical divisions for rapid net-meter synchronization',
+        'High-efficiency tier-1 PV modules paired with digital grid-interactive inverters',
+        'Substantial tariff reduction for participating households and commercial establishments',
       ],
     },
   },
@@ -187,8 +187,8 @@ const introCards: IntroHighlightCard[] = [
         caption: 'Statewide Technical Team Executing Turnkey Solar Projects',
       },
       {
-        src: '/images/licences/iso-9001-2015-quality-management-certificate.jpg',
-        caption: 'ISO 9001:2015 Certified Quality Management System',
+        src: '/images/solar/solar-site-assessment.jpg',
+        caption: 'On-Site Technical Feasibility Assessment & Engineering Survey',
       },
     ],
     highlights: [
@@ -289,11 +289,11 @@ export const HomeCompanyIntroSection: React.FC = () => {
 
           <div className="home-intro-metric-box">
             <div className="home-intro-metric-header">
-              <Award size={18} className="home-intro-metric-icon" />
-              <span className="home-intro-metric-val">Reg. #5493</span>
+              <Building2 size={18} className="home-intro-metric-icon" />
+              <span className="home-intro-metric-val">1-Year Milestone</span>
             </div>
-            <span className="home-intro-metric-title">TPCODL Empaneled</span>
-            <span className="home-intro-metric-sub">DISCOM Net-Meter Vendor</span>
+            <span className="home-intro-metric-title">Utility Aggregation</span>
+            <span className="home-intro-metric-sub">Household Solar Execution</span>
           </div>
 
           <div className="home-intro-metric-divider" aria-hidden="true" />
