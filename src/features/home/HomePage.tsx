@@ -16,6 +16,7 @@ import { ImagePlaceholder } from '../../components/ui/ImagePlaceholder';
 import { ProcessTimeline } from '../../components/common/ProcessTimeline';
 import { CTASection } from '../../components/common/CTASection';
 import { SunchargeShowcaseSections } from '../../components/home/SunchargeShowcaseSections';
+import { HomeCompanyIntroSection } from '../../components/home/HomeCompanyIntroSection';
 import { HomeAchievementsSection } from '../../components/home/HomeAchievementsSection';
 import { HomeGovernmentSection } from '../../components/home/HomeGovernmentSection';
 import { HomeLicencesPreviewSection } from '../../components/home/HomeLicencesPreviewSection';
@@ -187,32 +188,9 @@ export const HomePage: React.FC = () => {
       </section>
 
       {/* =================================================================
-          SECTION 2 — COMPANY INTRODUCTION
+          SECTION 2 — COMPANY INTRODUCTION & VERIFIED CREDENTIALS
       ================================================================= */}
-      <section className="section bg-white" style={{ paddingTop: '3.5rem', paddingBottom: '3.5rem', borderBottom: '1px solid var(--border-subtle)' }}>
-        <Container>
-          <div style={{ maxWidth: '920px', margin: '0 auto', textAlign: 'center' }}>
-            <span className="badge" style={{ marginBottom: '0.85rem' }}>
-              Welcome to {companyConfig.shortName}
-            </span>
-            <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.9rem, 3.2vw, 2.6rem)', fontWeight: 800, color: 'var(--color-forest-green)', lineHeight: 1.25, marginBottom: '1rem' }}>
-              Odisha’s Verified Engineering Partner for Clean Solar Power &amp; Sustainable Water.
-            </h2>
-            <p style={{ fontSize: '1.05rem', lineHeight: 1.75, color: 'var(--text-body)', margin: '0 auto 1.5rem' }}>
-              Operating from our Head Office in <strong>Kalahandi</strong> with a dedicated sub-branch office in <strong>Bhubaneswar</strong>, <strong>{companyConfig.legalName}</strong> (GSTIN: {companyConfig.gstin}) delivers turnkey on-grid rooftop solar plants, agricultural solar pumping infrastructure, and government-sector projects across Odisha with verified DISCOM synchronization.
-            </p>
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
-              <Link to="/about" className="ui-btn ui-btn--primary ui-btn--md">
-                <span>Learn About Our Company</span>
-                <ArrowRight size={16} />
-              </Link>
-              <Link to="/licences-and-certifications" className="ui-btn ui-btn--outline ui-btn--md">
-                <span>View Licences &amp; Certifications</span>
-              </Link>
-            </div>
-          </div>
-        </Container>
-      </section>
+      <HomeCompanyIntroSection />
 
       {/* =================================================================
           SECTION 3 — KEY ACHIEVEMENTS (350+ PM Surya Ghar & Utility Aggregation)

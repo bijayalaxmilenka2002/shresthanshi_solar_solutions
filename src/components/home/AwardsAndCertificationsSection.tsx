@@ -151,7 +151,7 @@ export const AwardsAndCertificationsSection: React.FC = () => {
             </p>
           </div>
           <div className="home-awards-header__action">
-            <Link to="/media" className="suncharge-pill-btn suncharge-pill-btn--solid">
+            <Link to="/about#media" className="suncharge-pill-btn suncharge-pill-btn--solid">
               <span className="suncharge-pill-btn__text">VIEW ALL MEDIA</span>
               <span className="suncharge-pill-btn__circle" aria-hidden="true">
                 <ArrowRight size={17} className="suncharge-pill-btn__arrow-first" />
