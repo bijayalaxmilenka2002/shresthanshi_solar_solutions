@@ -16,6 +16,7 @@ import {
 import { Container } from '../ui/Container';
 import { Modal } from '../ui/Modal';
 import { Button } from '../ui/Button';
+import { FullscreenMediaModal } from '../ui/FullscreenMediaModal';
 
 export interface FeaturedAward {
   id: string;
@@ -127,6 +128,7 @@ export const featuredAwards: FeaturedAward[] = [
 
 export const AwardsAndCertificationsSection: React.FC = () => {
   const [selectedAward, setSelectedAward] = useState<FeaturedAward | null>(null);
+  const [fullscreenAward, setFullscreenAward] = useState<FeaturedAward | null>(null);
 
   return (
     <section
@@ -343,15 +345,14 @@ export const AwardsAndCertificationsSection: React.FC = () => {
               </div>
 
               <div className="award-modal-actions">
-                <a
-                  href={selectedAward.imageSrc}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
+                  type="button"
                   className="ui-btn ui-btn--primary ui-btn--md"
+                  onClick={() => setFullscreenAward(selectedAward)}
                 >
-                  <ExternalLink size={16} />
-                  <span>Open Full Resolution Document</span>
-                </a>
+                  <Maximize2 size={16} />
+                  <span>View Full Size Photo (With Close ✕)</span>
+                </button>
                 <Link
                   to="/media"
                   className="ui-btn ui-btn--outline ui-btn--md"
@@ -364,6 +365,20 @@ export const AwardsAndCertificationsSection: React.FC = () => {
             </div>
           </div>
         </Modal>
+      )}
+
+      {/* Fullscreen Document Viewer with Close ✕ button */}
+      {fullscreenAward && (
+        <FullscreenMediaModal
+          isOpen={Boolean(fullscreenAward)}
+          onClose={() => setFullscreenAward(null)}
+          mediaUrl={fullscreenAward.imageSrc}
+          mediaType="image"
+          title={fullscreenAward.title}
+          badge={fullscreenAward.badge}
+          location={fullscreenAward.location}
+          date={fullscreenAward.date}
+        />
       )}
     </section>
   );

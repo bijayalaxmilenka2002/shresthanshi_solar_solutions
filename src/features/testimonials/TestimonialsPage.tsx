@@ -236,7 +236,7 @@ export const TestimonialsPage: React.FC = () => {
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 300px), 1fr))',
               gap: '1.75rem',
               alignItems: 'stretch',
             }}
@@ -358,7 +358,7 @@ export const TestimonialsPage: React.FC = () => {
               boxShadow: '0 8px 24px rgba(23, 75, 53, 0.06)',
             }}
           >
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2.5rem', alignItems: 'center' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '2.5rem', alignItems: 'center' }}>
               <div>
                 <span className="badge" style={{ marginBottom: '0.75rem' }}>
                   Are You a Shreshtanshi Customer?
@@ -402,7 +402,7 @@ export const TestimonialsPage: React.FC = () => {
                   </div>
                 ) : (
                   <form onSubmit={handleFeedbackSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: '0.75rem' }}>
                       <input
                         type="text"
                         placeholder="Your Name *"

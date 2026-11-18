@@ -70,7 +70,7 @@ export const HomeLicencesPreviewSection: React.FC = () => {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 290px), 1fr))',
             gap: '1.75rem',
             alignItems: 'stretch',
           }}

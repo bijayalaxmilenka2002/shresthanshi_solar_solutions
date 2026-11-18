@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import {
   ShieldCheck,
@@ -30,11 +30,157 @@ import { Breadcrumbs } from '../../components/common/Breadcrumbs';
 import { CTASection } from '../../components/common/CTASection';
 import { SEO } from '../../components/common/SEO';
 import { Modal } from '../../components/ui/Modal';
+import { FullscreenMediaModal } from '../../components/ui/FullscreenMediaModal';
 import { companyConfig } from '../../data/company';
 import { mediaItems, MediaItem } from '../../data/mediaData';
 
+// Autoplay video preview component for on-ground field videos
+const AutoplayCardVideo: React.FC<{
+  src: string;
+  poster?: string;
+  title: string;
+  badge?: string;
+}> = ({ src, poster, title, badge }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.muted = true;
+    video.defaultMuted = true;
+
+    const handlePlay = () => setIsPlaying(true);
+    const handlePause = () => setIsPlaying(false);
+
+    video.addEventListener('play', handlePlay);
+    video.addEventListener('pause', handlePause);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const playPromise = video.play();
+            if (playPromise !== undefined) {
+              playPromise.catch(() => {
+                // Autoplay blocked by browser policy, poster displays gracefully
+              });
+            }
+          } else {
+            video.pause();
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    observer.observe(video);
+
+    return () => {
+      video.removeEventListener('play', handlePlay);
+      video.removeEventListener('pause', handlePause);
+      observer.disconnect();
+    };
+  }, []);
+
+  return (
+    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+      <video
+        ref={videoRef}
+        src={src}
+        poster={poster || '/images/solar/solar-site-assessment.jpg'}
+        title={title}
+        muted
+        autoPlay
+        loop
+        playsInline
+        preload="auto"
+        style={{
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          display: 'block',
+        }}
+      />
+      <div
+        style={{
+          position: 'absolute',
+          bottom: '10px',
+          left: '10px',
+          right: '10px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          pointerEvents: 'none',
+        }}
+      >
+        <span
+          style={{
+            backgroundColor: 'rgba(0,0,0,0.75)',
+            color: '#FFFFFF',
+            fontSize: '0.72rem',
+            fontWeight: 600,
+            padding: '0.2rem 0.55rem',
+            borderRadius: '4px',
+            backdropFilter: 'blur(4px)',
+          }}
+        >
+          {badge || 'Site Video'}
+        </span>
+        <span
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '5px',
+            backgroundColor: 'rgba(23, 75, 53, 0.92)',
+            color: '#FFFFFF',
+            fontSize: '0.68rem',
+            fontWeight: 700,
+            padding: '0.2rem 0.55rem',
+            borderRadius: '999px',
+            letterSpacing: '0.04em',
+            textTransform: 'uppercase',
+            boxShadow: '0 2px 6px rgba(0,0,0,0.25)',
+          }}
+        >
+          <span
+            style={{
+              width: '6px',
+              height: '6px',
+              borderRadius: '50%',
+              backgroundColor: isPlaying ? '#4ADE80' : '#CBD5E1',
+              boxShadow: isPlaying ? '0 0 6px #4ADE80' : 'none',
+            }}
+          />
+          {isPlaying ? 'Auto-Playing' : 'Video'}
+        </span>
+      </div>
+      <div
+        style={{
+          position: 'absolute',
+          top: '10px',
+          right: '10px',
+          width: '32px',
+          height: '32px',
+          borderRadius: '50%',
+          backgroundColor: 'rgba(255, 255, 255, 0.92)',
+          color: 'var(--color-forest-green)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+        }}
+      >
+        <Play size={14} style={{ marginLeft: '2px' }} />
+      </div>
+    </div>
+  );
+};
+
 export const AboutPage: React.FC = () => {
   const [selectedMedia, setSelectedMedia] = useState<MediaItem | null>(null);
+  const [fullscreenItem, setFullscreenItem] = useState<MediaItem | null>(null);
 
   // Group media items into distinct categories for organized display
   const awardsMedia = mediaItems.filter((m) => m.category === 'awards');
@@ -159,7 +305,7 @@ export const AboutPage: React.FC = () => {
       {/* 3. OUR MISSION & VISION */}
       <section id="mission-vision" className="section bg-soft-green" style={{ paddingTop: '4rem', paddingBottom: '4.5rem' }}>
         <Container>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2.5rem', alignItems: 'stretch' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '2.5rem', alignItems: 'stretch' }}>
             <Card
               variant="white"
               padding="lg"
@@ -375,7 +521,7 @@ export const AboutPage: React.FC = () => {
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '2rem' }}>
             <Card variant="white" padding="lg" style={{ borderRadius: '16px', border: '1.5px solid var(--border-medium)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.8rem', color: 'var(--color-forest-green)', fontWeight: 700, marginBottom: '0.5rem' }}>
                 <Newspaper size={16} />
@@ -429,7 +575,7 @@ export const AboutPage: React.FC = () => {
             </span>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.75rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '1.75rem' }}>
             {videoMedia.map((video) => (
               <Card
                 key={video.id}
@@ -448,34 +594,12 @@ export const AboutPage: React.FC = () => {
                 }}
               >
                 <div style={{ position: 'relative', width: '100%', aspectRatio: '16/10', overflow: 'hidden', backgroundColor: '#0B2419', flexShrink: 0 }}>
-                  <img
-                    src={video.thumbnailUrl || '/images/solar/solar-site-assessment.jpg'}
-                    alt={video.title}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 20%', display: 'block' }}
-                    loading="lazy"
+                  <AutoplayCardVideo
+                    src={video.fileUrl}
+                    poster={video.thumbnailUrl}
+                    title={video.title}
+                    badge={video.badge}
                   />
-                  <div
-                    style={{
-                      position: 'absolute',
-                      top: '50%',
-                      left: '50%',
-                      transform: 'translate(-50%, -50%)',
-                      width: '52px',
-                      height: '52px',
-                      borderRadius: '50%',
-                      backgroundColor: 'rgba(23,75,53,0.92)',
-                      color: '#FFFFFF',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      boxShadow: '0 4px 16px rgba(0,0,0,0.3)',
-                    }}
-                  >
-                    <Play size={22} style={{ marginLeft: '3px' }} />
-                  </div>
-                  <span style={{ position: 'absolute', bottom: '10px', left: '10px', backgroundColor: 'rgba(0,0,0,0.75)', color: '#FFFFFF', fontSize: '0.72rem', fontWeight: 600, padding: '0.2rem 0.55rem', borderRadius: '4px' }}>
-                    {video.badge}
-                  </span>
                 </div>
                 <div style={{ padding: '1.25rem', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
                   <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.05rem', fontWeight: 800, color: 'var(--color-forest-green)', marginBottom: '0.45rem', lineHeight: 1.35, minHeight: '2.85rem', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
@@ -618,7 +742,12 @@ export const AboutPage: React.FC = () => {
           className="award-lightbox-modal"
         >
           <div className="award-modal-content">
-            <div className="award-modal-media">
+            <div
+              className="award-modal-media"
+              onClick={() => setFullscreenItem(selectedMedia)}
+              style={{ cursor: 'pointer' }}
+              title="Click to view full size with close button"
+            >
               {selectedMedia.type === 'video' ? (
                 <video
                   src={selectedMedia.fileUrl}
@@ -634,6 +763,26 @@ export const AboutPage: React.FC = () => {
                 />
               )}
               <span className="award-modal-badge">{selectedMedia.badge}</span>
+              <div
+                style={{
+                  position: 'absolute',
+                  bottom: '12px',
+                  right: '12px',
+                  backgroundColor: 'rgba(0, 0, 0, 0.75)',
+                  color: '#FFFFFF',
+                  padding: '0.35rem 0.75rem',
+                  borderRadius: '999px',
+                  fontSize: '0.75rem',
+                  fontWeight: 700,
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.35rem',
+                  backdropFilter: 'blur(4px)',
+                }}
+              >
+                <Maximize2 size={13} />
+                <span>Click for Full Size</span>
+              </div>
             </div>
 
             <div className="award-modal-info">
@@ -663,17 +812,14 @@ export const AboutPage: React.FC = () => {
               <p className="award-modal-desc">{selectedMedia.description}</p>
 
               <div className="award-modal-actions">
-                {selectedMedia.type !== 'video' && (
-                  <a
-                    href={selectedMedia.fileUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="ui-btn ui-btn--primary ui-btn--md"
-                  >
-                    <ExternalLink size={16} />
-                    <span>Open High-Resolution Document</span>
-                  </a>
-                )}
+                <button
+                  type="button"
+                  className="ui-btn ui-btn--primary ui-btn--md"
+                  onClick={() => setFullscreenItem(selectedMedia)}
+                >
+                  <Maximize2 size={16} />
+                  <span>{selectedMedia.type === 'video' ? 'View Full Screen Video' : 'View Full Size Photo (With Close ✕)'}</span>
+                </button>
                 <button
                   type="button"
                   className="ui-btn ui-btn--outline ui-btn--md"
@@ -685,6 +831,20 @@ export const AboutPage: React.FC = () => {
             </div>
           </div>
         </Modal>
+      )}
+
+      {/* In-App Fullscreen Media Viewer with Prominent Cross (✕) and Back Buttons */}
+      {fullscreenItem && (
+        <FullscreenMediaModal
+          isOpen={Boolean(fullscreenItem)}
+          onClose={() => setFullscreenItem(null)}
+          mediaUrl={fullscreenItem.fileUrl}
+          mediaType={fullscreenItem.type}
+          title={fullscreenItem.title}
+          badge={fullscreenItem.badge}
+          location={fullscreenItem.location}
+          date={fullscreenItem.date}
+        />
       )}
 
       {/* Bottom CTA */}

@@ -22,6 +22,7 @@ import { Container } from '../../components/ui/Container';
 import { Card } from '../../components/ui/Card';
 import { Button } from '../../components/ui/Button';
 import { Modal } from '../../components/ui/Modal';
+import { FullscreenMediaModal } from '../../components/ui/FullscreenMediaModal';
 import { Breadcrumbs } from '../../components/common/Breadcrumbs';
 import { SEO } from '../../components/common/SEO';
 import { CTASection } from '../../components/common/CTASection';
@@ -159,6 +160,7 @@ export const MediaPage: React.FC = () => {
 
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedMedia, setSelectedMedia] = useState<MediaItem | null>(null);
+  const [fullscreenItem, setFullscreenItem] = useState<MediaItem | null>(null);
 
   const handleCategoryChange = (cat: MediaCategory) => {
     if (cat === 'all') {
@@ -591,24 +593,23 @@ export const MediaPage: React.FC = () => {
                           <video
                             src={item.fileUrl}
                             poster={item.thumbnailUrl}
-                            preload="none"
+                            autoPlay
                             muted
                             playsInline
                             loop
+                            preload="auto"
+                            ref={(el) => {
+                              if (el) {
+                                el.muted = true;
+                                el.defaultMuted = true;
+                                el.play().catch(() => {});
+                              }
+                            }}
                             style={{
                               width: '100%',
                               height: '100%',
                               objectFit: 'cover',
                               display: 'block',
-                            }}
-                            onMouseEnter={(e) => {
-                              try {
-                                e.currentTarget.play();
-                              } catch {}
-                            }}
-                            onMouseLeave={(e) => {
-                              e.currentTarget.pause();
-                              e.currentTarget.currentTime = 0;
                             }}
                           />
 
@@ -937,24 +938,26 @@ export const MediaPage: React.FC = () => {
                   borderTop: '1px solid var(--border-subtle)',
                 }}
               >
-                <a
-                  href={selectedMedia.fileUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
+                  type="button"
+                  onClick={() => setFullscreenItem(selectedMedia)}
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
-                    gap: '0.35rem',
-                    fontSize: '0.78rem',
+                    gap: '0.45rem',
+                    fontSize: '0.82rem',
                     color: 'var(--color-forest-green)',
                     fontWeight: 700,
-                    textDecoration: 'underline',
-                    padding: '0.4rem 0',
+                    padding: '0.4rem 0.75rem',
+                    backgroundColor: 'var(--color-soft-green)',
+                    borderRadius: '999px',
+                    border: '1px solid var(--border-medium)',
+                    cursor: 'pointer',
                   }}
                 >
-                  <span>{selectedMedia.type === 'video' ? 'Open Raw Video' : 'Open Full High-Res'}</span>
-                  <ExternalLink size={12} />
-                </a>
+                  <Maximize2 size={13} />
+                  <span>{selectedMedia.type === 'video' ? 'View Full Screen Video' : 'View Full Size Photo (With Close ✕)'}</span>
+                </button>
 
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                   <Button
@@ -979,6 +982,20 @@ export const MediaPage: React.FC = () => {
             </div>
           </div>
         </Modal>
+      )}
+
+      {/* Fullscreen In-App Viewer with Close Cross Button */}
+      {fullscreenItem && (
+        <FullscreenMediaModal
+          isOpen={Boolean(fullscreenItem)}
+          onClose={() => setFullscreenItem(null)}
+          mediaUrl={fullscreenItem.fileUrl}
+          mediaType={fullscreenItem.type}
+          title={fullscreenItem.title}
+          badge={fullscreenItem.badge}
+          location={fullscreenItem.location}
+          date={fullscreenItem.date}
+        />
       )}
 
       {/* =========================================================================
