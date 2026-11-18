@@ -30,11 +30,11 @@ interface IntroHighlightCard {
   summary: string;
   imageSrc: string;
   imageAlt: string;
-  galleryImages?: GalleryDoc[];
+  galleryImages: GalleryDoc[];
   highlights: string[];
   linkPath: string;
   linkLabel: string;
-  modalDetails?: {
+  modalDetails: {
     fullTitle: string;
     description: string;
     points: string[];
@@ -48,20 +48,34 @@ const introCards: IntroHighlightCard[] = [
     category: 'PM Surya Ghar Muft Bijli Yojana',
     title: 'Rooftop Solar EPC & Subsidy Facilitation',
     summary:
-      'Over 350+ residential on-grid rooftop installations executed across Odisha within 2 years, securing up to ₹78,000 direct central DBT subsidy per household.',
+      'Over 350+ residential on-grid installations executed across Odisha within 2 years, securing up to ₹78,000 direct central DBT subsidy assistance.',
     imageSrc: '/images/solar/pm-surya-ghar-residential-350.jpg',
     imageAlt: 'PM Surya Ghar Rooftop Solar Installation in Odisha',
+    galleryImages: [
+      {
+        src: '/images/solar/pm-surya-ghar-residential-350.jpg',
+        caption: 'Turnkey On-Grid Rooftop Solar Installation under PM Surya Ghar',
+      },
+      {
+        src: '/images/solar/residential-rooftop.jpg',
+        caption: 'High-Efficiency Mono PERC Solar Panels on RCC Terrace Structure',
+      },
+      {
+        src: '/media/awards-certificates/pm-surya-ghar-kalahandi-district-award.jpg',
+        caption: 'District 1st Place Award for Highest PM Surya Ghar Installations',
+      },
+    ],
     highlights: [
-      '350+ verified rooftop solar plants',
-      'Up to ₹78,000 DBT direct subsidy assistance',
-      'Zero-hassle net-meter synchronization',
+      '350+ verified residential rooftop solar plants',
+      'Up to ₹78,000 DBT direct central subsidy credited',
+      'Bi-directional DISCOM net-meter synchronization',
     ],
     linkPath: '/solutions/residential',
     linkLabel: 'Explore Rooftop Solar',
     modalDetails: {
       fullTitle: 'PM Surya Ghar: Muft Bijli Yojana — Turnkey On-Grid Execution',
       description:
-        'Shreshtanshi Solar Solutions has established itself as a premier rooftop solar EPC in Western Odisha. In just two years, over 350 households have transitioned to clean energy with 1 kW to 10 kW grid-tied solar systems, saving up to 90% on electricity tariffs while receiving direct bank subsidies.',
+        'Shreshtanshi Solar Solutions has established itself as the leading rooftop solar EPC in Western Odisha. In just two years, over 350 households have transitioned to clean energy with 1 kW to 10 kW grid-tied solar systems, saving up to 90% on electricity tariffs while receiving direct bank subsidies.',
       points: [
         '350+ completed installations across Kalahandi, Nuapada, Balangir & neighboring districts',
         'Direct subsidy coordination on the National PM Surya Ghar Portal',
@@ -76,7 +90,7 @@ const introCards: IntroHighlightCard[] = [
     category: 'TPCODL & TPWODL Approved Vendor',
     title: 'Utility-Led Aggregation & Synchronization',
     summary:
-      'Officially registered with DISCOMs (Vendor Code #5493) for utility-led aggregation, feasibility approvals, and fast-track grid synchronization.',
+      'Officially empaneled DISCOM vendor (Vendor Code #5493) executing feasibility approvals, net-metering, and utility-led rooftop aggregation.',
     imageSrc: '/images/licences/tpcodl-vendor-registration-certificate.jpg',
     imageAlt: 'DISCOM Empaneled Solar Vendor Certificate',
     galleryImages: [
@@ -90,13 +104,13 @@ const introCards: IntroHighlightCard[] = [
       },
       {
         src: '/images/licences/tpcodl-empanelment-order.jpg',
-        caption: 'Official DISCOM Net-Meter Synchronization Order',
+        caption: 'Official DISCOM Net-Meter Synchronization Order & Empanelment',
       },
     ],
     highlights: [
       'Official DISCOM vendor registration code 5493',
-      'Utility-led aggregation execution',
-      'Compliant grid-synchronous inverters',
+      'Utility-led aggregation execution with zero consumer paperwork',
+      'Compliant grid-synchronous inverters & bi-directional metering',
     ],
     linkPath: '/licences-and-certifications',
     linkLabel: 'View DISCOM Licences',
@@ -118,13 +132,27 @@ const introCards: IntroHighlightCard[] = [
     category: 'Government & Public Infrastructure',
     title: 'Solar Water Pumps & Elephant Protection Fencing',
     summary:
-      'Partnering with Agro Odisha and Forest Department on high-capacity solar borewells, nursery irrigation, and solar fencing for human-wildlife safety.',
+      'Partnering with Agro Odisha and Forest Department on high-capacity solar borewells, nursery irrigation, and solar fencing for wildlife safety.',
     imageSrc: '/images/government/solar-water-pump-forest.jpg',
     imageAlt: 'Solar Water Pumping and Forest Infrastructure in Odisha',
+    galleryImages: [
+      {
+        src: '/images/government/solar-water-pump-forest.jpg',
+        caption: 'Solar-Powered Submersible Water Pumping for Forest Management',
+      },
+      {
+        src: '/images/government/solar-irrigation-agro.jpg',
+        caption: 'Agro Odisha Solar Irrigation Farmland Systems',
+      },
+      {
+        src: '/images/government/solar-fencing-elephant-protection.jpg',
+        caption: 'High-Tensile Pulsed Solar Fencing for Elephant Conflict Mitigation',
+      },
+    ],
     highlights: [
-      'Solar submersible borewell systems',
-      'Forest nursery & plantation irrigation',
-      'Solar perimeter fencing for elephant safety',
+      'Solar submersible borewell systems for remote forest beats',
+      'Forest nursery & plantation drip irrigation infrastructure',
+      'Non-lethal solar perimeter fencing for elephant safety',
     ],
     linkPath: '/who-we-serve/government',
     linkLabel: 'View Government Projects',
@@ -146,13 +174,27 @@ const introCards: IntroHighlightCard[] = [
     category: 'Statewide Technical Presence',
     title: 'Head Office Kalahandi & Bhubaneswar Sub-Branch',
     summary:
-      'Operating from our Head Office in Narla Road, Kalahandi and regional branch in Bhubaneswar with mobile engineer dispatch across Odisha.',
+      'Operating from our Head Office in Narla Road, Kalahandi and regional branch in Bhubaneswar with rapid 24–48 hr statewide engineering dispatch.',
     imageSrc: '/images/solar/residential-rooftop.jpg',
     imageAlt: 'Shreshtanshi Solar Engineering Team and Operations Hub',
+    galleryImages: [
+      {
+        src: '/images/solar/residential-rooftop.jpg',
+        caption: 'Engineering & Operational Dispatch Center in Kalahandi',
+      },
+      {
+        src: '/images/solar/commercial-rooftop.jpg',
+        caption: 'Statewide Technical Team Executing Turnkey Solar Projects',
+      },
+      {
+        src: '/images/licences/iso-9001-2015-quality-management-certificate.jpg',
+        caption: 'ISO 9001:2015 Certified Quality Management System',
+      },
+    ],
     highlights: [
       'Head Office: Kalahandi (Plot No- 406, Narla Road)',
-      'Sub-Branch: Bhubaneswar central hub',
-      '24–48 hr on-site engineering dispatch',
+      'Sub-Branch: Bhubaneswar central hub for coastal coordination',
+      '24–48 hr on-site certified engineering field deployment',
     ],
     linkPath: '/contact',
     linkLabel: 'Connect With Our Team',
@@ -267,88 +309,62 @@ export const HomeCompanyIntroSection: React.FC = () => {
         </div>
 
         {/* =================================================================
-            3. 4 RICH VISUAL SHOWCASE CARDS (IMAGE-FORWARD DESIGN)
+            3. 4 RICH VISUAL SHOWCASE CARDS (UNIFIED CLEAN DESIGN)
+               - Aligned images with tag & zoom
+               - Bold fixed headline
+               - Clean description
+               - Single solid Details button (no extra text, no empty space)
         ================================================================= */}
         <div className="home-intro-grid">
-          {introCards.map((card) => {
-            // Apply single-card streamlined layout for Card 2 as requested by user
-            const isStreamlinedCard = card.id === 'discom-empanelment';
+          {introCards.map((card) => (
+            <article key={card.id} className="home-intro-card">
+              {/* Media Container with Zoom action */}
+              <div className="home-intro-card__media">
+                <img
+                  src={card.imageSrc}
+                  alt={card.imageAlt}
+                  className="home-intro-card__img"
+                  loading="lazy"
+                />
+                <span className="home-intro-card__tag">{card.tag}</span>
+                <button
+                  type="button"
+                  className="home-intro-card__zoom-btn"
+                  onClick={() => openCardModal(card)}
+                  title={`Inspect ${card.title}`}
+                  aria-label={`Inspect ${card.title}`}
+                >
+                  <Maximize2 size={16} />
+                </button>
+              </div>
 
-            return (
-              <article key={card.id} className="home-intro-card">
-                {/* Media Container with Zoom action */}
-                <div className="home-intro-card__media">
-                  <img
-                    src={card.imageSrc}
-                    alt={card.imageAlt}
-                    className="home-intro-card__img"
-                    loading="lazy"
-                  />
-                  <span className="home-intro-card__tag">{card.tag}</span>
+              {/* Card Body */}
+              <div className="home-intro-card__body">
+                <div className="home-intro-card__meta">
+                  <span className="home-intro-card__category">
+                    <ShieldCheck size={13} className="home-intro-card__category-icon" />
+                    <span>{card.category}</span>
+                  </span>
+                </div>
+
+                <h3 className="home-intro-card__title">{card.title}</h3>
+
+                <p className="home-intro-card__summary">{card.summary}</p>
+
+                {/* Unified Clickable Details Button — Clean, Bold, No Extra Text */}
+                <div className="home-intro-card__action-wrap">
                   <button
                     type="button"
-                    className="home-intro-card__zoom-btn"
+                    className="home-intro-card__details-btn--solid"
                     onClick={() => openCardModal(card)}
-                    title={`Inspect ${card.title}`}
-                    aria-label={`Inspect ${card.title}`}
                   >
-                    <Maximize2 size={16} />
+                    <span>Details</span>
+                    <ArrowRight size={15} />
                   </button>
                 </div>
-
-                {/* Card Body */}
-                <div className="home-intro-card__body">
-                  <div className="home-intro-card__meta">
-                    <span className="home-intro-card__category">
-                      <ShieldCheck size={13} className="home-intro-card__category-icon" />
-                      <span>{card.category}</span>
-                    </span>
-                  </div>
-
-                  <h3 className="home-intro-card__title">{card.title}</h3>
-
-                  {/* If streamlined card: description is removed and only clickable Details button is shown */}
-                  {isStreamlinedCard ? (
-                    <div style={{ marginTop: 'auto', paddingTop: '0.75rem' }}>
-                      <button
-                        type="button"
-                        className="ui-btn ui-btn--primary ui-btn--sm"
-                        style={{
-                          width: '100%',
-                          justifyContent: 'center',
-                          fontWeight: 700,
-                          padding: '0.65rem 1rem',
-                        }}
-                        onClick={() => openCardModal(card)}
-                      >
-                        <span>Details</span>
-                        <ArrowRight size={15} />
-                      </button>
-                    </div>
-                  ) : (
-                    <>
-                      <p className="home-intro-card__summary">{card.summary}</p>
-
-                      {/* Footer with Links */}
-                      <div className="home-intro-card__footer">
-                        <Link to={card.linkPath} className="home-intro-card__link">
-                          <span>{card.linkLabel}</span>
-                          <ArrowRight size={15} />
-                        </Link>
-                        <button
-                          type="button"
-                          className="home-intro-card__details-btn"
-                          onClick={() => openCardModal(card)}
-                        >
-                          Details
-                        </button>
-                      </div>
-                    </>
-                  )}
-                </div>
-              </article>
-            );
-          })}
+              </div>
+            </article>
+          ))}
         </div>
 
         {/* =================================================================
@@ -387,6 +403,7 @@ export const HomeCompanyIntroSection: React.FC = () => {
                       key={idx}
                       type="button"
                       onClick={() => setModalImageIdx(idx)}
+                      title={img.caption}
                       style={{
                         flex: '0 0 auto',
                         width: '78px',
