@@ -156,6 +156,7 @@ export const HomeGovernmentSection: React.FC = () => {
                     color: 'var(--color-forest-green)',
                     lineHeight: 1.3,
                     marginBottom: '0.65rem',
+                    minHeight: '2.8rem',
                   }}
                 >
                   {act.title}

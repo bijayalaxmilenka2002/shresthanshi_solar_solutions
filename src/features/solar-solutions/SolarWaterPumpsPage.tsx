@@ -35,7 +35,7 @@ export const SolarWaterPumpsPage: React.FC = () => {
       icon: <Compass size={22} />,
       title: 'Overhead Water Sensor Pumps',
       imageLabel: '[Project gallery image: solar overhead water sensor pump]',
-      imageSrc: '/images/solar/solar-overhead-sensor-pump.jpg',
+      imageSrc: '/images/solar/solar-overhead-tank-installation.jpg',
       description: 'Automated solar pumping into elevated tanks with level sensors.',
     },
     {

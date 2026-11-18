@@ -100,49 +100,40 @@ export const ProjectsPage: React.FC = () => {
 
           <div className="grid-2" key={selectedCategory}>
             {filteredProjects.map((project) => (
-              <Card key={project.id} variant="soft-green" padding="none" hoverable className="project-card">
-                <div className="project-card__media">
-                  <ImagePlaceholder
-                    label={project.image}
-                    sublabel={project.title}
-                    aspectRatio="16/10"
-                    variant="white"
+              <Card key={project.id} variant="white" padding="none" hoverable className="project-card" style={{ borderRadius: '18px', border: '1.5px solid var(--border-medium)', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+                <div className="project-card__media" style={{ width: '100%', aspectRatio: '16/10', overflow: 'hidden', backgroundColor: '#0B2419', position: 'relative' }}>
+                  <img
                     src={project.imageSrc}
-                    imgFit={
-                      project.id === 'proj-borewell-irrigation-odisha' ||
-                      project.id === 'proj-solar-street-lighting'
-                        ? 'contain'
-                        : 'cover'
-                    }
+                    alt={project.title}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit:
+                        project.id === 'proj-borewell-irrigation-odisha' ||
+                        project.id === 'proj-solar-street-lighting'
+                          ? 'contain'
+                          : 'cover',
+                      display: 'block',
+                    }}
+                    loading="lazy"
                   />
                   <span className="project-card__category">{project.category}</span>
                 </div>
-                <div className="project-card__body">
-                  <div className="project-card__meta">
-                    <span>
-                      <MapPin size={15} /> {project.location} • {project.district}
-                    </span>
+                <div className="project-card__body" style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
+                  <div className="project-card__meta" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem', color: 'var(--color-forest-green)', fontWeight: 700, fontSize: '0.78rem', textTransform: 'uppercase', marginBottom: '0.45rem' }}>
+                    <MapPin size={14} />
+                    <span>{project.location} • {project.district}</span>
                   </div>
-                  <h3 className="project-card__title">{project.title}</h3>
-                  <p className="project-card__desc">{project.description}</p>
-                  <div className="project-card__scope">
-                    <ul className="feature-list">
-                      {project.scope.map((item) => (
-                        <li key={item} className="feature-list-item">
-                          <span className="feature-list-icon"><CheckCircle2 size={13} /></span>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="project-card__verified">
-                    <ShieldCheck size={15} />
-                    <span>{project.verifiedSource}</span>
-                  </div>
-                  <div className="project-card__action" style={{ marginTop: '0.85rem', paddingTop: '0.75rem', borderTop: '1px solid var(--border-subtle)' }}>
-                    <Link to={`/contact?intent=${encodeURIComponent(project.title)}`} className="ui-text-link">
+                  <h3 className="project-card__title" style={{ fontFamily: 'var(--font-heading)', fontSize: '1.25rem', fontWeight: 800, color: 'var(--color-forest-green)', lineHeight: 1.3, marginBottom: '0.65rem' }}>
+                    {project.title}
+                  </h3>
+                  <p className="project-card__desc" style={{ fontSize: '0.92rem', lineHeight: 1.6, color: 'var(--text-body)', margin: '0 0 1.25rem', flexGrow: 1 }}>
+                    {project.description}
+                  </p>
+                  <div className="project-card__action" style={{ paddingTop: '0.85rem', borderTop: '1px solid var(--border-subtle)', marginTop: 'auto' }}>
+                    <Link to={`/contact?intent=${encodeURIComponent(project.title)}`} className="ui-text-link" style={{ fontWeight: 700 }}>
                       <span>Enquire About This Work</span>
-                      <ArrowRight size={14} />
+                      <ArrowRight size={15} />
                     </Link>
                   </div>
                 </div>

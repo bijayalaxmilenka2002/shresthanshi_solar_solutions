@@ -217,7 +217,7 @@ export const GovernmentSectorPage: React.FC = () => {
                   <Waves size={15} />
                   <span>Activity 01 • Water Management</span>
                 </div>
-                <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.25rem', fontWeight: 800, color: 'var(--color-forest-green)', marginBottom: '0.65rem' }}>
+                <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.25rem', fontWeight: 800, color: 'var(--color-forest-green)', marginBottom: '0.65rem', minHeight: '2.8rem' }}>
                   1. Solar Water Pumps
                 </h3>
                 <p style={{ fontSize: '0.9rem', color: 'var(--text-body)', lineHeight: 1.6, marginBottom: '1rem', flexGrow: 1 }}>
@@ -244,7 +244,7 @@ export const GovernmentSectorPage: React.FC = () => {
                   <Sprout size={15} />
                   <span>Activity 02 • Green Canopy</span>
                 </div>
-                <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.25rem', fontWeight: 800, color: 'var(--color-forest-green)', marginBottom: '0.65rem' }}>
+                <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.25rem', fontWeight: 800, color: 'var(--color-forest-green)', marginBottom: '0.65rem', minHeight: '2.8rem' }}>
                   2. Solar Irrigation Systems
                 </h3>
                 <p style={{ fontSize: '0.9rem', color: 'var(--text-body)', lineHeight: 1.6, marginBottom: '1rem', flexGrow: 1 }}>
@@ -271,7 +271,7 @@ export const GovernmentSectorPage: React.FC = () => {
                   <TreePine size={15} />
                   <span>Activity 03 • Afforestation</span>
                 </div>
-                <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.25rem', fontWeight: 800, color: 'var(--color-forest-green)', marginBottom: '0.65rem' }}>
+                <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.25rem', fontWeight: 800, color: 'var(--color-forest-green)', marginBottom: '0.65rem', minHeight: '2.8rem' }}>
                   3. Plantation Support
                 </h3>
                 <p style={{ fontSize: '0.9rem', color: 'var(--text-body)', lineHeight: 1.6, marginBottom: '1rem', flexGrow: 1 }}>
@@ -301,7 +301,7 @@ export const GovernmentSectorPage: React.FC = () => {
                   <Zap size={15} />
                   <span>Activity 04 • Human-Wildlife Mitigation</span>
                 </div>
-                <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.25rem', fontWeight: 800, color: 'var(--color-forest-green)', marginBottom: '0.65rem' }}>
+                <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.25rem', fontWeight: 800, color: 'var(--color-forest-green)', marginBottom: '0.65rem', minHeight: '2.8rem' }}>
                   4. Solar Fencing for Elephant Protection
                 </h3>
                 <p style={{ fontSize: '0.9rem', color: 'var(--text-body)', lineHeight: 1.6, marginBottom: '1rem', flexGrow: 1 }}>

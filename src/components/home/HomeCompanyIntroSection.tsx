@@ -279,16 +279,6 @@ export const HomeCompanyIntroSection: React.FC = () => {
 
                 <p className="home-intro-card__summary">{card.summary}</p>
 
-                {/* Micro-checklist highlights */}
-                <ul className="home-intro-card__checklist">
-                  {card.highlights.map((item, idx) => (
-                    <li key={idx} className="home-intro-card__check-item">
-                      <CheckCircle2 size={13} className="home-intro-card__check-icon" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-
                 {/* Footer with Links */}
                 <div className="home-intro-card__footer">
                   <Link to={card.linkPath} className="home-intro-card__link">

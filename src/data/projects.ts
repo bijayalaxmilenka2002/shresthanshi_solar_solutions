@@ -21,18 +21,18 @@ export const projectItems: ProjectItem[] = [
   {
     id: 'proj-tubewell-farm-irrigation',
     title: 'Solar Agricultural Tubewell & Irrigation Infrastructure',
-    category: 'Solar Water Pumping',
+    category: 'Borewell & Rural Infrastructure',
     location: 'Dharmagarh, Junagarh & Narla Blocks',
     district: 'Kalahandi, Odisha',
     description:
-      'Turnkey solar tubewell irrigation installations, delivering high-discharge groundwater abstraction directly into farm concrete cisterns for multi-crop acreage.',
+      'Turnkey solar tubewell irrigation installations with high-efficiency PV arrays delivering reliable groundwater abstraction directly for multi-crop acreage.',
     scope: [
       'Agricultural solar array & pump panel erection',
       'Sanitary surface concrete apron & discharge integration',
       'Deep aquifer solar groundwater pumping for farmland',
     ],
-    image: '[Project gallery image: agricultural tubewell and borewell irrigation in Kalahandi]',
-    imageSrc: '/images/agricultural-tubewell-borewell.jpg',
+    image: '[Project gallery image: agricultural tubewell and borewell solar array in Kalahandi]',
+    imageSrc: '/images/solar/agricultural-solar-pump.jpg',
     verifiedSource: 'Verified Service Domain — shresthanshi.com',
   },
   {
@@ -55,18 +55,18 @@ export const projectItems: ProjectItem[] = [
   {
     id: 'proj-rural-water-pipeline-works',
     title: 'Solar Rural Drinking Water Overhead Tank Systems',
-    category: 'Solar Water Pumping',
+    category: 'Borewell & Rural Infrastructure',
     location: 'Rural Habitations & Gram Panchayats',
     district: 'Kalahandi & Across Odisha',
     description:
-      'Solar-powered drinking water delivery to elevated community reservoirs and public tap standposts, ensuring safe potable water across rural habitations.',
+      'Elevated steel staging community overhead storage tank system with integrated multi-module solar PV arrays and distribution standposts for clean rural potable water.',
     scope: [
-      'Solar pumping integration to elevated storage reservoirs (OHT)',
-      'Community distribution standpost connections',
-      'Automatic sensor cutoff preventing water wastage',
+      'Elevated steel staging with top-mounted solar PV array',
+      'Polycon community water reservoir & piping header assembly',
+      'Automated sensor cutoff preventing water wastage',
     ],
-    image: '[Project gallery image: rural water pipeline and infrastructure]',
-    imageSrc: '/images/rural-water-pipeline-distribution.jpg',
+    image: '[Project gallery image: elevated solar overhead tank staging with solar PV array]',
+    imageSrc: '/images/solar/solar-overhead-tank-installation.jpg',
     verifiedSource: 'Verified Service Domain — shresthanshi.com',
   },
   {
@@ -248,18 +248,18 @@ export const galleryPhotos: GalleryPhoto[] = [
     title: 'Agricultural Tubewell Solar Discharge',
     category: 'Agricultural Pumping',
     location: 'Agricultural Field, Kalahandi',
-    caption: 'High-discharge solar tubewell pumping clean groundwater into an on-farm concrete cistern.',
+    caption: 'High-discharge solar tubewell pumping clean groundwater with prominent ground-mounted solar PV array into farm cistern.',
     image: '[Project gallery image: agricultural tubewell borewell pump]',
-    imageSrc: '/images/agricultural-tubewell-borewell.jpg',
+    imageSrc: '/images/solar/agricultural-solar-pump.jpg',
   },
   {
     id: 'gallery-pump-08',
     title: 'Overhead Tank Solar Water Tap Stand',
     category: 'Agricultural Pumping',
     location: 'Rural Habitation, Odisha',
-    caption: 'Solar-powered elevated community water storage reservoir with pipeline connectivity and public tap stand.',
+    caption: 'Elevated staging solar water storage reservoir with top-mounted multi-module PV array and public tap stand.',
     image: '[Project gallery image: overhead tank and rural tap stand]',
-    imageSrc: '/images/rural-water-pipeline-distribution.jpg',
+    imageSrc: '/images/solar/solar-overhead-tank-installation.jpg',
   },
 
   // 3. Solar Street Lighting & Structural Engineering

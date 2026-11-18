@@ -1984,7 +1984,7 @@
 .visual-card__title {
   font-family: var(--font-heading);
   font-size: var(--text-lg);
-  font-weight: 700;
+  font-weight: 800;
   line-height: 1.3;
   color: var(--color-forest-green);
   margin-bottom: var(--space-2);
@@ -3601,10 +3601,12 @@
 
 .project-card__title {
   font-family: var(--font-heading);
-  font-size: var(--text-xl);
-  font-weight: 700;
-  line-height: 1.28;
+  font-size: clamp(1.18rem, 1.8vw, 1.35rem);
+  font-weight: 800;
+  color: var(--color-forest-green);
+  line-height: 1.3;
   margin-bottom: var(--space-3);
+  min-height: 2.8rem;
 }
 
 .project-card__desc {
@@ -5177,10 +5179,11 @@
 .home-award-card__title {
   font-family: var(--font-heading);
   font-size: 1.05rem;
-  font-weight: 700;
+  font-weight: 800;
   line-height: 1.3;
   color: var(--color-forest-green);
   margin-bottom: 0.35rem;
+  min-height: 2.7rem;
 }
 
 .home-award-card__tagline {
@@ -5832,11 +5835,12 @@
 
 .home-intro-card__title {
   font-family: var(--font-heading);
-  font-size: 1.05rem;
-  font-weight: 700;
+  font-size: 1.1rem;
+  font-weight: 800;
   line-height: 1.35;
   color: var(--color-forest-green);
   margin-bottom: 0.45rem;
+  min-height: 2.8rem;
 }
 
 .home-intro-card__summary {
