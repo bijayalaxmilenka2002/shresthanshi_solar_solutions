@@ -184,6 +184,9 @@ export const AwardsAndCertificationsSection: React.FC = () => {
                   src={award.imageSrc}
                   alt={award.imageAlt}
                   className="home-award-card__img"
+                  style={{
+                    objectPosition: award.id === 'summit-bre-mnre-tpwodl-leader' ? 'center 15%' : 'center center',
+                  }}
                   loading="lazy"
                 />
                 <span className="home-award-card__tag">{award.badge}</span>

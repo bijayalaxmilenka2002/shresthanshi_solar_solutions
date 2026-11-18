@@ -5080,8 +5080,8 @@
 .home-award-card__media {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 14;
-  min-height: 250px;
+  aspect-ratio: 16 / 11;
+  min-height: 230px;
   overflow: hidden;
   background-color: #0E291D;
   display: flex;
@@ -5099,7 +5099,7 @@
 }
 
 .home-award-card:hover .home-award-card__img {
-  transform: scale(1.06);
+  transform: scale(1.04);
 }
 
 .home-award-card__tag {
