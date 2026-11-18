@@ -168,10 +168,10 @@ export const ServicesPage: React.FC = () => {
               Complete Services Portfolio
             </span>
             <h2 style={{ fontSize: 'clamp(2rem, 3.2vw, 2.75rem)', marginBottom: '0.75rem', color: 'var(--color-forest-green)' }}>
-              All Services Sourced Directly from shresthanshi.com
+              Our Turnkey Solar &amp; Clean Energy Services
             </h2>
             <p style={{ fontSize: 'var(--text-base)', color: 'var(--text-body)', lineHeight: 1.65 }}>
-              Filter by service category to explore our turnkey capabilities spanning green energy, irrigation drilling, structural metal fabrication, and civic awareness works.
+              Explore our certified engineering services across Odisha — spanning on-grid rooftop solar plants, agricultural irrigation pumps, community drinking water systems, and long-term maintenance.
             </p>
           </div>
 

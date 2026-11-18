@@ -143,7 +143,7 @@ export const ProjectsPage: React.FC = () => {
 
           <Card variant="outlined" padding="lg" style={{ marginTop: '2.5rem' }}>
             <span className="badge" style={{ marginBottom: '0.6rem' }}>
-              Additional Verified Works (shresthanshi.com)
+              Allied Engineering &amp; Community Works
             </span>
             <h3>Allied Fabrication &amp; Public Utility Works</h3>
             <p style={{ marginTop: '0.4rem' }}>

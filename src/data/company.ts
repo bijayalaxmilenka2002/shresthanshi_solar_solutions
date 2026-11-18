@@ -40,8 +40,8 @@ export const companyConfig = {
       country: 'India',
       full: 'Head Office: Plot No- 406, Khata No- 225/51, Sargiguda, Narla Road, Kalahandi, Odisha – 766110 • Sub-Branch Office: Bhubaneswar, Odisha',
     },
-    workingHours: '24/7 Working Hours (as listed on shresthanshi.com)',
-    confirmationNote: 'Verified from shresthanshi.com (GSTIN: 21AVUPM9359D1Z6).',
+    workingHours: '24/7 Technical Support & Field Assistance',
+    confirmationNote: 'Registered Enterprise (GSTIN: 21AVUPM9359D1Z6).',
   },
 
   // Social Media Profiles (Connect With Us)

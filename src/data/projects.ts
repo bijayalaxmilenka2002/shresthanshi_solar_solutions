@@ -16,7 +16,7 @@ export const projectItems: ProjectItem[] = [
     ],
     image: '[Project gallery image: agricultural solar water pump in Kalahandi]',
     imageSrc: '/images/farmers-solar-pumping.jpg',
-    verifiedSource: 'Verified Service Domain — shresthanshi.com',
+    verifiedSource: 'Verified Odisha Field Execution',
   },
   {
     id: 'proj-tubewell-farm-irrigation',
@@ -33,7 +33,7 @@ export const projectItems: ProjectItem[] = [
     ],
     image: '[Project gallery image: agricultural tubewell and borewell solar array in Kalahandi]',
     imageSrc: '/images/solar/agricultural-solar-pump.jpg',
-    verifiedSource: 'Verified Service Domain — shresthanshi.com',
+    verifiedSource: 'Verified Odisha Field Execution',
   },
   {
     id: 'proj-overhead-sensor-pumps',
@@ -50,7 +50,7 @@ export const projectItems: ProjectItem[] = [
     ],
     image: '[Project gallery image: solar overhead water sensor pump]',
     imageSrc: '/images/solar/solar-overhead-sensor-pump.jpg',
-    verifiedSource: 'Verified Service Domain — shresthanshi.com',
+    verifiedSource: 'Verified Odisha Field Execution',
   },
   {
     id: 'proj-rural-water-pipeline-works',
@@ -67,7 +67,7 @@ export const projectItems: ProjectItem[] = [
     ],
     image: '[Project gallery image: elevated solar overhead tank staging with solar PV array]',
     imageSrc: '/images/solar/solar-overhead-tank-installation.jpg',
-    verifiedSource: 'Verified Service Domain — shresthanshi.com',
+    verifiedSource: 'Verified Odisha Field Execution',
   },
   {
     id: 'proj-solar-street-lighting',
@@ -84,7 +84,7 @@ export const projectItems: ProjectItem[] = [
     ],
     image: '[Project gallery image: solar street light unit]',
     imageSrc: '/images/solar/solar-street-light-road.jpg',
-    verifiedSource: 'Verified Service Domain — shresthanshi.com',
+    verifiedSource: 'Verified Odisha Field Execution',
   },
   {
     id: 'proj-commercial-institutional-solar',
@@ -101,7 +101,7 @@ export const projectItems: ProjectItem[] = [
     ],
     image: '[Project gallery image: commercial & institutional rooftop solar in Kalahandi]',
     imageSrc: '/images/cta-solar-rooftop.jpg',
-    verifiedSource: 'Verified Service Domain — shresthanshi.com',
+    verifiedSource: 'Verified Odisha Field Execution',
   },
   {
     id: 'proj-residential-rooftop-solar',
@@ -118,7 +118,7 @@ export const projectItems: ProjectItem[] = [
     ],
     image: '[Project gallery image: residential rooftop solar in Kalahandi]',
     imageSrc: '/images/homeowners-rooftop-solar.jpg',
-    verifiedSource: 'Verified Service Domain — shresthanshi.com',
+    verifiedSource: 'Verified Odisha Field Execution',
   },
 ];
 
