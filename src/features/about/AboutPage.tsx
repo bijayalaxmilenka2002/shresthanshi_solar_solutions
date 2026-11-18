@@ -338,7 +338,7 @@ export const AboutPage: React.FC = () => {
                   <span style={{ fontSize: '0.74rem', fontWeight: 700, color: 'var(--color-forest-green)', textTransform: 'uppercase', marginBottom: '0.35rem' }}>
                     {item.verifiedBy}
                   </span>
-                  <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.05rem', fontWeight: 700, color: 'var(--color-forest-green)', marginBottom: '0.5rem', lineHeight: 1.35 }}>
+                  <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.05rem', fontWeight: 700, color: 'var(--color-forest-green)', marginBottom: '0.5rem', lineHeight: 1.35, minHeight: '2.8rem' }}>
                     {item.title}
                   </h4>
                   <p style={{ fontSize: '0.85rem', color: 'var(--text-body)', lineHeight: 1.5, margin: 0, flexGrow: 1 }}>
