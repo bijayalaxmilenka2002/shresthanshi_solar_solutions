@@ -17,6 +17,11 @@ import { Modal } from '../ui/Modal';
 import { Button } from '../ui/Button';
 import { companyConfig } from '../../data/company';
 
+interface GalleryDoc {
+  src: string;
+  caption: string;
+}
+
 interface IntroHighlightCard {
   id: string;
   tag: string;
@@ -25,6 +30,7 @@ interface IntroHighlightCard {
   summary: string;
   imageSrc: string;
   imageAlt: string;
+  galleryImages?: GalleryDoc[];
   highlights: string[];
   linkPath: string;
   linkLabel: string;
@@ -71,8 +77,22 @@ const introCards: IntroHighlightCard[] = [
     title: 'Utility-Led Aggregation & Synchronization',
     summary:
       'Officially registered with DISCOMs (Vendor Code #5493) for utility-led aggregation, feasibility approvals, and fast-track grid synchronization.',
-    imageSrc: '/images/licences/licence-tata-power-discom.jpg',
+    imageSrc: '/images/licences/tpcodl-vendor-registration-certificate.jpg',
     imageAlt: 'DISCOM Empaneled Solar Vendor Certificate',
+    galleryImages: [
+      {
+        src: '/images/licences/tpcodl-vendor-registration-certificate.jpg',
+        caption: 'Official TPCODL Vendor Registration Certificate (Vendor Code #5493)',
+      },
+      {
+        src: '/media/awards-certificates/tpwodl-utility-led-aggregation-award.jpg',
+        caption: 'DISCOM Utility-Led Aggregation Excellence Award & Presentation',
+      },
+      {
+        src: '/images/licences/tpcodl-empanelment-order.jpg',
+        caption: 'Official DISCOM Net-Meter Synchronization Order',
+      },
+    ],
     highlights: [
       'Official DISCOM vendor registration code 5493',
       'Utility-led aggregation execution',
@@ -85,7 +105,7 @@ const introCards: IntroHighlightCard[] = [
       description:
         'M/s Shreshtanshi Construction & Suppliers is an officially recognized vendor by Odisha electricity distribution companies. We manage the entire lifecycle of utility documentation, load sanctions, site feasibility clearance, and DISCOM meter commissioning.',
       points: [
-        'Empaneled vendor for utility-led rooftop aggregation programs',
+        'Empaneled vendor for utility-led rooftop aggregation programs (Vendor Code #5493)',
         'Turnkey liaisoning with local electrical divisions and sub-divisional offices',
         'Compliant with CEA & OERC safety, earthing, and lightning protection standards',
         'Proven track record honored with official DISCOM letters of appreciation',
@@ -152,6 +172,12 @@ const introCards: IntroHighlightCard[] = [
 
 export const HomeCompanyIntroSection: React.FC = () => {
   const [activeModalCard, setActiveModalCard] = useState<IntroHighlightCard | null>(null);
+  const [modalImageIdx, setModalImageIdx] = useState<number>(0);
+
+  const openCardModal = (card: IntroHighlightCard) => {
+    setModalImageIdx(0);
+    setActiveModalCard(card);
+  };
 
   return (
     <section
@@ -244,62 +270,89 @@ export const HomeCompanyIntroSection: React.FC = () => {
             3. 4 RICH VISUAL SHOWCASE CARDS (IMAGE-FORWARD DESIGN)
         ================================================================= */}
         <div className="home-intro-grid">
-          {introCards.map((card) => (
-            <article key={card.id} className="home-intro-card">
-              {/* Media Container with Zoom action */}
-              <div className="home-intro-card__media">
-                <img
-                  src={card.imageSrc}
-                  alt={card.imageAlt}
-                  className="home-intro-card__img"
-                  loading="lazy"
-                />
-                <span className="home-intro-card__tag">{card.tag}</span>
-                <button
-                  type="button"
-                  className="home-intro-card__zoom-btn"
-                  onClick={() => setActiveModalCard(card)}
-                  title={`Inspect ${card.title}`}
-                  aria-label={`Inspect ${card.title}`}
-                >
-                  <Maximize2 size={16} />
-                </button>
-              </div>
+          {introCards.map((card) => {
+            // Apply single-card streamlined layout for Card 2 as requested by user
+            const isStreamlinedCard = card.id === 'discom-empanelment';
 
-              {/* Card Body */}
-              <div className="home-intro-card__body">
-                <div className="home-intro-card__meta">
-                  <span className="home-intro-card__category">
-                    <ShieldCheck size={13} className="home-intro-card__category-icon" />
-                    <span>{card.category}</span>
-                  </span>
-                </div>
-
-                <h3 className="home-intro-card__title">{card.title}</h3>
-
-                <p className="home-intro-card__summary">{card.summary}</p>
-
-                {/* Footer with Links */}
-                <div className="home-intro-card__footer">
-                  <Link to={card.linkPath} className="home-intro-card__link">
-                    <span>{card.linkLabel}</span>
-                    <ArrowRight size={15} />
-                  </Link>
+            return (
+              <article key={card.id} className="home-intro-card">
+                {/* Media Container with Zoom action */}
+                <div className="home-intro-card__media">
+                  <img
+                    src={card.imageSrc}
+                    alt={card.imageAlt}
+                    className="home-intro-card__img"
+                    loading="lazy"
+                  />
+                  <span className="home-intro-card__tag">{card.tag}</span>
                   <button
                     type="button"
-                    className="home-intro-card__details-btn"
-                    onClick={() => setActiveModalCard(card)}
+                    className="home-intro-card__zoom-btn"
+                    onClick={() => openCardModal(card)}
+                    title={`Inspect ${card.title}`}
+                    aria-label={`Inspect ${card.title}`}
                   >
-                    Details
+                    <Maximize2 size={16} />
                   </button>
                 </div>
-              </div>
-            </article>
-          ))}
+
+                {/* Card Body */}
+                <div className="home-intro-card__body">
+                  <div className="home-intro-card__meta">
+                    <span className="home-intro-card__category">
+                      <ShieldCheck size={13} className="home-intro-card__category-icon" />
+                      <span>{card.category}</span>
+                    </span>
+                  </div>
+
+                  <h3 className="home-intro-card__title">{card.title}</h3>
+
+                  {/* If streamlined card: description is removed and only clickable Details button is shown */}
+                  {isStreamlinedCard ? (
+                    <div style={{ marginTop: 'auto', paddingTop: '0.75rem' }}>
+                      <button
+                        type="button"
+                        className="ui-btn ui-btn--primary ui-btn--sm"
+                        style={{
+                          width: '100%',
+                          justifyContent: 'center',
+                          fontWeight: 700,
+                          padding: '0.65rem 1rem',
+                        }}
+                        onClick={() => openCardModal(card)}
+                      >
+                        <span>Details</span>
+                        <ArrowRight size={15} />
+                      </button>
+                    </div>
+                  ) : (
+                    <>
+                      <p className="home-intro-card__summary">{card.summary}</p>
+
+                      {/* Footer with Links */}
+                      <div className="home-intro-card__footer">
+                        <Link to={card.linkPath} className="home-intro-card__link">
+                          <span>{card.linkLabel}</span>
+                          <ArrowRight size={15} />
+                        </Link>
+                        <button
+                          type="button"
+                          className="home-intro-card__details-btn"
+                          onClick={() => openCardModal(card)}
+                        >
+                          Details
+                        </button>
+                      </div>
+                    </>
+                  )}
+                </div>
+              </article>
+            );
+          })}
         </div>
 
         {/* =================================================================
-            4. LIGHTBOX DETAIL MODAL
+            4. LIGHTBOX DETAIL MODAL (WITH MULTI-IMAGE GALLERY SUPPORT)
         ================================================================= */}
         {activeModalCard && (
           <Modal
@@ -308,14 +361,55 @@ export const HomeCompanyIntroSection: React.FC = () => {
             className="home-intro-modal"
           >
             <div className="home-intro-modal-content">
+              {/* Media viewer with current active image */}
               <div className="home-intro-modal-media">
                 <img
-                  src={activeModalCard.imageSrc}
-                  alt={activeModalCard.imageAlt}
+                  src={
+                    activeModalCard.galleryImages && activeModalCard.galleryImages.length > 0
+                      ? activeModalCard.galleryImages[modalImageIdx].src
+                      : activeModalCard.imageSrc
+                  }
+                  alt={
+                    activeModalCard.galleryImages && activeModalCard.galleryImages.length > 0
+                      ? activeModalCard.galleryImages[modalImageIdx].caption
+                      : activeModalCard.imageAlt
+                  }
                   className="home-intro-modal-img"
                 />
                 <span className="home-intro-modal-badge">{activeModalCard.tag}</span>
               </div>
+
+              {/* Multi-Image Gallery Selector if multiple images available */}
+              {activeModalCard.galleryImages && activeModalCard.galleryImages.length > 1 && (
+                <div style={{ display: 'flex', gap: '0.6rem', overflowX: 'auto', padding: '0.4rem 0' }}>
+                  {activeModalCard.galleryImages.map((img, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      onClick={() => setModalImageIdx(idx)}
+                      style={{
+                        flex: '0 0 auto',
+                        width: '78px',
+                        height: '52px',
+                        borderRadius: '8px',
+                        overflow: 'hidden',
+                        border: modalImageIdx === idx ? '2.5px solid var(--color-forest-green)' : '1px solid var(--border-medium)',
+                        opacity: modalImageIdx === idx ? 1 : 0.65,
+                        cursor: 'pointer',
+                        padding: 0,
+                        backgroundColor: '#0B2419',
+                        transition: 'all 0.2s ease',
+                      }}
+                    >
+                      <img
+                        src={img.src}
+                        alt={img.caption}
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                      />
+                    </button>
+                  ))}
+                </div>
+              )}
 
               <div className="home-intro-modal-body">
                 <span className="home-intro-card__category" style={{ marginBottom: '0.4rem' }}>
