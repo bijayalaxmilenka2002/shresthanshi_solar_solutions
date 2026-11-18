@@ -318,13 +318,14 @@ export const AboutPage: React.FC = () => {
                   cursor: 'pointer',
                   display: 'flex',
                   flexDirection: 'column',
+                  height: '100%',
                 }}
               >
-                <div style={{ position: 'relative', width: '100%', aspectRatio: '16/11', backgroundColor: '#0B2419' }}>
+                <div style={{ position: 'relative', width: '100%', aspectRatio: '16/11', overflow: 'hidden', backgroundColor: '#0B2419', flexShrink: 0 }}>
                   <img
                     src={item.fileUrl}
                     alt={item.title}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                     loading="lazy"
                   />
                   <span style={{ position: 'absolute', top: '10px', left: '10px', backgroundColor: 'rgba(23,75,53,0.92)', color: '#FFFFFF', fontSize: '0.72rem', fontWeight: 700, padding: '0.25rem 0.65rem', borderRadius: '999px' }}>
@@ -338,14 +339,17 @@ export const AboutPage: React.FC = () => {
                   <span style={{ fontSize: '0.74rem', fontWeight: 700, color: 'var(--color-forest-green)', textTransform: 'uppercase', marginBottom: '0.35rem' }}>
                     {item.verifiedBy}
                   </span>
-                  <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.05rem', fontWeight: 700, color: 'var(--color-forest-green)', marginBottom: '0.5rem', lineHeight: 1.35, minHeight: '2.8rem' }}>
+                  <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.05rem', fontWeight: 800, color: 'var(--color-forest-green)', marginBottom: '0.5rem', lineHeight: 1.35, minHeight: '2.85rem', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                     {item.title}
                   </h4>
-                  <p style={{ fontSize: '0.85rem', color: 'var(--text-body)', lineHeight: 1.5, margin: 0, flexGrow: 1 }}>
+                  <p style={{ fontSize: '0.85rem', color: 'var(--text-body)', lineHeight: 1.5, margin: '0 0 1rem', minHeight: '3.85rem', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                     {item.description}
                   </p>
-                  <div style={{ paddingTop: '0.75rem', marginTop: '0.85rem', borderTop: '1px solid var(--border-subtle)', display: 'flex', justifyContent: 'space-between', fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-                    <span>{item.location}</span>
+                  <div style={{ paddingTop: '0.75rem', marginTop: 'auto', borderTop: '1px solid var(--border-subtle)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.78rem', color: 'var(--text-muted)' }}>
+                    <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                      <MapPin size={13} color="var(--color-forest-green)" style={{ flexShrink: 0 }} />
+                      <span>{item.location}</span>
+                    </span>
                     <span>{item.date}</span>
                   </div>
                 </div>
@@ -440,13 +444,14 @@ export const AboutPage: React.FC = () => {
                   cursor: 'pointer',
                   display: 'flex',
                   flexDirection: 'column',
+                  height: '100%',
                 }}
               >
-                <div style={{ position: 'relative', width: '100%', aspectRatio: '16/10', backgroundColor: '#0B2419' }}>
+                <div style={{ position: 'relative', width: '100%', aspectRatio: '16/10', overflow: 'hidden', backgroundColor: '#0B2419', flexShrink: 0 }}>
                   <img
                     src={video.thumbnailUrl || '/images/solar/solar-site-assessment.jpg'}
                     alt={video.title}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 20%', display: 'block' }}
                     loading="lazy"
                   />
                   <div
@@ -455,8 +460,8 @@ export const AboutPage: React.FC = () => {
                       top: '50%',
                       left: '50%',
                       transform: 'translate(-50%, -50%)',
-                      width: '56px',
-                      height: '56px',
+                      width: '52px',
+                      height: '52px',
                       borderRadius: '50%',
                       backgroundColor: 'rgba(23,75,53,0.92)',
                       color: '#FFFFFF',
@@ -466,19 +471,28 @@ export const AboutPage: React.FC = () => {
                       boxShadow: '0 4px 16px rgba(0,0,0,0.3)',
                     }}
                   >
-                    <Play size={24} style={{ marginLeft: '3px' }} />
+                    <Play size={22} style={{ marginLeft: '3px' }} />
                   </div>
                   <span style={{ position: 'absolute', bottom: '10px', left: '10px', backgroundColor: 'rgba(0,0,0,0.75)', color: '#FFFFFF', fontSize: '0.72rem', fontWeight: 600, padding: '0.2rem 0.55rem', borderRadius: '4px' }}>
                     {video.badge}
                   </span>
                 </div>
-                <div style={{ padding: '1.25rem' }}>
-                  <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.05rem', fontWeight: 700, color: 'var(--color-forest-green)', marginBottom: '0.45rem' }}>
+                <div style={{ padding: '1.25rem', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
+                  <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.05rem', fontWeight: 800, color: 'var(--color-forest-green)', marginBottom: '0.45rem', lineHeight: 1.35, minHeight: '2.85rem', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                     {video.title}
                   </h4>
-                  <p style={{ fontSize: '0.85rem', color: 'var(--text-body)', lineHeight: 1.5, margin: 0 }}>
+                  <p style={{ fontSize: '0.85rem', color: 'var(--text-body)', lineHeight: 1.5, margin: '0 0 1rem', minHeight: '3.85rem', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                     {video.description}
                   </p>
+                  <div style={{ paddingTop: '0.75rem', marginTop: 'auto', borderTop: '1px solid var(--border-subtle)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.78rem', color: 'var(--text-muted)' }}>
+                    <span style={{ display: 'flex', alignItems: 'center', gap: '4px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '65%' }}>
+                      <MapPin size={13} color="var(--color-forest-green)" style={{ flexShrink: 0 }} />
+                      <span>{video.location || 'Odisha Field Site'}</span>
+                    </span>
+                    <span style={{ fontWeight: 700, color: 'var(--color-forest-green)', display: 'inline-flex', alignItems: 'center', gap: '3px', flexShrink: 0 }}>
+                      Watch Video &rarr;
+                    </span>
+                  </div>
                 </div>
               </Card>
             ))}
@@ -497,13 +511,14 @@ export const AboutPage: React.FC = () => {
                   cursor: 'pointer',
                   display: 'flex',
                   flexDirection: 'column',
+                  height: '100%',
                 }}
               >
-                <div style={{ position: 'relative', width: '100%', aspectRatio: '16/10', backgroundColor: '#0B2419' }}>
+                <div style={{ position: 'relative', width: '100%', aspectRatio: '16/10', overflow: 'hidden', backgroundColor: '#0B2419', flexShrink: 0 }}>
                   <img
                     src={summit.fileUrl}
                     alt={summit.title}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 20%', display: 'block' }}
                     loading="lazy"
                   />
                   <span style={{ position: 'absolute', top: '10px', left: '10px', backgroundColor: 'rgba(23,75,53,0.92)', color: '#FFFFFF', fontSize: '0.72rem', fontWeight: 700, padding: '0.25rem 0.65rem', borderRadius: '999px' }}>
@@ -513,16 +528,21 @@ export const AboutPage: React.FC = () => {
                     <Maximize2 size={15} />
                   </div>
                 </div>
-                <div style={{ padding: '1.25rem' }}>
-                  <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.05rem', fontWeight: 700, color: 'var(--color-forest-green)', marginBottom: '0.45rem' }}>
+                <div style={{ padding: '1.25rem', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
+                  <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.05rem', fontWeight: 800, color: 'var(--color-forest-green)', marginBottom: '0.45rem', lineHeight: 1.35, minHeight: '2.85rem', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                     {summit.title}
                   </h4>
-                  <p style={{ fontSize: '0.85rem', color: 'var(--text-body)', lineHeight: 1.5, margin: 0 }}>
+                  <p style={{ fontSize: '0.85rem', color: 'var(--text-body)', lineHeight: 1.5, margin: '0 0 1rem', minHeight: '3.85rem', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                     {summit.description}
                   </p>
-                  <div style={{ paddingTop: '0.75rem', marginTop: '0.85rem', borderTop: '1px solid var(--border-subtle)', display: 'flex', justifyContent: 'space-between', fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-                    <span>{summit.location}</span>
-                    <span>{summit.date}</span>
+                  <div style={{ paddingTop: '0.75rem', marginTop: 'auto', borderTop: '1px solid var(--border-subtle)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.78rem', color: 'var(--text-muted)' }}>
+                    <span style={{ display: 'flex', alignItems: 'center', gap: '4px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '65%' }}>
+                      <MapPin size={13} color="var(--color-forest-green)" style={{ flexShrink: 0 }} />
+                      <span>{summit.location}</span>
+                    </span>
+                    <span style={{ fontWeight: 700, color: 'var(--color-forest-green)', display: 'inline-flex', alignItems: 'center', gap: '3px', flexShrink: 0 }}>
+                      View Photo &rarr;
+                    </span>
                   </div>
                 </div>
               </Card>
