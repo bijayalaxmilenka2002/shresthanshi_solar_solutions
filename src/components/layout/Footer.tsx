@@ -8,10 +8,11 @@ import { companyConfig } from '../../data/company';
 import { footerLegalLinks } from '../../data/navigation';
 import { getSolarSolutions } from '../../data/solutions';
 import { useSolarGuideModal } from '../../hooks/useSolarGuideModal';
-import { useSiteSettings } from '../../app/providers';
+import { useSiteSettings, useTrackModal } from '../../app/providers';
 
 export const Footer: React.FC = () => {
   const { openGuideModal } = useSolarGuideModal();
+  const { openTrackModal } = useTrackModal();
   const { settings } = useSiteSettings();
   const solutions = getSolarSolutions();
 
@@ -106,6 +107,27 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <Link to="/contact">Contact Us</Link>
+              </li>
+              <li style={{ marginTop: '0.4rem' }}>
+                <button
+                  type="button"
+                  onClick={() => openTrackModal()}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    padding: 0,
+                    color: 'var(--color-soft-green)',
+                    cursor: 'pointer',
+                    fontWeight: 700,
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.35rem',
+                    textAlign: 'left',
+                  }}
+                >
+                  <span>Track Application Status</span>
+                  <span style={{ fontSize: '0.65rem', backgroundColor: '#22C55E', color: '#FFFFFF', padding: '0.1rem 0.4rem', borderRadius: '4px', fontWeight: 800 }}>LIVE</span>
+                </button>
               </li>
             </ul>
           </div>

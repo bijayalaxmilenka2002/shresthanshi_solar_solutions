@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
-import { ChevronDown, Menu, Phone, BookOpen, ArrowUpRight, ArrowRight } from 'lucide-react';
+import { ChevronDown, Menu, Phone, BookOpen, ArrowUpRight, ArrowRight, Clock } from 'lucide-react';
 import { Container } from '../ui/Container';
 import { Button } from '../ui/Button';
 import { Logo } from '../common/Logo';
@@ -9,7 +9,7 @@ import { getPrimaryNavigation } from '../../data/navigation';
 import { companyConfig } from '../../data/company';
 import { useSolarGuideModal } from '../../hooks/useSolarGuideModal';
 import { useQuoteModal } from '../../hooks/useQuoteModal';
-import { useSiteSettings } from '../../app/providers';
+import { useSiteSettings, useTrackModal } from '../../app/providers';
 
 export const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -18,6 +18,7 @@ export const Header: React.FC = () => {
   const location = useLocation();
   const { openGuideModal } = useSolarGuideModal();
   const { openQuoteModal } = useQuoteModal();
+  const { openTrackModal } = useTrackModal();
   const { settings } = useSiteSettings();
   const navItems = getPrimaryNavigation();
 
@@ -107,6 +108,21 @@ export const Header: React.FC = () => {
             <span className="top-bar__hide-sm" title="Head Office in Kalahandi, with Sub-Branch in Bhubaneswar, Odisha">Kalahandi (HQ) • Bhubaneswar Sub-Branch</span>
           </div>
           <div className="top-bar__right">
+            <button
+              type="button"
+              className="top-bar__guide-trigger"
+              onClick={() => openTrackModal()}
+              style={{
+                backgroundColor: 'rgba(23, 75, 53, 0.08)',
+                color: 'var(--color-forest-green)',
+                border: '1px solid var(--border-medium)',
+                fontWeight: 700,
+              }}
+              title="Track your solar application or quote status live"
+            >
+              <Clock size={13} />
+              <span>Track Application</span>
+            </button>
             <button
               type="button"
               className="top-bar__guide-trigger"

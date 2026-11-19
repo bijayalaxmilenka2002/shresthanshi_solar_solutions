@@ -13,11 +13,15 @@ import {
   ArrowRight,
   ShieldCheck,
   ChevronDown,
+  Copy,
+  Check,
+  Clock,
 } from 'lucide-react';
 import { Modal } from '../ui/Modal';
 import { Input, Textarea } from '../ui/Input';
 import { Button } from '../ui/Button';
 import { useQuoteModal } from '../../hooks/useQuoteModal';
+import { useTrackModal } from '../../app/providers';
 import { submitQuoteRequest } from '../../services/enquiryService';
 
 interface QuoteErrors {
@@ -107,6 +111,7 @@ const SOLAR_CONFIGS: SolarTypeConfig[] = [
 
 export const QuoteModal: React.FC = () => {
   const { isQuoteModalOpen, quotePrefillType, closeQuoteModal } = useQuoteModal();
+  const { openTrackModal } = useTrackModal();
 
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
@@ -120,6 +125,14 @@ export const QuoteModal: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [referenceId, setReferenceId] = useState('');
+  const [copiedId, setCopiedId] = useState(false);
+
+  const handleCopyReference = () => {
+    if (!referenceId) return;
+    navigator.clipboard.writeText(referenceId);
+    setCopiedId(true);
+    setTimeout(() => setCopiedId(false), 2500);
+  };
 
   // Find active config
   const activeConfig =
@@ -286,21 +299,48 @@ export const QuoteModal: React.FC = () => {
               padding: '0.85rem 1.25rem',
               margin: '1.25rem auto',
               maxWidth: '340px',
+              position: 'relative',
             }}
           >
             <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-              Reference ID
+              Reference ID (Saved to Live Database)
             </div>
             <div
               style={{
-                fontFamily: 'var(--font-heading)',
-                fontSize: '1.35rem',
-                fontWeight: 800,
-                color: 'var(--color-forest-green)',
-                marginTop: '0.15rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '0.5rem',
+                marginTop: '0.2rem',
               }}
             >
-              {referenceId}
+              <span
+                style={{
+                  fontFamily: 'var(--font-heading)',
+                  fontSize: '1.4rem',
+                  fontWeight: 800,
+                  color: 'var(--color-forest-green)',
+                  letterSpacing: '0.04em',
+                }}
+              >
+                {referenceId}
+              </span>
+              <button
+                type="button"
+                onClick={handleCopyReference}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  color: copiedId ? '#16A34A' : 'var(--color-forest-green)',
+                  padding: '4px',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                }}
+                title="Copy Reference ID"
+              >
+                {copiedId ? <Check size={18} /> : <Copy size={18} />}
+              </button>
             </div>
           </div>
 
@@ -317,12 +357,40 @@ export const QuoteModal: React.FC = () => {
           </p>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', maxWidth: '380px', margin: '0 auto' }}>
+            <Button
+              type="button"
+              variant="primary"
+              size="md"
+              fullWidth
+              iconLeft={<Clock size={16} />}
+              onClick={() => {
+                const currentRef = referenceId;
+                handleResetAndClose();
+                openTrackModal(currentRef);
+              }}
+            >
+              Track Live Application Status
+            </Button>
+
             <a
               href={`https://wa.me/919438080874?text=${whatsappMessage}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="ui-btn ui-btn--primary"
-              style={{ display: 'inline-flex', width: '100%', justifyContent: 'center', gap: '0.5rem', minHeight: '46px' }}
+              className="ui-btn ui-btn--secondary"
+              style={{
+                display: 'inline-flex',
+                width: '100%',
+                justifyContent: 'center',
+                gap: '0.5rem',
+                minHeight: '44px',
+                backgroundColor: '#25D366',
+                color: '#FFFFFF',
+                border: 'none',
+                fontWeight: 700,
+                borderRadius: '8px',
+                alignItems: 'center',
+                textDecoration: 'none',
+              }}
             >
               <MessageCircle size={18} />
               <span>Connect on WhatsApp Instantly</span>

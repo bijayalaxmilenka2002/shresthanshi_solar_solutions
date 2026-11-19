@@ -19,6 +19,11 @@ interface ModalContextValue {
   openQuoteModal: (prefillType?: string) => void;
   closeQuoteModal: () => void;
 
+  isTrackModalOpen: boolean;
+  trackPrefillQuery: string;
+  openTrackModal: (prefillQuery?: string) => void;
+  closeTrackModal: () => void;
+
   settings: SiteSettings;
   updateSettings: (newSettings: SiteSettings) => void;
   resetSettings: () => void;
@@ -32,6 +37,9 @@ export const AppProviders: React.FC<{ children: React.ReactNode }> = ({ children
 
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
   const [quotePrefillType, setQuotePrefillType] = useState('Residential Rooftop Solar');
+
+  const [isTrackModalOpen, setIsTrackModalOpen] = useState(false);
+  const [trackPrefillQuery, setTrackPrefillQuery] = useState('');
 
   const [settings, setSettings] = useState<SiteSettings>(loadSiteSettings);
 
@@ -72,6 +80,15 @@ export const AppProviders: React.FC<{ children: React.ReactNode }> = ({ children
     setIsQuoteModalOpen(false);
   }, []);
 
+  const openTrackModal = useCallback((prefillQuery = '') => {
+    setTrackPrefillQuery(prefillQuery);
+    setIsTrackModalOpen(true);
+  }, []);
+
+  const closeTrackModal = useCallback(() => {
+    setIsTrackModalOpen(false);
+  }, []);
+
   const updateSettings = useCallback((newSettings: SiteSettings) => {
     saveSiteSettings(newSettings);
     setSettings(newSettings);
@@ -93,6 +110,10 @@ export const AppProviders: React.FC<{ children: React.ReactNode }> = ({ children
         quotePrefillType,
         openQuoteModal,
         closeQuoteModal,
+        isTrackModalOpen,
+        trackPrefillQuery,
+        openTrackModal,
+        closeTrackModal,
         settings,
         updateSettings,
         resetSettings,
@@ -138,6 +159,19 @@ export const useQuoteModal = () => {
     quotePrefillType: context.quotePrefillType,
     openQuoteModal: context.openQuoteModal,
     closeQuoteModal: context.closeQuoteModal,
+  };
+};
+
+export const useTrackModal = () => {
+  const context = useContext(ModalContext);
+  if (!context) {
+    throw new Error('useTrackModal must be used within AppProviders');
+  }
+  return {
+    isTrackModalOpen: context.isTrackModalOpen,
+    trackPrefillQuery: context.trackPrefillQuery,
+    openTrackModal: context.openTrackModal,
+    closeTrackModal: context.closeTrackModal,
   };
 };
 

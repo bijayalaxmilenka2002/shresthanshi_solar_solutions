@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
-import { X, ChevronDown, Phone, BookOpen, Mail } from 'lucide-react';
+import { X, ChevronDown, Phone, BookOpen, Mail, Clock } from 'lucide-react';
 import { Logo } from '../common/Logo';
 import { Button } from '../ui/Button';
 import { getPrimaryNavigation } from '../../data/navigation';
 import { companyConfig } from '../../data/company';
 import { useSolarGuideModal } from '../../hooks/useSolarGuideModal';
 import { useQuoteModal } from '../../hooks/useQuoteModal';
-import { useSiteSettings } from '../../app/providers';
+import { useSiteSettings, useTrackModal } from '../../app/providers';
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -20,6 +20,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
   const navItems = getPrimaryNavigation();
   const { openGuideModal } = useSolarGuideModal();
   const { openQuoteModal } = useQuoteModal();
+  const { openTrackModal } = useTrackModal();
   const { settings } = useSiteSettings();
 
   useEffect(() => {
@@ -157,6 +158,18 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
             }}
           >
             Get a Quote
+          </Button>
+          <Button
+            variant="outline"
+            size="md"
+            fullWidth
+            iconLeft={<Clock size={16} />}
+            onClick={() => {
+              onClose();
+              openTrackModal();
+            }}
+          >
+            Track Application Status
           </Button>
           <Button
             variant="secondary"

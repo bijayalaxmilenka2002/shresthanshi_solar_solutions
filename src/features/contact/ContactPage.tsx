@@ -24,7 +24,7 @@ import { SEO } from '../../components/common/SEO';
 import { companyConfig } from '../../data/company';
 import { submitContactEnquiry } from '../../services/enquiryService';
 import { useSolarGuideModal } from '../../hooks/useSolarGuideModal';
-import { useSiteSettings } from '../../app/providers';
+import { useSiteSettings, useTrackModal } from '../../app/providers';
 
 interface ContactErrors {
   name?: string;
@@ -37,6 +37,7 @@ interface ContactErrors {
 export const ContactPage: React.FC = () => {
   const [searchParams] = useSearchParams();
   const { openGuideModal } = useSolarGuideModal();
+  const { openTrackModal } = useTrackModal();
   const { settings } = useSiteSettings();
 
   const [name, setName] = useState('');
@@ -686,9 +687,32 @@ export const ContactPage: React.FC = () => {
             <div className="contact-layout__form">
               <Card variant="white" padding="lg" className="contact-form-card">
                 <div style={{ marginBottom: '1.5rem' }}>
-                  <span className="badge" style={{ marginBottom: '0.5rem' }}>
-                    <MessageSquare size={14} /> Solar Assessment &amp; Enquiry Form
-                  </span>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                    <span className="badge">
+                      <MessageSquare size={14} /> Solar Assessment &amp; Enquiry Form
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => openTrackModal()}
+                      style={{
+                        background: 'none',
+                        border: 'none',
+                        color: 'var(--color-forest-green)',
+                        fontSize: '0.82rem',
+                        fontWeight: 700,
+                        cursor: 'pointer',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '0.35rem',
+                        padding: '0.2rem 0.5rem',
+                        borderRadius: '6px',
+                        backgroundColor: 'var(--color-soft-green)',
+                      }}
+                    >
+                      <Clock size={13} />
+                      <span>Already submitted? Track status</span>
+                    </button>
+                  </div>
                   <h2>Tell Us About Your Solar Requirement</h2>
                   <p style={{ fontSize: 'var(--text-sm)', color: 'var(--text-muted)', marginTop: '0.25rem' }}>
                     Fill in your details below and select your preferred contact method. Our team will respond with clear, site-specific guidance.
@@ -701,19 +725,63 @@ export const ContactPage: React.FC = () => {
                       <CheckCircle2 size={40} />
                     </div>
                     <h3>Thank You! Your Solar Enquiry Has Been Received.</h3>
+                    <div
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                        backgroundColor: 'var(--color-soft-green)',
+                        color: 'var(--color-forest-green)',
+                        padding: '0.4rem 0.85rem',
+                        borderRadius: '8px',
+                        fontFamily: 'monospace',
+                        fontWeight: 800,
+                        fontSize: '1rem',
+                        margin: '0.5rem 0 1rem',
+                      }}
+                    >
+                      <span>Reference ID: {referenceId}</span>
+                    </div>
                     <p>
-                      We have logged your enquiry under Reference ID <strong>{referenceId}</strong> for{' '}
-                      <strong>{solutionInterest}</strong> ({customerType}).
+                      We have logged your enquiry for <strong>{solutionInterest}</strong> ({customerType}) securely in our engineering database.
                     </p>
                     <p>
                       Our engineering team (Kalahandi Head Office &amp; Bhubaneswar Sub-Branch) will reach out to <strong>{name}</strong> via your preferred contact method (<strong>{preferredContactMethod}</strong> at <strong>{preferredContactMethod === 'Email' ? email : phone}</strong>).
                     </p>
-                    <div style={{ marginTop: '1.5rem', display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-                      <Button variant="primary" size="md" onClick={handleReset}>
-                        Submit Another Enquiry
+                    <div style={{ marginTop: '1.5rem', display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+                      <Button
+                        type="button"
+                        variant="primary"
+                        size="md"
+                        iconLeft={<Clock size={16} />}
+                        onClick={() => openTrackModal(referenceId)}
+                      >
+                        Track Status Live
                       </Button>
-                      <Button href={companyConfig.contact.primaryPhoneHref} variant="outline" size="md">
-                        Call {companyConfig.contact.primaryPhoneDisplay}
+                      <a
+                        href={`https://wa.me/91${companyConfig.contact.primaryPhone.replace(/\D/g, '')}?text=${encodeURIComponent(
+                          `Hello Shresthanshi Solar Solutions! I have submitted an assessment enquiry (Ref: ${referenceId}) for ${solutionInterest}. Name: ${name}, Phone: ${phone}.`
+                        )}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '0.45rem',
+                          backgroundColor: '#25D366',
+                          color: '#FFFFFF',
+                          padding: '0.65rem 1.25rem',
+                          borderRadius: '8px',
+                          fontWeight: 700,
+                          fontSize: '0.92rem',
+                          textDecoration: 'none',
+                        }}
+                      >
+                        <MessageCircle size={17} />
+                        <span>Chat on WhatsApp</span>
+                      </a>
+                      <Button variant="outline" size="md" onClick={handleReset}>
+                        Submit Another Enquiry
                       </Button>
                     </div>
                   </div>

@@ -170,6 +170,7 @@ export const OwnerPortalPage: React.FC = () => {
   // Database Connection & Cloud Sync State
   const [dbStatus, setDbStatus] = useState<{ connected: boolean; configured: boolean; database?: string; latencyMs?: number } | null>(null);
   const [isSyncing, setIsSyncing] = useState(false);
+  const [syncedLeadId, setSyncedLeadId] = useState<string | null>(null);
 
   const checkDatabaseHealth = async () => {
     try {
@@ -289,11 +290,15 @@ export const OwnerPortalPage: React.FC = () => {
   const handleStatusChange = (id: string, newStatus: LeadStatus) => {
     updateLeadStatus(id, newStatus);
     setLeads(getAllLeads());
+    setSyncedLeadId(id);
+    setTimeout(() => setSyncedLeadId(null), 2500);
   };
 
   const handleNotesChange = (id: string, notes: string) => {
     updateLeadNotes(id, notes);
     setLeads(getAllLeads());
+    setSyncedLeadId(id);
+    setTimeout(() => setSyncedLeadId(null), 2500);
   };
 
   const handleDeleteLead = (id: string) => {
@@ -1187,6 +1192,25 @@ export const OwnerPortalPage: React.FC = () => {
                                 minute: '2-digit',
                               })}
                             </span>
+
+                            {syncedLeadId === lead.id && (
+                              <span
+                                style={{
+                                  fontSize: '0.72rem',
+                                  fontWeight: 700,
+                                  color: '#15803D',
+                                  backgroundColor: '#DCFCE7',
+                                  padding: '0.15rem 0.5rem',
+                                  borderRadius: '999px',
+                                  display: 'inline-flex',
+                                  alignItems: 'center',
+                                  gap: '0.25rem',
+                                }}
+                              >
+                                <Check size={12} />
+                                <span>Saved to Cloud</span>
+                              </span>
+                            )}
                           </div>
 
                           {/* Status Dropdown & Delete */}

@@ -4,11 +4,14 @@ import { Header } from './Header';
 import { Footer } from './Footer';
 import { FreeSolarGuideModal } from '../common/FreeSolarGuideModal';
 import { QuoteModal } from '../common/QuoteModal';
+import { TrackEnquiryModal } from '../common/TrackEnquiryModal';
 import { ScrollProgressButton } from '../common/ScrollProgressButton';
 import { useScrollReveal } from '../../hooks/useScrollReveal';
+import { useTrackModal } from '../../app/providers';
 
 export const MainLayout: React.FC = () => {
   const { pathname, search } = useLocation();
+  const { isTrackModalOpen, trackPrefillQuery, closeTrackModal } = useTrackModal();
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
@@ -26,6 +29,11 @@ export const MainLayout: React.FC = () => {
       <ScrollProgressButton />
       <FreeSolarGuideModal />
       <QuoteModal />
+      <TrackEnquiryModal
+        isOpen={isTrackModalOpen}
+        onClose={closeTrackModal}
+        initialQuery={trackPrefillQuery}
+      />
     </div>
   );
 };
