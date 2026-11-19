@@ -4907,19 +4907,20 @@
 .service-card__details-btn {
   display: inline-flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 0.45rem;
   width: 100%;
-  padding: 0.55rem 0.85rem;
+  padding: 0.58rem 0.9rem;
   border-radius: 10px;
-  border: 1px solid var(--border-medium);
+  border: 1.5px solid var(--border-medium);
   background-color: #F8FAFC;
   color: var(--color-forest-green);
   font-family: var(--font-heading);
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-size: 0.82rem;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.2s ease;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.55rem;
   box-sizing: border-box;
 }
 
@@ -4927,21 +4928,7 @@
   background-color: var(--color-soft-green);
   border-color: var(--color-forest-green);
   color: var(--color-forest-green);
-}
-
-.service-card__details-btn--expanded {
-  background-color: var(--color-soft-green);
-  border-color: var(--color-forest-green);
-}
-
-.service-card__expanded-content {
-  margin-bottom: 0.75rem;
-  padding: 0.75rem 0.85rem;
-  background-color: #F8FAFC;
-  border-radius: 10px;
-  border: 1px dashed var(--border-medium);
-  animation: pageFadeRise 0.22s ease both;
-  box-sizing: border-box;
+  transform: translateY(-1px);
 }
 
 @media (max-width: 768px) {

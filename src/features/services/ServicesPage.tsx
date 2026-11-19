@@ -12,7 +12,6 @@ import {
   ShieldCheck,
   FileCheck2,
   MapPin,
-  ChevronDown,
   Info,
 } from 'lucide-react';
 import { Container } from '../../components/ui/Container';
@@ -21,8 +20,10 @@ import { Button } from '../../components/ui/Button';
 import { Breadcrumbs } from '../../components/common/Breadcrumbs';
 import { CTASection } from '../../components/common/CTASection';
 import { SEO } from '../../components/common/SEO';
+import { ServiceDetailsModal } from './ServiceDetailsModal';
 import { companyServices } from '../../data/services';
 import { companyConfig } from '../../data/company';
+import { CompanyService } from '../../types';
 
 export const ServicesPage: React.FC = () => {
   const categories = [
@@ -34,15 +35,8 @@ export const ServicesPage: React.FC = () => {
   ] as const;
 
   const [selectedCategory, setSelectedCategory] = useState<string>('All Solar Services');
-  const [expandedServices, setExpandedServices] = useState<Record<string, boolean>>({});
+  const [selectedDetailService, setSelectedDetailService] = useState<CompanyService | null>(null);
   const location = useLocation();
-
-  const toggleServiceExpand = (serviceId: string) => {
-    setExpandedServices((prev) => ({
-      ...prev,
-      [serviceId]: !prev[serviceId],
-    }));
-  };
 
   useEffect(() => {
     if (location.hash === '#solar-street-lighting' || location.search.toLowerCase().includes('street-light')) {
@@ -204,209 +198,172 @@ export const ServicesPage: React.FC = () => {
 
           {/* Services Grid */}
           <div className="services-grid">
-            {filteredServices.map((service) => {
-              const isExpanded = Boolean(expandedServices[service.id]);
-              return (
-                <div
-                  key={service.id}
-                  className="service-card"
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    backgroundColor: 'var(--color-white)',
-                    borderRadius: '20px',
-                    border: '1.5px solid var(--border-medium)',
-                    overflow: 'hidden',
-                    boxShadow: '0 4px 18px rgba(23, 75, 53, 0.05)',
-                    transition: 'transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal)',
-                  }}
-                >
-                  {/* Image Header */}
-                  <div style={{ position: 'relative', width: '100%', aspectRatio: '16/10', overflow: 'hidden', backgroundColor: 'var(--color-soft-green)' }}>
-                    <img
-                      src={service.imageSrc}
-                      alt={service.imageAlt}
-                      style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                      loading="lazy"
-                    />
-                    <div
-                      style={{
-                        position: 'absolute',
-                        top: '0.85rem',
-                        left: '0.85rem',
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '0.4rem',
-                        padding: '0.35rem 0.75rem',
-                        borderRadius: 'var(--radius-full)',
-                        fontFamily: 'var(--font-heading)',
-                        fontSize: '0.74rem',
-                        fontWeight: 700,
-                        backgroundColor: 'rgba(255, 255, 255, 0.94)',
-                        color: 'var(--color-forest-green)',
-                        boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
-                        backdropFilter: 'blur(4px)',
-                      }}
-                    >
-                      {getCategoryIcon(service.category)}
-                      <span>{service.category}</span>
-                    </div>
+            {filteredServices.map((service) => (
+              <div
+                key={service.id}
+                className="service-card"
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  backgroundColor: 'var(--color-white)',
+                  borderRadius: '20px',
+                  border: '1.5px solid var(--border-medium)',
+                  overflow: 'hidden',
+                  boxShadow: '0 4px 18px rgba(23, 75, 53, 0.05)',
+                  transition: 'transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal)',
+                }}
+              >
+                {/* Image Header */}
+                <div style={{ position: 'relative', width: '100%', aspectRatio: '16/10', overflow: 'hidden', backgroundColor: 'var(--color-soft-green)' }}>
+                  <img
+                    src={service.imageSrc}
+                    alt={service.imageAlt}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                    loading="lazy"
+                  />
+                  {/* Category Badge on Top-Left */}
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: '0.85rem',
+                      left: '0.85rem',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.4rem',
+                      padding: '0.35rem 0.75rem',
+                      borderRadius: 'var(--radius-full)',
+                      fontFamily: 'var(--font-heading)',
+                      fontSize: '0.74rem',
+                      fontWeight: 700,
+                      backgroundColor: 'rgba(255, 255, 255, 0.94)',
+                      color: 'var(--color-forest-green)',
+                      boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
+                      backdropFilter: 'blur(4px)',
+                    }}
+                  >
+                    {getCategoryIcon(service.category)}
+                    <span>{service.category}</span>
                   </div>
 
-                  {/* Body */}
-                  <div style={{ padding: '1.35rem 1.35rem 1.25rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
-                    <div
-                      style={{
-                        fontFamily: 'var(--font-body)',
-                        fontSize: '0.74rem',
-                        fontWeight: 700,
-                        letterSpacing: '0.04em',
-                        textTransform: 'uppercase',
-                        color: 'var(--color-forest-green)',
-                        marginBottom: '0.35rem',
-                        opacity: 0.9,
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                      }}
-                      title={service.specsOrHighlight}
-                    >
-                      {service.specsOrHighlight}
-                    </div>
+                  {/* Quick Details Icon Pill on Top-Right */}
+                  <button
+                    type="button"
+                    onClick={() => setSelectedDetailService(service)}
+                    title={`View Technical Scope & Details for ${service.title}`}
+                    aria-label={`View full scope and specifications for ${service.title}`}
+                    style={{
+                      position: 'absolute',
+                      top: '0.85rem',
+                      right: '0.85rem',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.35rem',
+                      padding: '0.35rem 0.65rem',
+                      borderRadius: 'var(--radius-full)',
+                      fontFamily: 'var(--font-heading)',
+                      fontSize: '0.74rem',
+                      fontWeight: 700,
+                      backgroundColor: 'rgba(255, 255, 255, 0.94)',
+                      color: 'var(--color-forest-green)',
+                      border: '1px solid rgba(23, 75, 53, 0.15)',
+                      boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
+                      cursor: 'pointer',
+                      backdropFilter: 'blur(4px)',
+                      transition: 'all 0.2s ease',
+                    }}
+                  >
+                    <Info size={14} />
+                    <span>Details</span>
+                  </button>
+                </div>
 
-                    <h3
-                      style={{
-                        fontFamily: 'var(--font-heading)',
-                        fontSize: '1.2rem',
-                        fontWeight: 700,
-                        lineHeight: 1.3,
-                        color: 'var(--color-forest-green)',
-                        marginBottom: '0.45rem',
-                        minHeight: '3.1rem',
-                        display: '-webkit-box',
-                        WebkitLineClamp: 2,
-                        WebkitBoxOrient: 'vertical',
-                        overflow: 'hidden',
-                      }}
-                    >
-                      {service.title}
-                    </h3>
+                {/* Body */}
+                <div style={{ padding: '1.35rem 1.35rem 1.25rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
+                  <div
+                    style={{
+                      fontFamily: 'var(--font-body)',
+                      fontSize: '0.74rem',
+                      fontWeight: 700,
+                      letterSpacing: '0.04em',
+                      textTransform: 'uppercase',
+                      color: 'var(--color-forest-green)',
+                      marginBottom: '0.35rem',
+                      opacity: 0.9,
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                    }}
+                    title={service.specsOrHighlight}
+                  >
+                    {service.specsOrHighlight}
+                  </div>
 
-                    <p
-                      style={{
-                        fontFamily: 'var(--font-body)',
-                        fontSize: '0.88rem',
-                        lineHeight: 1.55,
-                        color: 'var(--text-body)',
-                        marginBottom: '0.9rem',
-                        minHeight: '4.1rem',
-                        display: '-webkit-box',
-                        WebkitLineClamp: 3,
-                        WebkitBoxOrient: 'vertical',
-                        overflow: 'hidden',
-                      }}
-                    >
-                      {service.description}
-                    </p>
+                  <h3
+                    style={{
+                      fontFamily: 'var(--font-heading)',
+                      fontSize: '1.2rem',
+                      fontWeight: 700,
+                      lineHeight: 1.3,
+                      color: 'var(--color-forest-green)',
+                      marginBottom: '0.45rem',
+                      minHeight: '3.1rem',
+                      display: '-webkit-box',
+                      WebkitLineClamp: 2,
+                      WebkitBoxOrient: 'vertical',
+                      overflow: 'hidden',
+                    }}
+                  >
+                    {service.title}
+                  </h3>
 
-                    {/* Expandable Scope & Details Toggle Button */}
+                  <p
+                    style={{
+                      fontFamily: 'var(--font-body)',
+                      fontSize: '0.88rem',
+                      lineHeight: 1.55,
+                      color: 'var(--text-body)',
+                      marginBottom: '0.9rem',
+                      minHeight: '4.1rem',
+                      display: '-webkit-box',
+                      WebkitLineClamp: 3,
+                      WebkitBoxOrient: 'vertical',
+                      overflow: 'hidden',
+                    }}
+                  >
+                    {service.description}
+                  </p>
+
+                  {/* Actions Footer */}
+                  <div style={{ marginTop: 'auto', paddingTop: '0.75rem', display: 'flex', flexDirection: 'column', gap: '0.55rem' }}>
                     <button
                       type="button"
-                      onClick={() => toggleServiceExpand(service.id)}
-                      aria-expanded={isExpanded}
-                      className={`service-card__details-btn ${isExpanded ? 'service-card__details-btn--expanded' : ''}`}
+                      onClick={() => setSelectedDetailService(service)}
+                      className="service-card__details-btn"
+                      title={`View full technical scope and specifications for ${service.title}`}
                     >
-                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.45rem' }}>
-                        <Info size={14} style={{ color: 'var(--color-forest-green)', flexShrink: 0 }} />
-                        <span>{isExpanded ? 'Hide Scope & Details' : 'View Scope & Details'}</span>
-                      </span>
-                      <ChevronDown
-                        size={15}
-                        style={{
-                          transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
-                          transition: 'transform 0.25s ease',
-                          color: 'var(--color-forest-green)',
-                          flexShrink: 0,
-                        }}
-                      />
+                      <Info size={14} />
+                      <span>Scope &amp; Technical Details</span>
                     </button>
 
-                    {/* Collapsible Key Scope & Target Clients Drawer */}
-                    {isExpanded && (
-                      <div className="service-card__expanded-content">
-                        <div
-                          style={{
-                            fontSize: '0.74rem',
-                            fontWeight: 700,
-                            color: 'var(--color-forest-green)',
-                            marginBottom: '0.45rem',
-                            textTransform: 'uppercase',
-                            letterSpacing: '0.04em',
-                          }}
-                        >
-                          Key Features &amp; Scope:
-                        </div>
-                        <ul
-                          style={{
-                            listStyle: 'none',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            gap: '0.4rem',
-                            padding: 0,
-                            margin: '0 0 0.65rem 0',
-                          }}
-                        >
-                          {service.keyFeatures.map((feat, i) => (
-                            <li
-                              key={i}
-                              style={{
-                                display: 'flex',
-                                alignItems: 'flex-start',
-                                gap: '0.4rem',
-                                fontSize: '0.81rem',
-                                lineHeight: 1.4,
-                                color: 'var(--text-body)',
-                              }}
-                            >
-                              <CheckCircle2
-                                size={13}
-                                style={{ color: 'var(--color-forest-green)', flexShrink: 0, marginTop: '0.15rem' }}
-                              />
-                              <span>{feat}</span>
-                            </li>
-                          ))}
-                        </ul>
-                        <div
-                          style={{
-                            fontSize: '0.74rem',
-                            color: 'var(--text-muted)',
-                            borderTop: '1px solid var(--border-subtle)',
-                            paddingTop: '0.45rem',
-                            lineHeight: 1.4,
-                          }}
-                        >
-                          <strong style={{ color: 'var(--color-forest-green)' }}>Target Clients:</strong>{' '}
-                          {service.targetClients}
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Footer Action Button */}
-                    <div style={{ marginTop: 'auto', paddingTop: '0.65rem' }}>
-                      <Link
-                        to={service.actionPath}
-                        className="end-to-end-card__btn"
-                        style={{ width: '100%', justifyContent: 'center' }}
-                      >
-                        <span>{service.actionText}</span>
-                        <ArrowRight size={15} />
-                      </Link>
-                    </div>
+                    <Link
+                      to={service.actionPath}
+                      className="end-to-end-card__btn"
+                      style={{ width: '100%', justifyContent: 'center' }}
+                    >
+                      <span>{service.actionText}</span>
+                      <ArrowRight size={15} />
+                    </Link>
                   </div>
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
+
+          {/* Service Details Modal Popup */}
+          <ServiceDetailsModal
+            service={selectedDetailService}
+            onClose={() => setSelectedDetailService(null)}
+          />
         </Container>
       </section>
 
