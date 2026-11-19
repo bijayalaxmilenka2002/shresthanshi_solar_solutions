@@ -18,9 +18,6 @@ import {
   Sun,
   User,
   ShieldCheck,
-  ShieldAlert,
-  Users,
-  PhoneCall,
   Plus,
   RefreshCw,
   AlertCircle,
@@ -33,9 +30,7 @@ import {
   LogOut,
   Key,
   Download,
-  AlertTriangle,
   Check,
-  ArrowRight,
 } from 'lucide-react';
 import { Container } from '../../components/ui/Container';
 import { Card } from '../../components/ui/Card';
@@ -54,14 +49,6 @@ import {
   saveLead,
   exportLeadsToCSV,
 } from '../../services/enquiryService';
-import {
-  Employee,
-  EmployeeActivity,
-  VerificationStatus,
-  getAllEmployees,
-  getAllActivities,
-  updateActivityVerification,
-} from '../../services/employeeActivityService';
 import { useSiteSettings } from '../../app/providers';
 import { SiteSettings } from '../../services/siteSettingsService';
 
@@ -118,12 +105,11 @@ export const OwnerPortalPage: React.FC = () => {
       const passHash = await sha256Hex(p);
 
       // Authorized cryptographic hashes:
-      // Usernames: 'admin', 'shubham', 'shubham@shresthanshi.com', 'superadmin'
+      // Usernames: 'admin', 'shubham', 'shubham@shresthanshi.com'
       const validUserHashes = [
         '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', // admin
         '10f6d3ce9d854d1ebfc1ca7d1981fafc122a9970093382f2c5c72cfa6ab47572', // shubham
         '598c261e125de57e8e38ff2e6d86e5f1e376b4a0bf8018c83f19ac9d4c06b1cf', // shubham@shresthanshi.com
-        'd82494f05d6917ba02f7aac2a9099832edd62a167484976126f406091b4ab5d6', // superadmin
       ];
 
       // Password hash: 'shresthanshi2026'
@@ -132,7 +118,6 @@ export const OwnerPortalPage: React.FC = () => {
       if (validUserHashes.includes(userHash) && passHash === validPassHash) {
         // Successful authentication
         sessionStorage.setItem('shresthanshi_owner_auth', 'true');
-        sessionStorage.setItem('shresthanshi_superadmin_auth', 'true');
         sessionStorage.removeItem('shresthanshi_fail_count');
         sessionStorage.removeItem('shresthanshi_lockout_until');
         if (rememberMe) {
@@ -172,12 +157,8 @@ export const OwnerPortalPage: React.FC = () => {
   const [editSettings, setEditSettings] = useState<SiteSettings>(settings);
   const [saveSuccessMsg, setSaveSuccessMsg] = useState(false);
 
-  // Tabs: 'inbox' | 'employees' | 'sections' | 'announcement' | 'contact'
-  const [activeTab, setActiveTab] = useState<'inbox' | 'employees' | 'sections' | 'announcement' | 'contact'>('inbox');
-
-  // Employee oversight & activity audit state
-  const [employeeActivities, setEmployeeActivities] = useState<EmployeeActivity[]>(getAllActivities);
-  const [staffList, setStaffList] = useState<Employee[]>(getAllEmployees);
+  // Tabs: 'inbox' | 'sections' | 'announcement' | 'contact'
+  const [activeTab, setActiveTab] = useState<'inbox' | 'sections' | 'announcement' | 'contact'>('inbox');
 
   // Leads state
   const [leads, setLeads] = useState<UnifiedLead[]>(getAllLeads);
@@ -693,28 +674,6 @@ export const OwnerPortalPage: React.FC = () => {
               </span>
 
               <Link
-                to="/super-admin"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.45rem',
-                  color: '#062919',
-                  backgroundColor: '#10B981',
-                  padding: '0.38rem 0.85rem',
-                  borderRadius: '6px',
-                  fontSize: '0.78rem',
-                  fontWeight: 800,
-                  textDecoration: 'none',
-                  whiteSpace: 'nowrap',
-                  boxShadow: '0 2px 6px rgba(16, 185, 129, 0.3)',
-                }}
-                title="Super Admin Employee Oversight Portal"
-              >
-                <ShieldAlert size={14} />
-                <span>Super Admin (Employee Oversight)</span>
-              </Link>
-
-              <Link
                 to="/"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -811,43 +770,6 @@ export const OwnerPortalPage: React.FC = () => {
                 }}
               >
                 {newLeadsCount > 0 ? `${newLeadsCount} New` : totalLeads}
-              </span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setActiveTab('employees')}
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.45rem',
-                padding: '0.65rem 1rem',
-                borderRadius: '8px 8px 0 0',
-                fontFamily: 'var(--font-heading)',
-                fontSize: '0.88rem',
-                fontWeight: 700,
-                cursor: 'pointer',
-                border: 'none',
-                backgroundColor: activeTab === 'employees' ? '#174B35' : 'transparent',
-                color: activeTab === 'employees' ? '#FFFFFF' : 'var(--color-forest-green)',
-                whiteSpace: 'nowrap',
-                flexShrink: 0,
-                transition: 'all 150ms ease',
-              }}
-            >
-              <Users size={17} />
-              <span>Employee Oversight</span>
-              <span
-                style={{
-                  backgroundColor: activeTab === 'employees' ? '#FFFFFF' : '#10B981',
-                  color: activeTab === 'employees' ? '#174B35' : '#0F3324',
-                  borderRadius: '999px',
-                  padding: '0.1rem 0.5rem',
-                  fontSize: '0.74rem',
-                  fontWeight: 800,
-                }}
-              >
-                {employeeActivities.length} Contacts
               </span>
             </button>
 
@@ -1346,296 +1268,6 @@ export const OwnerPortalPage: React.FC = () => {
                   })}
                 </div>
               )}
-            </div>
-          )}
-
-          {/* =========================================================================
-            TAB: EMPLOYEE OVERSIGHT (SUPER ADMIN CONNECTED VIEW)
-            ========================================================================= */}
-          {activeTab === 'employees' && (
-            <div>
-              {/* Connected Super Admin Bridge Banner */}
-              <Card
-                variant="white"
-                padding="md"
-                style={{
-                  marginBottom: '1.5rem',
-                  borderRadius: '14px',
-                  border: '1.5px solid #10B981',
-                  backgroundColor: '#F0FDF4',
-                  boxShadow: '0 4px 14px rgba(16, 185, 129, 0.08)',
-                }}
-              >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
-                    <div
-                      style={{
-                        width: '44px',
-                        height: '44px',
-                        borderRadius: '10px',
-                        backgroundColor: '#10B981',
-                        color: '#062919',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        fontWeight: 900,
-                        fontSize: '1.2rem',
-                        flexShrink: 0,
-                      }}
-                    >
-                      <ShieldAlert size={22} />
-                    </div>
-                    <div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <h2 style={{ fontSize: '1.15rem', fontWeight: 800, margin: 0, color: '#062919' }}>
-                          Super Admin Oversight &amp; Employee Activity Audit
-                        </h2>
-                        <span
-                          style={{
-                            fontSize: '0.68rem',
-                            fontWeight: 800,
-                            backgroundColor: '#DCFCE7',
-                            color: '#15803D',
-                            padding: '0.15rem 0.5rem',
-                            borderRadius: '999px',
-                            border: '1px solid #86EFAC',
-                            textTransform: 'uppercase',
-                          }}
-                        >
-                          Connected to Super Admin
-                        </span>
-                      </div>
-                      <p style={{ margin: '3px 0 0', fontSize: '0.84rem', color: '#166534', lineHeight: 1.4 }}>
-                        Monitor whether employees are working properly, inspect who they contacted, and verify daily customer calls &amp; site surveys.
-                      </p>
-                    </div>
-                  </div>
-
-                  <Link
-                    to="/super-admin"
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '0.45rem',
-                      backgroundColor: '#174B35',
-                      color: '#FFFFFF',
-                      padding: '0.6rem 1.15rem',
-                      borderRadius: '8px',
-                      fontSize: '0.85rem',
-                      fontWeight: 800,
-                      textDecoration: 'none',
-                      boxShadow: '0 2px 8px rgba(23,75,53,0.2)',
-                    }}
-                  >
-                    <span>Open Full Super Admin Console</span>
-                    <ArrowRight size={15} />
-                  </Link>
-                </div>
-              </Card>
-
-              {/* Oversight Metrics Grid */}
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-                  gap: '1rem',
-                  marginBottom: '1.5rem',
-                }}
-              >
-                <div style={{ backgroundColor: '#FFFFFF', padding: '1rem 1.25rem', borderRadius: '12px', border: '1px solid var(--border-medium)', boxShadow: '0 2px 6px rgba(0,0,0,0.03)' }}>
-                  <div style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', color: 'var(--text-muted)' }}>Staff on Duty</div>
-                  <div style={{ fontSize: '1.5rem', fontWeight: 900, color: 'var(--color-forest-green)', marginTop: '2px' }}>{staffList.length} Active</div>
-                  <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)', marginTop: '2px' }}>Kalahandi HQ &amp; Bhubaneswar</div>
-                </div>
-
-                <div style={{ backgroundColor: '#FFFFFF', padding: '1rem 1.25rem', borderRadius: '12px', border: '1px solid var(--border-medium)', boxShadow: '0 2px 6px rgba(0,0,0,0.03)' }}>
-                  <div style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', color: 'var(--text-muted)' }}>Total Customers Contacted</div>
-                  <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#0369A1', marginTop: '2px' }}>{employeeActivities.length} Contacts</div>
-                  <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)', marginTop: '2px' }}>Calls, Visits &amp; WhatsApp</div>
-                </div>
-
-                <div style={{ backgroundColor: '#FFFFFF', padding: '1rem 1.25rem', borderRadius: '12px', border: '1px solid var(--border-medium)', boxShadow: '0 2px 6px rgba(0,0,0,0.03)' }}>
-                  <div style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', color: 'var(--text-muted)' }}>Verified Proper Work</div>
-                  <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#15803D', marginTop: '2px' }}>
-                    {employeeActivities.filter((a) => a.verificationStatus === 'Verified Work').length} Verified
-                  </div>
-                  <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)', marginTop: '2px' }}>Audited by Super Admin</div>
-                </div>
-
-                <div style={{ backgroundColor: '#FFFFFF', padding: '1rem 1.25rem', borderRadius: '12px', border: '1px solid var(--border-medium)', boxShadow: '0 2px 6px rgba(0,0,0,0.03)' }}>
-                  <div style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', color: 'var(--text-muted)' }}>Flagged Issues</div>
-                  <div style={{ fontSize: '1.5rem', fontWeight: 900, color: employeeActivities.filter((a) => a.verificationStatus === 'Flagged Discrepancy').length > 0 ? '#DC2626' : '#4B5563', marginTop: '2px' }}>
-                    {employeeActivities.filter((a) => a.verificationStatus === 'Flagged Discrepancy').length} Flagged
-                  </div>
-                  <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)', marginTop: '2px' }}>Requires employee review</div>
-                </div>
-              </div>
-
-              {/* Who They Contacted - Detailed Feed */}
-              <div style={{ marginBottom: '1.25rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--color-forest-green)', margin: 0 }}>
-                  Who Employees Contacted &amp; Work Details
-                </h3>
-                <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                  Showing all recorded staff interactions
-                </span>
-              </div>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                {employeeActivities.map((act) => {
-                  const isVerified = act.verificationStatus === 'Verified Work';
-                  const isFlagged = act.verificationStatus === 'Flagged Discrepancy';
-
-                  return (
-                    <Card
-                      key={act.id}
-                      variant="white"
-                      padding="md"
-                      style={{
-                        borderRadius: '14px',
-                        border: isFlagged ? '2px solid #FCA5A5' : isVerified ? '1.5px solid #86EFAC' : '1.5px solid var(--border-medium)',
-                        boxShadow: '0 2px 8px rgba(0,0,0,0.03)',
-                      }}
-                    >
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '0.75rem', marginBottom: '0.75rem' }}>
-                        <div>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
-                            <strong style={{ fontSize: '0.98rem', color: 'var(--color-forest-green)' }}>
-                              {act.employeeName}
-                            </strong>
-                            <span style={{ fontSize: '0.74rem', color: 'var(--text-muted)' }}>
-                              ({act.employeeRole})
-                            </span>
-                            <span
-                              style={{
-                                fontSize: '0.7rem',
-                                fontWeight: 700,
-                                backgroundColor: 'var(--color-soft-green)',
-                                color: 'var(--color-forest-green)',
-                                padding: '0.1rem 0.45rem',
-                                borderRadius: '4px',
-                              }}
-                            >
-                              Logged: {new Date(act.timestamp).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}, {new Date(act.timestamp).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })}
-                            </span>
-                          </div>
-                        </div>
-
-                        {/* Status Badge */}
-                        <span
-                          style={{
-                            fontSize: '0.74rem',
-                            fontWeight: 800,
-                            padding: '0.25rem 0.65rem',
-                            borderRadius: '999px',
-                            backgroundColor: isVerified ? '#DCFCE7' : isFlagged ? '#FEE2E2' : '#FEF3C7',
-                            color: isVerified ? '#15803D' : isFlagged ? '#B91C1C' : '#B45309',
-                            border: `1px solid ${isVerified ? '#86EFAC' : isFlagged ? '#FCA5A5' : '#FDE68A'}`,
-                          }}
-                        >
-                          {act.verificationStatus}
-                        </span>
-                      </div>
-
-                      {/* Customer Contacted Grid */}
-                      <div
-                        style={{
-                          backgroundColor: '#F8FAF9',
-                          borderRadius: '8px',
-                          padding: '0.75rem 1rem',
-                          marginBottom: '0.75rem',
-                          display: 'grid',
-                          gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-                          gap: '0.75rem',
-                          fontSize: '0.84rem',
-                        }}
-                      >
-                        <div>
-                          <div style={{ fontSize: '0.7rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase' }}>Customer</div>
-                          <div style={{ fontWeight: 800, color: 'var(--color-forest-green)' }}>{act.customerName}</div>
-                          <div style={{ fontSize: '0.76rem', color: 'var(--text-muted)' }}>{act.customerLocation}</div>
-                        </div>
-
-                        <div>
-                          <div style={{ fontSize: '0.7rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase' }}>Phone</div>
-                          <a href={`tel:${act.customerPhone}`} style={{ fontWeight: 800, color: '#15803D', textDecoration: 'none' }}>
-                            {act.customerPhone}
-                          </a>
-                        </div>
-
-                        <div>
-                          <div style={{ fontSize: '0.7rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase' }}>Action</div>
-                          <div style={{ fontWeight: 700 }}>{act.activityType}</div>
-                          <div style={{ fontSize: '0.76rem', color: 'var(--text-muted)' }}>{act.durationOrScope}</div>
-                        </div>
-
-                        <div>
-                          <div style={{ fontSize: '0.7rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase' }}>Outcome</div>
-                          <span style={{ fontSize: '0.75rem', fontWeight: 700, backgroundColor: '#E8F2E8', color: 'var(--color-forest-green)', padding: '0.1rem 0.45rem', borderRadius: '4px' }}>
-                            {act.outcome}
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* Work Notes */}
-                      <div style={{ fontSize: '0.86rem', color: 'var(--text-body)', lineHeight: 1.5, marginBottom: '0.65rem' }}>
-                        <strong>Work Notes:</strong> {act.notes}
-                      </div>
-
-                      {/* Super Admin Verification Controls */}
-                      <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.5rem', borderTop: '1px dashed var(--border-subtle)', paddingTop: '0.55rem' }}>
-                        <button
-                          type="button"
-                          onClick={() => {
-                            updateActivityVerification(act.id, 'Verified Work');
-                            setEmployeeActivities(getAllActivities());
-                          }}
-                          style={{
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            gap: '0.3rem',
-                            backgroundColor: isVerified ? '#15803D' : '#DCFCE7',
-                            color: isVerified ? '#FFFFFF' : '#15803D',
-                            border: '1px solid #86EFAC',
-                            padding: '0.28rem 0.65rem',
-                            borderRadius: '6px',
-                            fontSize: '0.74rem',
-                            fontWeight: 700,
-                            cursor: 'pointer',
-                          }}
-                        >
-                          <Check size={12} />
-                          <span>{isVerified ? 'Verified Proper Work' : 'Verify Work'}</span>
-                        </button>
-
-                        <button
-                          type="button"
-                          onClick={() => {
-                            updateActivityVerification(act.id, 'Flagged Discrepancy');
-                            setEmployeeActivities(getAllActivities());
-                          }}
-                          style={{
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            gap: '0.3rem',
-                            backgroundColor: isFlagged ? '#B91C1C' : '#FEE2E2',
-                            color: isFlagged ? '#FFFFFF' : '#B91C1C',
-                            border: '1px solid #FCA5A5',
-                            padding: '0.28rem 0.65rem',
-                            borderRadius: '6px',
-                            fontSize: '0.74rem',
-                            fontWeight: 700,
-                            cursor: 'pointer',
-                          }}
-                        >
-                          <AlertTriangle size={12} />
-                          <span>{isFlagged ? 'Flagged Issue' : 'Flag Discrepancy'}</span>
-                        </button>
-                      </div>
-                    </Card>
-                  );
-                })}
-              </div>
             </div>
           )}
 
