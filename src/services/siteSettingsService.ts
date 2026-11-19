@@ -117,7 +117,7 @@ export const loadSiteSettings = (): SiteSettings => {
   return DEFAULT_SITE_SETTINGS;
 };
 
-export const saveSiteSettings = (settings: SiteSettings): void => {
+export const saveSiteSettings = async (settings: SiteSettings): Promise<void> => {
   try {
     localStorage.setItem(SETTINGS_STORAGE_KEY, JSON.stringify(settings));
     window.dispatchEvent(new Event('site_settings_updated'));
@@ -125,14 +125,20 @@ export const saveSiteSettings = (settings: SiteSettings): void => {
     console.error('Failed to save site settings', err);
   }
 
-  // Asynchronously save to MongoDB Atlas
-  fetch('/api/settings', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ settings }),
-  }).catch((err) => {
+  // Push to MongoDB Atlas with timeout protection
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 4000);
+    await fetch('/api/settings', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ settings }),
+      signal: controller.signal,
+    });
+    clearTimeout(timeoutId);
+  } catch (err: any) {
     console.warn('MongoDB Atlas settings sync offline/pending:', err?.message);
-  });
+  }
 };
 
 /**
@@ -147,6 +153,15 @@ export const syncSiteSettingsFromDatabase = async (): Promise<SiteSettings | nul
         localStorage.setItem(SETTINGS_STORAGE_KEY, JSON.stringify(data.settings));
         window.dispatchEvent(new Event('site_settings_updated'));
         return data.settings;
+      } else if (data.success && !data.settings) {
+        // Cloud DB is connected but empty: seed current default settings to MongoDB Atlas
+        const current = loadSiteSettings();
+        fetch('/api/settings', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ settings: current }),
+        }).catch(() => {});
+        return current;
       }
     }
   } catch (err) {

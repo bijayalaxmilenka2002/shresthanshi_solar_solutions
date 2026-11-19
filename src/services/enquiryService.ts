@@ -33,7 +33,8 @@ export type LeadSource =
   | 'Quote Request'
   | 'Site Assessment'
   | 'Solar Guide Download'
-  | 'Direct Phone/Walk-in';
+  | 'Direct Phone/Walk-in'
+  | 'Customer Review';
 
 export type LeadStatus =
   | 'New'
@@ -152,7 +153,7 @@ export const getAllLeads = (): UnifiedLead[] => {
   }
 };
 
-export const saveLead = (lead: UnifiedLead): void => {
+export const saveLead = async (lead: UnifiedLead): Promise<void> => {
   try {
     const leads = getAllLeads();
     const updated = [lead, ...leads.filter((l) => l.id !== lead.id)];
@@ -162,18 +163,24 @@ export const saveLead = (lead: UnifiedLead): void => {
     console.error('Failed to save lead to local storage', err);
   }
 
-  // Asynchronously sync to MongoDB Atlas via /api/leads
-  fetch('/api/leads', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(lead),
-  }).catch((err) => {
+  // Push to MongoDB Atlas with timeout protection
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 4000);
+    await fetch('/api/leads', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(lead),
+      signal: controller.signal,
+    });
+    clearTimeout(timeoutId);
+  } catch (err: any) {
     // Graceful offline fallback
     console.warn('MongoDB Atlas lead sync offline/pending:', err?.message);
-  });
+  }
 };
 
-export const updateLeadStatus = (id: string, status: LeadStatus): void => {
+export const updateLeadStatus = async (id: string, status: LeadStatus): Promise<void> => {
   try {
     const leads = getAllLeads();
     const updated = leads.map((l) => (l.id === id ? { ...l, status } : l));
@@ -184,16 +191,18 @@ export const updateLeadStatus = (id: string, status: LeadStatus): void => {
   }
 
   // Asynchronously update MongoDB Atlas
-  fetch('/api/leads', {
-    method: 'PATCH',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ id, status }),
-  }).catch((err) => {
+  try {
+    await fetch('/api/leads', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id, status }),
+    });
+  } catch (err: any) {
     console.warn('MongoDB Atlas lead status sync offline/pending:', err?.message);
-  });
+  }
 };
 
-export const updateLeadNotes = (id: string, notes: string): void => {
+export const updateLeadNotes = async (id: string, notes: string): Promise<void> => {
   try {
     const leads = getAllLeads();
     const updated = leads.map((l) => (l.id === id ? { ...l, notes } : l));
@@ -204,16 +213,18 @@ export const updateLeadNotes = (id: string, notes: string): void => {
   }
 
   // Asynchronously update MongoDB Atlas
-  fetch('/api/leads', {
-    method: 'PATCH',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ id, notes }),
-  }).catch((err) => {
+  try {
+    await fetch('/api/leads', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id, notes }),
+    });
+  } catch (err: any) {
     console.warn('MongoDB Atlas lead notes sync offline/pending:', err?.message);
-  });
+  }
 };
 
-export const deleteLead = (id: string): void => {
+export const deleteLead = async (id: string): Promise<void> => {
   try {
     const leads = getAllLeads();
     const updated = leads.filter((l) => l.id !== id);
@@ -224,11 +235,13 @@ export const deleteLead = (id: string): void => {
   }
 
   // Asynchronously delete from MongoDB Atlas
-  fetch(`/api/leads?id=${encodeURIComponent(id)}`, {
-    method: 'DELETE',
-  }).catch((err) => {
+  try {
+    await fetch(`/api/leads?id=${encodeURIComponent(id)}`, {
+      method: 'DELETE',
+    });
+  } catch (err: any) {
     console.warn('MongoDB Atlas lead delete offline/pending:', err?.message);
-  });
+  }
 };
 
 /**
@@ -239,10 +252,23 @@ export const syncLeadsFromDatabase = async (): Promise<UnifiedLead[]> => {
     const res = await fetch('/api/leads');
     if (res.ok) {
       const data = await res.json();
-      if (data.success && Array.isArray(data.leads) && data.leads.length > 0) {
-        localStorage.setItem(UNIFIED_LEADS_KEY, JSON.stringify(data.leads));
-        window.dispatchEvent(new Event('leads_updated'));
-        return data.leads;
+      if (data.success && Array.isArray(data.leads)) {
+        if (data.leads.length > 0) {
+          localStorage.setItem(UNIFIED_LEADS_KEY, JSON.stringify(data.leads));
+          window.dispatchEvent(new Event('leads_updated'));
+          return data.leads;
+        } else {
+          // If the cloud database is empty, seed initial leads to the cloud DB
+          const currentLocal = getAllLeads();
+          for (const lead of currentLocal) {
+            fetch('/api/leads', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(lead),
+            }).catch(() => {});
+          }
+          return currentLocal;
+        }
       }
     }
   } catch (err) {
@@ -322,7 +348,7 @@ export const submitQuoteRequest = async (
     submittedAt,
   };
 
-  saveLead(unified);
+  await saveLead(unified);
 
   return { success: true, referenceId: ref };
 };
@@ -363,7 +389,7 @@ export const submitSolarGuideRequest = async (
     submittedAt,
   };
 
-  saveLead(unified);
+  await saveLead(unified);
 
   return { success: true, referenceId: ref };
 };
@@ -404,7 +430,7 @@ export const submitContactEnquiry = async (
     submittedAt,
   };
 
-  saveLead(unified);
+  await saveLead(unified);
 
   return { success: true, referenceId: ref };
 };

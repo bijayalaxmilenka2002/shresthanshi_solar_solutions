@@ -21,6 +21,7 @@ import { Breadcrumbs } from '../../components/common/Breadcrumbs';
 import { SEO } from '../../components/common/SEO';
 import { CTASection } from '../../components/common/CTASection';
 import { companyConfig } from '../../data/company';
+import { UnifiedLead, saveLead } from '../../services/enquiryService';
 
 type TestimonialCategory = 'All' | 'Residential Rooftop' | 'Agricultural Solar Pumps' | 'Commercial & Institutional' | 'Government Projects';
 
@@ -104,9 +105,24 @@ export const TestimonialsPage: React.FC = () => {
       ? placeholderSlots
       : placeholderSlots.filter((slot) => slot.category === selectedCategory);
 
-  const handleFeedbackSubmit = (e: React.FormEvent) => {
+  const handleFeedbackSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!feedbackName || !feedbackPhone) return;
+    if (!feedbackName.trim() || !feedbackPhone.trim()) return;
+
+    const reviewLead: UnifiedLead = {
+      id: `REV-${Date.now().toString().slice(-6)}`,
+      source: 'Customer Review',
+      name: feedbackName.trim(),
+      phone: feedbackPhone.trim(),
+      location: 'Odisha',
+      category: feedbackProject.trim() || 'Customer Experience / Review',
+      details: feedbackNotes.trim() || 'Client submitted experience feedback on Testimonials page',
+      preferredContactMethod: 'WhatsApp',
+      status: 'New',
+      submittedAt: new Date().toISOString(),
+    };
+
+    await saveLead(reviewLead);
     setSubmitSuccess(true);
   };
 

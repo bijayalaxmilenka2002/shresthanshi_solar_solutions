@@ -5,6 +5,7 @@ import {
   loadSiteSettings,
   saveSiteSettings,
   resetSiteSettings as resetSiteSettingsStorage,
+  syncSiteSettingsFromDatabase,
 } from '../services/siteSettingsService';
 
 interface ModalContextValue {
@@ -35,6 +36,13 @@ export const AppProviders: React.FC<{ children: React.ReactNode }> = ({ children
   const [settings, setSettings] = useState<SiteSettings>(loadSiteSettings);
 
   useEffect(() => {
+    // Automatically synchronize live settings from MongoDB Atlas on initial load
+    syncSiteSettingsFromDatabase().then((remoteSettings) => {
+      if (remoteSettings) {
+        setSettings(remoteSettings);
+      }
+    });
+
     const handleSettingsUpdate = () => {
       setSettings(loadSiteSettings());
     };

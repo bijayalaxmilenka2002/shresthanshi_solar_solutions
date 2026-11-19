@@ -130,9 +130,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           createdAt: new Date(),
         };
 
-        await collection.insertOne(newLead);
-        const { _id, ...savedLead } = newLead as any;
-        return sendJson(res, 201, { success: true, lead: savedLead });
+        await collection.updateOne(
+          { id: newLead.id },
+          { $set: newLead },
+          { upsert: true }
+        );
+        return sendJson(res, 201, { success: true, lead: newLead });
       }
 
       case 'PATCH': {

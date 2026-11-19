@@ -188,6 +188,11 @@ export const OwnerPortalPage: React.FC = () => {
     try {
       const fetched = await syncLeadsFromDatabase();
       if (fetched) setLeads(fetched);
+      const remoteSettings = await syncSiteSettingsFromDatabase();
+      if (remoteSettings) {
+        updateSettings(remoteSettings);
+        setEditSettings(remoteSettings);
+      }
       await checkDatabaseHealth();
     } finally {
       setIsSyncing(false);
@@ -331,8 +336,8 @@ export const OwnerPortalPage: React.FC = () => {
     setIsAddLeadOpen(false);
   };
 
-  const handleSaveSettings = () => {
-    updateSettings(editSettings);
+  const handleSaveSettings = async () => {
+    await updateSettings(editSettings);
     setSaveSuccessMsg(true);
     setTimeout(() => setSaveSuccessMsg(false), 3000);
   };
@@ -1034,6 +1039,7 @@ export const OwnerPortalPage: React.FC = () => {
                       <option value="Site Assessment">Site Assessments</option>
                       <option value="Solar Guide Download">Guide Downloads</option>
                       <option value="Direct Phone/Walk-in">Direct Walk-ins</option>
+                      <option value="Customer Review">Customer Reviews</option>
                     </select>
 
                     <select
