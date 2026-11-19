@@ -18,19 +18,38 @@ export default async function handler(req: any, res: any) {
     return res.end();
   }
 
-  const start = Date.now();
-  const dbConnection = await getDatabase();
+  const uri = process.env.MONGODB_URI;
 
-  if (!dbConnection) {
+  if (!uri) {
     return sendJson(res, 200, {
       connected: false,
       configured: false,
-      database: null,
-      message: 'MONGODB_URI environment variable is not set. Using local storage.',
+      message: 'MONGODB_URI environment variable is not set. Operating in local storage mode.',
     });
   }
 
+  if (uri.includes('<db_password>') || uri.includes('<password>') || uri.includes('YOUR_PASSWORD')) {
+    return sendJson(res, 200, {
+      connected: false,
+      configured: false,
+      placeholder: true,
+      message: 'MONGODB_URI has an unreplaced password placeholder. Please replace YOUR_PASSWORD with your actual database user password in Vercel.',
+    });
+  }
+
+  const start = Date.now();
+
   try {
+    const dbConnection = await getDatabase();
+
+    if (!dbConnection) {
+      return sendJson(res, 200, {
+        connected: false,
+        configured: true,
+        message: 'Could not connect to MongoDB Atlas. Please check password and IP Access (0.0.0.0/0).',
+      });
+    }
+
     const { db } = dbConnection;
     await db.command({ ping: 1 });
     const latencyMs = Date.now() - start;
@@ -49,7 +68,7 @@ export default async function handler(req: any, res: any) {
     return sendJson(res, 200, {
       connected: false,
       configured: true,
-      error: error.message || 'Database ping failed',
+      error: error?.message || 'Database ping failed',
     });
   }
 }
