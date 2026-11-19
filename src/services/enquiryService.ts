@@ -159,8 +159,18 @@ export const saveLead = (lead: UnifiedLead): void => {
     localStorage.setItem(UNIFIED_LEADS_KEY, JSON.stringify(updated));
     window.dispatchEvent(new Event('leads_updated'));
   } catch (err) {
-    console.error('Failed to save lead', err);
+    console.error('Failed to save lead to local storage', err);
   }
+
+  // Asynchronously sync to MongoDB Atlas via /api/leads
+  fetch('/api/leads', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(lead),
+  }).catch((err) => {
+    // Graceful offline fallback
+    console.warn('MongoDB Atlas lead sync offline/pending:', err?.message);
+  });
 };
 
 export const updateLeadStatus = (id: string, status: LeadStatus): void => {
@@ -172,6 +182,15 @@ export const updateLeadStatus = (id: string, status: LeadStatus): void => {
   } catch (err) {
     console.error('Failed to update lead status', err);
   }
+
+  // Asynchronously update MongoDB Atlas
+  fetch('/api/leads', {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id, status }),
+  }).catch((err) => {
+    console.warn('MongoDB Atlas lead status sync offline/pending:', err?.message);
+  });
 };
 
 export const updateLeadNotes = (id: string, notes: string): void => {
@@ -183,6 +202,15 @@ export const updateLeadNotes = (id: string, notes: string): void => {
   } catch (err) {
     console.error('Failed to update lead notes', err);
   }
+
+  // Asynchronously update MongoDB Atlas
+  fetch('/api/leads', {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id, notes }),
+  }).catch((err) => {
+    console.warn('MongoDB Atlas lead notes sync offline/pending:', err?.message);
+  });
 };
 
 export const deleteLead = (id: string): void => {
@@ -194,6 +222,33 @@ export const deleteLead = (id: string): void => {
   } catch (err) {
     console.error('Failed to delete lead', err);
   }
+
+  // Asynchronously delete from MongoDB Atlas
+  fetch(`/api/leads?id=${encodeURIComponent(id)}`, {
+    method: 'DELETE',
+  }).catch((err) => {
+    console.warn('MongoDB Atlas lead delete offline/pending:', err?.message);
+  });
+};
+
+/**
+ * Sync leads from MongoDB Atlas database into client store
+ */
+export const syncLeadsFromDatabase = async (): Promise<UnifiedLead[]> => {
+  try {
+    const res = await fetch('/api/leads');
+    if (res.ok) {
+      const data = await res.json();
+      if (data.success && Array.isArray(data.leads) && data.leads.length > 0) {
+        localStorage.setItem(UNIFIED_LEADS_KEY, JSON.stringify(data.leads));
+        window.dispatchEvent(new Event('leads_updated'));
+        return data.leads;
+      }
+    }
+  } catch (err) {
+    console.warn('Failed to fetch leads from MongoDB Atlas:', err);
+  }
+  return getAllLeads();
 };
 
 export const exportLeadsToCSV = (): string => {

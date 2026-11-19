@@ -124,6 +124,35 @@ export const saveSiteSettings = (settings: SiteSettings): void => {
   } catch (err) {
     console.error('Failed to save site settings', err);
   }
+
+  // Asynchronously save to MongoDB Atlas
+  fetch('/api/settings', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ settings }),
+  }).catch((err) => {
+    console.warn('MongoDB Atlas settings sync offline/pending:', err?.message);
+  });
+};
+
+/**
+ * Sync site settings from MongoDB Atlas database into client store
+ */
+export const syncSiteSettingsFromDatabase = async (): Promise<SiteSettings | null> => {
+  try {
+    const res = await fetch('/api/settings');
+    if (res.ok) {
+      const data = await res.json();
+      if (data.success && data.settings) {
+        localStorage.setItem(SETTINGS_STORAGE_KEY, JSON.stringify(data.settings));
+        window.dispatchEvent(new Event('site_settings_updated'));
+        return data.settings;
+      }
+    }
+  } catch (err) {
+    console.warn('Failed to fetch settings from MongoDB Atlas:', err);
+  }
+  return null;
 };
 
 export const resetSiteSettings = (): SiteSettings => {

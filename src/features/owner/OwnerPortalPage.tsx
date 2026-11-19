@@ -48,9 +48,10 @@ import {
   deleteLead,
   saveLead,
   exportLeadsToCSV,
+  syncLeadsFromDatabase,
 } from '../../services/enquiryService';
 import { useSiteSettings } from '../../app/providers';
-import { SiteSettings } from '../../services/siteSettingsService';
+import { SiteSettings, syncSiteSettingsFromDatabase } from '../../services/siteSettingsService';
 
 export const OwnerPortalPage: React.FC = () => {
   const { settings, updateSettings, resetSettings } = useSiteSettings();
@@ -165,6 +166,49 @@ export const OwnerPortalPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filterSource, setFilterSource] = useState<string>('All');
   const [filterStatus, setFilterStatus] = useState<string>('All');
+
+  // Database Connection & Cloud Sync State
+  const [dbStatus, setDbStatus] = useState<{ connected: boolean; configured: boolean; database?: string; latencyMs?: number } | null>(null);
+  const [isSyncing, setIsSyncing] = useState(false);
+
+  const checkDatabaseHealth = async () => {
+    try {
+      const res = await fetch('/api/health');
+      if (res.ok) {
+        const data = await res.json();
+        setDbStatus(data);
+      }
+    } catch {
+      setDbStatus({ connected: false, configured: false });
+    }
+  };
+
+  const handleSyncDatabase = async () => {
+    setIsSyncing(true);
+    try {
+      const fetched = await syncLeadsFromDatabase();
+      if (fetched) setLeads(fetched);
+      await checkDatabaseHealth();
+    } finally {
+      setIsSyncing(false);
+    }
+  };
+
+  // Check health and sync on authentication
+  useEffect(() => {
+    if (isAuthenticated) {
+      checkDatabaseHealth();
+      syncLeadsFromDatabase().then((fetched) => {
+        if (fetched && fetched.length > 0) setLeads(fetched);
+      });
+      syncSiteSettingsFromDatabase().then((remoteSettings) => {
+        if (remoteSettings) {
+          updateSettings(remoteSettings);
+          setEditSettings(remoteSettings);
+        }
+      });
+    }
+  }, [isAuthenticated]);
 
   // Add lead modal state
   const [isAddLeadOpen, setIsAddLeadOpen] = useState(false);
@@ -654,23 +698,31 @@ export const OwnerPortalPage: React.FC = () => {
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
-                  gap: '0.35rem',
-                  fontSize: '0.72rem',
-                  backgroundColor: 'rgba(255,255,255,0.15)',
+                  gap: '0.45rem',
+                  fontSize: '0.74rem',
+                  fontWeight: 700,
+                  backgroundColor: dbStatus?.connected ? 'rgba(74, 222, 128, 0.2)' : 'rgba(251, 191, 36, 0.2)',
+                  color: dbStatus?.connected ? '#86EFAC' : '#FDE68A',
+                  border: `1px solid ${dbStatus?.connected ? 'rgba(74, 222, 128, 0.35)' : 'rgba(251, 191, 36, 0.35)'}`,
                   padding: '0.28rem 0.65rem',
                   borderRadius: '999px',
                   whiteSpace: 'nowrap',
                 }}
+                title={
+                  dbStatus?.connected
+                    ? `MongoDB Atlas Connected (${dbStatus.latencyMs}ms latency, Database: ${dbStatus.database})`
+                    : 'MongoDB Atlas: Operating in local storage mode until MONGODB_URI is provided in Vercel environment variables.'
+                }
               >
                 <span
                   style={{
                     width: '7px',
                     height: '7px',
                     borderRadius: '50%',
-                    backgroundColor: '#4ADE80',
+                    backgroundColor: dbStatus?.connected ? '#4ADE80' : '#FBBF24',
                   }}
                 />
-                Live Synced
+                {dbStatus?.connected ? 'MongoDB Atlas Connected' : 'Local Storage Active'}
               </span>
 
               <Link
@@ -1005,6 +1057,18 @@ export const OwnerPortalPage: React.FC = () => {
                       <option value="Converted">Converted</option>
                       <option value="Closed">Closed</option>
                     </select>
+
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      iconLeft={<RefreshCw size={14} style={{ animation: isSyncing ? 'spin 1s linear infinite' : 'none' }} />}
+                      onClick={handleSyncDatabase}
+                      disabled={isSyncing}
+                      title="Sync latest responses from MongoDB Atlas"
+                    >
+                      {isSyncing ? 'Syncing...' : 'Sync Cloud DB'}
+                    </Button>
 
                     <Button
                       type="button"
