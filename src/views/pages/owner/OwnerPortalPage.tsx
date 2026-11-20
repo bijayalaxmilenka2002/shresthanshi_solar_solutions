@@ -713,37 +713,6 @@ export const OwnerPortalPage: React.FC = () => {
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
-              <span
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.45rem',
-                  fontSize: '0.74rem',
-                  fontWeight: 700,
-                  backgroundColor: dbStatus?.connected ? 'rgba(74, 222, 128, 0.2)' : 'rgba(251, 191, 36, 0.2)',
-                  color: dbStatus?.connected ? '#86EFAC' : '#FDE68A',
-                  border: `1px solid ${dbStatus?.connected ? 'rgba(74, 222, 128, 0.35)' : 'rgba(251, 191, 36, 0.35)'}`,
-                  padding: '0.28rem 0.65rem',
-                  borderRadius: '999px',
-                  whiteSpace: 'nowrap',
-                }}
-                title={
-                  dbStatus?.connected
-                    ? `MongoDB Atlas Connected (${dbStatus.latencyMs}ms latency, Database: ${dbStatus.database})`
-                    : 'MongoDB Atlas: Operating in local storage mode until MONGODB_URI is provided in Vercel environment variables.'
-                }
-              >
-                <span
-                  style={{
-                    width: '7px',
-                    height: '7px',
-                    borderRadius: '50%',
-                    backgroundColor: dbStatus?.connected ? '#4ADE80' : '#FBBF24',
-                  }}
-                />
-                {dbStatus?.connected ? 'MongoDB Atlas Connected' : 'Local Storage Active'}
-              </span>
-
               <Link
                 to="/"
                 target="_blank"
