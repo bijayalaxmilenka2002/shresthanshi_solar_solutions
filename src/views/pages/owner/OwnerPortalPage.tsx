@@ -1598,7 +1598,8 @@ export const OwnerPortalPage: React.FC = () => {
                     {editSettings.announcement.enabled ? (
                       <div
                         style={{
-                          backgroundColor: '#FFFFFF',
+                          backgroundColor: '#174B35',
+                          color: '#FFFFFF',
                           padding: '0.65rem 0.85rem',
                           fontSize: '0.78rem',
                           textAlign: 'center',
@@ -1607,30 +1608,34 @@ export const OwnerPortalPage: React.FC = () => {
                           justifyContent: 'center',
                           gap: '0.5rem',
                           flexWrap: 'wrap',
-                          borderBottom: '1px solid var(--border-subtle)',
+                          borderBottom: '1px solid rgba(255,255,255,0.15)',
                         }}
                       >
                         <span
                           style={{
-                            backgroundColor: 'var(--color-soft-green)',
-                            color: 'var(--color-forest-green)',
-                            border: '1px solid var(--border-medium)',
+                            backgroundColor: 'rgba(255, 255, 255, 0.18)',
+                            color: '#86EFAC',
+                            border: '1px solid rgba(134, 239, 172, 0.45)',
                             padding: '0.12rem 0.55rem',
                             borderRadius: '999px',
-                            fontWeight: 700,
+                            fontWeight: 800,
                             fontSize: '0.7rem',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '0.3rem',
                           }}
                         >
-                          {editSettings.announcement.badge || 'Alert'}
+                          <span>🔔</span>
+                          <span>{editSettings.announcement.badge || 'Alert'}</span>
                         </span>
-                        <span style={{ color: 'var(--text-body)', fontWeight: 500 }}>
+                        <span style={{ color: '#FFFFFF', fontWeight: 600 }}>
                           {editSettings.announcement.text || 'Your announcement message...'}
                         </span>
                         {editSettings.announcement.linkText && (
                           <span
                             style={{
-                              color: 'var(--color-forest-green)',
-                              fontWeight: 700,
+                              color: '#86EFAC',
+                              fontWeight: 800,
                               textDecoration: 'underline',
                               display: 'inline-flex',
                               alignItems: 'center',

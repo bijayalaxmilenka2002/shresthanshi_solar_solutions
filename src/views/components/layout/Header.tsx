@@ -41,11 +41,13 @@ export const Header: React.FC = () => {
       {settings?.announcement?.enabled && (
         <div
           style={{
-            backgroundColor: '#FFFFFF',
-            color: '#174B35',
-            padding: '0.45rem 0',
-            fontSize: '0.8rem',
-            borderBottom: '1px solid var(--border-subtle)',
+            backgroundColor: '#174B35',
+            color: '#FFFFFF',
+            padding: '0.5rem 0',
+            fontSize: '0.82rem',
+            borderBottom: '1px solid rgba(255, 255, 255, 0.15)',
+            position: 'relative',
+            zIndex: 100,
           }}
         >
           <Container>
@@ -61,35 +63,39 @@ export const Header: React.FC = () => {
             >
               <span
                 style={{
-                  backgroundColor: 'var(--color-soft-green)',
-                  color: 'var(--color-forest-green)',
-                  border: '1px solid var(--border-medium)',
-                  padding: '0.14rem 0.6rem',
+                  backgroundColor: 'rgba(255, 255, 255, 0.18)',
+                  color: '#86EFAC',
+                  border: '1px solid rgba(134, 239, 172, 0.45)',
+                  padding: '0.16rem 0.65rem',
                   borderRadius: '999px',
-                  fontWeight: 700,
-                  fontSize: '0.72rem',
+                  fontWeight: 800,
+                  fontSize: '0.74rem',
                   letterSpacing: '0.02em',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.35rem',
                 }}
               >
-                {settings?.announcement?.badge || 'Subsidy Alert'}
+                <span>🔔</span>
+                <span>{settings?.announcement?.badge || 'Subsidy Alert'}</span>
               </span>
-              <span style={{ color: 'var(--text-body)', fontWeight: 500 }}>
+              <span style={{ color: '#FFFFFF', fontWeight: 600 }}>
                 {settings?.announcement?.text}
               </span>
               {settings?.announcement?.linkText && (
                 <Link
                   to={settings?.announcement?.linkUrl || '/resources/subsidy-scheme-guidance'}
                   style={{
-                    color: 'var(--color-forest-green)',
-                    fontWeight: 700,
+                    color: '#86EFAC',
+                    fontWeight: 800,
                     textDecoration: 'underline',
                     display: 'inline-flex',
                     alignItems: 'center',
-                    gap: '0.2rem',
+                    gap: '0.25rem',
                   }}
                 >
                   <span>{settings?.announcement?.linkText}</span>
-                  <ArrowRight size={12} />
+                  <ArrowRight size={13} />
                 </Link>
               )}
             </div>
