@@ -229,6 +229,10 @@
   padding-right: max(var(--space-6), env(safe-area-inset-right, 0px));
 }
 
+.container--wide {
+  max-width: 1440px;
+}
+
 @media (max-width: 640px) {
   .container {
     padding-left: max(var(--space-4), env(safe-area-inset-left, 0px));
@@ -3969,12 +3973,12 @@
 /* Contact Page */
 .contact-layout {
   display: grid;
-  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
-  gap: clamp(1.5rem, 3.5vw, 2.5rem);
-  align-items: start;
+  grid-template-columns: minmax(360px, 460px) minmax(0, 1fr);
+  gap: clamp(1.75rem, 3vw, 2.75rem);
+  align-items: stretch;
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1024px) {
   .contact-layout {
     grid-template-columns: minmax(0, 1fr);
   }

@@ -157,6 +157,8 @@ export const OwnerPortalPage: React.FC = () => {
   // Local copy of settings for editing
   const [editSettings, setEditSettings] = useState<SiteSettings>(settings);
   const [saveSuccessMsg, setSaveSuccessMsg] = useState(false);
+  const [isSavingAnnouncement, setIsSavingAnnouncement] = useState(false);
+  const [announcementSavedMsg, setAnnouncementSavedMsg] = useState(false);
 
   // Tabs: 'inbox' | 'sections' | 'announcement' | 'contact'
   const [activeTab, setActiveTab] = useState<'inbox' | 'sections' | 'announcement' | 'contact'>('inbox');
@@ -342,9 +344,16 @@ export const OwnerPortalPage: React.FC = () => {
   };
 
   const handleSaveSettings = async () => {
-    await updateSettings(editSettings);
-    setSaveSuccessMsg(true);
-    setTimeout(() => setSaveSuccessMsg(false), 3000);
+    setIsSavingAnnouncement(true);
+    try {
+      await updateSettings(editSettings);
+      setSaveSuccessMsg(true);
+      setAnnouncementSavedMsg(true);
+      setTimeout(() => setSaveSuccessMsg(false), 4000);
+      setTimeout(() => setAnnouncementSavedMsg(false), 4000);
+    } finally {
+      setIsSavingAnnouncement(false);
+    }
   };
 
   const getStatusBadgeStyle = (status: LeadStatus) => {
@@ -1611,19 +1620,20 @@ export const OwnerPortalPage: React.FC = () => {
             TAB 3: NOTICE & SUBSIDY ALERT BAR
             ========================================================================= */}
           {activeTab === 'announcement' && (
-            <div style={{ maxWidth: '720px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 460px), 1fr))', gap: '1.5rem', alignItems: 'start' }}>
+              {/* Left Column: Edit Controls */}
               <Card variant="white" padding="lg">
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
                   <Bell size={20} color="#174B35" />
                   <h3 style={{ margin: 0, fontSize: '1.15rem', fontWeight: 700 }}>
                     Live Client Website Announcement Bar
                   </h3>
                 </div>
-                <p style={{ fontSize: '0.86rem', color: 'var(--text-muted)', marginBottom: '1.5rem' }}>
-                  Control the alert banner pinned across the top of your public website. Perfect for government subsidy announcements (e.g., PM Surya Ghar, PM-KUSUM) or urgent field updates.
+                <p style={{ fontSize: '0.84rem', color: 'var(--text-muted)', marginBottom: '1.25rem', lineHeight: 1.5 }}>
+                  Control the alert banner pinned across the top of your public website. Changes save directly to MongoDB Atlas and update immediately across all devices.
                 </p>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.15rem' }}>
                   <label
                     style={{
                       display: 'flex',
@@ -1632,8 +1642,9 @@ export const OwnerPortalPage: React.FC = () => {
                       padding: '0.85rem 1rem',
                       borderRadius: 'var(--radius-md)',
                       backgroundColor: editSettings.announcement.enabled ? 'var(--color-soft-green)' : '#F9FAFB',
-                      border: '1.5px solid var(--border-subtle)',
+                      border: `1.5px solid ${editSettings.announcement.enabled ? '#174B35' : 'var(--border-subtle)'}`,
                       cursor: 'pointer',
+                      transition: 'all 0.2s ease',
                     }}
                   >
                     <input
@@ -1655,7 +1666,7 @@ export const OwnerPortalPage: React.FC = () => {
                         Show Announcement Bar Across Entire Client Website
                       </strong>
                       <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-                        When enabled, this bar displays at the very top of all client pages.
+                        {editSettings.announcement.enabled ? '🟢 Banner is ACTIVE and visible to all visitors' : '⚪ Banner is HIDDEN'}
                       </div>
                     </div>
                   </label>
@@ -1676,7 +1687,7 @@ export const OwnerPortalPage: React.FC = () => {
                       placeholder="e.g. PM Surya Ghar Subsidy Alert"
                       style={{
                         width: '100%',
-                        padding: '0.55rem 0.85rem',
+                        padding: '0.6rem 0.85rem',
                         borderRadius: 'var(--radius-md)',
                         border: '1.5px solid var(--border-subtle)',
                         fontSize: '0.88rem',
@@ -1689,7 +1700,7 @@ export const OwnerPortalPage: React.FC = () => {
                       Announcement Message
                     </label>
                     <textarea
-                      rows={2}
+                      rows={3}
                       value={editSettings.announcement.text}
                       onChange={(e) =>
                         setEditSettings({
@@ -1697,19 +1708,20 @@ export const OwnerPortalPage: React.FC = () => {
                           announcement: { ...editSettings.announcement, text: e.target.value },
                         })
                       }
-                      placeholder="e.g. Government subsidy up to ₹78,000 available across Odisha for rooftop solar installations."
+                      placeholder="e.g. Government assistance up to ₹78,000 for residential rooftop solar & PM-KUSUM for solar pumps in Odisha."
                       style={{
                         width: '100%',
-                        padding: '0.55rem 0.85rem',
+                        padding: '0.6rem 0.85rem',
                         borderRadius: 'var(--radius-md)',
                         border: '1.5px solid var(--border-subtle)',
                         fontSize: '0.88rem',
                         fontFamily: 'inherit',
+                        lineHeight: 1.5,
                       }}
                     />
                   </div>
 
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '0.85rem' }}>
                     <div>
                       <label style={{ display: 'block', fontSize: '0.84rem', fontWeight: 700, color: '#174B35', marginBottom: '0.35rem' }}>
                         Call to Action Link Text
@@ -1726,7 +1738,7 @@ export const OwnerPortalPage: React.FC = () => {
                         placeholder="e.g. Check Eligibility"
                         style={{
                           width: '100%',
-                          padding: '0.55rem 0.85rem',
+                          padding: '0.6rem 0.85rem',
                           borderRadius: 'var(--radius-md)',
                           border: '1.5px solid var(--border-subtle)',
                           fontSize: '0.88rem',
@@ -1750,7 +1762,7 @@ export const OwnerPortalPage: React.FC = () => {
                         placeholder="e.g. /resources/subsidy-scheme-guidance"
                         style={{
                           width: '100%',
-                          padding: '0.55rem 0.85rem',
+                          padding: '0.6rem 0.85rem',
                           borderRadius: 'var(--radius-md)',
                           border: '1.5px solid var(--border-subtle)',
                           fontSize: '0.88rem',
@@ -1759,18 +1771,286 @@ export const OwnerPortalPage: React.FC = () => {
                     </div>
                   </div>
 
-                  <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.5rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginTop: '0.5rem', flexWrap: 'wrap' }}>
                     <Button
                       type="button"
                       variant="primary"
                       iconLeft={<Save size={16} />}
                       onClick={handleSaveSettings}
+                      disabled={isSavingAnnouncement}
                     >
-                      Save &amp; Publish Announcement
+                      {isSavingAnnouncement ? 'Saving to MongoDB Atlas...' : 'Save & Publish Announcement'}
                     </Button>
+
+                    {announcementSavedMsg && (
+                      <span
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '0.35rem',
+                          color: '#15803D',
+                          backgroundColor: '#DCFCE7',
+                          padding: '0.45rem 0.85rem',
+                          borderRadius: '8px',
+                          fontSize: '0.82rem',
+                          fontWeight: 700,
+                          border: '1px solid #86EFAC',
+                        }}
+                      >
+                        <CheckCircle2 size={16} />
+                        <span>Saved to Cloud &amp; Live!</span>
+                      </span>
+                    )}
                   </div>
                 </div>
               </Card>
+
+              {/* Right Column: Live Real-Time Preview & Quick Presets */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                {/* 1. Live Interactive Website Preview */}
+                <Card variant="white" padding="lg" style={{ border: '1.5px solid var(--border-medium)', borderRadius: '16px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.85rem' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+                      <Eye size={18} color="#174B35" />
+                      <strong style={{ fontSize: '0.92rem', color: '#174B35' }}>
+                        Live Website Preview
+                      </strong>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: '0.72rem',
+                        fontWeight: 700,
+                        padding: '0.15rem 0.55rem',
+                        borderRadius: '999px',
+                        backgroundColor: editSettings.announcement.enabled ? '#DCFCE7' : '#F3F4F6',
+                        color: editSettings.announcement.enabled ? '#166534' : '#6B7280',
+                      }}
+                    >
+                      {editSettings.announcement.enabled ? '🟢 Visible on Website' : '⚪ Hidden'}
+                    </span>
+                  </div>
+
+                  <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginBottom: '0.85rem' }}>
+                    This is how the banner renders at the top of your homepage:
+                  </p>
+
+                  {/* Rendered Preview Box */}
+                  <div
+                    style={{
+                      border: '1.5px solid var(--border-medium)',
+                      borderRadius: '10px',
+                      overflow: 'hidden',
+                      backgroundColor: '#FFFFFF',
+                      boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+                    }}
+                  >
+                    <div
+                      style={{
+                        backgroundColor: '#F3F4F6',
+                        padding: '0.35rem 0.75rem',
+                        fontSize: '0.7rem',
+                        color: '#6B7280',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.35rem',
+                        borderBottom: '1px solid var(--border-subtle)',
+                      }}
+                    >
+                      <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#EF4444', display: 'inline-block' }} />
+                      <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#F59E0B', display: 'inline-block' }} />
+                      <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#10B981', display: 'inline-block' }} />
+                      <span style={{ marginLeft: '0.35rem', fontFamily: 'monospace' }}>https://shresthanshisolarsolutions.vercel.app/</span>
+                    </div>
+
+                    {editSettings.announcement.enabled ? (
+                      <div
+                        style={{
+                          backgroundColor: '#FFFFFF',
+                          padding: '0.65rem 0.85rem',
+                          fontSize: '0.78rem',
+                          textAlign: 'center',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: '0.5rem',
+                          flexWrap: 'wrap',
+                          borderBottom: '1px solid var(--border-subtle)',
+                        }}
+                      >
+                        <span
+                          style={{
+                            backgroundColor: 'var(--color-soft-green)',
+                            color: 'var(--color-forest-green)',
+                            border: '1px solid var(--border-medium)',
+                            padding: '0.12rem 0.55rem',
+                            borderRadius: '999px',
+                            fontWeight: 700,
+                            fontSize: '0.7rem',
+                          }}
+                        >
+                          {editSettings.announcement.badge || 'Alert'}
+                        </span>
+                        <span style={{ color: 'var(--text-body)', fontWeight: 500 }}>
+                          {editSettings.announcement.text || 'Your announcement message...'}
+                        </span>
+                        {editSettings.announcement.linkText && (
+                          <span
+                            style={{
+                              color: 'var(--color-forest-green)',
+                              fontWeight: 700,
+                              textDecoration: 'underline',
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '0.2rem',
+                            }}
+                          >
+                            <span>{editSettings.announcement.linkText}</span>
+                            <ChevronRight size={12} />
+                          </span>
+                        )}
+                      </div>
+                    ) : (
+                      <div
+                        style={{
+                          padding: '1.25rem',
+                          textAlign: 'center',
+                          color: '#9CA3AF',
+                          fontSize: '0.8rem',
+                          backgroundColor: '#FAFAFA',
+                        }}
+                      >
+                        <EyeOff size={20} style={{ margin: '0 auto 0.35rem' }} />
+                        <span>Announcement bar is currently disabled. No alert will show at the top of the site.</span>
+                      </div>
+                    )}
+                  </div>
+
+                  <div style={{ marginTop: '0.85rem', display: 'flex', justifyContent: 'flex-end' }}>
+                    <Link
+                      to="/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '0.35rem',
+                        fontSize: '0.8rem',
+                        fontWeight: 700,
+                        color: 'var(--color-forest-green)',
+                        textDecoration: 'none',
+                      }}
+                    >
+                      <span>Open Live Website to Verify</span>
+                      <ExternalLink size={13} />
+                    </Link>
+                  </div>
+                </Card>
+
+                {/* 2. Quick Testing Presets Card */}
+                <Card variant="white" padding="md" style={{ border: '1.5px solid var(--border-subtle)', borderRadius: '16px' }}>
+                  <strong style={{ display: 'block', fontSize: '0.88rem', color: '#174B35', marginBottom: '0.4rem' }}>
+                    ⚡ 1-Click Testing Presets
+                  </strong>
+                  <p style={{ fontSize: '0.76rem', color: 'var(--text-muted)', marginBottom: '0.75rem' }}>
+                    Click any preset below to automatically load ready-to-publish banner templates:
+                  </p>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setEditSettings({
+                          ...editSettings,
+                          announcement: {
+                            enabled: true,
+                            badge: 'PM Surya Ghar Subsidy Alert',
+                            text: 'Government assistance up to ₹78,000 for residential rooftop solar & PM-KUSUM for solar pumps in Odisha.',
+                            linkText: 'Check Eligibility',
+                            linkUrl: '/resources/subsidy-scheme-guidance',
+                          },
+                        })
+                      }
+                      style={{
+                        padding: '0.5rem 0.75rem',
+                        textAlign: 'left',
+                        borderRadius: '8px',
+                        border: '1px solid var(--border-medium)',
+                        backgroundColor: '#FFFFFF',
+                        cursor: 'pointer',
+                        fontSize: '0.8rem',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                      }}
+                    >
+                      <span><strong>Preset 1:</strong> PM Surya Ghar Subsidy (₹78,000)</span>
+                      <span style={{ fontSize: '0.72rem', color: '#15803D' }}>Apply</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setEditSettings({
+                          ...editSettings,
+                          announcement: {
+                            enabled: true,
+                            badge: 'Agriculture Solar Pump Scheme',
+                            text: 'Apply for high-discharge 3 HP & 5 HP solar pumps with daytime irrigation and dual-mode grid support.',
+                            linkText: 'Farmer Guide',
+                            linkUrl: '/who-we-serve/farmers',
+                          },
+                        })
+                      }
+                      style={{
+                        padding: '0.5rem 0.75rem',
+                        textAlign: 'left',
+                        borderRadius: '8px',
+                        border: '1px solid var(--border-medium)',
+                        backgroundColor: '#FFFFFF',
+                        cursor: 'pointer',
+                        fontSize: '0.8rem',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                      }}
+                    >
+                      <span><strong>Preset 2:</strong> PM-KUSUM Agricultural Solar Pumps</span>
+                      <span style={{ fontSize: '0.72rem', color: '#15803D' }}>Apply</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setEditSettings({
+                          ...editSettings,
+                          announcement: {
+                            enabled: true,
+                            badge: 'Free Site Survey in Kalahandi',
+                            text: 'Book a free engineering terrace shadow analysis from our Narla Road Head Office or Bhubaneswar Sub-Branch.',
+                            linkText: 'Book Site Survey',
+                            linkUrl: '/contact',
+                          },
+                        })
+                      }
+                      style={{
+                        padding: '0.5rem 0.75rem',
+                        textAlign: 'left',
+                        borderRadius: '8px',
+                        border: '1px solid var(--border-medium)',
+                        backgroundColor: '#FFFFFF',
+                        cursor: 'pointer',
+                        fontSize: '0.8rem',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                      }}
+                    >
+                      <span><strong>Preset 3:</strong> Free Rooftop Assessment Survey</span>
+                      <span style={{ fontSize: '0.72rem', color: '#15803D' }}>Apply</span>
+                    </button>
+                  </div>
+                </Card>
+              </div>
             </div>
           )}
 
