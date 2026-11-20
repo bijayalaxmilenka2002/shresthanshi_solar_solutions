@@ -132,13 +132,13 @@ export const HomePage: React.FC = () => {
         <Container className="hero-section__grid">
           <div className="hero-section__content">
             <span className="badge hero-fade-up" style={{ marginBottom: '1rem' }}>
-              {settings.hero.badge || 'Homes • Farms • Businesses in Odisha'}
+              {settings?.hero?.badge || 'Homes • Farms • Businesses in Odisha'}
             </span>
             <h1 className="hero-section__title hero-fade-up hero-delay-1">
-              {settings.hero.title || 'Make the Sun Work for You.'}
+              {settings?.hero?.title || 'Make the Sun Work for You.'}
             </h1>
             <p className="hero-section__copy hero-fade-up hero-delay-2">
-              {settings.hero.subtitle || 'Practical rooftop solar, commercial daytime power, and agricultural solar water pumping—sized around what your property actually needs.'}
+              {settings?.hero?.subtitle || 'Practical rooftop solar, commercial daytime power, and agricultural solar water pumping—sized around what your property actually needs.'}
             </p>
             <div className="hero-section__actions hero-fade-up hero-delay-3">
               <Button
@@ -173,7 +173,7 @@ export const HomePage: React.FC = () => {
                 variant="white"
                 src="/images/hero-solar-home.jpg"
               />
-              {settings.sections.heroCaption && (
+              {settings?.sections?.heroCaption && (
                 <div className="hero-section__caption-card">
                   <MapPin size={18} />
                   <div>
@@ -195,7 +195,7 @@ export const HomePage: React.FC = () => {
       {/* =================================================================
           SECTION 3 — KEY ACHIEVEMENTS (350+ PM Surya Ghar & Utility Aggregation)
       ================================================================= */}
-      {(settings.sections.achievementsSection ?? true) && (
+      {(settings?.sections?.achievementsSection ?? true) && (
         <HomeAchievementsSection />
       )}
 
@@ -207,7 +207,7 @@ export const HomePage: React.FC = () => {
       {/* =================================================================
           SECTION 5 — WHO WE SERVE (Residential, Farm, Commercial, Government)
       ================================================================= */}
-      {settings.sections.applications && (
+      {settings?.sections?.applications && (
         <section id="applications" className="section bg-white" style={{ paddingTop: '4rem', paddingBottom: '4.5rem', borderBottom: '1px solid var(--border-subtle)' }}>
           <Container>
             <SectionHeading
@@ -250,14 +250,14 @@ export const HomePage: React.FC = () => {
       {/* =================================================================
           SECTION 6 — GOVERNMENT PROJECTS (Agro Odisha & Forest Department)
       ================================================================= */}
-      {(settings.sections.governmentProjects ?? true) && (
+      {(settings?.sections?.governmentProjects ?? true) && (
         <HomeGovernmentSection />
       )}
 
       {/* =================================================================
           SECTION 7 — PROJECT HIGHLIGHTS & FIELD PORTFOLIO
       ================================================================= */}
-      {settings.sections.fieldHighlights && (
+      {settings?.sections?.fieldHighlights && (
         <section className="section bg-white">
           <Container>
             <div className="trust-projects-preview__header">
@@ -307,35 +307,35 @@ export const HomePage: React.FC = () => {
       {/* =================================================================
           SECTION 8 — LICENCES & CERTIFICATIONS (Homepage Preview)
       ================================================================= */}
-      {(settings.sections.licencesSection ?? true) && (
+      {(settings?.sections?.licencesSection ?? true) && (
         <HomeLicencesPreviewSection />
       )}
 
       {/* =================================================================
           SECTION 9 — TESTIMONIALS (Customer Feedback Hub Preview)
       ================================================================= */}
-      {(settings.sections.testimonialsSection ?? true) && (
+      {(settings?.sections?.testimonialsSection ?? true) && (
         <HomeTestimonialsPreviewSection />
       )}
 
       {/* =================================================================
           SECTION 10 — NATIONAL AWARDS & OFFICIAL CERTIFICATIONS
       ================================================================= */}
-      {(settings.sections.awardsSection ?? true) && (
+      {(settings?.sections?.awardsSection ?? true) && (
         <AwardsAndCertificationsSection />
       )}
 
       {/* =================================================================
           SECTION 11 — END-TO-END SOLAR SERVICE (Complete Solar Lifecycle)
       ================================================================= */}
-      {settings.sections.coreServices && (
+      {settings?.sections?.coreServices && (
         <EndToEndServiceSection />
       )}
 
       {/* =================================================================
           SECTION 12 — HOW THE PROCESS WORKS (4 Simple Steps)
       ================================================================= */}
-      {settings.sections.processTimeline && (
+      {settings?.sections?.processTimeline && (
         <section className="section bg-white">
           <Container>
             <SectionHeading
@@ -364,7 +364,7 @@ export const HomePage: React.FC = () => {
       {/* =================================================================
           SECTION 13 — SUBSIDY & SCHEME CLARITY
       ================================================================= */}
-      {settings.sections.trustBanner && (
+      {settings?.sections?.trustBanner && (
         <section className="section bg-white">
           <Container>
             <div className="subsidy-banner">
@@ -430,7 +430,7 @@ export const HomePage: React.FC = () => {
       {/* =================================================================
           SECTION 8 — CONCISE FAQS
       ================================================================= */}
-      {settings.sections.faqSection && (
+      {settings?.sections?.faqSection && (
         <section className="section bg-soft-green">
           <Container>
             <SectionHeading

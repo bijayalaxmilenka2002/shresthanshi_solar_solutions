@@ -8,6 +8,7 @@ import { TrackEnquiryModal } from '../common/TrackEnquiryModal';
 import { ScrollProgressButton } from '../common/ScrollProgressButton';
 import { useScrollReveal } from '@controllers/hooks/useScrollReveal';
 import { useTrackModal } from '@/app/providers';
+import { ErrorBoundary } from '../common/ErrorBoundary';
 
 export const MainLayout: React.FC = () => {
   const { pathname, search } = useLocation();
@@ -23,7 +24,9 @@ export const MainLayout: React.FC = () => {
     <div className="site-wrapper">
       <Header />
       <main key={pathname} className="site-main page-transition-enter" id="main-content">
-        <Outlet />
+        <ErrorBoundary>
+          <Outlet />
+        </ErrorBoundary>
       </main>
       <Footer />
       <ScrollProgressButton />

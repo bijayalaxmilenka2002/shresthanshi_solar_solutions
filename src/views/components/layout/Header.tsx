@@ -38,7 +38,7 @@ export const Header: React.FC = () => {
   return (
     <>
       {/* Dynamic Announcement Bar (Controllable from Owner Portal) */}
-      {settings.announcement.enabled && (
+      {settings?.announcement?.enabled && (
         <div
           style={{
             backgroundColor: '#FFFFFF',
@@ -71,14 +71,14 @@ export const Header: React.FC = () => {
                   letterSpacing: '0.02em',
                 }}
               >
-                {settings.announcement.badge}
+                {settings?.announcement?.badge || 'Subsidy Alert'}
               </span>
               <span style={{ color: 'var(--text-body)', fontWeight: 500 }}>
-                {settings.announcement.text}
+                {settings?.announcement?.text}
               </span>
-              {settings.announcement.linkText && (
+              {settings?.announcement?.linkText && (
                 <Link
-                  to={settings.announcement.linkUrl || '/resources/subsidy-scheme-guidance'}
+                  to={settings?.announcement?.linkUrl || '/resources/subsidy-scheme-guidance'}
                   style={{
                     color: 'var(--color-forest-green)',
                     fontWeight: 700,
@@ -88,7 +88,7 @@ export const Header: React.FC = () => {
                     gap: '0.2rem',
                   }}
                 >
-                  <span>{settings.announcement.linkText}</span>
+                  <span>{settings?.announcement?.linkText}</span>
                   <ArrowRight size={12} />
                 </Link>
               )}

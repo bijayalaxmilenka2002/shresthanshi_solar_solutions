@@ -217,6 +217,44 @@ export const AboutPage: React.FC = () => {
         title="About Us & Company Media | Shreshtanshi Solar Solutions"
         description="Learn about M/s Shreshtanshi Construction & Suppliers: company journey, mission, leadership, 350+ PM Surya Ghar achievements, media coverage, and official national awards."
         canonicalPath="/about"
+        schema={{
+          '@context': 'https://schema.org',
+          '@type': 'AboutPage',
+          name: 'About Shreshtanshi Solar Solutions',
+          description:
+            'Company journey, leadership profile of Mr. Shubham Pratap Singh, 350+ PM Surya Ghar installations in Odisha, and official national awards.',
+          mainEntity: {
+            '@type': 'Organization',
+            name: 'M/s Shreshtanshi Construction & Suppliers',
+            alternateName: 'Shresthanshi Solar Solutions',
+            founder: {
+              '@type': 'Person',
+              name: 'Mr. Shubham Pratap Singh',
+              jobTitle: 'Proprietor & Solar Project Lead',
+            },
+            taxID: '21AVUPM9359D1Z6',
+            address: [
+              {
+                '@type': 'PostalAddress',
+                streetAddress: 'Plot No. 106, Khata No. 226/61, Karlapada, Mukhiguda',
+                addressLocality: 'Kalahandi',
+                addressRegion: 'Odisha',
+                postalCode: '766110',
+                addressCountry: 'IN',
+              },
+              {
+                '@type': 'PostalAddress',
+                streetAddress: 'Plot No. 891/2145, Bomikhal, Near Rasulgarh',
+                addressLocality: 'Bhubaneswar',
+                addressRegion: 'Odisha',
+                postalCode: '751010',
+                addressCountry: 'IN',
+              },
+            ],
+            telephone: '+919937000024',
+            email: 'shresthanshi@gmail.com',
+          },
+        }}
       />
 
       <Breadcrumbs items={[{ label: 'About Us' }]} />

@@ -192,9 +192,9 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
               <Phone size={15} />
               <span>Secondary: {companyConfig.contact.secondaryPhoneDisplay}</span>
             </a>
-            <a href={`mailto:${settings.contact.email || companyConfig.contact.email}`}>
+            <a href={`mailto:${settings?.contact?.email || companyConfig.contact.email}`}>
               <Mail size={15} />
-              <span>{settings.contact.email || companyConfig.contact.email}</span>
+              <span>{settings?.contact?.email || companyConfig.contact.email}</span>
             </a>
           </div>
         </div>

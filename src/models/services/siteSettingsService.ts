@@ -150,9 +150,29 @@ export const syncSiteSettingsFromDatabase = async (): Promise<SiteSettings | nul
     if (res.ok) {
       const data = await res.json();
       if (data.success && data.settings) {
-        localStorage.setItem(SETTINGS_STORAGE_KEY, JSON.stringify(data.settings));
+        const merged: SiteSettings = {
+          ...DEFAULT_SITE_SETTINGS,
+          ...data.settings,
+          announcement: {
+            ...DEFAULT_SITE_SETTINGS.announcement,
+            ...(data.settings.announcement || {}),
+          },
+          contact: {
+            ...DEFAULT_SITE_SETTINGS.contact,
+            ...(data.settings.contact || {}),
+          },
+          hero: {
+            ...DEFAULT_SITE_SETTINGS.hero,
+            ...(data.settings.hero || {}),
+          },
+          sections: {
+            ...DEFAULT_SITE_SETTINGS.sections,
+            ...(data.settings.sections || {}),
+          },
+        };
+        localStorage.setItem(SETTINGS_STORAGE_KEY, JSON.stringify(merged));
         window.dispatchEvent(new Event('site_settings_updated'));
-        return data.settings;
+        return merged;
       } else if (data.success && !data.settings) {
         // Cloud DB is connected but empty: seed current default settings to MongoDB Atlas
         const current = loadSiteSettings();

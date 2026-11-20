@@ -138,7 +138,7 @@ export const Footer: React.FC = () => {
             <ul className="site-footer__contact-list">
               <li>
                 <MapPin size={18} className="site-footer__contact-icon" />
-                <span>{settings.contact.address || companyConfig.contact.address.full}</span>
+                <span>{settings?.contact?.address || companyConfig.contact.address.full}</span>
               </li>
               <li>
                 <Phone size={18} className="site-footer__contact-icon" />
@@ -153,11 +153,11 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <Mail size={18} className="site-footer__contact-icon" />
-                <a href={`mailto:${settings.contact.email || companyConfig.contact.email}`}>{settings.contact.email || companyConfig.contact.email}</a>
+                <a href={`mailto:${settings?.contact?.email || companyConfig.contact.email}`}>{settings?.contact?.email || companyConfig.contact.email}</a>
               </li>
             </ul>
             <div className="site-footer__proprietor">
-              <strong>Proprietor:</strong> {settings.contact.proprietor || companyConfig.founder.name}
+              <strong>Proprietor:</strong> {settings?.contact?.proprietor || companyConfig.founder.name}
             </div>
 
             {/* Social Media Channels (Right Side of Footer) */}
