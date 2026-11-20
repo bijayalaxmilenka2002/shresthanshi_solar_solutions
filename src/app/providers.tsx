@@ -6,7 +6,7 @@ import {
   saveSiteSettings,
   resetSiteSettings as resetSiteSettingsStorage,
   syncSiteSettingsFromDatabase,
-} from '../services/siteSettingsService';
+} from '@models/services/siteSettingsService';
 
 interface ModalContextValue {
   isGuideModalOpen: boolean;

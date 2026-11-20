@@ -1,36 +1,36 @@
 import React, { Suspense, lazy } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { MainLayout } from '../components/layout/MainLayout';
-import { HomePage } from '../features/home/HomePage';
-import { ServicesPage } from '../features/services/ServicesPage';
-import { SolarSolutionsOverviewPage } from '../features/solar-solutions/SolarSolutionsOverviewPage';
-import { ResidentialSolarPage } from '../features/solar-solutions/ResidentialSolarPage';
-import { CommercialSolarPage } from '../features/solar-solutions/CommercialSolarPage';
-import { SolarWaterPumpsPage } from '../features/solar-solutions/SolarWaterPumpsPage';
-import { SolarStreetLightingPage } from '../features/solar-solutions/SolarStreetLightingPage';
-import { SolarMaintenancePage } from '../features/solar-solutions/SolarMaintenancePage';
-import { WhoWeServeOverviewPage } from '../features/who-we-serve/WhoWeServeOverviewPage';
-import { AudienceDetailPage } from '../features/who-we-serve/AudienceDetailPage';
-import { GovernmentSectorPage } from '../features/who-we-serve/GovernmentSectorPage';
-import { ProjectsPage } from '../features/projects/ProjectsPage';
-import { AboutPage } from '../features/about/AboutPage';
-import { GalleryPage } from '../features/gallery/GalleryPage';
-import { MediaPage } from '../features/media/MediaPage';
-import { TestimonialsPage } from '../features/testimonials/TestimonialsPage';
-import { LicencesPage } from '../features/licences/LicencesPage';
-import { ResourcesOverviewPage } from '../features/resources/ResourcesOverviewPage';
-import { SolarFaqsPage } from '../features/resources/SolarFaqsPage';
-import { SubsidyGuidancePage } from '../features/resources/SubsidyGuidancePage';
-import { ResourceArticleDetailPage } from '../features/resources/ResourceArticleDetailPage';
-import { ContactPage } from '../features/contact/ContactPage';
-import { LegalPage } from '../features/legal/LegalPages';
+import { MainLayout } from '@views/components/layout/MainLayout';
+import { HomePage } from '@views/pages/home/HomePage';
+import { ServicesPage } from '@views/pages/services/ServicesPage';
+import { SolarSolutionsOverviewPage } from '@views/pages/solar-solutions/SolarSolutionsOverviewPage';
+import { ResidentialSolarPage } from '@views/pages/solar-solutions/ResidentialSolarPage';
+import { CommercialSolarPage } from '@views/pages/solar-solutions/CommercialSolarPage';
+import { SolarWaterPumpsPage } from '@views/pages/solar-solutions/SolarWaterPumpsPage';
+import { SolarStreetLightingPage } from '@views/pages/solar-solutions/SolarStreetLightingPage';
+import { SolarMaintenancePage } from '@views/pages/solar-solutions/SolarMaintenancePage';
+import { WhoWeServeOverviewPage } from '@views/pages/who-we-serve/WhoWeServeOverviewPage';
+import { AudienceDetailPage } from '@views/pages/who-we-serve/AudienceDetailPage';
+import { GovernmentSectorPage } from '@views/pages/who-we-serve/GovernmentSectorPage';
+import { ProjectsPage } from '@views/pages/projects/ProjectsPage';
+import { AboutPage } from '@views/pages/about/AboutPage';
+import { GalleryPage } from '@views/pages/gallery/GalleryPage';
+import { MediaPage } from '@views/pages/media/MediaPage';
+import { TestimonialsPage } from '@views/pages/testimonials/TestimonialsPage';
+import { LicencesPage } from '@views/pages/licences/LicencesPage';
+import { ResourcesOverviewPage } from '@views/pages/resources/ResourcesOverviewPage';
+import { SolarFaqsPage } from '@views/pages/resources/SolarFaqsPage';
+import { SubsidyGuidancePage } from '@views/pages/resources/SubsidyGuidancePage';
+import { ResourceArticleDetailPage } from '@views/pages/resources/ResourceArticleDetailPage';
+import { ContactPage } from '@views/pages/contact/ContactPage';
+import { LegalPage } from '@views/pages/legal/LegalPages';
 
 // Lazy load Owner Portal & Super Admin Portal so clients never download their bundle
 const OwnerPortalPage = lazy(() =>
-  import('../features/owner/OwnerPortalPage').then((m) => ({ default: m.OwnerPortalPage }))
+  import('@views/pages/owner/OwnerPortalPage').then((m) => ({ default: m.OwnerPortalPage }))
 );
 const SuperAdminPortalPage = lazy(() =>
-  import('../features/owner/SuperAdminPortalPage').then((m) => ({ default: m.SuperAdminPortalPage }))
+  import('@views/pages/owner/SuperAdminPortalPage').then((m) => ({ default: m.SuperAdminPortalPage }))
 );
 
 export const AppRouter: React.FC = () => {
