@@ -12,9 +12,15 @@
 html {
   font-size: 16px;
   scroll-behavior: smooth;
+  scroll-padding-top: 96px;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
   overflow-x: clip;
+}
+
+/* Ensure all anchored sections with IDs account for fixed/sticky header */
+[id] {
+  scroll-margin-top: 96px;
 }
 
 body {

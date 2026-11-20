@@ -47,6 +47,33 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
     setExpandedItem((prev) => (prev === label ? null : label));
   };
 
+  const handleNavClick = (path: string) => {
+    onClose();
+    if (path.includes('#')) {
+      const [targetPath, hashPart] = path.split('#');
+      const isSamePath =
+        !targetPath ||
+        location.pathname === targetPath ||
+        (location.pathname === '/' && targetPath === '');
+      if (isSamePath && hashPart) {
+        setTimeout(() => {
+          const el = document.getElementById(hashPart);
+          if (el) {
+            const headerOffset = 90;
+            const elementPosition = el.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            window.scrollTo({
+              top: Math.max(0, offsetPosition),
+              behavior: 'smooth',
+            });
+          }
+        }, 120);
+      }
+    } else if (path === location.pathname) {
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    }
+  };
+
   return (
     <div
       className="mobile-menu-backdrop"
@@ -84,7 +111,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
                     <NavLink
                       to={item.path}
                       end={item.path === '/'}
-                      onClick={onClose}
+                      onClick={() => handleNavClick(item.path)}
                       className={({ isActive }) =>
                         `mobile-menu__link ${isActive ? 'mobile-menu__link--active' : ''}`
                       }
@@ -113,7 +140,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
                         <NavLink
                           to={item.path}
                           end
-                          onClick={onClose}
+                          onClick={() => handleNavClick(item.path)}
                           className="mobile-menu__sublink mobile-menu__sublink--overview"
                         >
                           Overview: All {item.label}
@@ -128,7 +155,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
                           <li key={sub.path}>
                             <Link
                               to={sub.path}
-                              onClick={onClose}
+                              onClick={() => handleNavClick(sub.path)}
                               className={`mobile-menu__sublink ${
                                 isSubActive ? 'mobile-menu__sublink--active' : ''
                               }`}

@@ -35,17 +35,46 @@ export const Header: React.FC = () => {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  const handleNavClick = (path: string) => {
+    setActiveDropdown(null);
+    if (path.includes('#')) {
+      const [targetPath, hashPart] = path.split('#');
+      const isSamePath =
+        !targetPath ||
+        location.pathname === targetPath ||
+        (location.pathname === '/' && targetPath === '');
+      if (isSamePath && hashPart) {
+        setTimeout(() => {
+          const el = document.getElementById(hashPart);
+          if (el) {
+            const headerOffset = 90;
+            const elementPosition = el.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            window.scrollTo({
+              top: Math.max(0, offsetPosition),
+              behavior: 'smooth',
+            });
+          }
+        }, 40);
+      }
+    } else if (path === location.pathname) {
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    }
+  };
+
   return (
     <>
       {/* Dynamic Announcement Bar (Controllable from Owner Portal) */}
       {settings?.announcement?.enabled && (
-        <div
+        <aside
+          aria-label="Important Announcement"
           style={{
-            backgroundColor: '#174B35',
+            background: 'linear-gradient(90deg, #062316 0%, #0F3E2B 30%, #174B35 70%, #08281A 100%)',
             color: '#FFFFFF',
-            padding: '0.5rem 0',
-            fontSize: '0.82rem',
-            borderBottom: '1px solid rgba(255, 255, 255, 0.15)',
+            padding: '0.62rem 0',
+            fontSize: '0.86rem',
+            borderBottom: '2px solid rgba(250, 204, 21, 0.45)',
+            boxShadow: '0 2px 12px rgba(0, 0, 0, 0.28)',
             position: 'relative',
             zIndex: 100,
           }}
@@ -56,42 +85,78 @@ export const Header: React.FC = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                gap: '0.65rem',
+                gap: '0.75rem',
                 flexWrap: 'wrap',
                 textAlign: 'center',
               }}
             >
               <span
                 style={{
-                  backgroundColor: 'rgba(255, 255, 255, 0.18)',
-                  color: '#86EFAC',
-                  border: '1px solid rgba(134, 239, 172, 0.45)',
-                  padding: '0.16rem 0.65rem',
+                  backgroundColor: '#FEF08A',
+                  color: '#14532D',
+                  border: '1px solid #FDE047',
+                  padding: '0.2rem 0.75rem',
                   borderRadius: '999px',
                   fontWeight: 800,
                   fontSize: '0.74rem',
-                  letterSpacing: '0.02em',
+                  letterSpacing: '0.03em',
+                  textTransform: 'uppercase',
                   display: 'inline-flex',
                   alignItems: 'center',
-                  gap: '0.35rem',
+                  gap: '0.4rem',
+                  boxShadow: '0 1px 4px rgba(0, 0, 0, 0.2)',
+                  flexShrink: 0,
                 }}
               >
-                <span>🔔</span>
+                <span
+                  style={{
+                    width: '7px',
+                    height: '7px',
+                    borderRadius: '50%',
+                    backgroundColor: '#16A34A',
+                    display: 'inline-block',
+                    animation: 'pulseDot 2s infinite',
+                  }}
+                />
                 <span>{settings?.announcement?.badge || 'Subsidy Alert'}</span>
               </span>
-              <span style={{ color: '#FFFFFF', fontWeight: 600 }}>
+
+              <span
+                style={{
+                  color: '#FFFFFF',
+                  fontWeight: 600,
+                  fontSize: '0.88rem',
+                  letterSpacing: '-0.01em',
+                }}
+              >
                 {settings?.announcement?.text}
               </span>
+
               {settings?.announcement?.linkText && (
                 <Link
                   to={settings?.announcement?.linkUrl || '/resources/subsidy-scheme-guidance'}
                   style={{
-                    color: '#86EFAC',
+                    backgroundColor: '#86EFAC',
+                    color: '#062316',
+                    padding: '0.22rem 0.75rem',
+                    borderRadius: '999px',
                     fontWeight: 800,
-                    textDecoration: 'underline',
+                    fontSize: '0.76rem',
                     display: 'inline-flex',
                     alignItems: 'center',
-                    gap: '0.25rem',
+                    gap: '0.3rem',
+                    textDecoration: 'none',
+                    boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
+                    transition: 'all 0.2s ease',
+                    flexShrink: 0,
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = '#BBF7D0';
+                    e.currentTarget.style.transform = 'translateY(-1px)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = '#86EFAC';
+                    e.currentTarget.style.transform = 'translateY(0)';
                   }}
                 >
                   <span>{settings?.announcement?.linkText}</span>
@@ -100,7 +165,7 @@ export const Header: React.FC = () => {
               )}
             </div>
           </Container>
-        </div>
+        </aside>
       )}
 
       {/* Top Info Bar */}
@@ -184,6 +249,7 @@ export const Header: React.FC = () => {
                       <NavLink
                         to={item.path}
                         end={item.path === '/'}
+                        onClick={() => handleNavClick(item.path)}
                         className={({ isActive }) =>
                           `desktop-nav__link ${isActive ? 'desktop-nav__link--active' : ''}`
                         }
@@ -208,7 +274,11 @@ export const Header: React.FC = () => {
                       >
                         <div className="desktop-dropdown__inner">
                           <div className="desktop-dropdown__header">
-                            <Link to={item.path} className="desktop-dropdown__overview">
+                            <Link
+                              to={item.path}
+                              onClick={() => handleNavClick(item.path)}
+                              className="desktop-dropdown__overview"
+                            >
                               <span>View All {item.label}</span>
                               <ArrowUpRight size={15} />
                             </Link>
@@ -223,7 +293,7 @@ export const Header: React.FC = () => {
                                 <li key={sub.path}>
                                   <Link
                                     to={sub.path}
-                                    onClick={() => setActiveDropdown(null)}
+                                    onClick={() => handleNavClick(sub.path)}
                                     className={`desktop-dropdown__item ${
                                       isSubActive ? 'desktop-dropdown__item--active' : ''
                                     }`}

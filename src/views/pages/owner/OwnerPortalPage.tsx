@@ -1598,34 +1598,46 @@ export const OwnerPortalPage: React.FC = () => {
                     {editSettings.announcement.enabled ? (
                       <div
                         style={{
-                          backgroundColor: '#174B35',
+                          background: 'linear-gradient(90deg, #062316 0%, #0F3E2B 30%, #174B35 70%, #08281A 100%)',
                           color: '#FFFFFF',
-                          padding: '0.65rem 0.85rem',
-                          fontSize: '0.78rem',
+                          padding: '0.62rem 0.85rem',
+                          fontSize: '0.8rem',
                           textAlign: 'center',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
-                          gap: '0.5rem',
+                          gap: '0.65rem',
                           flexWrap: 'wrap',
-                          borderBottom: '1px solid rgba(255,255,255,0.15)',
+                          borderBottom: '2px solid rgba(250, 204, 21, 0.45)',
+                          boxShadow: '0 2px 10px rgba(0,0,0,0.2)',
                         }}
                       >
                         <span
                           style={{
-                            backgroundColor: 'rgba(255, 255, 255, 0.18)',
-                            color: '#86EFAC',
-                            border: '1px solid rgba(134, 239, 172, 0.45)',
-                            padding: '0.12rem 0.55rem',
+                            backgroundColor: '#FEF08A',
+                            color: '#14532D',
+                            border: '1px solid #FDE047',
+                            padding: '0.15rem 0.6rem',
                             borderRadius: '999px',
                             fontWeight: 800,
                             fontSize: '0.7rem',
+                            letterSpacing: '0.03em',
+                            textTransform: 'uppercase',
                             display: 'inline-flex',
                             alignItems: 'center',
-                            gap: '0.3rem',
+                            gap: '0.35rem',
                           }}
                         >
-                          <span>🔔</span>
+                          <span
+                            style={{
+                              width: '6px',
+                              height: '6px',
+                              borderRadius: '50%',
+                              backgroundColor: '#16A34A',
+                              display: 'inline-block',
+                              animation: 'pulseDot 2s infinite',
+                            }}
+                          />
                           <span>{editSettings.announcement.badge || 'Alert'}</span>
                         </span>
                         <span style={{ color: '#FFFFFF', fontWeight: 600 }}>
@@ -1634,12 +1646,15 @@ export const OwnerPortalPage: React.FC = () => {
                         {editSettings.announcement.linkText && (
                           <span
                             style={{
-                              color: '#86EFAC',
+                              backgroundColor: '#86EFAC',
+                              color: '#062316',
+                              padding: '0.18rem 0.65rem',
+                              borderRadius: '999px',
                               fontWeight: 800,
-                              textDecoration: 'underline',
+                              fontSize: '0.72rem',
                               display: 'inline-flex',
                               alignItems: 'center',
-                              gap: '0.2rem',
+                              gap: '0.25rem',
                             }}
                           >
                             <span>{editSettings.announcement.linkText}</span>

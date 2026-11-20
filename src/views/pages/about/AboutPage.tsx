@@ -294,7 +294,7 @@ export const AboutPage: React.FC = () => {
       </section>
 
       {/* 2. OUR JOURNEY */}
-      <section id="our-journey" className="section bg-white" style={{ paddingTop: '4rem', paddingBottom: '4.5rem' }}>
+      <section id="our-journey" className="section bg-white" style={{ paddingTop: '4rem', paddingBottom: '4.5rem', scrollMarginTop: '100px' }}>
         <Container>
           <div style={{ maxWidth: '800px', margin: '0 auto 3rem', textAlign: 'center' }}>
             <span className="badge" style={{ marginBottom: '0.85rem' }}>
@@ -469,7 +469,7 @@ export const AboutPage: React.FC = () => {
       </section>
 
       {/* 5. MEDIA COVERAGE & OFFICIAL CERTIFICATES */}
-      <section id="media-coverage" className="section bg-soft-green" style={{ paddingTop: '4.5rem', paddingBottom: '4.5rem' }}>
+      <section id="media-coverage" className="section bg-soft-green" style={{ paddingTop: '4.5rem', paddingBottom: '4.5rem', scrollMarginTop: '100px' }}>
         <Container>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: '1.5rem', marginBottom: '2.5rem', flexWrap: 'wrap' }}>
             <div>
@@ -595,21 +595,21 @@ export const AboutPage: React.FC = () => {
         </Container>
       </section>
 
-      {/* 7. COMPANY ACTIVITIES & FIELD VIDEOS */}
-      <section id="events-summits" className="section bg-soft-green" style={{ paddingTop: '4.5rem', paddingBottom: '5rem' }}>
+      {/* 7. NATIONAL SUMMITS, EVENTS & FIELD VIDEOS */}
+      <section id="events-summits" className="section bg-soft-green" style={{ paddingTop: '4.5rem', paddingBottom: '5rem', scrollMarginTop: '100px' }}>
         <Container>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: '1.5rem', marginBottom: '2.5rem', flexWrap: 'wrap' }}>
             <div>
               <span className="badge" style={{ marginBottom: '0.65rem' }}>
-                <Video size={14} style={{ marginRight: '0.35rem' }} />
-                On-Ground Actions
+                <Sparkles size={14} style={{ marginRight: '0.35rem' }} />
+                National Summits &amp; Field Actions
               </span>
               <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.8rem, 3vw, 2.5rem)', color: 'var(--color-forest-green)', fontWeight: 800, margin: 0 }}>
-                Company Activities, Events &amp; Field Videos
+                National Summits, Conclaves &amp; Field Videos
               </h2>
             </div>
             <span style={{ fontSize: '0.9rem', color: 'var(--text-body)' }}>
-              Live recordings from solar sites across Odisha.
+              MNRE Bharat Mandapam Conclave delegations, MoU events &amp; live site recordings.
             </span>
           </div>
 
