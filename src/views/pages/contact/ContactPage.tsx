@@ -19,6 +19,8 @@ import {
   ExternalLink,
   Shield,
   Check,
+  Sparkles,
+  PhoneCall,
 } from 'lucide-react';
 import { Container } from '@views/components/ui/Container';
 import { Card } from '@views/components/ui/Card';
@@ -634,7 +636,7 @@ export const ContactPage: React.FC = () => {
                   height: '100%',
                   display: 'flex',
                   flexDirection: 'column',
-                  justifyContent: 'space-between',
+                  justifyContent: 'flex-start',
                 }}
               >
                 <div>
@@ -873,6 +875,194 @@ export const ContactPage: React.FC = () => {
                       </Button>
                     </form>
                   )}
+                </div>
+
+                {/* 3-Step "What Happens After You Submit" Process Panel */}
+                <div
+                  style={{
+                    marginTop: '1.25rem',
+                    padding: '1rem 1.15rem',
+                    backgroundColor: '#F8FAF8',
+                    borderRadius: '14px',
+                    border: '1px solid var(--border-medium)',
+                  }}
+                >
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      marginBottom: '0.65rem',
+                      flexWrap: 'wrap',
+                      gap: '0.5rem',
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontSize: '0.82rem',
+                        fontWeight: 800,
+                        color: 'var(--color-forest-green)',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '0.35rem',
+                      }}
+                    >
+                      <Sparkles size={14} color="#174B35" /> What Happens After You Submit?
+                    </span>
+                    <span
+                      style={{
+                        fontSize: '0.72rem',
+                        color: 'var(--color-forest-green)',
+                        fontWeight: 700,
+                        backgroundColor: 'var(--color-soft-green)',
+                        padding: '0.15rem 0.55rem',
+                        borderRadius: '999px',
+                      }}
+                    >
+                      Zero Obligation • 100% Free
+                    </span>
+                  </div>
+
+                  <div
+                    style={{
+                      display: 'grid',
+                      gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))',
+                      gap: '0.65rem',
+                    }}
+                  >
+                    <div
+                      style={{
+                        backgroundColor: '#FFFFFF',
+                        padding: '0.7rem 0.8rem',
+                        borderRadius: '10px',
+                        border: '1px solid var(--border-subtle)',
+                        boxShadow: '0 1px 3px rgba(0,0,0,0.02)',
+                      }}
+                    >
+                      <div
+                        style={{
+                          fontSize: '0.74rem',
+                          fontWeight: 800,
+                          color: 'var(--color-forest-green)',
+                          marginBottom: '0.2rem',
+                        }}
+                      >
+                        ① Engineering Sizing
+                      </div>
+                      <p style={{ margin: 0, fontSize: '0.73rem', color: 'var(--text-body)', lineHeight: 1.4 }}>
+                        Under 2 hrs: Sizing simulation based on your sanctioned load &amp; terrace dimensions.
+                      </p>
+                    </div>
+
+                    <div
+                      style={{
+                        backgroundColor: '#FFFFFF',
+                        padding: '0.7rem 0.8rem',
+                        borderRadius: '10px',
+                        border: '1px solid var(--border-subtle)',
+                        boxShadow: '0 1px 3px rgba(0,0,0,0.02)',
+                      }}
+                    >
+                      <div
+                        style={{
+                          fontSize: '0.74rem',
+                          fontWeight: 800,
+                          color: 'var(--color-forest-green)',
+                          marginBottom: '0.2rem',
+                        }}
+                      >
+                        ② Free Site Survey
+                      </div>
+                      <p style={{ margin: 0, fontSize: '0.73rem', color: 'var(--text-body)', lineHeight: 1.4 }}>
+                        Field team from Kalahandi or Bhubaneswar conducts shadow &amp; electrical DB audit.
+                      </p>
+                    </div>
+
+                    <div
+                      style={{
+                        backgroundColor: '#FFFFFF',
+                        padding: '0.7rem 0.8rem',
+                        borderRadius: '10px',
+                        border: '1px solid var(--border-subtle)',
+                        boxShadow: '0 1px 3px rgba(0,0,0,0.02)',
+                      }}
+                    >
+                      <div
+                        style={{
+                          fontSize: '0.74rem',
+                          fontWeight: 800,
+                          color: 'var(--color-forest-green)',
+                          marginBottom: '0.2rem',
+                        }}
+                      >
+                        ③ DPR &amp; Subsidy Filing
+                      </div>
+                      <p style={{ margin: 0, fontSize: '0.73rem', color: 'var(--text-body)', lineHeight: 1.4 }}>
+                        Transparent quotation with PM Surya Ghar (up to ₹78,000) or PM-KUSUM support.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Priority Direct Contact Strip */}
+                <div
+                  style={{
+                    marginTop: '0.85rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    flexWrap: 'wrap',
+                    gap: '0.75rem',
+                    padding: '0.75rem 1rem',
+                    backgroundColor: 'var(--color-soft-green)',
+                    borderRadius: '12px',
+                    border: '1px solid rgba(23, 75, 53, 0.15)',
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+                    <div
+                      style={{
+                        width: '34px',
+                        height: '34px',
+                        borderRadius: '50%',
+                        backgroundColor: 'var(--color-forest-green)',
+                        color: '#FFFFFF',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        flexShrink: 0,
+                      }}
+                    >
+                      <PhoneCall size={16} />
+                    </div>
+                    <div>
+                      <div style={{ fontSize: '0.78rem', fontWeight: 800, color: 'var(--color-forest-green)' }}>
+                        Need Instant Sizing or Urgent Guidance?
+                      </div>
+                      <div style={{ fontSize: '0.72rem', color: 'var(--text-body)' }}>
+                        Call Proprietor Mr. Shubham Pratap Singh directly: <strong>+91 99370 00024</strong>
+                      </div>
+                    </div>
+                  </div>
+                  <a
+                    href="tel:+919937000024"
+                    style={{
+                      backgroundColor: 'var(--color-forest-green)',
+                      color: '#FFFFFF',
+                      fontSize: '0.78rem',
+                      fontWeight: 700,
+                      padding: '0.4rem 0.85rem',
+                      borderRadius: '8px',
+                      textDecoration: 'none',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.35rem',
+                      boxShadow: '0 2px 6px rgba(23,75,53,0.18)',
+                    }}
+                  >
+                    <Phone size={13} />
+                    <span>Call Directly</span>
+                  </a>
                 </div>
 
                 {/* Bottom Trust & Peace-of-Mind Strip */}
