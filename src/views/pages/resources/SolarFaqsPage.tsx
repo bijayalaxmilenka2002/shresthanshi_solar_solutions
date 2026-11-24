@@ -50,13 +50,13 @@ export const SolarFaqsPage: React.FC = () => {
             <span className="badge" style={{ marginBottom: '1rem' }}>
               Solar Knowledge Base
             </span>
-            <h1 className="page-hero__title">
+            <h1 className="page-hero__title" style={{ marginBottom: '1.15rem', lineHeight: 1.2 }}>
               Questions Worth Asking Before Going Solar.
             </h1>
-            <p className="page-hero__subtitle">
+            <p className="page-hero__subtitle" style={{ margin: 0, fontSize: '1.05rem', lineHeight: 1.65, color: 'var(--text-body)' }}>
               Straightforward answers to common questions about solar system sizing, roof space, cloudy-day generation, battery storage, agricultural water pumps, and government scheme eligibility.
             </p>
-            <div className="page-hero__actions">
+            <div className="page-hero__actions" style={{ marginTop: '1.75rem' }}>
               <Button
                 to="/contact?intent=faq-consultation"
                 variant="primary"
@@ -76,14 +76,28 @@ export const SolarFaqsPage: React.FC = () => {
             </div>
           </div>
           <div className="page-hero__visual">
-            <ImagePlaceholder
-              label="[Interactive solar knowledge base & FAQ guidance]"
-              sublabel="Solar FAQs &amp; Technical Guidance • Odisha"
-              aspectRatio="16/10"
-              variant="white"
-              src="/images/solar-faqs-illustration.jpg"
-              imgFit="cover"
-            />
+            <div
+              style={{
+                borderRadius: '20px',
+                overflow: 'hidden',
+                boxShadow: '0 10px 32px rgba(23, 75, 53, 0.12)',
+                border: '1.5px solid var(--border-medium)',
+                backgroundColor: '#FFFFFF',
+                aspectRatio: '16/10',
+                width: '100%',
+              }}
+            >
+              <img
+                src="/images/solar-faqs-illustration.jpg"
+                alt="Questions Worth Asking Before Going Solar - Solar Knowledge Base"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  display: 'block',
+                }}
+              />
+            </div>
           </div>
         </Container>
       </section>
