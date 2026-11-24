@@ -4,6 +4,7 @@ import { Container } from '@views/components/ui/Container';
 import { SectionHeading } from '@views/components/ui/SectionHeading';
 import { Accordion } from '@views/components/ui/Accordion';
 import { Button } from '@views/components/ui/Button';
+import { ImagePlaceholder } from '@views/components/ui/ImagePlaceholder';
 import { Breadcrumbs } from '@views/components/common/Breadcrumbs';
 import { CTASection } from '@views/components/common/CTASection';
 import { SEO } from '@views/components/common/SEO';
@@ -43,37 +44,46 @@ export const SolarFaqsPage: React.FC = () => {
         ]}
       />
 
-      <section className="page-hero bg-soft-green" style={{ padding: '2rem 0' }}>
-        <Container>
-          <div
-            style={{
-              width: '100%',
-              borderRadius: '20px',
-              overflow: 'hidden',
-              boxShadow: '0 8px 30px rgba(23, 75, 53, 0.08)',
-              border: '1.5px solid var(--border-medium)',
-              backgroundColor: '#FFFFFF',
-            }}
-          >
-            <img
-              src="/images/solar-faqs-banner.jpg"
-              alt="Questions Worth Asking Before Going Solar — Solar Knowledge Base"
-              style={{
-                width: '100%',
-                height: 'auto',
-                display: 'block',
-                aspectRatio: '1024 / 341',
-                objectFit: 'cover',
-              }}
-            />
-          </div>
-
-          {/* Accessible SEO Headings for search crawlers & screen readers */}
-          <div className="sr-only">
-            <h1>Questions Worth Asking Before Going Solar.</h1>
-            <p>
+      <section className="page-hero bg-soft-green">
+        <Container className="page-hero__grid">
+          <div className="page-hero__content">
+            <span className="badge" style={{ marginBottom: '1rem' }}>
+              Solar Knowledge Base
+            </span>
+            <h1 className="page-hero__title">
+              Questions Worth Asking Before Going Solar.
+            </h1>
+            <p className="page-hero__subtitle">
               Straightforward answers to common questions about solar system sizing, roof space, cloudy-day generation, battery storage, agricultural water pumps, and government scheme eligibility.
             </p>
+            <div className="page-hero__actions">
+              <Button
+                to="/contact?intent=faq-consultation"
+                variant="primary"
+                size="lg"
+                iconRight={<ArrowRight size={18} />}
+              >
+                Ask an Engineer
+              </Button>
+              <Button
+                variant="outline"
+                size="lg"
+                iconLeft={<BookOpen size={18} />}
+                onClick={() => openGuideModal('Solar FAQs')}
+              >
+                Get a Free Solar Guide
+              </Button>
+            </div>
+          </div>
+          <div className="page-hero__visual">
+            <ImagePlaceholder
+              label="[Interactive solar knowledge base & FAQ guidance]"
+              sublabel="Solar FAQs &amp; Technical Guidance • Odisha"
+              aspectRatio="16/10"
+              variant="white"
+              src="/images/solar-faqs-illustration.jpg"
+              imgFit="cover"
+            />
           </div>
         </Container>
       </section>
