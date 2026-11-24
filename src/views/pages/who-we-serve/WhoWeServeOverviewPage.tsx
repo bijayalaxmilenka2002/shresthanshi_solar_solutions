@@ -35,10 +35,11 @@ export const WhoWeServeOverviewPage: React.FC = () => {
           </div>
           <div className="page-hero__visual">
             <ImagePlaceholder
-              label="[Hero image: solar panels on a modern home]"
+              label="[Field consultation: tailored solar sizing for properties in Odisha]"
+              sublabel="Tailored Solar Engineering • Homes, Farms &amp; Businesses"
               aspectRatio="16/10"
               variant="white"
-              src="/images/page-hero-solar-home.jpg"
+              src="/images/solar-consultation-rooftop.jpg"
               imgFit="cover"
             />
           </div>

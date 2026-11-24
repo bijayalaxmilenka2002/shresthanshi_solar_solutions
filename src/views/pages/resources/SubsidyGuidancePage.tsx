@@ -60,11 +60,11 @@ export const SubsidyGuidancePage: React.FC = () => {
           </div>
           <div className="page-hero__visual">
             <ImagePlaceholder
-              label="[Image: rooftop solar installation]"
-              sublabel="PM Surya Ghar & PM-KUSUM Guidance"
+              label="[PM Surya Ghar verified rooftop solar plant in Odisha]"
+              sublabel="PM Surya Ghar &amp; PM-KUSUM Subsidy Execution"
               aspectRatio="16/10"
               variant="white"
-              src="/images/page-hero-solar-home.jpg"
+              src="/media/field-installations/mahaling-pm-surya-ghar-saranga-sahu.jpg"
               imgFit="cover"
             />
           </div>

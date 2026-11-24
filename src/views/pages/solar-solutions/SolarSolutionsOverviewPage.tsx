@@ -58,10 +58,11 @@ export const SolarSolutionsOverviewPage: React.FC = () => {
           </div>
           <div className="page-hero__visual">
             <ImagePlaceholder
-              label="[Hero image: solar panels on a modern home]"
+              label="[Commercial and rooftop solar engineering in Odisha]"
+              sublabel="Turnkey Solar Engineering &amp; Power Generation"
               aspectRatio="16/10"
               variant="white"
-              src="/images/page-hero-solar-home.jpg"
+              src="/images/cta-solar-rooftop.jpg"
               imgFit="cover"
             />
           </div>

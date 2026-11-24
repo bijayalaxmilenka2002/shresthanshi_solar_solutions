@@ -95,11 +95,11 @@ export const ProjectsPage: React.FC = () => {
           </div>
           <div className="page-hero__visual">
             <ImagePlaceholder
-              label="[Project gallery image]"
-              sublabel="Odisha Solar & Water Infrastructure Portfolio"
+              label="[Field project execution: agricultural solar water pumping & infrastructure in Odisha]"
+              sublabel="Turnkey Solar &amp; Infrastructure Field Execution in Odisha"
               aspectRatio="16/10"
               variant="white"
-              src="/images/page-hero-solar-home.jpg"
+              src="/images/gallery-hero-solar-pump.jpg"
               imgFit="cover"
             />
           </div>
