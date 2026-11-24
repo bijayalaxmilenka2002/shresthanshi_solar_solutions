@@ -80,7 +80,7 @@ export const SubsidyGuidancePage: React.FC = () => {
 
           <div className="grid-2">
             {/* PM Surya Ghar */}
-            <Card variant="soft-green" padding="none" className="visual-card">
+            <Card variant="soft-green" padding="none" className="visual-card" style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
               <div className="visual-card__media">
                 <ImagePlaceholder
                   label="[Image: rooftop solar installation]"
@@ -91,13 +91,24 @@ export const SubsidyGuidancePage: React.FC = () => {
                   imgFit="cover"
                 />
               </div>
-              <div className="visual-card__body">
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
+              <div className="visual-card__body" style={{ display: 'flex', flexDirection: 'column', flexGrow: 1, padding: '1.75rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
                   <Home size={18} color="var(--color-forest-green)" />
                   <span className="badge">For Households</span>
                 </div>
-                <h2>PM Surya Ghar: Muft Bijli Yojana</h2>
-                <ul className="feature-list" style={{ margin: '1rem 0' }}>
+                <h2 style={{
+                  fontSize: '1.35rem',
+                  fontWeight: 700,
+                  color: 'var(--color-forest-green)',
+                  lineHeight: 1.3,
+                  minHeight: '3.6rem',
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  margin: '0 0 1rem'
+                }}>
+                  PM Surya Ghar: Muft Bijli Yojana
+                </h2>
+                <ul className="feature-list" style={{ margin: '0 0 1.5rem', flexGrow: 1, display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
                   <li className="feature-list-item">
                     <span className="feature-list-icon"><CheckCircle2 size={14} /></span>
                     <span>National Portal registration with active residential consumer number.</span>
@@ -111,14 +122,16 @@ export const SubsidyGuidancePage: React.FC = () => {
                     <span>Subsidy released after commissioning and DISCOM inspection.</span>
                   </li>
                 </ul>
-                <Button to="/resources/articles/pm-surya-ghar-guidance" variant="primary" size="sm" iconRight={<ArrowRight size={15} />}>
-                  Read PM Surya Ghar Guide
-                </Button>
+                <div style={{ marginTop: 'auto', paddingTop: '1rem', width: '100%' }}>
+                  <Button to="/resources/articles/pm-surya-ghar-guidance" variant="primary" fullWidth size="sm" iconRight={<ArrowRight size={15} />}>
+                    Read PM Surya Ghar Guide
+                  </Button>
+                </div>
               </div>
             </Card>
 
             {/* PM-KUSUM */}
-            <Card variant="soft-green" padding="none" className="visual-card">
+            <Card variant="soft-green" padding="none" className="visual-card" style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
               <div className="visual-card__media">
                 <ImagePlaceholder
                   label="[Image: solar water pump in a farm]"
@@ -129,13 +142,24 @@ export const SubsidyGuidancePage: React.FC = () => {
                   imgFit="cover"
                 />
               </div>
-              <div className="visual-card__body">
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
+              <div className="visual-card__body" style={{ display: 'flex', flexDirection: 'column', flexGrow: 1, padding: '1.75rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
                   <Sprout size={18} color="var(--color-forest-green)" />
                   <span className="badge">For Farmers</span>
                 </div>
-                <h2>PM-KUSUM &amp; Farm Solar Schemes</h2>
-                <ul className="feature-list" style={{ margin: '1rem 0' }}>
+                <h2 style={{
+                  fontSize: '1.35rem',
+                  fontWeight: 700,
+                  color: 'var(--color-forest-green)',
+                  lineHeight: 1.3,
+                  minHeight: '3.6rem',
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  margin: '0 0 1rem'
+                }}>
+                  PM-KUSUM &amp; Farm Solar Schemes
+                </h2>
+                <ul className="feature-list" style={{ margin: '0 0 1.5rem', flexGrow: 1, display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
                   <li className="feature-list-item">
                     <span className="feature-list-icon"><CheckCircle2 size={14} /></span>
                     <span>Administered via State Nodal Agencies during active portal windows.</span>
@@ -149,9 +173,11 @@ export const SubsidyGuidancePage: React.FC = () => {
                     <span>Apply strictly through official portals—avoid unverified links.</span>
                   </li>
                 </ul>
-                <Button to="/resources/articles/pm-kusum-guidance" variant="primary" size="sm" iconRight={<ArrowRight size={15} />}>
-                  Read PM-KUSUM Guide
-                </Button>
+                <div style={{ marginTop: 'auto', paddingTop: '1rem', width: '100%' }}>
+                  <Button to="/resources/articles/pm-kusum-guidance" variant="primary" fullWidth size="sm" iconRight={<ArrowRight size={15} />}>
+                    Read PM-KUSUM Guide
+                  </Button>
+                </div>
               </div>
             </Card>
           </div>
