@@ -43,15 +43,38 @@ export const SolarFaqsPage: React.FC = () => {
         ]}
       />
 
-      <section className="page-hero bg-soft-green">
+      <section className="page-hero bg-soft-green" style={{ padding: '2rem 0' }}>
         <Container>
-          <span className="badge" style={{ marginBottom: '1rem' }}>
-            Solar Knowledge Base
-          </span>
-          <h1 className="page-hero__title">Questions Worth Asking Before Going Solar.</h1>
-          <p className="page-hero__subtitle" style={{ maxWidth: '760px' }}>
-            Straightforward answers to common questions about solar system sizing, roof space, cloudy-day generation, battery storage, agricultural water pumps, and government scheme eligibility.
-          </p>
+          <div
+            style={{
+              width: '100%',
+              borderRadius: '20px',
+              overflow: 'hidden',
+              boxShadow: '0 8px 30px rgba(23, 75, 53, 0.08)',
+              border: '1.5px solid var(--border-medium)',
+              backgroundColor: '#FFFFFF',
+            }}
+          >
+            <img
+              src="/images/solar-faqs-banner.jpg"
+              alt="Questions Worth Asking Before Going Solar — Solar Knowledge Base"
+              style={{
+                width: '100%',
+                height: 'auto',
+                display: 'block',
+                aspectRatio: '1024 / 341',
+                objectFit: 'cover',
+              }}
+            />
+          </div>
+
+          {/* Accessible SEO Headings for search crawlers & screen readers */}
+          <div className="sr-only">
+            <h1>Questions Worth Asking Before Going Solar.</h1>
+            <p>
+              Straightforward answers to common questions about solar system sizing, roof space, cloudy-day generation, battery storage, agricultural water pumps, and government scheme eligibility.
+            </p>
+          </div>
         </Container>
       </section>
 
