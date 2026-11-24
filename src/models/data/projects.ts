@@ -71,12 +71,12 @@ export const projectItems: ProjectItem[] = [
   },
   {
     id: 'proj-solar-street-lighting',
-    title: 'Solar LED Street Lighting Systems',
-    category: 'Solar Street Lighting',
+    title: 'Solar LED Street Lighting & Rural Electrification Systems',
+    category: 'Solar Street Lighting & Community',
     location: 'Bhawanipatna, Narla & Gram Panchayats',
     district: 'Kalahandi, Odisha',
     description:
-      'Raised standalone solar street light structures powered by integrated PV panels, weather-resistant luminaires, and long-life battery storage for rural roads.',
+      'Raised standalone solar street light structures powered by integrated PV panels, weather-resistant luminaires, and long-life battery storage for rural roads and community clusters.',
     scope: [
       'Elevated galvanized steel street light poles',
       'Dusk-to-dawn automatic lux sensor switching',
@@ -87,9 +87,43 @@ export const projectItems: ProjectItem[] = [
     verifiedSource: 'Verified Odisha Field Execution',
   },
   {
+    id: 'proj-community-campus-lighting',
+    title: 'Commercial Campus & Institutional Solar Street Lighting',
+    category: 'Solar Street Lighting & Community',
+    location: 'Public Campuses & Semi-Urban Clusters',
+    district: 'Kalahandi & Khordha, Odisha',
+    description:
+      'Multi-pole commercial solar street light installations with elevated structural poles, high-lumen optical LED fixtures, and automated dusk-to-dawn controllers.',
+    scope: [
+      'Hot-dip galvanized solar light poles with concrete footings',
+      'High-efficiency monocrystalline top-mounted solar modules',
+      'Long-life LiFePO4 battery banks with MPPT smart drivers',
+    ],
+    image: '[Project gallery image: commercial campus solar street light]',
+    imageSrc: '/images/solar/solar-street-light-campus.jpg',
+    verifiedSource: 'Verified Odisha Field Execution',
+  },
+  {
+    id: 'proj-community-water-overhead-tank',
+    title: 'Integrated Community Solar Overhead Water Storage Facility',
+    category: 'Solar Street Lighting & Community',
+    location: 'Community Habitations & Gram Panchayats',
+    district: 'Kalahandi & Western Odisha',
+    description:
+      'Heavy-duty elevated steel staging community water tank powered by an integrated rooftop solar array, delivering reliable gravity-fed potable water access.',
+    scope: [
+      'Structural steel elevated water storage staging',
+      'Integrated top solar module mounting framework',
+      'Automated sensory pump control preventing reservoir overflow',
+    ],
+    image: '[Project gallery image: community water tank overhead staging with solar]',
+    imageSrc: '/media/field-installations/solar-community-water-tank-overhead.jpg',
+    verifiedSource: 'Verified Odisha Field Execution',
+  },
+  {
     id: 'proj-commercial-institutional-solar',
     title: 'Commercial & Institutional Rooftop Solar Installations',
-    category: 'Commercial Rooftop Solar',
+    category: 'Rooftop & Institutional Solar',
     location: 'Bhawanipatna & Western Odisha',
     district: 'Kalahandi, Odisha',
     description:
@@ -100,13 +134,13 @@ export const projectItems: ProjectItem[] = [
       'Galvanized structural steel elevated roof mounts',
     ],
     image: '[Project gallery image: commercial & institutional rooftop solar in Kalahandi]',
-    imageSrc: '/images/cta-solar-rooftop.jpg',
+    imageSrc: '/media/field-installations/kesinga-commercial-metal-shed-solar.jpg',
     verifiedSource: 'Verified Odisha Field Execution',
   },
   {
     id: 'proj-residential-rooftop-solar',
-    title: 'Residential Rooftop Solar Power Systems',
-    category: 'Residential Rooftop Solar',
+    title: 'Residential Rooftop Solar Power Systems (PM Surya Ghar)',
+    category: 'Rooftop & Institutional Solar',
     location: 'Bhawanipatna Urban & Semi-Urban',
     district: 'Kalahandi, Odisha',
     description:
@@ -117,7 +151,41 @@ export const projectItems: ProjectItem[] = [
       'Elevated weather-durable galvanized mounting structures',
     ],
     image: '[Project gallery image: residential rooftop solar in Kalahandi]',
-    imageSrc: '/images/homeowners-rooftop-solar.jpg',
+    imageSrc: '/media/field-installations/narla-dual-elevated-rooftop-solar.jpg',
+    verifiedSource: 'Verified Odisha Field Execution',
+  },
+  {
+    id: 'proj-pm-surya-ghar-mahaling',
+    title: 'PM Surya Ghar Household Turnkey Solar Installation',
+    category: 'Rooftop & Institutional Solar',
+    location: 'Mahaling, Sarangarh',
+    district: 'Kalahandi, Odisha',
+    description:
+      'Turnkey residential rooftop solar plant executed under PM Surya Ghar Muft Bijli Yojana, featuring high-yield bifacial panels and rapid net-metering synchronization.',
+    scope: [
+      'Bifacial mono-PERC DCR certified solar modules',
+      'Certified TPWODL bi-directional generation metering',
+      'Complete safety earthing, surge protection, and walkaway structural clearance',
+    ],
+    image: '[Project gallery image: Mahaling PM Surya Ghar rooftop solar plant]',
+    imageSrc: '/media/field-installations/mahaling-pm-surya-ghar-saranga-sahu.jpg',
+    verifiedSource: 'Verified Odisha Field Execution',
+  },
+  {
+    id: 'proj-bhubaneswar-ground-mount',
+    title: 'Utility Grid-Tied Ground Mount Solar Power Plant',
+    category: 'Rooftop & Institutional Solar',
+    location: 'Bhubaneswar Sub-Branch Operational Cluster',
+    district: 'Khordha, Odisha',
+    description:
+      'Engineered ground-mounted solar photovoltaic generation array with heavy galvanized steel tracking foundations and high-capacity central inverter infrastructure.',
+    scope: [
+      'Ground-mounted PV array civil piling & structural erection',
+      'High-efficiency multi-string grid synchronizers',
+      'DISCOM grid interconnection & power evacuation approval',
+    ],
+    image: '[Project gallery image: ground mount solar trackers plant]',
+    imageSrc: '/media/field-installations/bhubaneswar-ground-mount-solar-trackers.jpg',
     verifiedSource: 'Verified Odisha Field Execution',
   },
 ];

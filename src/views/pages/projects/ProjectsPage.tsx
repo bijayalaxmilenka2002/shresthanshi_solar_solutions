@@ -26,7 +26,37 @@ export const ProjectsPage: React.FC = () => {
   const filteredProjects =
     selectedCategory === 'All'
       ? projectItems
-      : projectItems.filter((p) => p.category === selectedCategory);
+      : projectItems.filter((p) => {
+          if (selectedCategory === 'Solar Street Lighting & Community') {
+            return (
+              p.category === 'Solar Street Lighting & Community' ||
+              p.category === 'Solar Street Lighting' ||
+              p.category.toLowerCase().includes('street light')
+            );
+          }
+          if (selectedCategory === 'Rooftop & Institutional Solar') {
+            return (
+              p.category === 'Rooftop & Institutional Solar' ||
+              p.category === 'Commercial Rooftop Solar' ||
+              p.category === 'Residential Rooftop Solar' ||
+              p.category.toLowerCase().includes('rooftop')
+            );
+          }
+          if (selectedCategory === 'Solar Water Pumping') {
+            return (
+              p.category === 'Solar Water Pumping' ||
+              p.category.toLowerCase().includes('pump')
+            );
+          }
+          if (selectedCategory === 'Borewell & Rural Infrastructure') {
+            return (
+              p.category === 'Borewell & Rural Infrastructure' ||
+              p.category.toLowerCase().includes('borewell') ||
+              p.category.toLowerCase().includes('tank')
+            );
+          }
+          return p.category === selectedCategory;
+        });
 
   return (
     <div>
@@ -108,11 +138,7 @@ export const ProjectsPage: React.FC = () => {
                     style={{
                       width: '100%',
                       height: '100%',
-                      objectFit:
-                        project.id === 'proj-borewell-irrigation-odisha' ||
-                        project.id === 'proj-solar-street-lighting'
-                          ? 'contain'
-                          : 'cover',
+                      objectFit: 'cover',
                       display: 'block',
                     }}
                     loading="lazy"
