@@ -60,11 +60,11 @@ export const SubsidyGuidancePage: React.FC = () => {
           </div>
           <div className="page-hero__visual">
             <ImagePlaceholder
-              label="[PM Surya Ghar verified rooftop solar plant in Odisha]"
-              sublabel="PM Surya Ghar &amp; PM-KUSUM Subsidy Execution"
+              label="[Solar Engineer Consulting Homeowners on Rooftop Solar &amp; Subsidy Scheme]"
+              sublabel="PM Surya Ghar Subsidy Consultation &amp; Sizing • Odisha"
               aspectRatio="16/10"
               variant="white"
-              src="/media/field-installations/mahaling-pm-surya-ghar-saranga-sahu.jpg"
+              src="/images/solar-subsidy-consultation.jpg"
               imgFit="cover"
             />
           </div>
