@@ -146,9 +146,8 @@ export const companyConfig = {
     image: '[Image: proprietor portrait — Mrs. Sinjita Shikha Mohapatra]',
     imageSrc: '/images/existing/SINJITA.jpeg',
     bioParagraphs: [
-      "Mrs. Sinjita Shikha Mohapatra, Proprietor of M/s Shresthanshi Construction & Suppliers and Director at Arch Exotic Private Limited, Bhubaneswar, is a native of Bhawanipatna, Kalahandi. She completed her schooling at Bhawanipatna, earned her Bachelor's degree from Bhawanipatna Government College, and completed her Master's in Business Administration (MBA) from BPUT.",
-      'Shresthanshi Construction & Suppliers is focused on creating local job opportunities in Kalahandi district, promoting sanitation awareness under the Swachh Bharat Mission through community wall painting, and installing borewells with solar pumps to assist farmers in irrigation.',
-      'The enterprise is also establishing an iron and steel fabrication workshop to supply durable, low-cost iron furniture items in Kalahandi.',
+      'Mrs. Sinjita Shikha Mohapatra is the Proprietor of M/s Shresthanshi Construction & Suppliers and Director at Arch Exotic Private Limited. An MBA graduate from BPUT and a native of Bhawanipatna, she established the enterprise to bring reliable clean energy and infrastructure directly to Kalahandi and Odisha.',
+      'Under her leadership, the company empowers rural livelihoods through agricultural solar pumps, rooftop solar installations, and community awareness initiatives while creating meaningful local employment.',
     ],
   },
 
