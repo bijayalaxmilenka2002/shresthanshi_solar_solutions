@@ -8,7 +8,7 @@ interface LogoProps {
 
 /**
  * Official Brand Logo for Shresthanshi Solar Solutions
- * (Prop. Shubham Pratap Singh)
+ * (Prop. Mrs. Sinjita Shikha Mohapatra)
  */
 export const Logo: React.FC<LogoProps> = ({ variant = 'light-bg', className = '' }) => {
   const isDarkBg = variant === 'dark-bg';
@@ -21,7 +21,7 @@ export const Logo: React.FC<LogoProps> = ({ variant = 'light-bg', className = ''
     >
       <img
         src="/images/brand-logo.jpg"
-        alt="Shresthanshi Solar Solutions - Prop. Shubham Pratap Singh"
+        alt="Shresthanshi Solar Solutions - Prop. Mrs. Sinjita Shikha Mohapatra"
         className="brand-logo__img"
       />
     </Link>

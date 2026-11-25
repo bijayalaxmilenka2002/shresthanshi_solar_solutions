@@ -78,7 +78,7 @@ export const ServicesPage: React.FC = () => {
     <div>
       <SEO
         title="Solar Services — Rooftop Solar, Solar Pumps & Street Lights | Shresthanshi Solar Solutions"
-        description="Comprehensive solar engineering services by Shresthanshi Solar Solutions (Prop. Shubham Pratap Singh): residential & commercial rooftop solar, solar water pump controllers, community sensor pumping, street lights, and AMC care across Odisha."
+        description="Comprehensive solar engineering services by Shresthanshi Solar Solutions (Prop. Mrs. Sinjita Shikha Mohapatra): residential & commercial rooftop solar, solar water pump controllers, community sensor pumping, street lights, and AMC care across Odisha."
         canonicalPath="/services"
       />
 

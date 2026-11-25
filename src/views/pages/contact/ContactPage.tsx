@@ -1040,7 +1040,7 @@ export const ContactPage: React.FC = () => {
                         Need Instant Sizing or Urgent Guidance?
                       </div>
                       <div style={{ fontSize: '0.72rem', color: 'var(--text-body)' }}>
-                        Call Proprietor Mr. Shubham Pratap Singh directly: <strong>+91 99370 00024</strong>
+                        Call Proprietor Mrs. Sinjita Shikha Mohapatra directly: <strong>+91 99370 00624</strong>
                       </div>
                     </div>
                   </div>

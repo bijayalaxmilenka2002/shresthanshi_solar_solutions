@@ -463,7 +463,7 @@ export const OwnerPortalPage: React.FC = () => {
               Shresthanshi Solar Solutions
             </h1>
             <p style={{ margin: 0, fontSize: '0.78rem', opacity: 0.85, color: '#E8F2E8' }}>
-              Prop. Shubham Pratap Singh • Administrative Control
+              Prop. Mrs. Sinjita Shikha Mohapatra • Administrative Control
             </p>
           </div>
 
@@ -707,7 +707,7 @@ export const OwnerPortalPage: React.FC = () => {
                   Shresthanshi Solar Solutions
                 </h1>
                 <div style={{ fontSize: '0.72rem', opacity: 0.85, marginTop: '2px' }}>
-                  Owner Response Portal • Prop. Shubham Pratap Singh
+                  Owner Response Portal • Prop. Mrs. Sinjita Shikha Mohapatra
                 </div>
               </div>
             </div>
@@ -1072,7 +1072,7 @@ export const OwnerPortalPage: React.FC = () => {
                   {filteredLeads.map((lead) => {
                     const statusStyle = getStatusBadgeStyle(lead.status);
                     const whatsappUrl = `https://wa.me/91${lead.phone.replace(/\D/g, '')}?text=${encodeURIComponent(
-                      `Hello ${lead.name}, this is Shubham Pratap Singh from Shresthanshi Solar Solutions regarding your enquiry (${lead.id}) for ${lead.category}.`
+                      `Hello ${lead.name}, this is Shresthanshi Solar Solutions regarding your enquiry (${lead.id}) for ${lead.category}.`
                     )}`;
 
                     return (

@@ -39,7 +39,7 @@ export const generateSolarGuidePDF = (options: SolarGuidePdfOptions = {}): void 
   // Subtitle & Proprietor
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(9);
-  doc.text('M/s Shreshtanshi Construction & Suppliers • Prop. Shubham Pratap Singh', margin, 20);
+  doc.text('M/s Shreshtanshi Construction & Suppliers • Prop. Mrs. Sinjita Shikha Mohapatra', margin, 20);
   doc.text(`Registered GSTIN: ${companyConfig.gstin} | Bhubaneswar, Kalahandi & Across Odisha`, margin, 25);
 
   // Official Seal Badge
@@ -195,7 +195,7 @@ export const generateSolarGuidePDF = (options: SolarGuidePdfOptions = {}): void 
     margin + 4,
     footerBoxY + 18
   );
-  doc.text('Proprietor: Shubham Pratap Singh (MBA, BPUT) • Turnkey Solar Engineering', margin + 4, footerBoxY + 23);
+  doc.text('Proprietor: Mrs. Sinjita Shikha Mohapatra (MBA, BPUT) • Turnkey Solar Engineering', margin + 4, footerBoxY + 23);
 
   // 9. Document Legal Notice
   doc.setTextColor(...mutedText);

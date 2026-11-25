@@ -105,7 +105,7 @@ export const getPrimaryNavigation = (): NavItem[] => {
         {
           label: 'About Company & Journey',
           path: '/about',
-          description: 'Proprietor Shubham Pratap Singh, company mission, journey, and milestones.',
+          description: 'Proprietor Mrs. Sinjita Shikha Mohapatra, company mission, journey, and milestones.',
         },
         {
           label: 'Media Coverage & Videos',

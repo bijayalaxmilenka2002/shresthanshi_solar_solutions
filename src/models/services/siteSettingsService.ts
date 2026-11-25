@@ -66,7 +66,7 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
     email: companyConfig.contact.email,
     workingHours: companyConfig.contact.workingHours,
     address: companyConfig.contact.address.full,
-    proprietor: 'Mr. Shubham Pratap Singh',
+    proprietor: 'Mrs. Sinjita Shikha Mohapatra',
   },
   social: {
     facebook: companyConfig.social.facebook,

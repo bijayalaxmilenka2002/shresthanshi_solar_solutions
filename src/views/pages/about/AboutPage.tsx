@@ -222,15 +222,15 @@ export const AboutPage: React.FC = () => {
           '@type': 'AboutPage',
           name: 'About Shreshtanshi Solar Solutions',
           description:
-            'Company journey, leadership profile of Mr. Shubham Pratap Singh, 350+ PM Surya Ghar installations in Odisha, and official national awards.',
+            'Company journey, leadership profile of Mrs. Sinjita Shikha Mohapatra, 350+ PM Surya Ghar installations in Odisha, and official national awards.',
           mainEntity: {
             '@type': 'Organization',
             name: 'M/s Shreshtanshi Construction & Suppliers',
             alternateName: 'Shresthanshi Solar Solutions',
             founder: {
               '@type': 'Person',
-              name: 'Mr. Shubham Pratap Singh',
-              jobTitle: 'Proprietor & Solar Project Lead',
+              name: 'Mrs. Sinjita Shikha Mohapatra',
+              jobTitle: 'Proprietor, M/s Shresthanshi Construction & Suppliers',
             },
             taxID: '21AVUPM9359D1Z6',
             address: [

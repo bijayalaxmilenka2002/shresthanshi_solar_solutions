@@ -46,12 +46,12 @@ export const featuredAwards: FeaturedAward[] = [
     date: 'November 2026',
     location: 'Bharat Mandapam, New Delhi',
     imageSrc: '/media/summits-leadership/bre-summit-mnre-tpwodl-er-satyabrata-panda.jpg',
-    imageAlt: 'National Solar Summit Delegate Shubham Pratap Singh with Er. Satyabrata Panda of TPWODL',
+    imageAlt: 'National Solar Summit Delegate alongside Er. Satyabrata Panda of TPWODL',
     shortTagline: 'Top 100 Vendor Invitation at Bharat Mandapam, New Delhi with TPWODL leadership.',
     summary:
       'Invited as one of the Top 100 Renewable Energy Vendors of Odisha at Bharat Mandapam, New Delhi alongside TPWODL leadership.',
     fullDescription:
-      'Invited by the Ministry of New and Renewable Energy (MNRE), Govt of India, as one of the Top 100 Renewable Energy Vendors of Odisha. Proprietor Shubham Pratap Singh represented the state at Bharat Mandapam, New Delhi in high-level policy discussions on PM Surya Ghar acceleration and rural electrification alongside Er. Satyabrata Panda (TPWODL RE Cell).',
+      'Invited by the Ministry of New and Renewable Energy (MNRE), Govt of India, as one of the Top 100 Renewable Energy Vendors of Odisha. Team Shresthanshi represented the enterprise at Bharat Mandapam, New Delhi in high-level policy discussions on PM Surya Ghar acceleration and rural electrification alongside Er. Satyabrata Panda (TPWODL RE Cell).',
     highlights: [
       'Govt of India (MNRE) official invitation',
       'Top 100 Renewable Energy Vendors in Odisha',

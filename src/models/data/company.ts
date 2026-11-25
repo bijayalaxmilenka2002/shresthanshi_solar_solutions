@@ -9,7 +9,7 @@ export const companyConfig = {
   name: 'Shresthanshi Solar Solutions',
   legalName: 'M/s Shreshtanshi Construction & Suppliers (Shresthanshi Solar Solutions)',
   shortName: 'Shresthanshi Solar',
-  proprietor: 'Mr. Shubham Pratap Singh',
+  proprietor: 'Mrs. Sinjita Shikha Mohapatra',
   tagline: 'Turnkey Solar Energy & Solar Water Pumping Solutions in Odisha',
   gstin: '21AVUPM9359D1Z6',
   websiteUrl: 'https://shresthanshi.com',
@@ -133,19 +133,22 @@ export const companyConfig = {
 
   // Verified Leadership & Founder Details
   founder: {
-    name: 'Mr. Shubham Pratap Singh',
-    role: 'Proprietor, M/s Shreshtanshi Construction & Suppliers',
-    additionalRole: 'Solar Energy & Infrastructure Lead',
+    name: 'Mrs. Sinjita Shikha Mohapatra',
+    role: 'Proprietor, M/s Shresthanshi Construction & Suppliers',
+    additionalRole: 'Director, Arch Exotic Private Limited, Bhubaneswar',
     hometown: 'Bhawanipatna, Kalahandi, Odisha',
     education: [
-      'MBA — Odisha Technical University',
-      'Solar Engineering & Turnkey Project Execution Specialist',
-      'Kalahandi, Odisha',
+      "Master's in Business Administration (MBA) — BPUT",
+      'Bachelor Degree — Bhawanipatna Government College',
+      'Schooling at Bhawanipatna, Kalahandi',
+      'Expertise: Solar Street Light, Solar Water Pump Panel, Borewell Irrigation & Fabrication',
     ],
-    image: '[Image: proprietor portrait — Mr. Shubham Pratap Singh]',
+    image: '[Image: proprietor portrait — Mrs. Sinjita Shikha Mohapatra]',
     imageSrc: '/images/existing/SINJITA.jpeg',
     bioParagraphs: [
-      'Mr. Shubham Pratap Singh is the Proprietor of M/s Shreshtanshi Construction & Suppliers (Shresthanshi Solar Solutions). Headquartered at Kalahandi with a sub-branch office in Bhubaneswar, he leads turnkey on-grid rooftop solar plants, agricultural solar pumping infrastructure, and sustainable energy projects across Odisha.',
+      "Proprietor of M/s shresthanshi construction and suppliers Mrs sinjita shikha Mohapatra has done her master's in business administration from BPUT and working as the director of arch exotic private limited, bhubaneswar. Mrs Mohapatra is the native of bhawanipatna kalahandi, she has done her schooling at bhawanipatna and completed bachelor degree from bhawanipatna government College, she was always interested to work for kalahandi thats why she has taken the initiative to start her own business at kalahandi district. Mrs sinjita shikha Mohapatra has an expertise of providing the services like wall painting, printing in t-shirts, borewel irrigation, solar street light, solar water pump panel, Fabrication etc. She has already completed wall painting, printing in t-shirts, borewel for irrigation in different places of Odisha.",
+      'Shresthanshi construction and suppliers is all about increasing the awareness among the people by doing wall painting for use of toilets under swachh bharat mission, constructing borewell with solar pumps to help farmers in irrigation and creating job opportunities in kalahandi district.',
+      'Shresthanshi construction and suppliers is planning to start an iron and steel fabrication work shop to supply low cost iron furniture items in kalahandi.',
     ],
   },
 

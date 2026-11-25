@@ -124,7 +124,7 @@ export const mediaItems: MediaItem[] = [
     location: 'Bharat Mandapam, New Delhi',
     date: 'November 2026',
     description:
-      'Proprietor Shubham Pratap Singh participating in national panel discussions on green energy, decentralized solar pumping, and PM Surya Ghar rural adoption at Bharat Mandapam.',
+      'Team Shresthanshi delegate participating in national panel discussions on green energy, decentralized solar pumping, and PM Surya Ghar rural adoption at Bharat Mandapam.',
     verifiedBy: 'MNRE & ISA Summit Secretariat',
   },
 
