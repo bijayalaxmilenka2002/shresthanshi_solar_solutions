@@ -146,9 +146,9 @@ export const companyConfig = {
     image: '[Image: proprietor portrait — Mrs. Sinjita Shikha Mohapatra]',
     imageSrc: '/images/existing/SINJITA.jpeg',
     bioParagraphs: [
-      "Proprietor of M/s shresthanshi construction and suppliers Mrs sinjita shikha Mohapatra has done her master's in business administration from BPUT and working as the director of arch exotic private limited, bhubaneswar. Mrs Mohapatra is the native of bhawanipatna kalahandi, she has done her schooling at bhawanipatna and completed bachelor degree from bhawanipatna government College.",
-      'Shresthanshi construction and suppliers is all about increasing the awareness among the people by doing wall painting for use of toilets under swachh bharat mission, constructing borewell with solar pumps to help farmers in irrigation and creating job opportunities in kalahandi district.',
-      'Shresthanshi construction and suppliers is planning to start an iron and steel fabrication work shop to supply low cost iron furniture items in kalahandi.',
+      "Mrs. Sinjita Shikha Mohapatra, Proprietor of M/s Shresthanshi Construction & Suppliers and Director at Arch Exotic Private Limited, Bhubaneswar, is a native of Bhawanipatna, Kalahandi. She completed her schooling at Bhawanipatna, earned her Bachelor's degree from Bhawanipatna Government College, and completed her Master's in Business Administration (MBA) from BPUT.",
+      'Shresthanshi Construction & Suppliers is focused on creating local job opportunities in Kalahandi district, promoting sanitation awareness under the Swachh Bharat Mission through community wall painting, and installing borewells with solar pumps to assist farmers in irrigation.',
+      'The enterprise is also establishing an iron and steel fabrication workshop to supply durable, low-cost iron furniture items in Kalahandi.',
     ],
   },
 
